@@ -132,6 +132,49 @@ npx @hivellm/classify document contract.pdf --output nexus-cypher | \
   curl -X POST http://localhost:15474/cypher -d @-
 ```
 
+### Neo4j (Graph Database)
+
+```bash
+# Generate Cypher for Neo4j
+npx @hivellm/classify document contract.pdf --output nexus-cypher | \
+  curl -X POST http://localhost:7474/db/neo4j/tx/commit \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Basic $(echo -n neo4j:password | base64)" \
+    -d '{"statements":[{"statement":"'"$(cat)"'"}]}'
+
+# Or using Neo4j bolt protocol
+npx @hivellm/classify document contract.pdf --output nexus-cypher > contract.cypher
+cypher-shell -u neo4j -p password < contract.cypher
+```
+
+### Lexum (Full-text Search Engine)
+
+```bash
+# Index in Lexum with full-text metadata
+npx @hivellm/classify document contract.pdf --output fulltext-metadata | \
+  curl -X POST http://localhost:9595/index/documents \
+    -H "Content-Type: application/json" \
+    -d @-
+
+# Batch index multiple documents in Lexum
+npx @hivellm/classify batch ./documents --output fulltext-metadata | \
+  jq -s '.' | \
+  curl -X POST http://localhost:9595/index/documents/batch \
+    -H "Content-Type: application/json" \
+    -d @-
+
+# Search indexed documents in Lexum
+curl -X POST http://localhost:9595/search \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "legal contracts",
+    "filters": {
+      "domain": "legal",
+      "doc_type": "contract"
+    }
+  }'
+```
+
 ### Elasticsearch (Full-text Search)
 
 ```bash
@@ -140,7 +183,7 @@ npx @hivellm/classify document contract.pdf --output fulltext-metadata | \
   curl -X POST http://localhost:9200/documents/_doc -d @-
 ```
 
-### Dual Indexing (Both)
+### Dual Indexing (Graph + Full-text)
 
 ```bash
 # Generate both outputs
@@ -151,6 +194,25 @@ cat result.json | jq -r '.graph_structure.cypher' | \
   curl -X POST http://localhost:15474/cypher -d @-
 
 # Index in Elasticsearch
+cat result.json | jq '.fulltext_metadata' | \
+  curl -X POST http://localhost:9200/documents/_doc -d @-
+```
+
+### Triple Indexing (Neo4j + Lexum + Elasticsearch)
+
+```bash
+# Generate combined output
+npx @hivellm/classify document contract.pdf --output combined > result.json
+
+# 1. Index in Neo4j (graph relationships)
+cat result.json | jq -r '.graph_structure.cypher' | \
+  cypher-shell -u neo4j -p password
+
+# 2. Index in Lexum (specialized full-text)
+cat result.json | jq '.fulltext_metadata' | \
+  curl -X POST http://localhost:9595/index/documents -d @-
+
+# 3. Index in Elasticsearch (general search)
 cat result.json | jq '.fulltext_metadata' | \
   curl -X POST http://localhost:9200/documents/_doc -d @-
 ```

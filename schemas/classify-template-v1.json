@@ -1,0 +1,550 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://hivellm.org/schemas/classify-template-v1.json",
+  "title": "Classify Template Schema",
+  "description": "Schema for Classify CLI template files that define document classification rules",
+  "type": "object",
+  "required": ["version", "metadata", "llm_config", "document_types", "entity_definitions", "relationship_definitions", "graph_schema", "fulltext_schema"],
+  
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$",
+      "description": "Template version (e.g., '1.0')"
+    },
+    
+    "metadata": {
+      "type": "object",
+      "required": ["name", "display_name", "description", "domains", "indicators", "document_types"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "description": "Unique template identifier (lowercase, no spaces)"
+        },
+        "display_name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-readable template name"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 10,
+          "description": "Detailed description of template purpose"
+        },
+        "domains": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "description": "List of domains this template covers"
+        },
+        "priority": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "default": 50,
+          "description": "Selection priority (higher = preferred)"
+        },
+        "indicators": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "description": "Keywords that suggest this template"
+        },
+        "document_types": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "description": "Types of documents this template handles"
+        },
+        "example_titles": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Example document titles"
+        },
+        "use_cases": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Common use cases for this template"
+        }
+      }
+    },
+    
+    "llm_config": {
+      "type": "object",
+      "required": ["system_prompt"],
+      "properties": {
+        "provider": {
+          "type": "string",
+          "enum": ["deepseek", "openai", "anthropic", "gemini", "xai", "groq"],
+          "description": "Default LLM provider"
+        },
+        "model": {
+          "type": "string",
+          "description": "Default model for this template"
+        },
+        "temperature": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2,
+          "default": 0.1,
+          "description": "LLM temperature (0.0-2.0)"
+        },
+        "max_tokens": {
+          "type": "number",
+          "minimum": 100,
+          "maximum": 10000,
+          "default": 2000,
+          "description": "Maximum output tokens"
+        },
+        "system_prompt": {
+          "type": "string",
+          "minLength": 20,
+          "description": "System prompt for classification"
+        },
+        "fallback_models": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Fallback models if primary fails"
+        }
+      }
+    },
+    
+    "document_types": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["type", "display_name", "description"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "description": "Document type identifier"
+          },
+          "display_name": {
+            "type": "string",
+            "description": "Human-readable type name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Type description"
+          },
+          "indicators": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Keywords for this type"
+          },
+          "required_entities": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Required entity types"
+          },
+          "optional_entities": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Optional entity types"
+          },
+          "priority": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "Type priority"
+          }
+        }
+      }
+    },
+    
+    "entity_definitions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["type", "description", "properties", "extraction_methods"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "pattern": "^[A-Z][a-zA-Z0-9]*$",
+            "description": "Entity type (PascalCase)"
+          },
+          "description": {
+            "type": "string",
+            "description": "Entity description"
+          },
+          "properties": {
+            "type": "object",
+            "minProperties": 1,
+            "patternProperties": {
+              "^[a-z][a-z0-9_]*$": {
+                "type": "object",
+                "required": ["type"],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": ["string", "number", "boolean", "date", "array", "object", "enum"]
+                  },
+                  "required": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "values": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "Enum values (when type is enum)"
+                  }
+                }
+              }
+            }
+          },
+          "extraction_methods": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["ner", "pattern", "llm", "heuristic", "section_detection"]
+            },
+            "minItems": 1
+          },
+          "patterns": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Regex patterns for extraction"
+          }
+        }
+      }
+    },
+    
+    "relationship_definitions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "description", "source", "target", "extraction_methods"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]*$",
+            "description": "Relationship type (UPPER_SNAKE_CASE)"
+          },
+          "description": {
+            "type": "string",
+            "description": "Relationship description"
+          },
+          "source": {
+            "type": "string",
+            "description": "Source node type"
+          },
+          "target": {
+            "oneOf": [
+              { "type": "string" },
+              {
+                "type": "array",
+                "items": { "type": "string" },
+                "minItems": 1
+              }
+            ],
+            "description": "Target node type(s)"
+          },
+          "properties": {
+            "type": "object",
+            "patternProperties": {
+              "^[a-z][a-z0-9_]*$": {
+                "type": "object",
+                "required": ["type"],
+                "properties": {
+                  "type": { "type": "string" },
+                  "required": { "type": "boolean", "default": false }
+                }
+              }
+            }
+          },
+          "extraction_methods": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["llm", "pattern", "heuristic", "ner"]
+            },
+            "minItems": 1
+          },
+          "patterns": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    
+    "graph_schema": {
+      "type": "object",
+      "required": ["nodes", "relationships"],
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["type", "labels", "required_properties"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "pattern": "^[A-Z][a-zA-Z0-9]*$"
+              },
+              "labels": {
+                "type": "array",
+                "items": { "type": "string" },
+                "minItems": 1
+              },
+              "description": {
+                "type": "string"
+              },
+              "required_properties": {
+                "type": "array",
+                "items": { "type": "string" },
+                "minItems": 1
+              },
+              "optional_properties": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "indexes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["property", "type"],
+                  "properties": {
+                    "property": { "type": "string" },
+                    "type": {
+                      "type": "string",
+                      "enum": ["unique", "index", "fulltext"]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "relationships": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type", "source", "target"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "pattern": "^[A-Z][A-Z0-9_]*$"
+              },
+              "source": { "type": "string" },
+              "target": {
+                "oneOf": [
+                  { "type": "string" },
+                  { "type": "array", "items": { "type": "string" } }
+                ]
+              },
+              "properties": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "required": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        },
+        "constraints": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    
+    "fulltext_schema": {
+      "type": "object",
+      "required": ["required_fields", "extracted_fields"],
+      "properties": {
+        "required_fields": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "extracted_fields": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "type", "description", "extraction_method"],
+            "properties": {
+              "name": { "type": "string" },
+              "type": {
+                "type": "string",
+                "enum": ["string", "number", "boolean", "date", "array", "object"]
+              },
+              "description": { "type": "string" },
+              "extraction_method": {
+                "type": "string",
+                "enum": ["ner", "pattern", "llm", "heuristic"]
+              },
+              "patterns": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "index": {
+                "type": "boolean",
+                "default": true
+              }
+            }
+          }
+        },
+        "keyword_extraction": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean", "default": true },
+            "method": {
+              "type": "string",
+              "enum": ["tfidf", "rake", "textrank"]
+            },
+            "min_frequency": { "type": "number", "minimum": 1 },
+            "max_keywords": { "type": "number", "minimum": 1 },
+            "exclude_stopwords": { "type": "boolean", "default": true },
+            "preserve_entities": { "type": "boolean", "default": true },
+            "preserve_code_terms": { "type": "boolean", "default": false }
+          }
+        },
+        "categories": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "summary": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean", "default": true },
+            "method": {
+              "type": "string",
+              "enum": ["llm", "extractive", "abstractive"]
+            },
+            "max_length": {
+              "type": "number",
+              "minimum": 50,
+              "maximum": 1000
+            }
+          }
+        }
+      }
+    },
+    
+    "extraction_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "description", "method"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "description": { "type": "string" },
+          "method": {
+            "type": "string",
+            "enum": ["ner", "pattern", "llm", "heuristic", "section_detection"]
+          },
+          "entity_types": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "patterns": {
+            "oneOf": [
+              {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["pattern"],
+                  "properties": {
+                    "pattern": { "type": "string" },
+                    "type": { "type": "string" },
+                    "flags": { "type": "string" }
+                  }
+                }
+              }
+            ]
+          },
+          "confidence_threshold": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "post_processing": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["deduplicate", "normalize_whitespace", "title_case", "uppercase", "lowercase"]
+            }
+          },
+          "prompt": { "type": "string" },
+          "date_parser": { "type": "string" },
+          "include_content": { "type": "boolean" },
+          "max_clause_length": { "type": "number" },
+          "indicators": {
+            "type": "object",
+            "patternProperties": {
+              "^[a-z]+$": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          },
+          "flags": { "type": "string" }
+        }
+      }
+    },
+    
+    "validation_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["field", "rules"],
+        "properties": {
+          "field": { "type": "string" },
+          "rules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["type"],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "required", "min_length", "max_length",
+                    "min_value", "max_value", "pattern",
+                    "date_format", "date_range", "enum"
+                  ]
+                },
+                "value": {
+                  "oneOf": [
+                    { "type": "string" },
+                    { "type": "number" },
+                    { "type": "array" }
+                  ]
+                },
+                "values": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "format": { "type": "string" },
+                "min": { "type": "string" },
+                "max": { "type": "string" },
+                "message": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

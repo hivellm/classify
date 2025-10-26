@@ -1,0 +1,374 @@
+{
+  "$schema": "https://hivellm.org/schemas/classify-template-v1.json",
+  "version": "1.0",
+  
+  "metadata": {
+    "name": "engineering",
+    "display_name": "Engineering Documents",
+    "description": "Classification template for technical and engineering documents including code, specifications, design docs, and API documentation",
+    "domains": ["engineering", "technical", "software", "development"],
+    "priority": 80,
+    
+    "indicators": [
+      "function", "class", "api", "implementation",
+      "specification", "design", "architecture", "code",
+      "method", "interface", "module", "component",
+      "endpoint", "request", "response", "parameter"
+    ],
+    
+    "document_types": [
+      "code", "specification", "design", "documentation",
+      "api", "technical_spec", "architecture", "readme",
+      "changelog", "requirements"
+    ],
+    
+    "example_titles": [
+      "API Specification v1.0",
+      "System Design Document",
+      "README.md",
+      "Authentication Service Documentation",
+      "Database Schema Specification",
+      "User Service Code"
+    ],
+    
+    "use_cases": [
+      "Code documentation and indexing",
+      "API specification management",
+      "System design documentation",
+      "Technical knowledge base",
+      "Architecture documentation"
+    ]
+  },
+  
+  "llm_config": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "temperature": 0.2,
+    "max_tokens": 2000,
+    "system_prompt": "You are an expert technical document classifier. Extract function names, classes, APIs, dependencies, components, and technical specifications with high accuracy. Identify programming languages, frameworks, design patterns, and architectural components. Preserve exact technical terminology and code references.",
+    "fallback_models": [
+      "gpt-4o-mini",
+      "claude-3-5-haiku-latest",
+      "gemini-2.0-flash"
+    ]
+  },
+  
+  "document_types": [
+    {
+      "type": "code",
+      "display_name": "Source Code",
+      "description": "Source code file or snippet",
+      "indicators": ["function", "class", "def", "const", "var", "import"],
+      "required_entities": ["language", "functions"],
+      "optional_entities": ["dependencies", "classes"],
+      "priority": 100
+    },
+    {
+      "type": "api",
+      "display_name": "API Documentation",
+      "description": "API specification or documentation",
+      "indicators": ["endpoint", "request", "response", "api", "method"],
+      "required_entities": ["endpoints", "methods"],
+      "optional_entities": ["authentication", "parameters"],
+      "priority": 95
+    },
+    {
+      "type": "design",
+      "display_name": "Design Document",
+      "description": "Technical design or architecture document",
+      "indicators": ["design", "architecture", "system", "component"],
+      "required_entities": ["components"],
+      "optional_entities": ["diagrams", "patterns"],
+      "priority": 85
+    }
+  ],
+  
+  "entity_definitions": [
+    {
+      "type": "Function",
+      "description": "Function or method",
+      "properties": {
+        "name": { "type": "string", "required": true },
+        "signature": { "type": "string", "required": false },
+        "parameters": { "type": "array", "required": false },
+        "return_type": { "type": "string", "required": false },
+        "description": { "type": "string", "required": false }
+      },
+      "extraction_methods": ["pattern", "llm"]
+    },
+    {
+      "type": "Class",
+      "description": "Class or interface",
+      "properties": {
+        "name": { "type": "string", "required": true },
+        "type": {
+          "type": "enum",
+          "values": ["class", "interface", "abstract", "trait"],
+          "required": false
+        },
+        "methods": { "type": "array", "required": false },
+        "properties": { "type": "array", "required": false }
+      },
+      "extraction_methods": ["pattern", "llm"]
+    },
+    {
+      "type": "API",
+      "description": "API endpoint",
+      "properties": {
+        "endpoint": { "type": "string", "required": true },
+        "method": {
+          "type": "enum",
+          "values": ["GET", "POST", "PUT", "DELETE", "PATCH"],
+          "required": true
+        },
+        "description": { "type": "string", "required": false },
+        "parameters": { "type": "array", "required": false },
+        "response": { "type": "object", "required": false }
+      },
+      "extraction_methods": ["pattern", "llm"]
+    },
+    {
+      "type": "Dependency",
+      "description": "External dependency or library",
+      "properties": {
+        "name": { "type": "string", "required": true },
+        "version": { "type": "string", "required": false },
+        "type": {
+          "type": "enum",
+          "values": ["library", "framework", "tool", "service"],
+          "required": false
+        }
+      },
+      "extraction_methods": ["pattern", "llm"]
+    },
+    {
+      "type": "Component",
+      "description": "System component or module",
+      "properties": {
+        "name": { "type": "string", "required": true },
+        "type": {
+          "type": "enum",
+          "values": ["service", "module", "library", "database", "api"],
+          "required": false
+        },
+        "description": { "type": "string", "required": false }
+      },
+      "extraction_methods": ["llm"]
+    }
+  ],
+  
+  "relationship_definitions": [
+    {
+      "type": "DEPENDS_ON",
+      "description": "Component depends on another component",
+      "source": "Component",
+      "target": ["Component", "Dependency"],
+      "properties": {
+        "version": { "type": "string", "required": false }
+      },
+      "extraction_methods": ["llm", "pattern"]
+    },
+    {
+      "type": "IMPLEMENTS",
+      "description": "Class implements interface",
+      "source": "Class",
+      "target": ["Class"],
+      "properties": {},
+      "extraction_methods": ["llm"]
+    },
+    {
+      "type": "CALLS",
+      "description": "Function calls another function",
+      "source": "Function",
+      "target": ["Function", "API"],
+      "properties": {},
+      "extraction_methods": ["llm"]
+    },
+    {
+      "type": "HAS_ENDPOINT",
+      "description": "API has endpoint",
+      "source": "Document",
+      "target": ["API"],
+      "properties": {
+        "method": { "type": "string", "required": true }
+      },
+      "extraction_methods": ["llm"]
+    }
+  ],
+  
+  "graph_schema": {
+    "nodes": [
+      {
+        "type": "TechnicalDocument",
+        "labels": ["Document", "TechnicalDocument"],
+        "required_properties": ["id", "title", "doc_type", "domain"],
+        "optional_properties": ["language", "framework", "version"],
+        "indexes": [
+          { "property": "id", "type": "unique" },
+          { "property": "doc_type", "type": "index" },
+          { "property": "language", "type": "index" }
+        ]
+      },
+      {
+        "type": "Component",
+        "labels": ["Component"],
+        "required_properties": ["name", "type"],
+        "optional_properties": ["description", "version"],
+        "indexes": [
+          { "property": "name", "type": "index" }
+        ]
+      },
+      {
+        "type": "Function",
+        "labels": ["Function"],
+        "required_properties": ["name"],
+        "optional_properties": ["signature", "return_type"],
+        "indexes": [
+          { "property": "name", "type": "index" }
+        ]
+      }
+    ],
+    
+    "relationships": [
+      {
+        "type": "DEPENDS_ON",
+        "source": "Component",
+        "target": ["Component", "Dependency"],
+        "properties": ["version"],
+        "required": []
+      },
+      {
+        "type": "CALLS",
+        "source": "Function",
+        "target": ["Function", "API"],
+        "properties": [],
+        "required": []
+      }
+    ]
+  },
+  
+  "fulltext_schema": {
+    "required_fields": ["title", "domain", "doc_type"],
+    
+    "extracted_fields": [
+      {
+        "name": "language",
+        "type": "string",
+        "description": "Programming language",
+        "extraction_method": "pattern",
+        "patterns": ["python", "javascript", "typescript", "java", "rust", "go", "c\\+\\+"],
+        "index": true
+      },
+      {
+        "name": "framework",
+        "type": "string",
+        "description": "Framework or library",
+        "extraction_method": "llm",
+        "index": true
+      },
+      {
+        "name": "functions",
+        "type": "array",
+        "description": "Function names",
+        "extraction_method": "pattern",
+        "index": true
+      },
+      {
+        "name": "classes",
+        "type": "array",
+        "description": "Class names",
+        "extraction_method": "pattern",
+        "index": true
+      },
+      {
+        "name": "dependencies",
+        "type": "array",
+        "description": "External dependencies",
+        "extraction_method": "llm",
+        "index": true
+      }
+    ],
+    
+    "keyword_extraction": {
+      "enabled": true,
+      "method": "tfidf",
+      "min_frequency": 1,
+      "max_keywords": 30,
+      "exclude_stopwords": true,
+      "preserve_entities": true,
+      "preserve_code_terms": true
+    },
+    
+    "categories": [
+      "engineering", "technical", "code", "api", "documentation"
+    ],
+    
+    "summary": {
+      "enabled": true,
+      "method": "llm",
+      "max_length": 500
+    }
+  },
+  
+  "extraction_rules": [
+    {
+      "name": "extract_functions",
+      "description": "Extract function definitions",
+      "method": "pattern",
+      "patterns": [
+        "function\\s+(\\w+)\\s*\\(",
+        "def\\s+(\\w+)\\s*\\(",
+        "const\\s+(\\w+)\\s*=\\s*\\(",
+        "fn\\s+(\\w+)\\s*\\("
+      ],
+      "post_processing": ["deduplicate"]
+    },
+    {
+      "name": "extract_classes",
+      "description": "Extract class definitions",
+      "method": "pattern",
+      "patterns": [
+        "class\\s+(\\w+)",
+        "interface\\s+(\\w+)",
+        "struct\\s+(\\w+)",
+        "trait\\s+(\\w+)"
+      ],
+      "post_processing": ["deduplicate"]
+    },
+    {
+      "name": "extract_dependencies",
+      "description": "Extract import statements",
+      "method": "pattern",
+      "patterns": [
+        "import\\s+([\\w.]+)",
+        "from\\s+([\\w.]+)\\s+import",
+        "require\\(['\"]([\\w./]+)['\"]\\)",
+        "use\\s+([\\w:]+)"
+      ],
+      "post_processing": ["deduplicate"]
+    },
+    {
+      "name": "extract_language",
+      "description": "Detect programming language",
+      "method": "heuristic",
+      "indicators": {
+        "python": ["def ", "import ", "self"],
+        "javascript": ["function ", "const ", "var ", "let "],
+        "typescript": ["interface ", "type ", "export "],
+        "rust": ["fn ", "impl ", "trait "],
+        "java": ["public class", "private ", "extends "],
+        "go": ["func ", "package ", "import "]
+      }
+    }
+  ],
+  
+  "validation_rules": [
+    {
+      "field": "language",
+      "rules": [
+        { "type": "enum", "values": ["python", "javascript", "typescript", "java", "rust", "go", "cpp", "unknown"] }
+      ]
+    }
+  ]
+}
+
