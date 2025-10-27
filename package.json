@@ -1,6 +1,6 @@
 {
   "name": "@hivellm/classify",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Intelligent document classification for graph databases and full-text search using modern LLMs",
   "type": "module",
   "main": "./dist/index.js",
