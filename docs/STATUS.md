@@ -25,13 +25,15 @@
 
 ### Test Coverage
 - **Overall Coverage:** 77.57% (exceeds 75% threshold)
-- **Test Files:** 24 test suites (21 unit + 3 new v0.6.0)
-- **Total Tests:** 177 passing, 1 skipped (99.4% pass rate)
-- **Execution Time:** ~1.8s
+- **Test Files:** 25 test suites (including integration tests)
+- **Total Tests:** 198 passing, 6 skipped (97% pass rate)
+- **Execution Time:** ~36s
+- **LLM Mocking:** All tests use mocked LLM providers (no real API calls)
+- **Skipped Tests:** 5 integration tests requiring real LLM classification
 - **New Tests (v0.6.0):**
   - GitIgnore Parser: 16 tests
   - Relationship Builder: 17 tests  
-  - Integration Tests: Full project mapping suite
+  - Integration Tests: Full project mapping suite (with mocked LLM)
 
 ### Coverage by Module
 
