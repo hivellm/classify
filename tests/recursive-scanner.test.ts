@@ -258,7 +258,11 @@ describe('RecursiveScanner', () => {
       await writeFile(join(testDir, 'a', 'b', 'level2.ts'), 'x');
       await writeFile(join(testDir, 'a', 'b', 'c', 'level3.ts'), 'x');
 
-      const scanner = new RecursiveScanner({ maxDepth: 1, useGitIgnore: false, includeTests: false });
+      const scanner = new RecursiveScanner({
+        maxDepth: 1,
+        useGitIgnore: false,
+        includeTests: false,
+      });
       const files = await scanner.scan(testDir);
 
       // Should include level0 and level1, but not level2 or level3
