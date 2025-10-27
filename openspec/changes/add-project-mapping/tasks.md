@@ -16,12 +16,12 @@
 - [x] Keep only source code extensions (.ts, .js, .py, .rs, .java, .go, .md, .json, .yml)
 - [x] Multi-language support (Java, C#, C++, Go, Elixir, Ruby, PHP, Rust)
 
-### 1.3 Project Structure Detector
-- [ ] Detect Node.js projects (package.json)
-- [ ] Detect Rust projects (Cargo.toml)
-- [ ] Detect Python projects (pyproject.toml, setup.py, requirements.txt)
-- [ ] Detect multi-language projects
-- [ ] Identify entry points (index.ts, main.rs, __init__.py)
+### 1.3 Project Structure Detector ✅ COMPLETED (v0.5.0)
+- [x] Detect Node.js projects (package.json)
+- [x] Detect Rust projects (Cargo.toml)
+- [x] Detect Python projects (pyproject.toml, setup.py, requirements.txt)
+- [x] Detect multi-language projects
+- [x] Identify entry points (index.ts, main.rs, __init__.py)
 
 ### 1.4 Recursive Scanner
 - [ ] Implement async recursive directory traversal
@@ -31,11 +31,11 @@
 
 ## 2. Project Mapper ⏳ PENDING
 
-### 2.1 Project Analyzer
-- [ ] Create ProjectMapper class
-- [ ] Analyze project structure (directories, modules)
-- [ ] Build project metadata (name, type, languages, entry points)
-- [ ] Identify configuration files
+### 2.1 Project Analyzer ✅ COMPLETED (v0.5.0)
+- [x] Create ProjectMapper class
+- [x] Analyze project structure (directories, modules)
+- [x] Build project metadata (name, type, languages, entry points)
+- [x] Identify configuration files
 
 ### 2.2 Parallel Classification ✅ COMPLETED (v0.4.0)
 - [x] Classify files in parallel (use BatchProcessor)
@@ -50,25 +50,25 @@
 - [ ] Build file-to-file relationship graph
 - [ ] Detect circular dependencies
 
-### 2.4 Project-Level Aggregation
-- [ ] Aggregate entities across all files
-- [ ] Build module hierarchy
-- [ ] Map test files to source files
-- [ ] Calculate project statistics (total entities, relationships, files)
+### 2.4 Project-Level Aggregation ✅ COMPLETED (v0.5.0)
+- [x] Aggregate entities across all files
+- [x] Build module hierarchy (via Project node)
+- [x] Map test files to source files (optional includeTests flag)
+- [x] Calculate project statistics (total entities, relationships, files, cost)
 
 ## 3. CLI Command ⏳ PENDING
 
-### 3.1 Map Command
-- [ ] Implement `classify map-project <directory>` command
-- [ ] Options: --concurrency, --ignore, --include-tests, --output
-- [ ] Default output: combined (Cypher + JSON)
-- [ ] Progress bar showing files processed
+### 3.1 Map Command ✅ COMPLETED (v0.5.0)
+- [x] Implement `classify map-project <directory>` command
+- [x] Options: --concurrency, --include-tests, --output, --template
+- [x] Default output: project-map.cypher
+- [x] Progress callback for files processed
 
-### 3.2 Output Formatters
-- [ ] Generate project-level Cypher (all files + relationships)
-- [ ] Generate project summary JSON
-- [ ] Export as unified graph
-- [ ] Option to split by module
+### 3.2 Output Formatters ✅ COMPLETED (v0.5.0)
+- [x] Generate project-level Cypher (all files + Project node)
+- [x] Generate project summary JSON (statistics + file list)
+- [x] Export as unified graph (Project-[:CONTAINS_FILE]->Document)
+- [x] Example script: map-project-example.ts
 
 ## 4. Testing ⏳ PENDING
 

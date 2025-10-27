@@ -63,3 +63,11 @@ export {
   type Neo4jConfig,
   type ElasticsearchConfig,
 } from './integrations/index.js';
+
+// Project Mapping
+export {
+  ProjectDetector,
+  ProjectMapper,
+  type ProjectInfo,
+  type ProjectMapResult,
+} from './project/index.js';

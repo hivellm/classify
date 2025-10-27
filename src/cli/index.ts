@@ -43,6 +43,22 @@ program
     console.log('⚠️  Not implemented yet');
   });
 
+// Map project command
+program
+  .command('map-project <directory>')
+  .description('Map entire project structure to graph database')
+  .option('-o, --output <file>', 'Output file for unified Cypher', 'project-map.cypher')
+  .option('-m, --model <model>', 'LLM model to use', 'deepseek-chat')
+  .option('--concurrency <n>', 'Number of parallel processes', '20')
+  .option('--include-tests', 'Include test files in mapping')
+  .option('--template <id>', 'Force specific template (default: auto-select)')
+  .option('--no-cache', 'Disable caching')
+  .action((directory, options) => {
+    console.log(`Mapping project: ${directory}`);
+    console.log('Options:', options);
+    console.log('⚠️  Not implemented yet - use ProjectMapper API directly');
+  });
+
 // List templates command
 program
   .command('list-templates')
