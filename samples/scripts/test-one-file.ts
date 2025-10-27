@@ -1,7 +1,7 @@
 import { config } from 'dotenv';
 config();
 
-import { ClassifyClient } from '../dist/index.js';
+import { ClassifyClient } from '../../dist/index.js';
 import { join } from 'path';
 
 async function main() {

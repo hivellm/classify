@@ -1,7 +1,7 @@
 /**
  * Test script to demonstrate cache functionality
  */
-import { ClassifyClient } from '../src/client.js';
+import { ClassifyClient } from '../../src/client.js';
 import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import 'dotenv/config';

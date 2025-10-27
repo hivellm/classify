@@ -1,10 +1,10 @@
 {
-  "timestamp": "2025-10-27T15:59:30.854Z",
+  "timestamp": "2025-10-27T16:05:57.499Z",
   "totalFiles": 20,
   "successCount": 20,
   "failCount": 0,
   "totalCost": 0.018219040000000002,
-  "totalTime": 23,
+  "totalTime": 149,
   "cacheHits": 20,
   "cacheHitRate": 1,
   "totalEntities": 460,

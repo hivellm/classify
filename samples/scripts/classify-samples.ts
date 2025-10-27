@@ -7,7 +7,7 @@
 import { config } from 'dotenv';
 config(); // Load .env
 
-import { ClassifyClient, DEFAULT_IGNORE_PATTERNS, type ClassifyResult } from '../src/index.js';
+import { ClassifyClient, DEFAULT_IGNORE_PATTERNS, type ClassifyResult } from '../../src/index.js';
 import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import { glob } from 'glob';

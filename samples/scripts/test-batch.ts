@@ -1,8 +1,8 @@
 /**
  * Test script for batch processing with cache
  */
-import { ClassifyClient } from '../src/client.js';
-import { BatchProcessor } from '../src/batch/batch-processor.js';
+import { ClassifyClient } from '../../src/client.js';
+import { BatchProcessor } from '../../src/batch/batch-processor.js';
 import 'dotenv/config';
 
 async function main() {
