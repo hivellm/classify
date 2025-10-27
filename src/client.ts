@@ -1,10 +1,25 @@
 import type { ClassifyOptions, ClassifyResult } from './types.js';
+import { DocumentProcessor } from './preprocessing/document-processor.js';
+import { TemplateLoader } from './templates/template-loader.js';
+import { TemplateSelector } from './templates/template-selector.js';
+import {
+  ClassificationPipeline,
+  type ClassificationPipelineResult,
+} from './classification/pipeline.js';
+import { ProviderFactory } from './llm/provider-factory.js';
+import type { LLMProvider } from './llm/types.js';
 
 /**
  * Main client for document classification
  */
 export class ClassifyClient {
   private options: Required<ClassifyOptions>;
+  private documentProcessor: DocumentProcessor;
+  private templateLoader: TemplateLoader;
+  private llmProvider: LLMProvider;
+  private templateSelector: TemplateSelector;
+  private classificationPipeline: ClassificationPipeline;
+  private templatesLoaded = false;
 
   constructor(options: ClassifyOptions = {}) {
     // Initialize with defaults, merging provided options
@@ -20,8 +35,23 @@ export class ClassifyClient {
 
     // Validate API key if provided
     if (this.options.apiKey === '') {
-      console.warn('Warning: No API key provided. Set DEEPSEEK_API_KEY or pass apiKey in options.');
+      console.warn(
+        'Warning: No API key provided. Set DEEPSEEK_API_KEY or pass apiKey in options.'
+      );
     }
+
+    // Initialize components
+    this.documentProcessor = new DocumentProcessor();
+    this.templateLoader = new TemplateLoader();
+    this.llmProvider = ProviderFactory.create(this.options.provider, {
+      apiKey: this.options.apiKey,
+      model: this.options.model,
+    });
+    this.templateSelector = new TemplateSelector(
+      this.llmProvider,
+      this.templateLoader
+    );
+    this.classificationPipeline = new ClassificationPipeline(this.llmProvider);
   }
 
   /**
@@ -30,7 +60,115 @@ export class ClassifyClient {
    * @returns Classification result
    */
   async classify(filePath: string): Promise<ClassifyResult> {
-    // TODO: Implement full classification pipeline
-    throw new Error(`Not implemented yet. File: ${filePath}`);
+    const startTime = Date.now();
+
+    // Load templates if not loaded yet
+    if (!this.templatesLoaded) {
+      await this.templateLoader.loadTemplates();
+      this.templatesLoaded = true;
+    }
+
+    // Step 1: Process document (convert to markdown + hash)
+    const processedDoc = await this.documentProcessor.process(filePath);
+
+    // TODO: Check cache here
+
+    // Step 2: Select template using LLM
+    const templateSelection = await this.templateSelector.select(
+      processedDoc.markdown
+    );
+
+    // Get selected template
+    const template = this.templateLoader.getTemplate(templateSelection.templateId);
+    if (!template) {
+      throw new Error(`Template not found: ${templateSelection.templateId}`);
+    }
+
+    // Step 3: Extract entities and relationships
+    const pipelineResult = await this.classificationPipeline.classify(
+      processedDoc,
+      template
+    );
+
+    // Step 4: Generate outputs
+    const totalTimeMs = Date.now() - startTime;
+
+    const result: ClassifyResult = {
+      classification: {
+        template: templateSelection.templateId,
+        confidence: templateSelection.confidence,
+        domain: pipelineResult.classification.domain,
+        docType: pipelineResult.classification.docType,
+      },
+      graphStructure: {
+        cypher: this.generateCypher(pipelineResult),
+        entities: pipelineResult.entities,
+        relationships: pipelineResult.relationships,
+      },
+      fulltextMetadata: {
+        title: pipelineResult.classification.title,
+        domain: pipelineResult.classification.domain,
+        docType: pipelineResult.classification.docType,
+        extractedFields: {},
+        keywords: [],
+      },
+      cacheInfo: {
+        cached: false,
+        hash: processedDoc.hash,
+      },
+      performance: {
+        totalTimeMs,
+        tokens: {
+          input:
+            templateSelection.tokens.input +
+            pipelineResult.tokens.extraction.input,
+          output:
+            templateSelection.tokens.output +
+            pipelineResult.tokens.extraction.output,
+          total:
+            templateSelection.tokens.input +
+            templateSelection.tokens.output +
+            pipelineResult.tokens.total,
+        },
+        costUsd: templateSelection.costUsd + pipelineResult.costUsd,
+      },
+    };
+
+    return result;
+  }
+
+  /**
+   * Generate Cypher statements from classification result
+   */
+  private generateCypher(result: ClassificationPipelineResult): string {
+    const statements: string[] = [];
+
+    // Create Document node
+    const docProps = `{
+      id: "${result.classification.title.replace(/"/g, '\\"')}",
+      title: "${result.classification.title.replace(/"/g, '\\"')}",
+      domain: "${result.classification.domain}",
+      doc_type: "${result.classification.docType}"
+    }`;
+    statements.push(`CREATE (doc:Document ${docProps})`);
+
+    // Create entity nodes and relationships
+    result.entities.forEach(
+      (
+        entity: { type: string; properties: Record<string, unknown> },
+        idx: number
+      ) => {
+        const entityVar = `e${idx}`;
+        const props = Object.entries(entity.properties)
+          .map(([k, v]) => `${k}: "${String(v).replace(/"/g, '\\"')}"`)
+          .join(', ');
+
+        statements.push(`CREATE (${entityVar}:${entity.type} {${props}})`);
+        statements.push(`CREATE (doc)-[:MENTIONS]->(${entityVar})`);
+      }
+    );
+
+    return statements.join('\n');
   }
 }
+

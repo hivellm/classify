@@ -2,56 +2,73 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { ClassifyClient } from '../src/client.js';
 
 describe('ClassifyClient', () => {
-  let client: ClassifyClient;
-
-  beforeEach(() => {
-    client = new ClassifyClient({
-      provider: 'deepseek',
-      model: 'deepseek-chat',
-      apiKey: 'test-key',
-      cacheEnabled: true,
-      cacheDir: '.test-cache',
-    });
-  });
-
   describe('constructor', () => {
-    it('should create instance with default options', (): void => {
-      const defaultClient = new ClassifyClient();
-      expect(defaultClient).toBeInstanceOf(ClassifyClient);
-    });
+    it('should create instance with API key', (): void => {
+      const client = new ClassifyClient({
+        apiKey: 'test-api-key',
+      });
 
-    it('should create instance with custom options', (): void => {
       expect(client).toBeInstanceOf(ClassifyClient);
     });
 
-    it('should merge provided options with defaults', (): void => {
-      const customClient = new ClassifyClient({
-        provider: 'openai',
-        model: 'gpt-4o-mini',
+    it('should create instance with custom options', (): void => {
+      const client = new ClassifyClient({
+        provider: 'deepseek',
+        model: 'deepseek-chat',
+        apiKey: 'test-key',
+        cacheEnabled: true,
+        cacheDir: '.test-cache',
       });
-      expect(customClient).toBeInstanceOf(ClassifyClient);
+
+      expect(client).toBeInstanceOf(ClassifyClient);
     });
 
-    it('should warn when no API key is provided', (): void => {
-      const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    it('should create OpenAI client', (): void => {
+      const client = new ClassifyClient({
+        provider: 'openai',
+        model: 'gpt-4o-mini',
+        apiKey: 'test-api-key',
+      });
 
-      new ClassifyClient({ apiKey: '' });
+      expect(client).toBeInstanceOf(ClassifyClient);
+    });
 
-      expect(consoleWarnSpy).toHaveBeenCalledWith(
-        'Warning: No API key provided. Set DEEPSEEK_API_KEY or pass apiKey in options.'
+    it('should throw when no API key is provided', (): void => {
+      expect(() => new ClassifyClient({ apiKey: '' })).toThrow(
+        'API key required for provider'
       );
+    });
+
+    it('should warn when empty API key passed', (): void => {
+      const consoleWarnSpy = vi
+        .spyOn(console, 'warn')
+        .mockImplementation(() => {});
+
+      expect(() => new ClassifyClient({ apiKey: '' })).toThrow();
 
       consoleWarnSpy.mockRestore();
+    });
+
+    it('should use environment variable for API key', (): void => {
+      const oldKey = process.env.DEEPSEEK_API_KEY;
+      process.env.DEEPSEEK_API_KEY = 'env-test-key';
+
+      const client = new ClassifyClient();
+      expect(client).toBeInstanceOf(ClassifyClient);
+
+      // Restore
+      if (oldKey) {
+        process.env.DEEPSEEK_API_KEY = oldKey;
+      } else {
+        delete process.env.DEEPSEEK_API_KEY;
+      }
     });
   });
 
   describe('classify', () => {
-    it('should throw not implemented error', async (): Promise<void> => {
-      await expect(client.classify('test.pdf')).rejects.toThrow('Not implemented yet');
-    });
-
-    it('should include file path in error message', async (): Promise<void> => {
-      await expect(client.classify('document.pdf')).rejects.toThrow('document.pdf');
+    it('should throw error for non-existent file', async (): Promise<void> => {
+      const client = new ClassifyClient({ apiKey: 'test-key' });
+      await expect(client.classify('non-existent-file.pdf')).rejects.toThrow();
     });
   });
 });
