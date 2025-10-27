@@ -12,6 +12,13 @@ build/
 
 # Testing
 coverage/
+
+# Cache directories
+.classify-cache/
+.test-cache/
+
+# Test files
+tests/temp-*/
 .nyc_output/
 
 # Cache
