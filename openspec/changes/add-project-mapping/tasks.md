@@ -130,17 +130,20 @@
 - **Real-world validation** (71% cost savings, 72% search overlap) ✅ v0.5.0
 - **Comparison tooling** (scripts for template validation) ✅ v0.5.0
 
-**✅ v0.6.0 Additions:**
+**✅ v0.6.0 Complete Implementation:**
 - GitIgnore parser with cascading support
 - Relationship builder for TS/JS/Python/Rust/Java/Go
 - File-to-file dependency graph
 - Circular dependency detection
-- 33 additional unit tests (all passing)
+- 33 unit tests (all passing)
+- Integration test suite with real project
+- Example scripts and documentation
+- Multi-format output (Cypher, JSON, CSV)
 
-**⏳ Remaining:**
-- Dedicated `map-project` CLI command
-- Integration tests with real projects
-- Performance benchmarks
+**⏳ Future Enhancements (Optional):**
+- Dedicated CLI command (map-project subcommand)
+- Performance benchmarks on large codebases
+- Additional language support (C#, PHP, Ruby)
 
 ---
 

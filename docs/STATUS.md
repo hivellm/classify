@@ -1,12 +1,22 @@
 # Classify - Project Status
 
-**Version:** 0.5.0  
-**Last Updated:** 2025-10-27  
-**Status:** ⭐ Ultra Cost-Optimized - TINY Templates Default (70-80% Savings) - Production Ready
+**Version:** 0.6.0  
+**Last Updated:** 2025-01-27  
+**Status:** ⭐ Ultra Cost-Optimized + Project Analysis - TINY Templates Default (70-80% Savings) - Production Ready
 
 ## ✅ Current State
 
-### 🚀 Major Update: TINY Templates (v0.5.0)
+### 🚀 Major Updates
+
+#### v0.6.0: Project Mapping & Relationship Analysis
+- **GitIgnore Parser:** Full `.gitignore` support with cascading
+- **Relationship Builder:** Import/dependency analysis for 6 languages (TS/JS, Python, Rust, Java, Go)
+- **Dependency Graph:** File-to-file relationships with circular dependency detection
+- **Multi-Format Output:** Cypher, JSON, CSV exports
+- **Integration Tests:** Comprehensive test suite with real projects
+- **Examples:** Practical usage scripts and documentation
+
+#### v0.5.0: TINY Templates (Cost Optimization)
 - **Default Templates:** TINY (cost-optimized) - **70-80% token savings**
 - **Template Sets:** 2 sets (TINY in `templates/tiny/` + STANDARD in `templates/standard/`)
 - **Templates per Set:** 16 specialized templates each (32 total)
@@ -15,9 +25,13 @@
 
 ### Test Coverage
 - **Overall Coverage:** 77.57% (exceeds 75% threshold)
-- **Test Files:** 21 test suites
-- **Total Tests:** 144 passing, 1 skipped (99.3% pass rate)
-- **Execution Time:** ~1.7s
+- **Test Files:** 24 test suites (21 unit + 3 new v0.6.0)
+- **Total Tests:** 177 passing, 1 skipped (99.4% pass rate)
+- **Execution Time:** ~1.8s
+- **New Tests (v0.6.0):**
+  - GitIgnore Parser: 16 tests
+  - Relationship Builder: 17 tests  
+  - Integration Tests: Full project mapping suite
 
 ### Coverage by Module
 
@@ -68,6 +82,14 @@
 - Progress tracking
 - Error handling
 - Cache integration
+
+✅ **Project Mapping (v0.6.0):**
+- GitIgnore parser with cascading support
+- Relationship builder for 6 languages (TS/JS, Python, Rust, Java, Go)
+- File-to-file dependency graph
+- Circular dependency detection
+- Multi-format output (Cypher, JSON, CSV)
+- Integration test suite with real projects
 
 ✅ **Performance:**
 - Cache hit: 2734x faster
