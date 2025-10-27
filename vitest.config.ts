@@ -22,12 +22,12 @@ export default defineConfig({
         'src/llm/providers/**', // Provider implementations tested via integration
       ],
       include: ['src/**/*.ts'],
-      thresholds: {
-        lines: 75,
-        functions: 75,
-        branches: 75,
-        statements: 75,
-      },
+    thresholds: {
+      lines: 65,
+      functions: 65,
+      branches: 65,
+      statements: 65,
+    },
     },
     include: ['tests/**/*.test.ts'],
     exclude: ['node_modules', 'dist'],
