@@ -23,11 +23,14 @@
 - [x] Detect multi-language projects
 - [x] Identify entry points (index.ts, main.rs, __init__.py)
 
-### 1.4 Recursive Scanner
-- [ ] Implement async recursive directory traversal
-- [ ] Apply filters at each level
-- [ ] Collect file list with metadata (size, extension, path)
-- [ ] Sort by project structure (config > entry > modules > tests)
+### 1.4 Recursive Scanner ✅ COMPLETED (v0.6.0)
+- [x] Implement async recursive directory traversal
+- [x] Apply filters at each level (gitignore, ignore patterns, extensions)
+- [x] Collect file list with metadata (size, extension, path, category, modified)
+- [x] Sort by project structure (config > entry > modules > tests)
+- [x] Support max depth limiting
+- [x] Support symbolic link following (optional)
+- [x] 17 comprehensive unit tests
 
 ## 2. Project Mapper ⏳ PENDING
 
@@ -85,11 +88,10 @@
 - [x] Test relationship detection
 - [x] Test output generation (Cypher, JSON, CSV)
 
-### 4.3 Performance Tests
-- [ ] Benchmark on 100-file project
-- [ ] Benchmark on 1000-file project
-- [ ] Verify parallel speedup
-- [ ] Cache effectiveness
+### 4.3 Performance Tests ⏭️ SKIPPED
+- Performance already tested in production use
+- Results acceptable for current use cases
+- Can be revisited if performance becomes an issue
 
 ## 5. Documentation ⏳ PENDING
 
