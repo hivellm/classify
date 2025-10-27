@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { ProviderFactory } from '../../src/llm/provider-factory.js';
 import { DeepSeekProvider } from '../../src/llm/providers/deepseek.js';
 import { OpenAIProvider } from '../../src/llm/providers/openai.js';
+import { CursorAgentProvider } from '../../src/llm/providers/cursor-agent.js';
 
 describe('ProviderFactory', () => {
   describe('create', () => {
@@ -39,6 +40,15 @@ describe('ProviderFactory', () => {
       expect(ProviderFactory.create('gemini', { apiKey: 'test-key' }).name).toBe('gemini');
       expect(ProviderFactory.create('xai', { apiKey: 'test-key' }).name).toBe('xai');
       expect(ProviderFactory.create('groq', { apiKey: 'test-key' }).name).toBe('groq');
+      expect(ProviderFactory.create('cursor-agent', {}).name).toBe('cursor-agent');
+    });
+
+    it('should create CursorAgent provider without API key', () => {
+      const provider = ProviderFactory.create('cursor-agent', {});
+
+      expect(provider).toBeInstanceOf(CursorAgentProvider);
+      expect(provider.name).toBe('cursor-agent');
+      expect(provider.defaultModel).toBe('cursor-agent');
     });
   });
 
@@ -50,6 +60,7 @@ describe('ProviderFactory', () => {
       expect(ProviderFactory.getDefaultModel('gemini')).toBe('gemini-2.5-flash');
       expect(ProviderFactory.getDefaultModel('xai')).toBe('grok-3');
       expect(ProviderFactory.getDefaultModel('groq')).toBe('llama-3.3-70b-versatile');
+      expect(ProviderFactory.getDefaultModel('cursor-agent')).toBe('cursor-agent');
     });
   });
 
@@ -61,6 +72,7 @@ describe('ProviderFactory', () => {
       expect(ProviderFactory.getApiKeyEnvVar('gemini')).toBe('GEMINI_API_KEY');
       expect(ProviderFactory.getApiKeyEnvVar('xai')).toBe('XAI_API_KEY');
       expect(ProviderFactory.getApiKeyEnvVar('groq')).toBe('GROQ_API_KEY');
+      expect(ProviderFactory.getApiKeyEnvVar('cursor-agent')).toBe('');
     });
   });
 });
