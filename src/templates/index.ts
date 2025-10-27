@@ -9,8 +9,4 @@ export {
   type TemplateIndex,
 } from './template-loader.js';
 
-export {
-  TemplateSelector,
-  type TemplateSelection,
-} from './template-selector.js';
-
+export { TemplateSelector, type TemplateSelection } from './template-selector.js';

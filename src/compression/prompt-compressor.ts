@@ -81,9 +81,7 @@ export class PromptCompressor {
         compressedTokens: result.compressedTokens,
         compressionRatio: result.compressionRatio,
         tokenReduction:
-          ((result.originalTokens - result.compressedTokens) /
-            result.originalTokens) *
-          100,
+          ((result.originalTokens - result.compressedTokens) / result.originalTokens) * 100,
         compressionTimeMs,
       };
     } catch (error) {
@@ -119,5 +117,3 @@ export class PromptCompressor {
     return this.enabled;
   }
 }
-
-

@@ -34,15 +34,11 @@ describe('ClassifyClient', () => {
     });
 
     it('should throw when no API key is provided', (): void => {
-      expect(() => new ClassifyClient({ apiKey: '' })).toThrow(
-        'API key required for provider'
-      );
+      expect(() => new ClassifyClient({ apiKey: '' })).toThrow('API key required for provider');
     });
 
     it('should warn when empty API key passed', (): void => {
-      const consoleWarnSpy = vi
-        .spyOn(console, 'warn')
-        .mockImplementation(() => {});
+      const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
       expect(() => new ClassifyClient({ apiKey: '' })).toThrow();
 

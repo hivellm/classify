@@ -116,4 +116,3 @@ export class DocumentProcessor {
     return this.converter.getSupportedFormats();
   }
 }
-

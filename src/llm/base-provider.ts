@@ -59,17 +59,13 @@ export abstract class BaseLLMProvider implements LLMProvider {
       }
     }
 
-    throw new Error(
-      `Failed after ${this.config.maxRetries} retries: ${lastError?.message}`
-    );
+    throw new Error(`Failed after ${this.config.maxRetries} retries: ${lastError?.message}`);
   }
 
   /**
    * Make the actual API request (implemented by each provider)
    */
-  protected abstract makeRequest(
-    _request: LLMCompletionRequest
-  ): Promise<LLMCompletionResponse>;
+  protected abstract makeRequest(_request: LLMCompletionRequest): Promise<LLMCompletionResponse>;
 
   /**
    * Get model pricing (per 1M tokens)
@@ -97,15 +93,10 @@ export abstract class BaseLLMProvider implements LLMProvider {
   /**
    * Calculate cost based on token usage and pricing
    */
-  protected calculateCost(
-    inputTokens: number,
-    outputTokens: number,
-    model: string
-  ): number {
+  protected calculateCost(inputTokens: number, outputTokens: number, model: string): number {
     const pricing = this.getPricing(model);
     const inputCost = (inputTokens / 1_000_000) * pricing.input;
     const outputCost = (outputTokens / 1_000_000) * pricing.output;
     return inputCost + outputCost;
   }
 }
-

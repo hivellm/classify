@@ -3,8 +3,4 @@
  * @packageDocumentation
  */
 
-export {
-  FulltextGenerator,
-  type FulltextMetadata,
-} from './fulltext-generator.js';
-
+export { FulltextGenerator, type FulltextMetadata } from './fulltext-generator.js';

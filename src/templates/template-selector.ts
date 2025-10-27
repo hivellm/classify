@@ -63,7 +63,7 @@ export class TemplateSelector {
     // Compress only the document content, keep JSON instructions
     const documentPart = `\`\`\`markdown\n${documentContent.slice(0, 3000)}${documentContent.length > 3000 ? '\n...(truncated)' : ''}\n\`\`\``;
     const compressionResult = this.compressor.compress(documentPart);
-    
+
     const compressedUserPrompt = `Analyze this document and select the best classification template:
 
 ${compressionResult.compressed}
@@ -95,9 +95,7 @@ IMPORTANT: Respond with valid JSON in the exact format specified above. Your res
 
     // Validate selected template exists
     if (!this.templateLoader.hasTemplate(result.template_id)) {
-      throw new Error(
-        `LLM selected invalid template: ${result.template_id}`
-      );
+      throw new Error(`LLM selected invalid template: ${result.template_id}`);
     }
 
     return {
@@ -171,4 +169,3 @@ IMPORTANT: Respond with valid JSON in the exact format specified above. Your res
     return { system, user };
   }
 }
-

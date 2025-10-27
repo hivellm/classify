@@ -88,14 +88,14 @@ export class ClassificationPipeline {
     if (!userMessage) {
       throw new Error('User message not found in extraction prompt');
     }
-    
+
     // Extract document content for compression (between ``` markers)
     let compressionResult = null;
     const contentMatch = userMessage.content.match(/```markdown\n([\s\S]*?)\n```/);
     if (contentMatch?.[1]) {
       const originalContent = contentMatch[1];
       compressionResult = this.compressor.compress(originalContent);
-      
+
       // Replace only the document content, keep JSON instructions
       userMessage.content = userMessage.content.replace(
         /```markdown\n[\s\S]*?\n```/,
@@ -203,4 +203,3 @@ Your entire response must be valid JSON. Do not include any other text.`;
     ];
   }
 }
-

@@ -14,11 +14,12 @@ describe('DeepSeekProvider', () => {
     });
 
     it('should throw without API key', () => {
-      expect(() =>
-        new DeepSeekProvider({
-          apiKey: '',
-          model: 'deepseek-chat',
-        })
+      expect(
+        () =>
+          new DeepSeekProvider({
+            apiKey: '',
+            model: 'deepseek-chat',
+          })
       ).toThrow('API key required');
     });
   });
@@ -48,4 +49,3 @@ describe('DeepSeekProvider', () => {
     });
   });
 });
-

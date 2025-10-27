@@ -20,7 +20,8 @@ describe('PromptCompressor', () => {
   describe('compress', () => {
     it('should compress text', () => {
       const compressor = new PromptCompressor({ enabled: true });
-      const text = 'This is a test document with some content that should be compressed to save tokens.';
+      const text =
+        'This is a test document with some content that should be compressed to save tokens.';
 
       const result = compressor.compress(text);
 
@@ -84,4 +85,3 @@ describe('PromptCompressor', () => {
     });
   });
 });
-

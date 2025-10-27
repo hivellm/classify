@@ -1,8 +1,5 @@
 import { BaseLLMProvider } from '../base-provider.js';
-import type {
-  LLMCompletionRequest,
-  LLMCompletionResponse,
-} from '../types.js';
+import type { LLMCompletionRequest, LLMCompletionResponse } from '../types.js';
 
 /**
  * OpenAI LLM Provider
@@ -11,21 +8,13 @@ import type {
 export class OpenAIProvider extends BaseLLMProvider {
   readonly name = 'openai';
   readonly defaultModel = 'gpt-4o-mini';
-  readonly supportedModels = [
-    'gpt-4o',
-    'gpt-4o-mini',
-    'gpt-4-turbo',
-    'gpt-4',
-    'gpt-3.5-turbo',
-  ];
+  readonly supportedModels = ['gpt-4o', 'gpt-4o-mini', 'gpt-4-turbo', 'gpt-4', 'gpt-3.5-turbo'];
 
   protected getDefaultBaseUrl(): string {
     return 'https://api.openai.com/v1';
   }
 
-  protected async makeRequest(
-    request: LLMCompletionRequest
-  ): Promise<LLMCompletionResponse> {
+  protected async makeRequest(request: LLMCompletionRequest): Promise<LLMCompletionResponse> {
     const model = request.model || this.defaultModel;
 
     if (!this.supportedModels.includes(model)) {
@@ -60,10 +49,9 @@ export class OpenAIProvider extends BaseLLMProvider {
 
       if (!response.ok) {
         const error = await response.text();
-        throw Object.assign(
-          new Error(`OpenAI API error (${response.status}): ${error}`),
-          { status: response.status }
-        );
+        throw Object.assign(new Error(`OpenAI API error (${response.status}): ${error}`), {
+          status: response.status,
+        });
       }
 
       const data = (await response.json()) as {
@@ -115,9 +103,7 @@ export class OpenAIProvider extends BaseLLMProvider {
     return pricingMap[model] ?? pricingMap['gpt-4o-mini']!;
   }
 
-  private mapFinishReason(
-    reason: string
-  ): 'stop' | 'length' | 'content_filter' | 'error' {
+  private mapFinishReason(reason: string): 'stop' | 'length' | 'content_filter' | 'error' {
     switch (reason) {
       case 'stop':
         return 'stop';
@@ -130,4 +116,3 @@ export class OpenAIProvider extends BaseLLMProvider {
     }
   }
 }
-

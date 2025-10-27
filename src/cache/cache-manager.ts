@@ -269,4 +269,3 @@ export class CacheManager {
     return this.enabled;
   }
 }
-

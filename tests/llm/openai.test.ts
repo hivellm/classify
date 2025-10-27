@@ -14,11 +14,12 @@ describe('OpenAIProvider', () => {
     });
 
     it('should throw without API key', () => {
-      expect(() =>
-        new OpenAIProvider({
-          apiKey: '',
-          model: 'gpt-4o-mini',
-        })
+      expect(
+        () =>
+          new OpenAIProvider({
+            apiKey: '',
+            model: 'gpt-4o-mini',
+          })
       ).toThrow('API key required');
     });
   });
@@ -62,4 +63,3 @@ describe('OpenAIProvider', () => {
     });
   });
 });
-

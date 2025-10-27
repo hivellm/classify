@@ -1,8 +1,5 @@
 import { BaseLLMProvider } from '../base-provider.js';
-import type {
-  LLMCompletionRequest,
-  LLMCompletionResponse,
-} from '../types.js';
+import type { LLMCompletionRequest, LLMCompletionResponse } from '../types.js';
 
 /**
  * DeepSeek LLM Provider
@@ -12,18 +9,13 @@ import type {
 export class DeepSeekProvider extends BaseLLMProvider {
   readonly name = 'deepseek';
   readonly defaultModel = 'deepseek-chat';
-  readonly supportedModels = [
-    'deepseek-chat',
-    'deepseek-reasoner',
-  ];
+  readonly supportedModels = ['deepseek-chat', 'deepseek-reasoner'];
 
   protected getDefaultBaseUrl(): string {
     return 'https://api.deepseek.com/v1';
   }
 
-  protected async makeRequest(
-    request: LLMCompletionRequest
-  ): Promise<LLMCompletionResponse> {
+  protected async makeRequest(request: LLMCompletionRequest): Promise<LLMCompletionResponse> {
     const model = request.model || this.defaultModel;
 
     if (!this.supportedModels.includes(model)) {
@@ -58,10 +50,9 @@ export class DeepSeekProvider extends BaseLLMProvider {
 
       if (!response.ok) {
         const error = await response.text();
-        throw Object.assign(
-          new Error(`DeepSeek API error (${response.status}): ${error}`),
-          { status: response.status }
-        );
+        throw Object.assign(new Error(`DeepSeek API error (${response.status}): ${error}`), {
+          status: response.status,
+        });
       }
 
       const data = (await response.json()) as {
@@ -109,9 +100,7 @@ export class DeepSeekProvider extends BaseLLMProvider {
     };
   }
 
-  private mapFinishReason(
-    reason: string
-  ): 'stop' | 'length' | 'content_filter' | 'error' {
+  private mapFinishReason(reason: string): 'stop' | 'length' | 'content_filter' | 'error' {
     switch (reason) {
       case 'stop':
         return 'stop';
@@ -124,4 +113,3 @@ export class DeepSeekProvider extends BaseLLMProvider {
     }
   }
 }
-

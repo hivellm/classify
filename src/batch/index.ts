@@ -3,9 +3,4 @@
  * @packageDocumentation
  */
 
-export {
-  BatchProcessor,
-  type BatchOptions,
-  type BatchResult,
-} from './batch-processor.js';
-
+export { BatchProcessor, type BatchOptions, type BatchResult } from './batch-processor.js';

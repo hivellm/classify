@@ -35,13 +35,13 @@ describe('ProviderFactory', () => {
     });
 
     it('should throw for unimplemented providers', () => {
-      expect(() =>
-        ProviderFactory.create('anthropic', { apiKey: 'test-key' })
-      ).toThrow('not yet implemented');
+      expect(() => ProviderFactory.create('anthropic', { apiKey: 'test-key' })).toThrow(
+        'not yet implemented'
+      );
 
-      expect(() =>
-        ProviderFactory.create('gemini', { apiKey: 'test-key' })
-      ).toThrow('not yet implemented');
+      expect(() => ProviderFactory.create('gemini', { apiKey: 'test-key' })).toThrow(
+        'not yet implemented'
+      );
     });
   });
 
@@ -67,4 +67,3 @@ describe('ProviderFactory', () => {
     });
   });
 });
-

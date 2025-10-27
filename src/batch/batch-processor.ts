@@ -68,16 +68,8 @@ export class BatchProcessor {
    * @param options - Batch processing options
    * @returns Batch processing result
    */
-  async processDirectory(
-    directory: string,
-    options: BatchOptions = {}
-  ): Promise<BatchResult> {
-    const {
-      recursive = false,
-      concurrency = 4,
-      extensions,
-      continueOnError = true,
-    } = options;
+  async processDirectory(directory: string, options: BatchOptions = {}): Promise<BatchResult> {
+    const { recursive = false, concurrency = 4, extensions, continueOnError = true } = options;
 
     const startTime = Date.now();
 
@@ -133,8 +125,7 @@ export class BatchProcessor {
           };
         } catch (error) {
           failureCount++;
-          const errorMsg =
-            error instanceof Error ? error.message : 'Unknown error';
+          const errorMsg = error instanceof Error ? error.message : 'Unknown error';
 
           console.log(`  ❌ ${file.split('/').pop()} - ${errorMsg}`);
 
@@ -205,4 +196,3 @@ export class BatchProcessor {
     return files;
   }
 }
-

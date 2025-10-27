@@ -270,7 +270,7 @@ ${content.slice(0, 2000)}${content.length > 2000 ? '...' : ''}`,
       // Add all entity properties to extracted fields
       Object.entries(entity.properties).forEach(([key, value]) => {
         const fieldName = `${entity.type.toLowerCase()}_${key}`;
-        
+
         if (!fields[fieldName]) {
           fields[fieldName] = value;
         } else if (Array.isArray(fields[fieldName])) {
@@ -284,4 +284,3 @@ ${content.slice(0, 2000)}${content.length > 2000 ? '...' : ''}`,
     return fields;
   }
 }
-

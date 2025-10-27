@@ -39,9 +39,7 @@ export class ClassifyClient {
 
     // Validate API key if provided
     if (this.options.apiKey === '') {
-      console.warn(
-        'Warning: No API key provided. Set DEEPSEEK_API_KEY or pass apiKey in options.'
-      );
+      console.warn('Warning: No API key provided. Set DEEPSEEK_API_KEY or pass apiKey in options.');
     }
 
     // Initialize components
@@ -51,14 +49,10 @@ export class ClassifyClient {
       apiKey: this.options.apiKey,
       model: this.options.model,
     });
-    this.templateSelector = new TemplateSelector(
-      this.llmProvider,
-      this.templateLoader,
-      {
-        compressionEnabled: this.options.compressionEnabled,
-        compressionRatio: this.options.compressionRatio,
-      }
-    );
+    this.templateSelector = new TemplateSelector(this.llmProvider, this.templateLoader, {
+      compressionEnabled: this.options.compressionEnabled,
+      compressionRatio: this.options.compressionRatio,
+    });
     this.classificationPipeline = new ClassificationPipeline(this.llmProvider, {
       compressionEnabled: this.options.compressionEnabled,
       compressionRatio: this.options.compressionRatio,
@@ -99,9 +93,7 @@ export class ClassifyClient {
     }
 
     // Step 3: Select template using LLM
-    const templateSelection = await this.templateSelector.select(
-      processedDoc.markdown
-    );
+    const templateSelection = await this.templateSelector.select(processedDoc.markdown);
 
     // Get selected template
     const template = this.templateLoader.getTemplate(templateSelection.templateId);
@@ -110,16 +102,10 @@ export class ClassifyClient {
     }
 
     // Step 4: Extract entities and relationships
-    const pipelineResult = await this.classificationPipeline.classify(
-      processedDoc,
-      template
-    );
+    const pipelineResult = await this.classificationPipeline.classify(processedDoc, template);
 
     // Step 5: Generate fulltext metadata
-    const fulltextMetadata = await this.fulltextGenerator.generate(
-      processedDoc,
-      pipelineResult
-    );
+    const fulltextMetadata = await this.fulltextGenerator.generate(processedDoc, pipelineResult);
 
     // Step 6: Build final result
     const totalTimeMs = Date.now() - startTime;
@@ -151,12 +137,8 @@ export class ClassifyClient {
       performance: {
         totalTimeMs,
         tokens: {
-          input:
-            templateSelection.tokens.input +
-            pipelineResult.tokens.extraction.input,
-          output:
-            templateSelection.tokens.output +
-            pipelineResult.tokens.extraction.output,
+          input: templateSelection.tokens.input + pipelineResult.tokens.extraction.input,
+          output: templateSelection.tokens.output + pipelineResult.tokens.extraction.output,
           total:
             templateSelection.tokens.input +
             templateSelection.tokens.output +
@@ -206,10 +188,7 @@ export class ClassifyClient {
 
     // Create entity nodes and relationships
     result.entities.forEach(
-      (
-        entity: { type: string; properties: Record<string, unknown> },
-        idx: number
-      ) => {
+      (entity: { type: string; properties: Record<string, unknown> }, idx: number) => {
         const entityVar = `e${idx}`;
         const props = Object.entries(entity.properties)
           .map(([k, v]) => `${k}: "${String(v).replace(/"/g, '\\"')}"`)
@@ -223,4 +202,3 @@ export class ClassifyClient {
     return statements.join('\n');
   }
 }
-

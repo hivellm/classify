@@ -132,9 +132,7 @@ export class TemplateLoader {
 
     // Load all template files
     const files = await readdir(dir);
-    const templateFiles = files.filter(
-      (f) => f.endsWith('.json') && f !== 'index.json'
-    );
+    const templateFiles = files.filter((f) => f.endsWith('.json') && f !== 'index.json');
 
     for (const file of templateFiles) {
       const filePath = join(dir, file);
@@ -193,7 +191,7 @@ export class TemplateLoader {
     // Get the directory of this module
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = dirname(__filename);
-    
+
     // Templates are in the root templates/ directory
     return join(__dirname, '..', '..', 'templates');
   }
@@ -219,12 +217,15 @@ export class TemplateLoader {
     }
 
     if (!Array.isArray(template.relationship_definitions)) {
-      throw new Error(`Template ${template.metadata.name} must have relationship_definitions array`);
+      throw new Error(
+        `Template ${template.metadata.name} must have relationship_definitions array`
+      );
     }
 
     if (!template.llm_config?.system_prompt) {
-      throw new Error(`Template ${template.metadata.name} must have valid llm_config.system_prompt`);
+      throw new Error(
+        `Template ${template.metadata.name} must have valid llm_config.system_prompt`
+      );
     }
   }
 }
-

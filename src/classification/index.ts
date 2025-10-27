@@ -3,8 +3,4 @@
  * @packageDocumentation
  */
 
-export {
-  ClassificationPipeline,
-  type ClassificationPipelineResult,
-} from './pipeline.js';
-
+export { ClassificationPipeline, type ClassificationPipelineResult } from './pipeline.js';

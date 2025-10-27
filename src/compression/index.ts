@@ -3,8 +3,4 @@
  * @packageDocumentation
  */
 
-export {
-  PromptCompressor,
-  type CompressionResult,
-} from './prompt-compressor.js';
-
+export { PromptCompressor, type CompressionResult } from './prompt-compressor.js';
