@@ -1,0 +1,205 @@
+{
+  "hash": "544855f05f5de6d57368fdb5731760c826e61c2982bed52032c13f8a7011e4a0",
+  "result": {
+    "classification": {
+      "template": "legal",
+      "confidence": 0.95,
+      "domain": "legal",
+      "docType": "Software License Agreement"
+    },
+    "graphStructure": {
+      "cypher": "CREATE (doc:Document {\n      id: \"Software License Agreement\",\n      title: \"Software License Agreement\",\n      domain: \"legal\",\n      doc_type: \"Software License Agreement\"\n    })\nCREATE (e0:Party {name: \"SoftCo Inc.\", role: \"Licensor\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Party {name: \"UserCorp Ltd.\", role: \"Licensee\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Date {date: \"2025-01-01\", description: \"Agreement entered date\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Date {date: \"2025-01-01\", description: \"Effective date for term\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Jurisdiction {name: \"Not specified\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Clause {clause_number: \"1\", description: \"Grant of non-exclusive license for Software\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Clause {clause_number: \"2\", description: \"Term valid for 1 year effective from date\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Clause {clause_number: \"3\", description: \"Payment of $10,000 annually\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Amount {amount: \"10000\", currency: \"USD\", description: \"Annual payment\"})\nCREATE (doc)-[:MENTIONS]->(e8)",
+      "entities": [
+        {
+          "type": "Party",
+          "properties": {
+            "name": "SoftCo Inc.",
+            "role": "Licensor"
+          }
+        },
+        {
+          "type": "Party",
+          "properties": {
+            "name": "UserCorp Ltd.",
+            "role": "Licensee"
+          }
+        },
+        {
+          "type": "Date",
+          "properties": {
+            "date": "2025-01-01",
+            "description": "Agreement entered date"
+          }
+        },
+        {
+          "type": "Date",
+          "properties": {
+            "date": "2025-01-01",
+            "description": "Effective date for term"
+          }
+        },
+        {
+          "type": "Jurisdiction",
+          "properties": {
+            "name": "Not specified"
+          }
+        },
+        {
+          "type": "Clause",
+          "properties": {
+            "clause_number": "1",
+            "description": "Grant of non-exclusive license for Software"
+          }
+        },
+        {
+          "type": "Clause",
+          "properties": {
+            "clause_number": "2",
+            "description": "Term valid for 1 year effective from date"
+          }
+        },
+        {
+          "type": "Clause",
+          "properties": {
+            "clause_number": "3",
+            "description": "Payment of $10,000 annually"
+          }
+        },
+        {
+          "type": "Amount",
+          "properties": {
+            "amount": 10000,
+            "currency": "USD",
+            "description": "Annual payment"
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "type": "PARTY_TO",
+          "source": "SoftCo Inc.",
+          "target": "UserCorp Ltd.",
+          "properties": {}
+        },
+        {
+          "type": "REFERENCES",
+          "source": "Software License Agreement",
+          "target": "Clause 1",
+          "properties": {}
+        },
+        {
+          "type": "REFERENCES",
+          "source": "Software License Agreement",
+          "target": "Clause 2",
+          "properties": {}
+        },
+        {
+          "type": "REFERENCES",
+          "source": "Software License Agreement",
+          "target": "Clause 3",
+          "properties": {}
+        },
+        {
+          "type": "HAS_CLAUSE",
+          "source": "Software License Agreement",
+          "target": "Clause 1",
+          "properties": {}
+        },
+        {
+          "type": "HAS_CLAUSE",
+          "source": "Software License Agreement",
+          "target": "Clause 2",
+          "properties": {}
+        },
+        {
+          "type": "HAS_CLAUSE",
+          "source": "Software License Agreement",
+          "target": "Clause 3",
+          "properties": {}
+        },
+        {
+          "type": "GOVERNED_BY",
+          "source": "Software License Agreement",
+          "target": "Not specified",
+          "properties": {}
+        }
+      ]
+    },
+    "fulltextMetadata": {
+      "title": "Software License Agreement",
+      "domain": "legal",
+      "docType": "Software License Agreement",
+      "extractedFields": {
+        "party_name": [
+          "SoftCo Inc.",
+          "UserCorp Ltd."
+        ],
+        "party_role": [
+          "Licensor",
+          "Licensee"
+        ],
+        "date_date": [
+          "2025-01-01",
+          "2025-01-01"
+        ],
+        "date_description": [
+          "Agreement entered date",
+          "Effective date for term"
+        ],
+        "jurisdiction_name": "Not specified",
+        "clause_clause_number": [
+          "1",
+          "2",
+          "3"
+        ],
+        "clause_description": [
+          "Grant of non-exclusive license for Software",
+          "Term valid for 1 year effective from date",
+          "Payment of $10,000 annually"
+        ],
+        "amount_amount": 10000,
+        "amount_currency": "USD",
+        "amount_description": "Annual payment"
+      },
+      "keywords": [
+        "license",
+        "licensee",
+        "software",
+        "agreement",
+        "licensor",
+        "2025",
+        "entered",
+        "january",
+        "between",
+        "softco",
+        "usercorp",
+        "grant",
+        "grants",
+        "exclusive",
+        "term",
+        "valid",
+        "year",
+        "effective",
+        "date",
+        "payment"
+      ],
+      "summary": "This software license agreement grants UserCorp Ltd. a one-year, non-exclusive license to use SoftCo Inc.'s software effective January 1, 2025. The annual licensing fee is $10,000 payable by the licensee."
+    },
+    "cacheInfo": {
+      "cached": false,
+      "hash": "544855f05f5de6d57368fdb5731760c826e61c2982bed52032c13f8a7011e4a0"
+    },
+    "performance": {
+      "totalTimeMs": 32806,
+      "tokens": {
+        "input": 1476,
+        "output": 748,
+        "total": 2224
+      },
+      "costUsd": 0.0004160800000000001
+    }
+  },
+  "cachedAt": 1761573652869,
+  "accessedAt": 1761573652880,
+  "accessCount": 1
+}

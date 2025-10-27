@@ -7,6 +7,7 @@ import {
   type ClassificationPipelineResult,
 } from './classification/pipeline.js';
 import { FulltextGenerator } from './output/fulltext-generator.js';
+import { CacheManager } from './cache/cache-manager.js';
 import { ProviderFactory } from './llm/provider-factory.js';
 import type { LLMProvider } from './llm/types.js';
 
@@ -21,6 +22,7 @@ export class ClassifyClient {
   private templateSelector: TemplateSelector;
   private classificationPipeline: ClassificationPipeline;
   private fulltextGenerator: FulltextGenerator;
+  private cacheManager: CacheManager;
   private templatesLoaded = false;
 
   constructor(options: ClassifyOptions = {}) {
@@ -62,6 +64,10 @@ export class ClassifyClient {
       compressionRatio: this.options.compressionRatio,
     });
     this.fulltextGenerator = new FulltextGenerator(this.llmProvider);
+    this.cacheManager = new CacheManager({
+      cacheDir: this.options.cacheDir,
+      enabled: this.options.cacheEnabled,
+    });
   }
 
   /**
@@ -72,6 +78,9 @@ export class ClassifyClient {
   async classify(filePath: string): Promise<ClassifyResult> {
     const startTime = Date.now();
 
+    // Initialize cache
+    await this.cacheManager.initialize();
+
     // Load templates if not loaded yet
     if (!this.templatesLoaded) {
       await this.templateLoader.loadTemplates();
@@ -81,9 +90,15 @@ export class ClassifyClient {
     // Step 1: Process document (convert to markdown + hash)
     const processedDoc = await this.documentProcessor.process(filePath);
 
-    // TODO: Check cache here
+    // Step 2: Check cache
+    const cached = await this.cacheManager.get(processedDoc.hash);
+    if (cached) {
+      // Return cached result with updated timing
+      cached.performance.totalTimeMs = Date.now() - startTime;
+      return cached;
+    }
 
-    // Step 2: Select template using LLM
+    // Step 3: Select template using LLM
     const templateSelection = await this.templateSelector.select(
       processedDoc.markdown
     );
@@ -94,19 +109,19 @@ export class ClassifyClient {
       throw new Error(`Template not found: ${templateSelection.templateId}`);
     }
 
-    // Step 3: Extract entities and relationships
+    // Step 4: Extract entities and relationships
     const pipelineResult = await this.classificationPipeline.classify(
       processedDoc,
       template
     );
 
-    // Step 4: Generate fulltext metadata
+    // Step 5: Generate fulltext metadata
     const fulltextMetadata = await this.fulltextGenerator.generate(
       processedDoc,
       pipelineResult
     );
 
-    // Step 5: Build final result
+    // Step 6: Build final result
     const totalTimeMs = Date.now() - startTime;
 
     const result: ClassifyResult = {
@@ -151,7 +166,27 @@ export class ClassifyClient {
       },
     };
 
+    // Step 7: Cache the result
+    await this.cacheManager.set(processedDoc.hash, result);
+
     return result;
+  }
+
+  /**
+   * Get cache statistics
+   */
+  async getCacheStats() {
+    return this.cacheManager.getStats();
+  }
+
+  /**
+   * Clear cache
+   */
+  async clearCache(options?: { olderThanDays?: number }) {
+    if (options?.olderThanDays) {
+      return this.cacheManager.clearOlderThan(options.olderThanDays);
+    }
+    return this.cacheManager.clear();
   }
 
   /**

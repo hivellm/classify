@@ -51,3 +51,6 @@ export {
   FulltextGenerator,
   type FulltextMetadata,
 } from './output/index.js';
+
+// Cache System
+export { CacheManager, type CacheStats } from './cache/index.js';
