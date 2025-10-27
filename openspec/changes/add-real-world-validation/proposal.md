@@ -19,34 +19,50 @@ Templates are theoretically sound but need real-world validation. We need to:
 
 Create comprehensive **validation samples** using available Elasticsearch and Neo4j instances:
 
-### 1. Sample Documents
+### 1. Sample Documents (Focus: Source Code)
 
-Create 20 diverse sample documents across all 15 templates:
-- 2 Legal contracts
-- 2 Financial reports
-- 2 HR documents
-- 2 Academic papers
-- 2 Software projects (code samples)
-- 2 Engineering specs
-- 8 documents from remaining templates
+Create 20 source code files and documentation samples:
+- **10 Source Code Files**:
+  - 3 TypeScript modules (different patterns: service, component, util)
+  - 3 Rust modules (different patterns: lib, handler, model)
+  - 2 Python scripts (API + data processing)
+  - 2 JavaScript files (React component, Node.js server)
+  
+- **5 Project Documentation**:
+  - README.md (project overview)
+  - API.md (REST API documentation)
+  - CONTRIBUTING.md (developer guide)
+  - ARCHITECTURE.md (system design)
+  - CHANGELOG.md (version history)
+  
+- **5 Configuration & Scripts**:
+  - package.json (Node.js dependencies)
+  - Cargo.toml (Rust dependencies)
+  - docker-compose.yml (deployment)
+  - build.sh (build script)
+  - test.py (test suite)
 
 ### 2. Integration Tests
 
-**Elasticsearch Integration:**
-- Index all 20 documents with fulltext metadata
-- Test keyword search quality
-- Test faceted search (domain, docType)
-- Test named entity search (people, organizations)
-- Validate summary quality
-- Measure search relevance
+**Elasticsearch Integration (Code-Focused):**
+- Index all 20 code files with fulltext metadata
+- Search for functions by name
+- Search for modules by purpose
+- Find files importing specific dependencies
+- Search code by keywords (async, database, api, etc)
+- Find documentation mentioning specific modules
+- Validate code summary quality
 
-**Neo4j Integration:**
-- Import all 20 documents as Cypher
+**Neo4j Integration (Code Graph):**
+- Import all 20 files as Cypher (complete code graph)
 - Execute generated Cypher statements
-- Verify nodes and relationships created correctly
-- Test graph queries (find related entities, shortest path)
-- Validate relationship accuracy
-- Test complex traversals
+- Verify code entities: Module, Function, Class, Dependency, API
+- Test import relationships (IMPORTS, DEPENDS_ON)
+- Find all dependencies of a module
+- Find all functions in a module (CONTAINS)
+- Trace dependency chains
+- Find which tests cover which modules
+- Find documentation for specific code components
 
 ### 3. Quality Validation
 
@@ -64,19 +80,25 @@ Create 20 diverse sample documents across all 15 templates:
 
 ### 4. Sample Query Suite
 
-**Elasticsearch Queries:**
-- Full-text search: "legal contracts with TechCorp"
-- Faceted search: domain=legal AND docType=contract
-- Named entity search: people:"John Doe"
-- Date range: dates:[2024-01-01 TO 2025-12-31]
-- Keyword search: keywords:("compliance" OR "audit")
+**Elasticsearch Queries (Code Search):**
+- Find functions by name: "authenticate" OR "login"
+- Find modules using dependency: "bcrypt" OR "jwt"
+- Find async functions: keywords:"async"
+- Find API endpoints: keywords:"endpoint" OR "route"
+- Find database access: keywords:"database" OR "query"
+- Find TypeScript modules: language:"typescript"
+- Find test files: docType:"test"
+- Find documentation for module: title:"AuthService"
 
-**Neo4j Queries:**
-- Find all entities connected to a person
-- Find shortest path between two entities
-- Find all documents in a domain
-- Find entity co-occurrence patterns
-- Find relationship chains
+**Neo4j Queries (Code Graph):**
+- Find all modules importing "bcrypt": `MATCH (m:Module)-[:IMPORTS]->(d:Dependency {name: "bcrypt"}) RETURN m`
+- Find all functions in a module: `MATCH (m:Module {name: "AuthService"})-[:CONTAINS]->(f:Function) RETURN f`
+- Find dependency chain: `MATCH path=(m:Module)-[:DEPENDS_ON*1..3]->(d:Dependency) RETURN path`
+- Find which tests cover a module: `MATCH (t:Test)-[:TESTS]->(m:Module {name: "AuthService"}) RETURN t`
+- Find all API endpoints in project: `MATCH (m:Module)-[:EXPOSES]->(a:API) RETURN m, a`
+- Find modules accessing database: `MATCH (m:Module)-[:ACCESSES]->(db:Database) RETURN m, db`
+- Find circular dependencies: `MATCH path=(m:Module)-[:IMPORTS*2..5]->(m) RETURN path`
+- Find documentation for code: `MATCH (d:Documentation)-[:DOCUMENTS]->(m:Module) RETURN d, m`
 
 ## Deliverables
 

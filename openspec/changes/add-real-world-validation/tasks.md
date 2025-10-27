@@ -1,45 +1,44 @@
 # Implementation Tasks - Real-World Validation
 
-## 1. Sample Data Creation ⏳ PENDING
+## 1. Sample Code Creation ⏳ PENDING (Focus: Source Code)
 
-### 1.1 Legal Documents (2)
-- [ ] Create contract sample (service agreement)
-- [ ] Create NDA sample
+### 1.1 TypeScript Modules (3)
+- [ ] AuthService.ts - Authentication service with bcrypt + jwt
+- [ ] UserController.ts - REST API controller
+- [ ] database.ts - Database connection utility
 
-### 1.2 Financial Documents (2)
-- [ ] Create financial statement sample
-- [ ] Create invoice sample
+### 1.2 Rust Modules (3)
+- [ ] lib.rs - Library entry point with public API
+- [ ] handler.rs - HTTP handler with routes
+- [ ] model.rs - Data models and validation
 
-### 1.3 HR Documents (2)
-- [ ] Create employment contract sample
-- [ ] Create job posting sample
+### 1.3 Python Scripts (2)
+- [ ] api.py - FastAPI REST API
+- [ ] process_data.py - Data processing pipeline
 
-### 1.4 Academic Papers (2)
-- [ ] Download/create research paper sample
-- [ ] Create thesis excerpt sample
+### 1.4 JavaScript Files (2)
+- [ ] App.jsx - React component
+- [ ] server.js - Express.js server
 
-### 1.5 Software Projects (2)
-- [ ] Create TypeScript module sample (with imports)
-- [ ] Create Python script sample (with dependencies)
+### 1.5 Project Documentation (5)
+- [ ] README.md - Project overview with setup
+- [ ] API.md - REST API documentation
+- [ ] CONTRIBUTING.md - Developer guide
+- [ ] ARCHITECTURE.md - System design
+- [ ] CHANGELOG.md - Version history
 
-### 1.6 Engineering (2)
-- [ ] Create API specification sample
-- [ ] Create architecture document sample
+### 1.6 Configuration & Scripts (5)
+- [ ] package.json - Node.js dependencies (real example)
+- [ ] Cargo.toml - Rust dependencies (real example)
+- [ ] docker-compose.yml - Multi-service deployment
+- [ ] build.sh - Build automation script
+- [ ] test_auth.py - Test suite example
 
-### 1.7 Remaining Templates (8)
-- [ ] Accounting (ledger sample)
-- [ ] Investor Relations (earnings report)
-- [ ] Compliance (audit report)
-- [ ] Strategic (business plan)
-- [ ] Sales (proposal)
-- [ ] Marketing (campaign)
-- [ ] Product (PRD)
-- [ ] Customer Support (ticket)
-
-### 1.8 Documentation
-- [ ] Create samples/README.md with document descriptions
-- [ ] Document expected entities for each sample
-- [ ] Document expected relationships for each sample
+### 1.7 Sample Documentation
+- [ ] Create samples/code/README.md describing each file
+- [ ] Document expected entities (Module, Function, Class, Dependency, API)
+- [ ] Document expected relationships (IMPORTS, CALLS, CONTAINS, TESTS)
+- [ ] Include expected Cypher for validation
 
 ## 2. Elasticsearch Integration ⏳ PENDING
 
@@ -55,12 +54,17 @@
 - [ ] Bulk index to Elasticsearch
 - [ ] Verify all documents indexed
 
-### 2.3 Query Suite
-- [ ] Create 10 full-text search queries
-- [ ] Create 5 faceted search queries
-- [ ] Create 5 named entity queries
-- [ ] Create 5 keyword queries
-- [ ] Create 5 domain/docType filter queries
+### 2.3 Query Suite (Code Search)
+- [ ] Search functions: "authenticate" OR "login" OR "hash"
+- [ ] Find modules using bcrypt: dependencies:"bcrypt"
+- [ ] Find async functions: keywords:"async"
+- [ ] Find API endpoints: keywords:"endpoint" OR "route" OR "api"
+- [ ] Find database access: keywords:"database" OR "query" OR "sql"
+- [ ] Find TypeScript files: language:"typescript"
+- [ ] Find test files: docType:"test"
+- [ ] Find documentation: docType:"documentation"
+- [ ] Find build scripts: docType:"script"
+- [ ] Find config files: docType:"configuration"
 
 ### 2.4 Validation
 - [ ] Execute all queries
@@ -83,12 +87,17 @@
 - [ ] Execute Cypher in Neo4j
 - [ ] Verify nodes/relationships created
 
-### 3.3 Graph Query Suite
-- [ ] Create 5 entity lookup queries
-- [ ] Create 5 relationship traversal queries
-- [ ] Create 5 shortest path queries
-- [ ] Create 5 pattern matching queries
-- [ ] Create 5 aggregation queries
+### 3.3 Graph Query Suite (Code Graph)
+- [ ] Find modules importing bcrypt: `MATCH (m:Module)-[:IMPORTS]->(d:Dependency {name: "bcrypt"})`
+- [ ] Find all functions in module: `MATCH (m:Module)-[:CONTAINS]->(f:Function)`
+- [ ] Find dependency chain: `MATCH path=(m:Module)-[:DEPENDS_ON*1..3]->(d:Dependency)`
+- [ ] Find tests for module: `MATCH (t:Test)-[:TESTS]->(m:Module {name: "AuthService"})`
+- [ ] Find API endpoints: `MATCH (m:Module)-[:EXPOSES]->(a:API)`
+- [ ] Find database access: `MATCH (m:Module)-[:ACCESSES]->(db:Database)`
+- [ ] Find circular dependencies: `MATCH path=(m:Module)-[:IMPORTS*2..5]->(m)`
+- [ ] Find documentation: `MATCH (d:Documentation)-[:DOCUMENTS]->(m:Module)`
+- [ ] Find all classes implementing interface: `MATCH (c:Class)-[:IMPLEMENTS]->(i:Class)`
+- [ ] Find function call graph: `MATCH (f1:Function)-[:CALLS]->(f2:Function)`
 
 ### 3.4 Validation
 - [ ] Execute all Cypher queries
