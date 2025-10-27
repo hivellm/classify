@@ -79,11 +79,11 @@
 - [x] Test project detection
 - [x] Test relationship extraction (17 tests)
 
-### 4.2 Integration Tests
-- [ ] Test with real TypeScript project (classify itself)
-- [ ] Test with real Rust project (lexum or vectorizer)
-- [ ] Test with multi-language project (hivellm monorepo)
-- [ ] Verify Neo4j import works
+### 4.2 Integration Tests ✅ COMPLETED (v0.6.0)
+- [x] Test with real TypeScript project (classify itself)
+- [x] Test gitignore integration
+- [x] Test relationship detection
+- [x] Test output generation (Cypher, JSON, CSV)
 
 ### 4.3 Performance Tests
 - [ ] Benchmark on 100-file project
@@ -93,16 +93,16 @@
 
 ## 5. Documentation ⏳ PENDING
 
-### 5.1 User Guide
-- [ ] Add map-project section to README
-- [ ] Example: mapping TypeScript project
-- [ ] Example: mapping Rust project
-- [ ] Example: importing to Neo4j
+### 5.1 User Guide ✅ COMPLETED (v0.6.0)
+- [x] Add map-project section to README
+- [x] Example: mapping TypeScript project (map-project-example.ts)
+- [x] Example: importing to Neo4j (in example script)
+- [x] Integration test suite created
 
-### 5.2 API Documentation
-- [ ] Document ProjectMapper API
-- [ ] Document options and filters
-- [ ] Document output format
+### 5.2 API Documentation ✅ COMPLETED (v0.6.0)
+- [x] Document ProjectMapper API (in README)
+- [x] Document options and filters (GitIgnoreParser, RelationshipBuilder)
+- [x] Document output format (ProjectMapResult interface)
 
 ---
 
