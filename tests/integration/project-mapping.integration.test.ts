@@ -1,13 +1,32 @@
-import { describe, it, expect, beforeAll } from 'vitest';
+import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { ProjectMapper } from '../../src/project/project-mapper.js';
-import { ProjectDetector } from '../../src/project/project-detector.js';
 import { ClassifyClient } from '../../src/client.js';
+import { ProjectDetector } from '../../src/project/project-detector.js';
+import type { LLMProvider } from '../../src/llm/types.js';
 import { join } from 'path';
 import { writeFile, mkdir } from 'fs/promises';
+
+// Mock LLM Provider to avoid real API calls
+const mockProvider: LLMProvider = {
+  name: 'mock',
+  defaultModel: 'test-model',
+  supportedModels: ['test-model'],
+  complete: vi.fn().mockResolvedValue({
+    content: JSON.stringify({
+      entities: [],
+      relationships: [],
+      classification: { title: 'Mock Doc', doc_type: 'test' },
+    }),
+    finishReason: 'stop',
+    usage: { inputTokens: 100, outputTokens: 50 },
+    model: 'test-model',
+  }),
+} as unknown as LLMProvider;
 
 /**
  * Integration tests for Project Mapping
  * These tests use real projects to validate end-to-end functionality
+ * NOTE: Using mocked LLM provider to avoid real API calls
  */
 describe('Project Mapping Integration', () => {
   const projectRoot = join(process.cwd());
@@ -15,12 +34,16 @@ describe('Project Mapping Integration', () => {
   let mapper: ProjectMapper;
 
   beforeAll(() => {
-    // Use DeepSeek for testing (cheapest option)
+    // Create client with mocked LLM to avoid real API calls
     client = new ClassifyClient({
       provider: 'deepseek',
       model: 'deepseek-chat',
-      apiKey: process.env.DEEPSEEK_API_KEY || 'test-key',
+      apiKey: 'test-key',
+      cacheEnabled: false,
     });
+    
+    // Replace the LLM provider with mock
+    (client as any).llmProvider = mockProvider;
 
     mapper = new ProjectMapper(client);
   });
