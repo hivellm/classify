@@ -6,135 +6,123 @@
     "docType": "Product Roadmap"
   },
   "graphStructure": {
-    "cypher": "CREATE (doc:Document {\n      id: \"Product Roadmap CloudSync Pro\",\n      title: \"Product Roadmap CloudSync Pro\",\n      domain: \"product\",\n      doc_type: \"Product Roadmap\"\n    })\nCREATE (e0:Feature {name: \"Multi-region Sync\", description: \"Sync across AWS, Azure, GCP\", priority: \"P0\", release: \"3.0 Enterprise\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Feature {name: \"Advanced Role-based Control\", description: \"Enhanced role-based access control\", priority: \"P0\", release: \"3.0 Enterprise\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Feature {name: \"Audit Complete Activity\", description: \"Complete activity auditing\", priority: \"P0\", release: \"3.0 Enterprise\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Feature {name: \"RESTful API Webhooks\", description: \"RESTful API with webhooks\", priority: \"P1\", release: \"3.0 Enterprise\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Feature {name: \"Smart Categorization\", description: \"ML-based smart categorization\", priority: \"P2\", release: \"3.1 AI-Powered\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Feature {name: \"Duplicate Intelligent Detection\", description: \"Intelligent duplicate detection\", priority: \"P2\", release: \"3.1 AI-Powered\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Feature {name: \"Content Natural Language Processing\", description: \"Natural language content processing\", priority: \"P2\", release: \"3.1 AI-Powered\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Feature {name: \"Automated If-This-Then-That\", description: \"Automated workflows with if-this-then-that logic\", priority: \"P2\", release: \"3.1 AI-Powered\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Feature {name: \"Performance Bug Fixes\", description: \"Critical performance bug fixes\", priority: \"P0\", release: \"General\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Feature {name: \"Advanced API\", description: \"Advanced API features\", priority: \"P1\", release: \"General\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Feature {name: \"Mobile Improvements\", description: \"Improvements to mobile functionality\", priority: \"P2\", release: \"General\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Feature {name: \"Integrations\", description: \"Integrations with Slack, Teams\", priority: \"P2\", release: \"General\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Requirement {name: \"Infrastructure Setup\", description: \"Setup of infrastructure for features\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Requirement {name: \"ML AI Model Training\", description: \"Training of ML and AI models\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Requirement {name: \"Security Compliance Review\", description: \"Review for security and compliance\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Milestone {name: \"Q1 2025 Release\", date: \"2025-03-15\", description: \"Release of version 3.0 Enterprise\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:Milestone {name: \"Q2 2025 Release\", date: \"2025-06-30\", description: \"Release of version 3.1 AI-Powered\"})\nCREATE (doc)-[:MENTIONS]->(e16)",
+    "cypher": "CREATE (doc:Document {\n      id: \"CloudSync Pro Product Roadmap 2025 H1\",\n      title: \"CloudSync Pro Product Roadmap 2025 H1\",\n      domain: \"product\",\n      doc_type: \"Product Roadmap\"\n    })\nCREATE (e0:Feature {name: \"Multi-region Sync\", priority: \"P0\", description: \"Sync across AWS, Azure, GCP regions\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Feature {name: \"Advanced Role-based Control\", priority: \"P0\", description: \"Enhanced role-based access control\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Feature {name: \"Audit Complete Activity\", priority: \"P0\", description: \"Comprehensive activity auditing\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Feature {name: \"RESTful API Webhooks\", priority: \"P1\", description: \"RESTful API with webhook support\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Feature {name: \"Smart Categorization\", priority: \"P2\", description: \"ML-based intelligent categorization\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Feature {name: \"Duplicate Intelligent Detection\", priority: \"P2\", description: \"ML-based duplicate content detection\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Feature {name: \"Content Natural Language Processing\", priority: \"P2\", description: \"NLP for content analysis\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Feature {name: \"Automated If-this-then-that\", priority: \"P2\", description: \"Automated workflows based on conditions\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Feature {name: \"Performance Bug Fixes\", priority: \"P0\", description: \"Critical performance and bug enhancements\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Feature {name: \"Advanced API\", priority: \"P1\", description: \"Enhanced API capabilities\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Feature {name: \"Mobile Improvements\", priority: \"P2\", description: \"Enhancements for mobile platforms\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Feature {name: \"Integrations (Slack, Teams)\", priority: \"P2\", description: \"Integration with Slack and Microsoft Teams\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Requirement {name: \"Infrastructure Setup\", description: \"Setup for multi-region and AI features\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Requirement {name: \"ML AI Model Training\", description: \"Training of machine learning models\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Requirement {name: \"Security Compliance Review\", description: \"Review for security and compliance standards\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Milestone {name: \"Q1 2025 Release\", date: \"2025-03-15\", description: \"Release of version 3.0 Enterprise with multi-region sync, advanced role-based control, audit, and API features\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:Milestone {name: \"Q2 2025 Release\", date: \"2025-06-30\", description: \"Release of version 3.1 AI-Powered with smart categorization, duplicate detection, NLP, and automation features\"})\nCREATE (doc)-[:MENTIONS]->(e16)",
     "entities": [
       {
         "type": "Feature",
         "properties": {
           "name": "Multi-region Sync",
-          "description": "Sync across AWS, Azure, GCP",
           "priority": "P0",
-          "release": "3.0 Enterprise"
+          "description": "Sync across AWS, Azure, GCP regions"
         }
       },
       {
         "type": "Feature",
         "properties": {
           "name": "Advanced Role-based Control",
-          "description": "Enhanced role-based access control",
           "priority": "P0",
-          "release": "3.0 Enterprise"
+          "description": "Enhanced role-based access control"
         }
       },
       {
         "type": "Feature",
         "properties": {
           "name": "Audit Complete Activity",
-          "description": "Complete activity auditing",
           "priority": "P0",
-          "release": "3.0 Enterprise"
+          "description": "Comprehensive activity auditing"
         }
       },
       {
         "type": "Feature",
         "properties": {
           "name": "RESTful API Webhooks",
-          "description": "RESTful API with webhooks",
           "priority": "P1",
-          "release": "3.0 Enterprise"
+          "description": "RESTful API with webhook support"
         }
       },
       {
         "type": "Feature",
         "properties": {
           "name": "Smart Categorization",
-          "description": "ML-based smart categorization",
           "priority": "P2",
-          "release": "3.1 AI-Powered"
+          "description": "ML-based intelligent categorization"
         }
       },
       {
         "type": "Feature",
         "properties": {
           "name": "Duplicate Intelligent Detection",
-          "description": "Intelligent duplicate detection",
           "priority": "P2",
-          "release": "3.1 AI-Powered"
+          "description": "ML-based duplicate content detection"
         }
       },
       {
         "type": "Feature",
         "properties": {
           "name": "Content Natural Language Processing",
-          "description": "Natural language content processing",
           "priority": "P2",
-          "release": "3.1 AI-Powered"
+          "description": "NLP for content analysis"
         }
       },
       {
         "type": "Feature",
         "properties": {
-          "name": "Automated If-This-Then-That",
-          "description": "Automated workflows with if-this-then-that logic",
+          "name": "Automated If-this-then-that",
           "priority": "P2",
-          "release": "3.1 AI-Powered"
+          "description": "Automated workflows based on conditions"
         }
       },
       {
         "type": "Feature",
         "properties": {
           "name": "Performance Bug Fixes",
-          "description": "Critical performance bug fixes",
           "priority": "P0",
-          "release": "General"
+          "description": "Critical performance and bug enhancements"
         }
       },
       {
         "type": "Feature",
         "properties": {
           "name": "Advanced API",
-          "description": "Advanced API features",
           "priority": "P1",
-          "release": "General"
+          "description": "Enhanced API capabilities"
         }
       },
       {
         "type": "Feature",
         "properties": {
           "name": "Mobile Improvements",
-          "description": "Improvements to mobile functionality",
           "priority": "P2",
-          "release": "General"
+          "description": "Enhancements for mobile platforms"
         }
       },
       {
         "type": "Feature",
         "properties": {
-          "name": "Integrations",
-          "description": "Integrations with Slack, Teams",
+          "name": "Integrations (Slack, Teams)",
           "priority": "P2",
-          "release": "General"
+          "description": "Integration with Slack and Microsoft Teams"
         }
       },
       {
         "type": "Requirement",
         "properties": {
           "name": "Infrastructure Setup",
-          "description": "Setup of infrastructure for features"
+          "description": "Setup for multi-region and AI features"
         }
       },
       {
         "type": "Requirement",
         "properties": {
           "name": "ML AI Model Training",
-          "description": "Training of ML and AI models"
+          "description": "Training of machine learning models"
         }
       },
       {
         "type": "Requirement",
         "properties": {
           "name": "Security Compliance Review",
-          "description": "Review for security and compliance"
+          "description": "Review for security and compliance standards"
         }
       },
       {
@@ -142,7 +130,7 @@
         "properties": {
           "name": "Q1 2025 Release",
           "date": "2025-03-15",
-          "description": "Release of version 3.0 Enterprise"
+          "description": "Release of version 3.0 Enterprise with multi-region sync, advanced role-based control, audit, and API features"
         }
       },
       {
@@ -150,7 +138,7 @@
         "properties": {
           "name": "Q2 2025 Release",
           "date": "2025-06-30",
-          "description": "Release of version 3.1 AI-Powered"
+          "description": "Release of version 3.1 AI-Powered with smart categorization, duplicate detection, NLP, and automation features"
         }
       }
     ],
@@ -200,31 +188,7 @@
       {
         "type": "HAS_FEATURE",
         "source": "Q2 2025 Release",
-        "target": "Automated If-This-Then-That",
-        "properties": {}
-      },
-      {
-        "type": "REQUIRES",
-        "source": "Smart Categorization",
-        "target": "ML AI Model Training",
-        "properties": {}
-      },
-      {
-        "type": "REQUIRES",
-        "source": "Duplicate Intelligent Detection",
-        "target": "ML AI Model Training",
-        "properties": {}
-      },
-      {
-        "type": "REQUIRES",
-        "source": "Content Natural Language Processing",
-        "target": "ML AI Model Training",
-        "properties": {}
-      },
-      {
-        "type": "REQUIRES",
-        "source": "Automated If-This-Then-That",
-        "target": "ML AI Model Training",
+        "target": "Automated If-this-then-that",
         "properties": {}
       },
       {
@@ -235,42 +199,159 @@
       },
       {
         "type": "DEPENDS_ON",
-        "source": "Advanced Role-based Control",
-        "target": "Security Compliance Review",
+        "source": "Smart Categorization",
+        "target": "ML AI Model Training",
         "properties": {}
       },
       {
         "type": "DEPENDS_ON",
-        "source": "Audit Complete Activity",
-        "target": "Security Compliance Review",
+        "source": "Duplicate Intelligent Detection",
+        "target": "ML AI Model Training",
         "properties": {}
       },
       {
         "type": "DEPENDS_ON",
-        "source": "RESTful API Webhooks",
+        "source": "Content Natural Language Processing",
+        "target": "ML AI Model Training",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Automated If-this-then-that",
+        "target": "ML AI Model Training",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Q1 2025 Release",
         "target": "Infrastructure Setup",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Q2 2025 Release",
+        "target": "ML AI Model Training",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Q1 2025 Release",
+        "target": "Security Compliance Review",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Q2 2025 Release",
+        "target": "Security Compliance Review",
         "properties": {}
       }
     ]
   },
   "fulltextMetadata": {
-    "title": "Product Roadmap CloudSync Pro",
+    "title": "CloudSync Pro Product Roadmap 2025 H1",
     "domain": "product",
     "docType": "Product Roadmap",
-    "extractedFields": {},
-    "keywords": []
+    "extractedFields": {
+      "feature_name": [
+        "Multi-region Sync",
+        "Advanced Role-based Control",
+        "Audit Complete Activity",
+        "RESTful API Webhooks",
+        "Smart Categorization",
+        "Duplicate Intelligent Detection",
+        "Content Natural Language Processing",
+        "Automated If-this-then-that",
+        "Performance Bug Fixes",
+        "Advanced API",
+        "Mobile Improvements",
+        "Integrations (Slack, Teams)"
+      ],
+      "feature_priority": [
+        "P0",
+        "P0",
+        "P0",
+        "P1",
+        "P2",
+        "P2",
+        "P2",
+        "P2",
+        "P0",
+        "P1",
+        "P2",
+        "P2"
+      ],
+      "feature_description": [
+        "Sync across AWS, Azure, GCP regions",
+        "Enhanced role-based access control",
+        "Comprehensive activity auditing",
+        "RESTful API with webhook support",
+        "ML-based intelligent categorization",
+        "ML-based duplicate content detection",
+        "NLP for content analysis",
+        "Automated workflows based on conditions",
+        "Critical performance and bug enhancements",
+        "Enhanced API capabilities",
+        "Enhancements for mobile platforms",
+        "Integration with Slack and Microsoft Teams"
+      ],
+      "requirement_name": [
+        "Infrastructure Setup",
+        "ML AI Model Training",
+        "Security Compliance Review"
+      ],
+      "requirement_description": [
+        "Setup for multi-region and AI features",
+        "Training of machine learning models",
+        "Review for security and compliance standards"
+      ],
+      "milestone_name": [
+        "Q1 2025 Release",
+        "Q2 2025 Release"
+      ],
+      "milestone_date": [
+        "2025-03-15",
+        "2025-06-30"
+      ],
+      "milestone_description": [
+        "Release of version 3.0 Enterprise with multi-region sync, advanced role-based control, audit, and API features",
+        "Release of version 3.1 AI-Powered with smart categorization, duplicate detection, NLP, and automation features"
+      ]
+    },
+    "keywords": [
+      "2025",
+      "features",
+      "product",
+      "multi",
+      "region",
+      "sync",
+      "team",
+      "cloudsync",
+      "version",
+      "enterprise",
+      "advanced",
+      "permissions",
+      "based",
+      "target",
+      "search",
+      "security",
+      "performance",
+      "roadmap",
+      "timeframe",
+      "manager"
+    ],
+    "summary": "CloudSync Pro's 2025 H1 roadmap focuses on enterprise capabilities in Q1 with multi-region synchronization, advanced permissions, and API v2, followed by AI-powered features in Q2 including smart categorization and natural language search. Critical priorities include security enhancements and performance optimization, with success measured by high enterprise adoption and 99.9% uptime. Implementation depends on infrastructure, machine learning, and security teams for multi-region setup, AI model training, and compliance reviews."
   },
   "cacheInfo": {
     "cached": false,
     "hash": "57c6c8d8fce97bb8b2a40f1a4a4519bb37f6c2c488b6552ca428723f701b6275"
   },
   "performance": {
-    "totalTimeMs": 58466,
+    "totalTimeMs": 62525,
     "tokens": {
       "input": 1696,
-      "output": 1682,
-      "total": 3378
+      "output": 1647,
+      "total": 3343
     },
-    "costUsd": 0.0007084000000000001
+    "costUsd": 0.0006986000000000001
   }
 }

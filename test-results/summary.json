@@ -1,9 +1,9 @@
 {
   "totalDocuments": 10,
-  "totalCost": 0.005102860000000001,
-  "averageCost": 0.0005102860000000001,
-  "totalTimeMs": 351971,
-  "averageTimeMs": 35197.1,
+  "totalCost": 0.005315660000000001,
+  "averageCost": 0.000531566,
+  "totalTimeMs": 420890,
+  "averageTimeMs": 42089,
   "results": [
     {
       "filename": "01-legal-contract.md",
@@ -11,10 +11,10 @@
       "domain": "legal",
       "docType": "Service Agreement",
       "confidence": 0.95,
-      "entities": 10,
-      "cost": 0.00044100000000000004,
-      "timeMs": 29119,
-      "tokens": 2369
+      "entities": 11,
+      "cost": 0.00045948000000000007,
+      "timeMs": 35300,
+      "tokens": 2435
     },
     {
       "filename": "02-financial-report.md",
@@ -22,21 +22,21 @@
       "domain": "financial",
       "docType": "financial report",
       "confidence": 0.95,
-      "entities": 31,
-      "cost": 0.00059206,
-      "timeMs": 44534,
-      "tokens": 2971
+      "entities": 26,
+      "cost": 0.00066094,
+      "timeMs": 55968,
+      "tokens": 3217
     },
     {
       "filename": "03-hr-job-posting.md",
       "template": "hr",
       "domain": "hr",
       "docType": "Job Posting",
-      "confidence": 0.9,
+      "confidence": 0.85,
       "entities": 8,
-      "cost": 0.00038864000000000005,
-      "timeMs": 22346,
-      "tokens": 2191
+      "cost": 0.00039536000000000004,
+      "timeMs": 27864,
+      "tokens": 2215
     },
     {
       "filename": "04-engineering-spec.md",
@@ -44,10 +44,10 @@
       "domain": "engineering",
       "docType": "API Design Specification",
       "confidence": 0.95,
-      "entities": 14,
-      "cost": 0.0005693800000000001,
-      "timeMs": 42394,
-      "tokens": 2886
+      "entities": 12,
+      "cost": 0.0005461400000000001,
+      "timeMs": 42956,
+      "tokens": 2803
     },
     {
       "filename": "05-marketing-campaign.md",
@@ -56,9 +56,9 @@
       "docType": "Campaign Overview Document",
       "confidence": 0.95,
       "entities": 11,
-      "cost": 0.00052374,
-      "timeMs": 36912,
-      "tokens": 2713
+      "cost": 0.00051702,
+      "timeMs": 42272,
+      "tokens": 2689
     },
     {
       "filename": "06-compliance-policy.md",
@@ -67,9 +67,9 @@
       "docType": "Compliance Policy",
       "confidence": 0.95,
       "entities": 11,
-      "cost": 0.0005135200000000001,
-      "timeMs": 35789,
-      "tokens": 2677
+      "cost": 0.0005112800000000001,
+      "timeMs": 39621,
+      "tokens": 2669
     },
     {
       "filename": "07-sales-proposal.md",
@@ -77,10 +77,10 @@
       "domain": "sales",
       "docType": "Sales Proposal",
       "confidence": 0.85,
-      "entities": 4,
-      "cost": 0.00040138,
-      "timeMs": 21195,
-      "tokens": 2333
+      "entities": 11,
+      "cost": 0.0005609800000000001,
+      "timeMs": 43483,
+      "tokens": 2903
     },
     {
       "filename": "08-product-roadmap.md",
@@ -89,9 +89,9 @@
       "docType": "Product Roadmap",
       "confidence": 0.95,
       "entities": 17,
-      "cost": 0.0007084000000000001,
-      "timeMs": 58466,
-      "tokens": 3378
+      "cost": 0.0006986000000000001,
+      "timeMs": 62525,
+      "tokens": 3343
     },
     {
       "filename": "09-customer-support-ticket.md",
@@ -100,9 +100,9 @@
       "docType": "Support Ticket",
       "confidence": 0.95,
       "entities": 3,
-      "cost": 0.0004158,
-      "timeMs": 23192,
-      "tokens": 2370
+      "cost": 0.00041692000000000004,
+      "timeMs": 28478,
+      "tokens": 2374
     },
     {
       "filename": "10-investor-update.md",
@@ -112,7 +112,7 @@
       "confidence": 0.95,
       "entities": 15,
       "cost": 0.00054894,
-      "timeMs": 38024,
+      "timeMs": 42423,
       "tokens": 2876
     }
   ]

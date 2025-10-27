@@ -6,7 +6,7 @@
     "docType": "Support Ticket"
   },
   "graphStructure": {
-    "cypher": "CREATE (doc:Document {\n      id: \"Support Ticket #CS-2025-1842\",\n      title: \"Support Ticket #CS-2025-1842\",\n      domain: \"customer_support\",\n      doc_type: \"Support Ticket\"\n    })\nCREATE (e0:Ticket {id: \"CS-2025-1842\", customer: \"Acme Corporation\", reported_by: \"Alice Brown\", email: \"alice.brown@acme.com\", priority: \"High\", status: \"In Progress\", created: \"January 26, 2025 10:30 AM\", assigned_to: \"Tom Wilson (Support) + Team\", next_update: \"January 27, 2025\", sla_metrics: \"48 hours for follow-up\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Issue {description: \"File synchronization failing for files larger than 100MB, gets stuck at 67% and eventually times out\", steps_to_reproduce: \"Attempt to sync a 150MB file, observe progress stalling at approximately 67%\", impact: \"Affects 15 users, blocking design work\", category: \"Synchronization Failure\", root_cause: \"Chunk size set to 10MB causing timeouts\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Resolution {steps: \"Reduce chunk size to 5MB, deploy fix to production\", deployment_eta: \"January 27, 2025 9:00 AM\", communication: \"Email sent to Alice Brown with ETA update\", follow_up: \"Follow up with customer within 48 hours\"})\nCREATE (doc)-[:MENTIONS]->(e2)",
+    "cypher": "CREATE (doc:Document {\n      id: \"Support Ticket #CS-2025-1842\",\n      title: \"Support Ticket #CS-2025-1842\",\n      domain: \"customer_support\",\n      doc_type: \"Support Ticket\"\n    })\nCREATE (e0:Ticket {id: \"CS-2025-1842\", customer: \"Acme Corporation\", reported_by: \"Alice Brown\", email: \"alice.brown@acme.com\", priority: \"High\", status: \"In Progress\", created: \"January 26, 2025 10:30 AM\", assigned_to: \"Tom Wilson (Support) + Team\", next_update: \"January 27, 2025\", sla_metrics: \"48 hours for follow-up\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Issue {description: \"File synchronization failing for files larger than 100MB, gets stuck at 67% and eventually times out\", steps_to_reproduce: \"Attempt to sync a 150MB file, observe progress stalling at approximately 67%\", impact: \"Affects 15 users, blocking design work\", category: \"Synchronization Failure\", root_cause: \"Chunk size set to 10MB causing timeouts\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Resolution {steps: \"Reduce chunk size to 5MB, deploy fix to production\", deployment_eta: \"January 27, 2025 9:00 AM\", communication: \"Email sent to Alice Brown with ETA update\", follow_up_plan: \"Notify affected customers, follow up within 48 hours\"})\nCREATE (doc)-[:MENTIONS]->(e2)",
     "entities": [
       {
         "type": "Ticket",
@@ -39,7 +39,7 @@
           "steps": "Reduce chunk size to 5MB, deploy fix to production",
           "deployment_eta": "January 27, 2025 9:00 AM",
           "communication": "Email sent to Alice Brown with ETA update",
-          "follow_up": "Follow up with customer within 48 hours"
+          "follow_up_plan": "Notify affected customers, follow up within 48 hours"
         }
       }
     ],
@@ -62,20 +62,62 @@
     "title": "Support Ticket #CS-2025-1842",
     "domain": "customer_support",
     "docType": "Support Ticket",
-    "extractedFields": {},
-    "keywords": []
+    "extractedFields": {
+      "ticket_id": "CS-2025-1842",
+      "ticket_customer": "Acme Corporation",
+      "ticket_reported_by": "Alice Brown",
+      "ticket_email": "alice.brown@acme.com",
+      "ticket_priority": "High",
+      "ticket_status": "In Progress",
+      "ticket_created": "January 26, 2025 10:30 AM",
+      "ticket_assigned_to": "Tom Wilson (Support) + Team",
+      "ticket_next_update": "January 27, 2025",
+      "ticket_sla_metrics": "48 hours for follow-up",
+      "issue_description": "File synchronization failing for files larger than 100MB, gets stuck at 67% and eventually times out",
+      "issue_steps_to_reproduce": "Attempt to sync a 150MB file, observe progress stalling at approximately 67%",
+      "issue_impact": "Affects 15 users, blocking design work",
+      "issue_category": "Synchronization Failure",
+      "issue_root_cause": "Chunk size set to 10MB causing timeouts",
+      "resolution_steps": "Reduce chunk size to 5MB, deploy fix to production",
+      "resolution_deployment_eta": "January 27, 2025 9:00 AM",
+      "resolution_communication": "Email sent to Alice Brown with ETA update",
+      "resolution_follow_up_plan": "Notify affected customers, follow up within 48 hours"
+    },
+    "keywords": [
+      "customer",
+      "upload",
+      "engineering",
+      "2025",
+      "support",
+      "alice",
+      "brown",
+      "progress",
+      "issue",
+      "team",
+      "update",
+      "ticket",
+      "acme",
+      "january",
+      "file",
+      "monitor",
+      "investigation",
+      "wilson",
+      "timeout",
+      "chunk"
+    ],
+    "summary": "A high-priority support ticket from Acme Corporation reported file synchronization failures for files over 100MB, with uploads stalling at 67%. Engineering identified the root cause as oversized upload chunks and will deploy a fix by January 27 to reduce chunk size from 10MB to 5MB. The customer has been notified, and the resolution will be monitored post-deployment."
   },
   "cacheInfo": {
     "cached": false,
     "hash": "9210093729e5407e068502928214ebc4866d15030132fcd05e8fa9c7f9b7d687"
   },
   "performance": {
-    "totalTimeMs": 23192,
+    "totalTimeMs": 28478,
     "tokens": {
       "input": 1770,
-      "output": 600,
-      "total": 2370
+      "output": 604,
+      "total": 2374
     },
-    "costUsd": 0.0004158
+    "costUsd": 0.00041692000000000004
   }
 }

@@ -6,16 +6,16 @@
     "docType": "Sales Proposal"
   },
   "graphStructure": {
-    "cypher": "CREATE (doc:Document {\n      id: \"Enterprise Proposal ESP-2025-0042\",\n      title: \"Enterprise Proposal ESP-2025-0042\",\n      domain: \"sales\",\n      doc_type: \"Sales Proposal\"\n    })\nCREATE (e0:Opportunity {name: \"ERP Implementation for Inc.\", deal_value: \"500000\", close_date: \"2025-02-28\", win_probability: \"90\", stage: \"Proposal\", revenue_forecast: \"500000\", terms: \"30% upfront, 40% on milestone, 30% on completion\", valid_until: \"2025-02-28\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Customer {name: \"Inc.\", contact_info: \"Not specified\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Product {name: \"ERP Solution\", modules: \"Finance Accounting, Human Resources, Supply Chain, CRM\", pricing: \"[object Object]\", quantities: \"[object Object]\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:SalesRep {name: \"Jennifer Davis\", contact: \"jennifer.davis@softwaresolutions.com\"})\nCREATE (doc)-[:MENTIONS]->(e3)",
+    "cypher": "CREATE (doc:Document {\n      id: \"Enterprise Proposal\",\n      title: \"Enterprise Proposal\",\n      domain: \"sales\",\n      doc_type: \"Sales Proposal\"\n    })\nCREATE (e0:Opportunity {name: \"ERP Solution Implementation for Inc.\", deal_value: \"500000\", close_date: \"2025-02-28\", win_probability: \"90\", pipeline_stage: \"Proposal\", revenue_forecast: \"500000\", terms: \"30% upfront, 40% on milestone, 30% on completion\", valid_until: \"2025-02-28\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Customer {name: \"Inc.\", contact_info: \"Not specified\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Product {name: \"Finance Accounting Module\", description: \"GL, AP, AR, Fixed Assets\", price: \"0\", quantity: \"1\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Product {name: \"Human Resources Module\", description: \"HRIS, Payroll, Benefits\", price: \"0\", quantity: \"1\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Product {name: \"Supply Chain Module\", description: \"Inventory, Procurement, Warehousing\", price: \"0\", quantity: \"1\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Product {name: \"CRM Module\", description: \"Sales, Customer service\", price: \"0\", quantity: \"1\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Product {name: \"Licenses\", description: \"500 users\", price: \"200000\", quantity: \"500\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Product {name: \"Services\", description: \"Implementation services\", price: \"180000\", quantity: \"1\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Product {name: \"Training\", description: \"5 sessions\", price: \"40000\", quantity: \"5\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Product {name: \"Year Maintenance\", description: \"Annual maintenance\", price: \"80000\", quantity: \"1\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:SalesRep {name: \"Jennifer Davis\", email: \"jennifer.davis@softwaresolutions.com\"})\nCREATE (doc)-[:MENTIONS]->(e10)",
     "entities": [
       {
         "type": "Opportunity",
         "properties": {
-          "name": "ERP Implementation for Inc.",
+          "name": "ERP Solution Implementation for Inc.",
           "deal_value": 500000,
           "close_date": "2025-02-28",
           "win_probability": 90,
-          "stage": "Proposal",
+          "pipeline_stage": "Proposal",
           "revenue_forecast": 500000,
           "terms": "30% upfront, 40% on milestone, 30% on completion",
           "valid_until": "2025-02-28"
@@ -31,26 +31,80 @@
       {
         "type": "Product",
         "properties": {
-          "name": "ERP Solution",
-          "modules": "Finance Accounting, Human Resources, Supply Chain, CRM",
-          "pricing": {
-            "licenses": 200000,
-            "services": 180000,
-            "training": 40000,
-            "maintenance": 80000,
-            "total": 500000
-          },
-          "quantities": {
-            "users": 500,
-            "training_sessions": 5
-          }
+          "name": "Finance Accounting Module",
+          "description": "GL, AP, AR, Fixed Assets",
+          "price": 0,
+          "quantity": 1
+        }
+      },
+      {
+        "type": "Product",
+        "properties": {
+          "name": "Human Resources Module",
+          "description": "HRIS, Payroll, Benefits",
+          "price": 0,
+          "quantity": 1
+        }
+      },
+      {
+        "type": "Product",
+        "properties": {
+          "name": "Supply Chain Module",
+          "description": "Inventory, Procurement, Warehousing",
+          "price": 0,
+          "quantity": 1
+        }
+      },
+      {
+        "type": "Product",
+        "properties": {
+          "name": "CRM Module",
+          "description": "Sales, Customer service",
+          "price": 0,
+          "quantity": 1
+        }
+      },
+      {
+        "type": "Product",
+        "properties": {
+          "name": "Licenses",
+          "description": "500 users",
+          "price": 200000,
+          "quantity": 500
+        }
+      },
+      {
+        "type": "Product",
+        "properties": {
+          "name": "Services",
+          "description": "Implementation services",
+          "price": 180000,
+          "quantity": 1
+        }
+      },
+      {
+        "type": "Product",
+        "properties": {
+          "name": "Training",
+          "description": "5 sessions",
+          "price": 40000,
+          "quantity": 5
+        }
+      },
+      {
+        "type": "Product",
+        "properties": {
+          "name": "Year Maintenance",
+          "description": "Annual maintenance",
+          "price": 80000,
+          "quantity": 1
         }
       },
       {
         "type": "SalesRep",
         "properties": {
           "name": "Jennifer Davis",
-          "contact": "jennifer.davis@softwaresolutions.com"
+          "email": "jennifer.davis@softwaresolutions.com"
         }
       }
     ],
@@ -63,36 +117,149 @@
       },
       {
         "type": "INCLUDES_PRODUCT",
-        "source": "ERP Implementation for Inc.",
-        "target": "ERP Solution",
+        "source": "ERP Solution Implementation for Inc.",
+        "target": "Finance Accounting Module",
+        "properties": {}
+      },
+      {
+        "type": "INCLUDES_PRODUCT",
+        "source": "ERP Solution Implementation for Inc.",
+        "target": "Human Resources Module",
+        "properties": {}
+      },
+      {
+        "type": "INCLUDES_PRODUCT",
+        "source": "ERP Solution Implementation for Inc.",
+        "target": "Supply Chain Module",
+        "properties": {}
+      },
+      {
+        "type": "INCLUDES_PRODUCT",
+        "source": "ERP Solution Implementation for Inc.",
+        "target": "CRM Module",
+        "properties": {}
+      },
+      {
+        "type": "INCLUDES_PRODUCT",
+        "source": "ERP Solution Implementation for Inc.",
+        "target": "Licenses",
+        "properties": {}
+      },
+      {
+        "type": "INCLUDES_PRODUCT",
+        "source": "ERP Solution Implementation for Inc.",
+        "target": "Services",
+        "properties": {}
+      },
+      {
+        "type": "INCLUDES_PRODUCT",
+        "source": "ERP Solution Implementation for Inc.",
+        "target": "Training",
+        "properties": {}
+      },
+      {
+        "type": "INCLUDES_PRODUCT",
+        "source": "ERP Solution Implementation for Inc.",
+        "target": "Year Maintenance",
         "properties": {}
       },
       {
         "type": "OWNED_BY",
-        "source": "ERP Implementation for Inc.",
+        "source": "ERP Solution Implementation for Inc.",
         "target": "Jennifer Davis",
         "properties": {}
       }
     ]
   },
   "fulltextMetadata": {
-    "title": "Enterprise Proposal ESP-2025-0042",
+    "title": "Enterprise Proposal",
     "domain": "sales",
     "docType": "Sales Proposal",
-    "extractedFields": {},
-    "keywords": []
+    "extractedFields": {
+      "opportunity_name": "ERP Solution Implementation for Inc.",
+      "opportunity_deal_value": 500000,
+      "opportunity_close_date": "2025-02-28",
+      "opportunity_win_probability": 90,
+      "opportunity_pipeline_stage": "Proposal",
+      "opportunity_revenue_forecast": 500000,
+      "opportunity_terms": "30% upfront, 40% on milestone, 30% on completion",
+      "opportunity_valid_until": "2025-02-28",
+      "customer_name": "Inc.",
+      "customer_contact_info": "Not specified",
+      "product_name": [
+        "Finance Accounting Module",
+        "Human Resources Module",
+        "Supply Chain Module",
+        "CRM Module",
+        "Licenses",
+        "Services",
+        "Training",
+        "Year Maintenance"
+      ],
+      "product_description": [
+        "GL, AP, AR, Fixed Assets",
+        "HRIS, Payroll, Benefits",
+        "Inventory, Procurement, Warehousing",
+        "Sales, Customer service",
+        "500 users",
+        "Implementation services",
+        "5 sessions",
+        "Annual maintenance"
+      ],
+      "product_price": [
+        200000,
+        180000,
+        40000,
+        80000
+      ],
+      "product_quantity": [
+        1,
+        1,
+        1,
+        1,
+        500,
+        1,
+        5,
+        1
+      ],
+      "salesrep_name": "Jennifer Davis",
+      "salesrep_email": "jennifer.davis@softwaresolutions.com"
+    },
+    "keywords": [
+      "phase",
+      "2025",
+      "software",
+      "softwaresolutions",
+      "implementation",
+      "support",
+      "months",
+      "enterprise",
+      "proposal",
+      "global",
+      "enterprises",
+      "corp",
+      "solution",
+      "estimated",
+      "year",
+      "sales",
+      "automation",
+      "training",
+      "live",
+      "upon"
+    ],
+    "summary": "SoftwareSolutions Corp. proposes a $500,000 enterprise resource planning (ERP) solution for Global Enterprises Inc., including finance, HR, supply chain, and CRM modules. The five-month implementation will be followed by ongoing support, with projected annual savings of $750,000 through improved efficiency and automation."
   },
   "cacheInfo": {
     "cached": false,
     "hash": "71ac12c4f7a4cb37bd454decd88577394f6c0aa518a8241483f88fe436497e26"
   },
   "performance": {
-    "totalTimeMs": 21195,
+    "totalTimeMs": 43483,
     "tokens": {
       "input": 1799,
-      "output": 534,
-      "total": 2333
+      "output": 1104,
+      "total": 2903
     },
-    "costUsd": 0.00040138
+    "costUsd": 0.0005609800000000001
   }
 }

@@ -6,7 +6,7 @@
     "docType": "Campaign Overview Document"
   },
   "graphStructure": {
-    "cypher": "CREATE (doc:Document {\n      id: \"Q1 2025 Product Campaign: CloudSync Pro\",\n      title: \"Q1 2025 Product Campaign: CloudSync Pro\",\n      domain: \"marketing\",\n      doc_type: \"Campaign Overview Document\"\n    })\nCREATE (e0:Campaign {name: \"CloudSync Pro\", duration: \"March 1 - May 31, 2025\", budget: \"250000\", target_users: \"10000\", campaign_manager: \"Lisa Martinez\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:TargetAudience {name: \"IT Managers\", company_size: \"50-500 employees\", industries: \"Technology,Finance,Healthcare\", geographic_regions: \"North America,Europe\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Channel {name: \"Digital Advertising\", budget: \"120000\", subchannels: \"Google Ads,LinkedIn Sponsored Content,Facebook/Instagram\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Channel {name: \"Content\", budget: \"60000\", assets: \"Blog posts (12),Whitepapers (3 technical),Case studies (5),Webinars (4 live)\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Channel {name: \"Email\", budget: \"30000\", types: \"Newsletter,Drip campaigns,Targeted outreach\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Channel {name: \"Events\", budget: \"40000\", types: \"Conferences,Virtual sessions\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Metric {name: \"Website Traffic Increase\", value: \"150\", unit: \"%\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Metric {name: \"Trial Sign-ups\", value: \"5000\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Metric {name: \"Conversion Rate\", value: \"10\", unit: \"%\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Metric {name: \"Paying Customers\", value: \"500\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Metric {name: \"Customer Acquisition Cost (CAC) Target\", value: \"500\", unit: \"USD\", condition: \"<\"})\nCREATE (doc)-[:MENTIONS]->(e10)",
+    "cypher": "CREATE (doc:Document {\n      id: \"Q1 2025 Product Campaign: CloudSync Pro\",\n      title: \"Q1 2025 Product Campaign: CloudSync Pro\",\n      domain: \"marketing\",\n      doc_type: \"Campaign Overview Document\"\n    })\nCREATE (e0:Campaign {name: \"CloudSync Pro\", duration: \"March 1 - May 31, 2025\", budget: \"250000\", target_users: \"10000\", campaign_manager: \"Lisa Martinez\", objectives: \"Increase trial sign-ups and conversions for CloudSync Pro\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Metric {name: \"Website Traffic Increase\", value: \"+150%\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Metric {name: \"Trial Sign-ups\", value: \"5000\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Metric {name: \"Conversion Rate\", value: \"10%\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Metric {name: \"Paying Customers\", value: \"500\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Metric {name: \"CAC Target\", value: \"<$500\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Channel {name: \"Digital Advertising\", budget: \"120000\", subchannels: \"Google Ads, LinkedIn Sponsored Content, Facebook/Instagram\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Channel {name: \"Content\", budget: \"60000\", assets: \"12 Blog posts, 3 Whitepapers, 5 Case studies, 4 Webinars\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Channel {name: \"Email\", budget: \"30000\", types: \"Newsletter, Drip campaigns, Targeted outreach\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Channel {name: \"Events\", budget: \"40000\", types: \"Conferences, Virtual sessions\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:TargetAudience {name: \"IT Managers\", company_size: \"50-500 employees\", industries: \"Technology, Finance, Healthcare\", geography: \"North America, Europe\"})\nCREATE (doc)-[:MENTIONS]->(e10)",
     "entities": [
       {
         "type": "Campaign",
@@ -15,79 +15,15 @@
           "duration": "March 1 - May 31, 2025",
           "budget": 250000,
           "target_users": 10000,
-          "campaign_manager": "Lisa Martinez"
-        }
-      },
-      {
-        "type": "TargetAudience",
-        "properties": {
-          "name": "IT Managers",
-          "company_size": "50-500 employees",
-          "industries": [
-            "Technology",
-            "Finance",
-            "Healthcare"
-          ],
-          "geographic_regions": [
-            "North America",
-            "Europe"
-          ]
-        }
-      },
-      {
-        "type": "Channel",
-        "properties": {
-          "name": "Digital Advertising",
-          "budget": 120000,
-          "subchannels": [
-            "Google Ads",
-            "LinkedIn Sponsored Content",
-            "Facebook/Instagram"
-          ]
-        }
-      },
-      {
-        "type": "Channel",
-        "properties": {
-          "name": "Content",
-          "budget": 60000,
-          "assets": [
-            "Blog posts (12)",
-            "Whitepapers (3 technical)",
-            "Case studies (5)",
-            "Webinars (4 live)"
-          ]
-        }
-      },
-      {
-        "type": "Channel",
-        "properties": {
-          "name": "Email",
-          "budget": 30000,
-          "types": [
-            "Newsletter",
-            "Drip campaigns",
-            "Targeted outreach"
-          ]
-        }
-      },
-      {
-        "type": "Channel",
-        "properties": {
-          "name": "Events",
-          "budget": 40000,
-          "types": [
-            "Conferences",
-            "Virtual sessions"
-          ]
+          "campaign_manager": "Lisa Martinez",
+          "objectives": "Increase trial sign-ups and conversions for CloudSync Pro"
         }
       },
       {
         "type": "Metric",
         "properties": {
           "name": "Website Traffic Increase",
-          "value": 150,
-          "unit": "%"
+          "value": "+150%"
         }
       },
       {
@@ -101,8 +37,7 @@
         "type": "Metric",
         "properties": {
           "name": "Conversion Rate",
-          "value": 10,
-          "unit": "%"
+          "value": "10%"
         }
       },
       {
@@ -115,10 +50,49 @@
       {
         "type": "Metric",
         "properties": {
-          "name": "Customer Acquisition Cost (CAC) Target",
-          "value": 500,
-          "unit": "USD",
-          "condition": "<"
+          "name": "CAC Target",
+          "value": "<$500"
+        }
+      },
+      {
+        "type": "Channel",
+        "properties": {
+          "name": "Digital Advertising",
+          "budget": 120000,
+          "subchannels": "Google Ads, LinkedIn Sponsored Content, Facebook/Instagram"
+        }
+      },
+      {
+        "type": "Channel",
+        "properties": {
+          "name": "Content",
+          "budget": 60000,
+          "assets": "12 Blog posts, 3 Whitepapers, 5 Case studies, 4 Webinars"
+        }
+      },
+      {
+        "type": "Channel",
+        "properties": {
+          "name": "Email",
+          "budget": 30000,
+          "types": "Newsletter, Drip campaigns, Targeted outreach"
+        }
+      },
+      {
+        "type": "Channel",
+        "properties": {
+          "name": "Events",
+          "budget": 40000,
+          "types": "Conferences, Virtual sessions"
+        }
+      },
+      {
+        "type": "TargetAudience",
+        "properties": {
+          "name": "IT Managers",
+          "company_size": "50-500 employees",
+          "industries": "Technology, Finance, Healthcare",
+          "geography": "North America, Europe"
         }
       }
     ],
@@ -180,7 +154,7 @@
       {
         "type": "MEASURES",
         "source": "CloudSync Pro",
-        "target": "Customer Acquisition Cost (CAC) Target",
+        "target": "CAC Target",
         "properties": {}
       }
     ]
@@ -189,20 +163,85 @@
     "title": "Q1 2025 Product Campaign: CloudSync Pro",
     "domain": "marketing",
     "docType": "Campaign Overview Document",
-    "extractedFields": {},
-    "keywords": []
+    "extractedFields": {
+      "campaign_name": "CloudSync Pro",
+      "campaign_duration": "March 1 - May 31, 2025",
+      "campaign_budget": 250000,
+      "campaign_target_users": 10000,
+      "campaign_campaign_manager": "Lisa Martinez",
+      "campaign_objectives": "Increase trial sign-ups and conversions for CloudSync Pro",
+      "metric_name": [
+        "Website Traffic Increase",
+        "Trial Sign-ups",
+        "Conversion Rate",
+        "Paying Customers",
+        "CAC Target"
+      ],
+      "metric_value": [
+        "+150%",
+        5000,
+        "10%",
+        500,
+        "<$500"
+      ],
+      "channel_name": [
+        "Digital Advertising",
+        "Content",
+        "Email",
+        "Events"
+      ],
+      "channel_budget": [
+        120000,
+        60000,
+        30000,
+        40000
+      ],
+      "channel_subchannels": "Google Ads, LinkedIn Sponsored Content, Facebook/Instagram",
+      "channel_assets": "12 Blog posts, 3 Whitepapers, 5 Case studies, 4 Webinars",
+      "channel_types": [
+        "Newsletter, Drip campaigns, Targeted outreach",
+        "Conferences, Virtual sessions"
+      ],
+      "targetaudience_name": "IT Managers",
+      "targetaudience_company_size": "50-500 employees",
+      "targetaudience_industries": "Technology, Finance, Healthcare",
+      "targetaudience_geography": "North America, Europe"
+    },
+    "keywords": [
+      "campaign",
+      "launch",
+      "target",
+      "marketing",
+      "sessions",
+      "2025",
+      "cloudsync",
+      "enterprise",
+      "content",
+      "events",
+      "product",
+      "duration",
+      "march",
+      "budget",
+      "users",
+      "overview",
+      "file",
+      "synchronization",
+      "solution",
+      "audience"
+    ],
+    "summary": "This document outlines the Q1 2025 launch campaign for CloudSync Pro, targeting 10,000 new users with a $250,000 budget. The campaign will run from March to May 2025, focusing on IT managers in North America and Europe through digital ads, content marketing, email campaigns, and events. Key goals include achieving 5,000 trial signups and converting 500 paying customers while keeping customer acquisition costs below $500."
   },
   "cacheInfo": {
     "cached": false,
     "hash": "97e18c57b1032cc91d0d90c8e40b7d7ed859f32ab4e82dbf3df3bb64868a1fae"
   },
   "performance": {
-    "totalTimeMs": 36912,
+    "totalTimeMs": 42272,
     "tokens": {
       "input": 1685,
-      "output": 1028,
-      "total": 2713
+      "output": 1004,
+      "total": 2689
     },
-    "costUsd": 0.00052374
+    "costUsd": 0.00051702
   }
 }

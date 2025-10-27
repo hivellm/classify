@@ -171,15 +171,80 @@
     "title": "Q4 2024 Investor Update",
     "domain": "investor_relations",
     "docType": "Investor Update",
-    "extractedFields": {},
-    "keywords": []
+    "extractedFields": {
+      "company_name": "NextGen AI Solutions",
+      "period_fiscal_period": "Q4 2024",
+      "period_date": "January 20, 2025",
+      "financialmetric_metric": [
+        "Revenue",
+        "ARR",
+        "Gross Margin",
+        "Burn",
+        "Runway",
+        "Net Revenue Retention",
+        "Churn"
+      ],
+      "financialmetric_value": [
+        "$12.5M",
+        "$48M",
+        "78%",
+        "$1.2M/month",
+        "18 months",
+        "135%",
+        "2.1%"
+      ],
+      "financialmetric_comparison": [
+        "+45% YoY",
+        "+52% YoY",
+        "industry avg: 5%"
+      ],
+      "guidance_description": [
+        "Launch Beta AI",
+        "Complete fundraising",
+        "Expand sales team with 10 new AEs",
+        "International expansion into EU market",
+        "Infrastructure scaling",
+        "Expected $30M funding round"
+      ],
+      "guidance_period": [
+        "Q1 2025",
+        "Q1 2025",
+        "Q1 2025",
+        "Q1 2025",
+        "Q1 2025",
+        "Q2 2025"
+      ]
+    },
+    "keywords": [
+      "2025",
+      "team",
+      "market",
+      "2024",
+      "investor",
+      "company",
+      "board",
+      "revenue",
+      "rate",
+      "product",
+      "enterprise",
+      "agents",
+      "launch",
+      "customer",
+      "growth",
+      "customers",
+      "expansion",
+      "engineering",
+      "sales",
+      "fundraising"
+    ],
+    "summary": "NextGen AI Solutions demonstrated strong Q4 2024 performance with 45% revenue growth to $12.5M and 52% ARR growth to $48M, while expanding to 450 total customers. The company achieved key product milestones including AI Chat v2.0 launch and SOC 2 certification, while maintaining 18 months of runway. Strategic priorities for Q1 2025 include closing a $30M Series B round and launching the AI Agents product."
   },
   "cacheInfo": {
     "cached": false,
     "hash": "7f04eec52b8679b7d80b64350dc9220ed70489ae70b719206b913c41b8d0eaca"
   },
   "performance": {
-    "totalTimeMs": 38024,
+    "totalTimeMs": 42423,
     "tokens": {
       "input": 1831,
       "output": 1045,

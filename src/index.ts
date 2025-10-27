@@ -45,3 +45,9 @@ export {
   PromptCompressor,
   type CompressionResult,
 } from './compression/index.js';
+
+// Output Generation
+export {
+  FulltextGenerator,
+  type FulltextMetadata,
+} from './output/index.js';

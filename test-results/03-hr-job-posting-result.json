@@ -1,12 +1,12 @@
 {
   "classification": {
     "template": "hr",
-    "confidence": 0.9,
+    "confidence": 0.85,
     "domain": "hr",
     "docType": "Job Posting"
   },
   "graphStructure": {
-    "cypher": "CREATE (doc:Document {\n      id: \"Senior Software Engineer Full Stack\",\n      title: \"Senior Software Engineer Full Stack\",\n      domain: \"hr\",\n      doc_type: \"Job Posting\"\n    })\nCREATE (e0:Person {name: \"Senior Software Engineer\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Skill {name: \"PostgreSQL\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Skill {name: \"TypeScript\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Skill {name: \"JavaScript\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Skill {name: \"React\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Skill {name: \"SQL\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Experience {years: \"5+\", role: \"Software Development\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Education {degree: \"Bachelor's\", field: \"Computer Science\"})\nCREATE (doc)-[:MENTIONS]->(e7)",
+    "cypher": "CREATE (doc:Document {\n      id: \"Senior Software Engineer Full Stack\",\n      title: \"Senior Software Engineer Full Stack\",\n      domain: \"hr\",\n      doc_type: \"Job Posting\"\n    })\nCREATE (e0:Person {name: \"Senior Software Engineer\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Skill {name: \"PostgreSQL\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Skill {name: \"TypeScript\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Skill {name: \"JavaScript\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Skill {name: \"React\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Skill {name: \"SQL\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Experience {years: \"5+\", description: \"software development\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Education {degree: \"Bachelor's\", field: \"Computer Science\"})\nCREATE (doc)-[:MENTIONS]->(e7)",
     "entities": [
       {
         "type": "Person",
@@ -48,7 +48,7 @@
         "type": "Experience",
         "properties": {
           "years": "5+",
-          "role": "Software Development"
+          "description": "software development"
         }
       },
       {
@@ -91,15 +91,15 @@
         "properties": {}
       },
       {
-        "type": "WORKED_AT",
+        "type": "HAS_SKILL",
         "source": "Senior Software Engineer",
-        "target": "Engineering",
+        "target": "software development",
         "properties": {}
       },
       {
         "type": "EDUCATED_AT",
         "source": "Senior Software Engineer",
-        "target": "Bachelor's Computer Science",
+        "target": "Bachelor's in Computer Science",
         "properties": {}
       }
     ]
@@ -108,20 +108,55 @@
     "title": "Senior Software Engineer Full Stack",
     "domain": "hr",
     "docType": "Job Posting",
-    "extractedFields": {},
-    "keywords": []
+    "extractedFields": {
+      "person_name": "Senior Software Engineer",
+      "skill_name": [
+        "PostgreSQL",
+        "TypeScript",
+        "JavaScript",
+        "React",
+        "SQL"
+      ],
+      "experience_years": "5+",
+      "experience_description": "software development",
+      "education_degree": "Bachelor's",
+      "education_field": "Computer Science"
+    },
+    "keywords": [
+      "software",
+      "senior",
+      "engineer",
+      "full",
+      "engineering",
+      "salary",
+      "work",
+      "react",
+      "node",
+      "code",
+      "experience",
+      "2025",
+      "stack",
+      "location",
+      "francisco",
+      "hybrid",
+      "department",
+      "employment",
+      "type",
+      "time"
+    ],
+    "summary": "This full-time hybrid Senior Software Engineer position in San Francisco offers $140,000-$180,000 to develop scalable web applications using React, Node.js, and PostgreSQL. The role requires 5+ years of experience with TypeScript/JavaScript and involves feature development, mentoring, and collaboration across teams. Benefits include competitive compensation, comprehensive insurance, 401(k) matching, unlimited PTO, and remote flexibility."
   },
   "cacheInfo": {
     "cached": false,
     "hash": "9b6808b5871ad582b7957abeb5ed5f3de14f54661a72f59f620a650fac82bbdd"
   },
   "performance": {
-    "totalTimeMs": 22346,
+    "totalTimeMs": 27864,
     "tokens": {
       "input": 1606,
-      "output": 585,
-      "total": 2191
+      "output": 609,
+      "total": 2215
     },
-    "costUsd": 0.00038864000000000005
+    "costUsd": 0.00039536000000000004
   }
 }

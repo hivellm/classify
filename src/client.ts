@@ -6,6 +6,7 @@ import {
   ClassificationPipeline,
   type ClassificationPipelineResult,
 } from './classification/pipeline.js';
+import { FulltextGenerator } from './output/fulltext-generator.js';
 import { ProviderFactory } from './llm/provider-factory.js';
 import type { LLMProvider } from './llm/types.js';
 
@@ -19,6 +20,7 @@ export class ClassifyClient {
   private llmProvider: LLMProvider;
   private templateSelector: TemplateSelector;
   private classificationPipeline: ClassificationPipeline;
+  private fulltextGenerator: FulltextGenerator;
   private templatesLoaded = false;
 
   constructor(options: ClassifyOptions = {}) {
@@ -59,6 +61,7 @@ export class ClassifyClient {
       compressionEnabled: this.options.compressionEnabled,
       compressionRatio: this.options.compressionRatio,
     });
+    this.fulltextGenerator = new FulltextGenerator(this.llmProvider);
   }
 
   /**
@@ -97,7 +100,13 @@ export class ClassifyClient {
       template
     );
 
-    // Step 4: Generate outputs
+    // Step 4: Generate fulltext metadata
+    const fulltextMetadata = await this.fulltextGenerator.generate(
+      processedDoc,
+      pipelineResult
+    );
+
+    // Step 5: Build final result
     const totalTimeMs = Date.now() - startTime;
 
     const result: ClassifyResult = {
@@ -113,11 +122,12 @@ export class ClassifyClient {
         relationships: pipelineResult.relationships,
       },
       fulltextMetadata: {
-        title: pipelineResult.classification.title,
-        domain: pipelineResult.classification.domain,
-        docType: pipelineResult.classification.docType,
-        extractedFields: {},
-        keywords: [],
+        title: fulltextMetadata.title,
+        domain: fulltextMetadata.domain,
+        docType: fulltextMetadata.docType,
+        extractedFields: fulltextMetadata.extractedFields,
+        keywords: fulltextMetadata.keywords,
+        summary: fulltextMetadata.summary,
       },
       cacheInfo: {
         cached: false,

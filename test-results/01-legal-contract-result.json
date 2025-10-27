@@ -6,7 +6,7 @@
     "docType": "Service Agreement"
   },
   "graphStructure": {
-    "cypher": "CREATE (doc:Document {\n      id: \"Agreement\",\n      title: \"Agreement\",\n      domain: \"legal\",\n      doc_type: \"Service Agreement\"\n    })\nCREATE (e0:Party {name: \"TechCorp\", role: \"Client\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Party {name: \"DataSolutions LLC\", role: \"Service Provider\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Date {date: \"January 15, 2025\", description: \"Agreement Date\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Date {date: \"February 1, 2025\", description: \"Term Commencement\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Clause {name: \"Services\", description: \"Provider to provide infrastructure management services including maintenance, 24/7 support\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Clause {name: \"Term\", description: \"Commence February 1, 2025, continue for 12 months\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Clause {name: \"Compensation\", description: \"Client to pay $5,000 USD, payable within 15 days of invoice\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Clause {name: \"Termination\", description: \"Either party may terminate with 30 days written notice\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Clause {name: \"Liability\", description: \"Provider's liability not to exceed fees paid in preceding six months\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Amount {value: \"5000\", currency: \"USD\", description: \"Monthly service fee\"})\nCREATE (doc)-[:MENTIONS]->(e9)",
+    "cypher": "CREATE (doc:Document {\n      id: \"Agreement\",\n      title: \"Agreement\",\n      domain: \"legal\",\n      doc_type: \"Service Agreement\"\n    })\nCREATE (e0:Party {name: \"TechCorp\", role: \"Client\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Party {name: \"DataSolutions LLC\", role: \"Service Provider\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Date {date: \"January 15, 2025\", description: \"Agreement execution date\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Date {date: \"February 1, 2025\", description: \"Term commencement date\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Jurisdiction {name: \"USD\", description: \"Currency jurisdiction\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Clause {name: \"Services\", description: \"Infrastructure management services including maintenance, 24/7 support\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Clause {name: \"Term\", description: \"Commence February 1, 2025, continue for 12 months\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Clause {name: \"Compensation\", description: \"Client to pay $5,000 USD payable within 15 days of invoice\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Clause {name: \"Termination\", description: \"Either party may terminate with 30 days written notice\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Clause {name: \"Liability\", description: \"Provider's liability not to exceed fees paid in preceding six months\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Amount {value: \"5000\", currency: \"USD\", description: \"Monthly service fee\"})\nCREATE (doc)-[:MENTIONS]->(e10)",
     "entities": [
       {
         "type": "Party",
@@ -26,21 +26,28 @@
         "type": "Date",
         "properties": {
           "date": "January 15, 2025",
-          "description": "Agreement Date"
+          "description": "Agreement execution date"
         }
       },
       {
         "type": "Date",
         "properties": {
           "date": "February 1, 2025",
-          "description": "Term Commencement"
+          "description": "Term commencement date"
+        }
+      },
+      {
+        "type": "Jurisdiction",
+        "properties": {
+          "name": "USD",
+          "description": "Currency jurisdiction"
         }
       },
       {
         "type": "Clause",
         "properties": {
           "name": "Services",
-          "description": "Provider to provide infrastructure management services including maintenance, 24/7 support"
+          "description": "Infrastructure management services including maintenance, 24/7 support"
         }
       },
       {
@@ -54,7 +61,7 @@
         "type": "Clause",
         "properties": {
           "name": "Compensation",
-          "description": "Client to pay $5,000 USD, payable within 15 days of invoice"
+          "description": "Client to pay $5,000 USD payable within 15 days of invoice"
         }
       },
       {
@@ -122,6 +129,12 @@
         "source": "Compensation",
         "target": "Amount",
         "properties": {}
+      },
+      {
+        "type": "GOVERNED_BY",
+        "source": "Agreement",
+        "target": "USD",
+        "properties": {}
       }
     ]
   },
@@ -129,20 +142,78 @@
     "title": "Agreement",
     "domain": "legal",
     "docType": "Service Agreement",
-    "extractedFields": {},
-    "keywords": []
+    "extractedFields": {
+      "party_name": [
+        "TechCorp",
+        "DataSolutions LLC"
+      ],
+      "party_role": [
+        "Client",
+        "Service Provider"
+      ],
+      "date_date": [
+        "January 15, 2025",
+        "February 1, 2025"
+      ],
+      "date_description": [
+        "Agreement execution date",
+        "Term commencement date"
+      ],
+      "jurisdiction_name": "USD",
+      "jurisdiction_description": "Currency jurisdiction",
+      "clause_name": [
+        "Services",
+        "Term",
+        "Compensation",
+        "Termination",
+        "Liability"
+      ],
+      "clause_description": [
+        "Infrastructure management services including maintenance, 24/7 support",
+        "Commence February 1, 2025, continue for 12 months",
+        "Client to pay $5,000 USD payable within 15 days of invoice",
+        "Either party may terminate with 30 days written notice",
+        "Provider's liability not to exceed fees paid in preceding six months"
+      ],
+      "amount_value": "5000",
+      "amount_currency": "USD",
+      "amount_description": "Monthly service fee"
+    },
+    "keywords": [
+      "service",
+      "agreement",
+      "provider",
+      "2025",
+      "techcorp",
+      "client",
+      "datasolutions",
+      "services",
+      "agrees",
+      "shall",
+      "months",
+      "days",
+      "liability",
+      "entered",
+      "january",
+      "between",
+      "provide",
+      "cloud",
+      "infrastructure",
+      "management"
+    ],
+    "summary": "This service agreement between TechCorp Inc. and DataSolutions LLC establishes a 12-month contract for cloud infrastructure management services beginning February 1, 2025. DataSolutions will provide server maintenance, security updates, and 24/7 monitoring for a monthly fee of $5,000. The agreement allows either party to terminate with 30 days' written notice and limits the service provider's liability to fees paid in the preceding six months."
   },
   "cacheInfo": {
     "cached": false,
     "hash": "2cd694d76bfd5a03bfec695a4895faaca8e66183f0e34d2d903b6babccddf732"
   },
   "performance": {
-    "totalTimeMs": 29119,
+    "totalTimeMs": 35300,
     "tokens": {
       "input": 1588,
-      "output": 781,
-      "total": 2369
+      "output": 847,
+      "total": 2435
     },
-    "costUsd": 0.00044100000000000004
+    "costUsd": 0.00045948000000000007
   }
 }
