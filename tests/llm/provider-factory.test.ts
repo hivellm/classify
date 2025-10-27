@@ -22,7 +22,7 @@ describe('ProviderFactory', () => {
 
       expect(provider).toBeInstanceOf(OpenAIProvider);
       expect(provider.name).toBe('openai');
-      expect(provider.defaultModel).toBe('gpt-4o-mini');
+      expect(provider.defaultModel).toBe('gpt-5-mini');
     });
 
     it('should use custom model if provided', () => {
@@ -34,25 +34,22 @@ describe('ProviderFactory', () => {
       expect(provider).toBeInstanceOf(OpenAIProvider);
     });
 
-    it('should throw for unimplemented providers', () => {
-      expect(() => ProviderFactory.create('anthropic', { apiKey: 'test-key' })).toThrow(
-        'not yet implemented'
-      );
-
-      expect(() => ProviderFactory.create('gemini', { apiKey: 'test-key' })).toThrow(
-        'not yet implemented'
-      );
+    it('should create all providers', () => {
+      expect(ProviderFactory.create('anthropic', { apiKey: 'test-key' }).name).toBe('anthropic');
+      expect(ProviderFactory.create('gemini', { apiKey: 'test-key' }).name).toBe('gemini');
+      expect(ProviderFactory.create('xai', { apiKey: 'test-key' }).name).toBe('xai');
+      expect(ProviderFactory.create('groq', { apiKey: 'test-key' }).name).toBe('groq');
     });
   });
 
   describe('getDefaultModel', () => {
     it('should return correct default models', () => {
       expect(ProviderFactory.getDefaultModel('deepseek')).toBe('deepseek-chat');
-      expect(ProviderFactory.getDefaultModel('openai')).toBe('gpt-4o-mini');
-      expect(ProviderFactory.getDefaultModel('anthropic')).toBe('claude-3-5-haiku-latest');
-      expect(ProviderFactory.getDefaultModel('gemini')).toBe('gemini-2.0-flash');
-      expect(ProviderFactory.getDefaultModel('xai')).toBe('grok-3-mini-latest');
-      expect(ProviderFactory.getDefaultModel('groq')).toBe('llama-3.1-8b-instant');
+      expect(ProviderFactory.getDefaultModel('openai')).toBe('gpt-5-mini');
+      expect(ProviderFactory.getDefaultModel('anthropic')).toBe('claude-3-5-haiku-20241022');
+      expect(ProviderFactory.getDefaultModel('gemini')).toBe('gemini-2.5-flash');
+      expect(ProviderFactory.getDefaultModel('xai')).toBe('grok-3');
+      expect(ProviderFactory.getDefaultModel('groq')).toBe('llama-3.3-70b-versatile');
     });
   });
 

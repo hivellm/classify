@@ -6,11 +6,11 @@ describe('OpenAIProvider', () => {
     it('should create instance with valid config', () => {
       const provider = new OpenAIProvider({
         apiKey: 'test-key',
-        model: 'gpt-4o-mini',
+        model: 'gpt-5-mini',
       });
 
       expect(provider.name).toBe('openai');
-      expect(provider.defaultModel).toBe('gpt-4o-mini');
+      expect(provider.defaultModel).toBe('gpt-5-mini');
     });
 
     it('should throw without API key', () => {
@@ -28,38 +28,37 @@ describe('OpenAIProvider', () => {
     it('should list supported models', () => {
       const provider = new OpenAIProvider({
         apiKey: 'test-key',
-        model: 'gpt-4o-mini',
+        model: 'gpt-5-mini',
       });
 
-      expect(provider.supportedModels).toContain('gpt-4o');
+      expect(provider.supportedModels).toContain('gpt-5-mini');
+      expect(provider.supportedModels).toContain('gpt-5-nano');
       expect(provider.supportedModels).toContain('gpt-4o-mini');
-      expect(provider.supportedModels).toContain('gpt-4-turbo');
-      expect(provider.supportedModels).toContain('gpt-4');
-      expect(provider.supportedModels).toContain('gpt-3.5-turbo');
+      expect(provider.supportedModels).toContain('o3-mini');
     });
   });
 
   describe('getPricing', () => {
-    it('should return correct pricing for gpt-4o-mini', () => {
+    it('should return correct pricing for gpt-5-mini', () => {
       const provider = new OpenAIProvider({
         apiKey: 'test-key',
-        model: 'gpt-4o-mini',
+        model: 'gpt-5-mini',
       });
 
-      const pricing = provider.getPricing('gpt-4o-mini');
-      expect(pricing.input).toBe(0.15);
-      expect(pricing.output).toBe(0.6);
+      const pricing = provider.getPricing('gpt-5-mini');
+      expect(pricing.input).toBe(0.25);
+      expect(pricing.output).toBe(2.0);
     });
 
-    it('should return correct pricing for gpt-4o', () => {
+    it('should return correct pricing for gpt-5-nano', () => {
       const provider = new OpenAIProvider({
         apiKey: 'test-key',
-        model: 'gpt-4o',
+        model: 'gpt-5-nano',
       });
 
-      const pricing = provider.getPricing('gpt-4o');
-      expect(pricing.input).toBe(2.5);
-      expect(pricing.output).toBe(10.0);
+      const pricing = provider.getPricing('gpt-5-nano');
+      expect(pricing.input).toBe(0.05);
+      expect(pricing.output).toBe(0.4);
     });
   });
 });

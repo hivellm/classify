@@ -7,8 +7,23 @@ import type { LLMCompletionRequest, LLMCompletionResponse } from '../types.js';
  */
 export class OpenAIProvider extends BaseLLMProvider {
   readonly name = 'openai';
-  readonly defaultModel = 'gpt-4o-mini';
-  readonly supportedModels = ['gpt-4o', 'gpt-4o-mini', 'gpt-4-turbo', 'gpt-4', 'gpt-3.5-turbo'];
+  readonly defaultModel = 'gpt-5-mini';
+  readonly supportedModels = [
+    'gpt-5-mini',
+    'gpt-5-nano',
+    'gpt-4o-2024-11-20',
+    'gpt-4o-2024-08-06',
+    'gpt-4o-2024-05-13',
+    'gpt-4o-mini-2024-07-18',
+    'gpt-4o-mini',
+    'gpt-4-turbo-2024-04-09',
+    'gpt-4-turbo',
+    'gpt-4',
+    'gpt-3.5-turbo',
+    'o3-mini',
+    'o1-preview',
+    'o1-mini',
+  ];
 
   protected getDefaultBaseUrl(): string {
     return 'https://api.openai.com/v1';
@@ -91,16 +106,25 @@ export class OpenAIProvider extends BaseLLMProvider {
   }
 
   getPricing(model: string): { input: number; output: number } {
-    // OpenAI pricing per 1M tokens
+    // OpenAI pricing per 1M tokens (January 2025)
     const pricingMap: Record<string, { input: number; output: number }> = {
-      'gpt-4o': { input: 2.5, output: 10.0 },
+      'gpt-5-mini': { input: 0.25, output: 2.0 },
+      'gpt-5-nano': { input: 0.05, output: 0.4 },
+      'gpt-4o-2024-11-20': { input: 2.5, output: 10.0 },
+      'gpt-4o-2024-08-06': { input: 2.5, output: 10.0 },
+      'gpt-4o-2024-05-13': { input: 5.0, output: 15.0 },
+      'gpt-4o-mini-2024-07-18': { input: 0.15, output: 0.6 },
       'gpt-4o-mini': { input: 0.15, output: 0.6 },
+      'gpt-4-turbo-2024-04-09': { input: 10.0, output: 30.0 },
       'gpt-4-turbo': { input: 10.0, output: 30.0 },
       'gpt-4': { input: 30.0, output: 60.0 },
       'gpt-3.5-turbo': { input: 0.5, output: 1.5 },
+      'o3-mini': { input: 1.0, output: 4.0 },
+      'o1-preview': { input: 15.0, output: 60.0 },
+      'o1-mini': { input: 3.0, output: 12.0 },
     };
 
-    return pricingMap[model] ?? pricingMap['gpt-4o-mini']!;
+    return pricingMap[model] ?? { input: 0.25, output: 2.0 };
   }
 
   private mapFinishReason(reason: string): 'stop' | 'length' | 'content_filter' | 'error' {

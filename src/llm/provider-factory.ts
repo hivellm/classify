@@ -1,6 +1,10 @@
 import type { LLMProvider, LLMProviderConfig } from './types.js';
 import { DeepSeekProvider } from './providers/deepseek.js';
 import { OpenAIProvider } from './providers/openai.js';
+import { AnthropicProvider } from './providers/anthropic.js';
+import { GeminiProvider } from './providers/gemini.js';
+import { XAIProvider } from './providers/xai.js';
+import { GroqProvider } from './providers/groq.js';
 
 /**
  * Supported LLM provider names
@@ -20,11 +24,11 @@ export class ProviderFactory {
   ): LLMProvider {
     const defaultModels: Record<ProviderName, string> = {
       deepseek: 'deepseek-chat',
-      openai: 'gpt-4o-mini',
-      anthropic: 'claude-3-5-haiku-latest',
-      gemini: 'gemini-2.0-flash',
-      xai: 'grok-3-mini-latest',
-      groq: 'llama-3.1-8b-instant',
+      openai: 'gpt-5-mini',
+      anthropic: 'claude-3-5-haiku-20241022',
+      gemini: 'gemini-2.5-flash',
+      xai: 'grok-3',
+      groq: 'llama-3.3-70b-versatile',
     };
 
     const providerConfig: LLMProviderConfig = {
@@ -38,17 +42,13 @@ export class ProviderFactory {
       case 'openai':
         return new OpenAIProvider(providerConfig);
       case 'anthropic':
-        // TODO: Implement AnthropicProvider
-        throw new Error('Anthropic provider not yet implemented');
+        return new AnthropicProvider(providerConfig);
       case 'gemini':
-        // TODO: Implement GeminiProvider
-        throw new Error('Gemini provider not yet implemented');
+        return new GeminiProvider(providerConfig);
       case 'xai':
-        // TODO: Implement xAIProvider
-        throw new Error('xAI provider not yet implemented');
+        return new XAIProvider(providerConfig);
       case 'groq':
-        // TODO: Implement GroqProvider
-        throw new Error('Groq provider not yet implemented');
+        return new GroqProvider(providerConfig);
       default:
         throw new Error(`Unknown provider: ${provider}`);
     }
@@ -60,11 +60,11 @@ export class ProviderFactory {
   static getDefaultModel(provider: ProviderName): string {
     const defaults: Record<ProviderName, string> = {
       deepseek: 'deepseek-chat',
-      openai: 'gpt-4o-mini',
-      anthropic: 'claude-3-5-haiku-latest',
-      gemini: 'gemini-2.0-flash',
-      xai: 'grok-3-mini-latest',
-      groq: 'llama-3.1-8b-instant',
+      openai: 'gpt-5-mini',
+      anthropic: 'claude-3-5-haiku-20241022',
+      gemini: 'gemini-2.5-flash',
+      xai: 'grok-3',
+      groq: 'llama-3.3-70b-versatile',
     };
 
     return defaults[provider];

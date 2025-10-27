@@ -6,6 +6,10 @@
 export { BaseLLMProvider } from './base-provider.js';
 export { DeepSeekProvider } from './providers/deepseek.js';
 export { OpenAIProvider } from './providers/openai.js';
+export { AnthropicProvider } from './providers/anthropic.js';
+export { GeminiProvider } from './providers/gemini.js';
+export { XAIProvider } from './providers/xai.js';
+export { GroqProvider } from './providers/groq.js';
 export { ProviderFactory, type ProviderName } from './provider-factory.js';
 
 export type {
