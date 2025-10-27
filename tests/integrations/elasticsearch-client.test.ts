@@ -8,6 +8,29 @@ global.fetch = vi.fn();
 describe('ElasticsearchClient', () => {
   let client: ElasticsearchClient;
 
+  const mockResult: ClassifyResult = {
+    classification: {
+      template: 'legal',
+      confidence: 0.95,
+      domain: 'legal',
+      docType: 'contract',
+    },
+    graphStructure: {
+      cypher: 'CREATE (n:Document)',
+      entities: [],
+      relationships: [],
+    },
+    fulltextMetadata: {
+      keywords: ['contract', 'legal'],
+      summary: 'Legal contract document',
+      searchFields: { title: 'Contract' },
+    },
+    cacheInfo: {
+      cached: false,
+      cachedAt: Date.now(),
+    },
+  };
+
   beforeEach(() => {
     vi.clearAllMocks();
     client = new ElasticsearchClient({
@@ -23,7 +46,7 @@ describe('ElasticsearchClient', () => {
         ok: true,
         json: async () => ({ cluster_name: 'test', version: { number: '8.0.0' } }),
       } as Response);
-      
+
       // Mock index exists check
       vi.mocked(fetch).mockResolvedValueOnce({
         ok: true,
@@ -71,7 +94,7 @@ describe('ElasticsearchClient', () => {
         ok: true,
         json: async () => ({ cluster_name: 'test' }),
       } as Response);
-      
+
       // Mock index check
       vi.mocked(fetch).mockResolvedValueOnce({
         ok: true,
@@ -93,7 +116,7 @@ describe('ElasticsearchClient', () => {
         ok: true,
         json: async () => ({ cluster_name: 'test' }),
       } as Response);
-      
+
       // Mock index check
       vi.mocked(fetch).mockResolvedValueOnce({
         ok: true,
@@ -116,29 +139,6 @@ describe('ElasticsearchClient', () => {
   });
 
   describe('insertResult', () => {
-    const mockResult: ClassifyResult = {
-      classification: {
-        template: 'legal',
-        confidence: 0.95,
-        domain: 'legal',
-        docType: 'contract',
-      },
-      graphStructure: {
-        cypher: 'CREATE (n:Document)',
-        entities: [],
-        relationships: [],
-      },
-      fulltextMetadata: {
-        keywords: ['contract', 'legal'],
-        summary: 'Legal contract document',
-        searchFields: { title: 'Contract' },
-      },
-      cacheInfo: {
-        cached: false,
-        cachedAt: Date.now(),
-      },
-    };
-
     it('should insert document successfully', async () => {
       vi.mocked(fetch).mockResolvedValueOnce({
         ok: true,
@@ -150,7 +150,7 @@ describe('ElasticsearchClient', () => {
         expect.stringContaining('test-index/_doc'),
         expect.objectContaining({
           method: 'POST',
-        }),
+        })
       );
     });
 
@@ -164,7 +164,28 @@ describe('ElasticsearchClient', () => {
 
       await expect(client.insertResult(mockResult, 'test.pdf')).rejects.toThrow();
     });
+
+    it('should include fulltext metadata', async () => {
+      let capturedBody: any;
+      vi.mocked(fetch).mockImplementationOnce(async (url, options: any) => {
+        capturedBody = JSON.parse(options.body);
+        return {
+          ok: true,
+          json: async () => ({ result: 'created' }),
+        } as Response;
+      });
+
+      await client.insertResult(mockResult, 'test.pdf');
+
+      expect(capturedBody).toBeDefined();
+      expect(capturedBody.keywords).toEqual(['contract', 'legal']);
+      expect(capturedBody.summary).toBe('Legal contract document');
+    });
   });
 
+  describe('close', () => {
+    it('should close connection without errors', async () => {
+      await expect(client.close()).resolves.toBeUndefined();
+    });
+  });
 });
-

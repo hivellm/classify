@@ -33,7 +33,9 @@ describe('ignore-patterns', () => {
 
   describe('shouldIgnore', () => {
     it('should ignore node_modules', () => {
-      expect(shouldIgnore('project/node_modules/package/index.js', DEFAULT_IGNORE_PATTERNS)).toBe(true);
+      expect(shouldIgnore('project/node_modules/package/index.js', DEFAULT_IGNORE_PATTERNS)).toBe(
+        true
+      );
       expect(shouldIgnore('src/node_modules/test.js', DEFAULT_IGNORE_PATTERNS)).toBe(true);
     });
 
@@ -78,7 +80,7 @@ describe('ignore-patterns', () => {
       expect(shouldIgnore('project/.cache/file', DEFAULT_IGNORE_PATTERNS)).toBe(true);
       expect(shouldIgnore('__pycache__/module.pyc', DEFAULT_IGNORE_PATTERNS)).toBe(true);
     });
-    
+
     it('should ignore Python environments', () => {
       expect(shouldIgnore('venv/lib/python3.9', DEFAULT_IGNORE_PATTERNS)).toBe(true);
       expect(shouldIgnore('.venv/bin/activate', DEFAULT_IGNORE_PATTERNS)).toBe(true);
@@ -141,4 +143,3 @@ describe('ignore-patterns', () => {
     });
   });
 });
-

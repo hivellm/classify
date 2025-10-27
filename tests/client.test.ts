@@ -83,14 +83,26 @@ describe('ClassifyClient', () => {
   });
 
   describe('clearCache', () => {
-    it('should clear all cache when no age specified', async () => {
+    it('should clear all cache when no options specified', async () => {
       const cleared = await client.clearCache();
       expect(typeof cleared).toBe('number');
       expect(cleared).toBeGreaterThanOrEqual(0);
     });
 
-    it('should clear old cache entries', async () => {
-      const cleared = await client.clearCache(30);
+    it('should clear all cache with empty options', async () => {
+      const cleared = await client.clearCache({});
+      expect(typeof cleared).toBe('number');
+      expect(cleared).toBeGreaterThanOrEqual(0);
+    });
+
+    it('should clear old cache entries with olderThanDays option', async () => {
+      const cleared = await client.clearCache({ olderThanDays: 30 });
+      expect(typeof cleared).toBe('number');
+      expect(cleared).toBeGreaterThanOrEqual(0);
+    });
+
+    it('should clear very old cache entries', async () => {
+      const cleared = await client.clearCache({ olderThanDays: 365 });
       expect(typeof cleared).toBe('number');
       expect(cleared).toBeGreaterThanOrEqual(0);
     });

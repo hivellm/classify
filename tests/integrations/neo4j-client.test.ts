@@ -8,6 +8,29 @@ global.fetch = vi.fn();
 describe('Neo4jClient', () => {
   let client: Neo4jClient;
 
+  const mockResult: ClassifyResult = {
+    classification: {
+      template: 'legal',
+      confidence: 0.95,
+      domain: 'legal',
+      docType: 'contract',
+    },
+    graphStructure: {
+      cypher: 'CREATE (n:Document {name: "test"})',
+      entities: [{ type: 'Document', properties: { name: 'test' } }],
+      relationships: [],
+    },
+    fulltextMetadata: {
+      keywords: ['test'],
+      summary: 'test',
+      searchFields: {},
+    },
+    cacheInfo: {
+      cached: false,
+      cachedAt: Date.now(),
+    },
+  };
+
   beforeEach(() => {
     vi.clearAllMocks();
     client = new Neo4jClient({
@@ -32,7 +55,7 @@ describe('Neo4jClient', () => {
           headers: expect.objectContaining({
             Authorization: expect.stringContaining('Basic'),
           }),
-        }),
+        })
       );
     });
 
@@ -63,35 +86,12 @@ describe('Neo4jClient', () => {
       await customClient.initialize();
       expect(fetch).toHaveBeenCalledWith(
         'http://localhost:7474/db/mydb/tx/commit',
-        expect.any(Object),
+        expect.any(Object)
       );
     });
   });
 
   describe('insertResult', () => {
-    const mockResult: ClassifyResult = {
-      classification: {
-        template: 'legal',
-        confidence: 0.95,
-        domain: 'legal',
-        docType: 'contract',
-      },
-      graphStructure: {
-        cypher: 'CREATE (n:Document {name: "test"})',
-        entities: [{ type: 'Document', properties: { name: 'test' } }],
-        relationships: [],
-      },
-      fulltextMetadata: {
-        keywords: ['test'],
-        summary: 'test',
-        searchFields: {},
-      },
-      cacheInfo: {
-        cached: false,
-        cachedAt: Date.now(),
-      },
-    };
-
     it('should insert result successfully', async () => {
       vi.mocked(fetch).mockResolvedValueOnce({
         ok: true,
@@ -114,5 +114,9 @@ describe('Neo4jClient', () => {
     });
   });
 
+  describe('close', () => {
+    it('should close connection without errors', async () => {
+      await expect(client.close()).resolves.toBeUndefined();
+    });
+  });
 });
-

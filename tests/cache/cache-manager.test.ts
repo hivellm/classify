@@ -166,5 +166,133 @@ describe('CacheManager', () => {
       const check = await disabledManager.has('hash');
       expect(check).toBe(false);
     });
+
+    it('should return zero for clear when disabled', async () => {
+      const disabledManager = new CacheManager({ enabled: false });
+      const cleared = await disabledManager.clear();
+      expect(cleared).toBe(0);
+    });
+
+    it('should return zero for clearOlderThan when disabled', async () => {
+      const disabledManager = new CacheManager({ enabled: false });
+      const cleared = await disabledManager.clearOlderThan(30);
+      expect(cleared).toBe(0);
+    });
+
+    it('should return empty stats when disabled', async () => {
+      const disabledManager = new CacheManager({ enabled: false });
+      const stats = await disabledManager.getStats();
+      expect(stats.entryCount).toBe(0);
+      expect(stats.totalSizeBytes).toBe(0);
+      expect(stats.hits).toBe(0);
+      expect(stats.misses).toBe(0);
+    });
+  });
+
+  describe('clearOlderThan', () => {
+    it('should clear old cache entries', async () => {
+      const mockResult: ClassifyResult = {
+        classification: {
+          template: 'legal',
+          confidence: 0.95,
+          domain: 'legal',
+          docType: 'contract',
+        },
+        graphStructure: {
+          cypher: 'CREATE (doc:Document)',
+          entities: [],
+          relationships: [],
+        },
+        fulltextMetadata: {
+          keywords: [],
+          summary: '',
+          searchFields: {},
+        },
+        cacheInfo: {
+          cached: false,
+          cachedAt: Date.now(),
+        },
+      };
+
+      await cacheManager.set('recent', mockResult);
+
+      // Should not clear recent entries (0 days old)
+      const cleared = await cacheManager.clearOlderThan(365);
+      expect(cleared).toBe(0);
+
+      // Verify entry still exists
+      const exists = await cacheManager.has('recent');
+      expect(exists).toBe(true);
+    });
+  });
+
+  describe('cache statistics tracking', () => {
+    it('should track hits and misses', async () => {
+      const mockResult: ClassifyResult = {
+        classification: {
+          template: 'legal',
+          confidence: 0.95,
+          domain: 'legal',
+          docType: 'contract',
+        },
+        graphStructure: {
+          cypher: 'CREATE (doc:Document)',
+          entities: [],
+          relationships: [],
+        },
+        fulltextMetadata: {
+          keywords: [],
+          summary: '',
+          searchFields: {},
+        },
+        cacheInfo: {
+          cached: false,
+          cachedAt: Date.now(),
+        },
+      };
+
+      // Miss
+      await cacheManager.get('non-existent');
+
+      // Set and hit
+      await cacheManager.set('test', mockResult);
+      await cacheManager.get('test');
+
+      const stats = await cacheManager.getStats();
+      expect(stats.hits).toBeGreaterThan(0);
+      expect(stats.misses).toBeGreaterThan(0);
+    });
+
+    it('should count cache entries', async () => {
+      const mockResult: ClassifyResult = {
+        classification: {
+          template: 'legal',
+          confidence: 0.95,
+          domain: 'legal',
+          docType: 'contract',
+        },
+        graphStructure: {
+          cypher: 'CREATE (doc:Document)',
+          entities: [],
+          relationships: [],
+        },
+        fulltextMetadata: {
+          keywords: [],
+          summary: '',
+          searchFields: {},
+        },
+        cacheInfo: {
+          cached: false,
+          cachedAt: Date.now(),
+        },
+      };
+
+      await cacheManager.set('entry1', mockResult);
+      await cacheManager.set('entry2', mockResult);
+      await cacheManager.set('entry3', mockResult);
+
+      const stats = await cacheManager.getStats();
+      expect(stats.entryCount).toBeGreaterThanOrEqual(3);
+    });
   });
 });

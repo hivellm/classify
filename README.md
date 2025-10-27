@@ -450,18 +450,19 @@ npm run lint:fix
 npm run format
 ```
 
-**Test Coverage**: 100% on core modules
-- 67 tests across 10 test suites (100% passing)
-- LLM Providers: DeepSeek, OpenAI (15 tests)
-- Document Processing: Transmutation integration (8 tests)
-- Template System: Loader + Selector (9 tests)
-- Classification Pipeline: Complete (integrated)
-- Compression: Prompt optimization (8 tests)
-- Cache System: SHA256-based caching (8 tests)
-- Fulltext Generation: Keywords + Summary (integrated)
+**Test Coverage**: 77.57% overall (exceeds 75% threshold)
+- 144 tests across 21 test suites (99.3% passing, 1 skipped)
+- LLM Providers: DeepSeek, OpenAI, Anthropic, Gemini, xAI, Groq (27 tests)
+- Document Processing: Transmutation integration (8 tests, 100% coverage)
+- Template System: Loader + Selector (15 tests, 87% coverage)
+- Classification Pipeline: Complete (7 tests, 90% coverage)
+- Compression: Prompt optimization (8 tests, 100% coverage)
+- Cache System: SHA256-based caching (14 tests, 80% coverage)
+- Integrations: Neo4j + Elasticsearch (15 tests, 70% coverage)
+- Utils: Ignore patterns (21 tests, 100% coverage)
+- Client configuration (14 tests, 33% coverage)
 - CLI integration tests via execSync (7 tests)
 - Type system validation (5 tests)
-- Client configuration (7 tests)
 
 **CI/CD**: All tests run on Ubuntu, Windows, and macOS with Node.js 18.x, 20.x, and 22.x
 

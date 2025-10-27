@@ -22,6 +22,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - All CI/CD checks now passing (Build, Lint, Codespell, Tests)
 - Improved code quality with stricter ESLint compliance
+- Test coverage increased from 55.76% to 77.57% (39% improvement)
+
+### Added
+
+- **Comprehensive Test Suite**:
+  - Neo4j integration tests (6 tests, 90% coverage)
+  - Elasticsearch integration tests (9 tests, 60% coverage)
+  - Utility ignore-patterns tests (21 tests, 100% coverage)
+  - Client configuration tests (14 tests)
+  - Cache manager additional tests (14 total tests, 80% coverage)
+- Total tests increased from 88 to 144 (64% increase)
 
 ## [0.4.0] - 2025-10-27
 
