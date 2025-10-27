@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Cursor-Agent Provider**: Local LLM execution via cursor-agent CLI
+  - Zero cost alternative to API providers
+  - Privacy-focused local execution
+  - Stream parsing based on rulebook implementation
+  - 3 unit tests
+  - OpenSpec proposal and spec created
+
 ## [0.6.1] - 2025-01-27
 
 ### Fixed

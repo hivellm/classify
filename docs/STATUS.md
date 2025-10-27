@@ -1,12 +1,18 @@
 # Classify - Project Status
 
-**Version:** 0.6.0  
+**Version:** 0.6.1  
 **Last Updated:** 2025-01-27  
-**Status:** ⭐ Ultra Cost-Optimized + Project Analysis - TINY Templates Default (70-80% Savings) - Production Ready
+**Status:** ⭐ Ultra Cost-Optimized + Project Analysis + Cursor-Agent Support - TINY Templates Default (70-80% Savings) - Production Ready
 
 ## ✅ Current State
 
 ### 🚀 Major Updates
+
+#### v0.6.1: Cursor-Agent Provider + Test Fixes (Unreleased)
+- **Cursor-Agent Provider:** Local LLM execution via cursor-agent CLI (zero cost)
+- **Privacy-Focused:** No API keys needed for cursor-agent
+- **Test Suite Improvements:** All tests use mocked providers (no real API calls)
+- **OpenSpec Proposal:** Complete proposal, tasks, design, and spec
 
 #### v0.6.0: Project Mapping & Relationship Analysis
 - **GitIgnore Parser:** Full `.gitignore` support with cascading
