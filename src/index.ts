@@ -54,3 +54,10 @@ export {
 
 // Cache System
 export { CacheManager, type CacheStats } from './cache/index.js';
+
+// Batch Processing
+export {
+  BatchProcessor,
+  type BatchOptions,
+  type BatchResult,
+} from './batch/index.js';
