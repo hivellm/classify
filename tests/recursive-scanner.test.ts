@@ -11,7 +11,7 @@ describe('RecursiveScanner', () => {
   beforeEach(async () => {
     testDir = join(tmpdir(), `scanner-test-${Date.now()}`);
     await mkdir(testDir, { recursive: true });
-    scanner = new RecursiveScanner();
+    scanner = new RecursiveScanner({ useGitIgnore: false });
   });
 
   afterEach(async () => {
@@ -103,6 +103,7 @@ describe('RecursiveScanner', () => {
     it('should respect custom extensions', async () => {
       const customScanner = new RecursiveScanner({
         extensions: ['.custom', '.special'],
+        useGitIgnore: false,
       });
 
       await writeFile(join(testDir, 'file.custom'), 'x');
@@ -118,7 +119,7 @@ describe('RecursiveScanner', () => {
     });
 
     it('should exclude test files by default', async () => {
-      const scanner = new RecursiveScanner({ includeTests: false });
+      const scanner = new RecursiveScanner({ includeTests: false, useGitIgnore: false });
 
       await mkdir(join(testDir, 'src'), { recursive: true });
       await mkdir(join(testDir, 'tests'), { recursive: true });
@@ -135,7 +136,7 @@ describe('RecursiveScanner', () => {
     });
 
     it('should include test files when requested', async () => {
-      const scanner = new RecursiveScanner({ includeTests: true });
+      const scanner = new RecursiveScanner({ includeTests: true, useGitIgnore: false });
 
       await mkdir(join(testDir, 'tests'), { recursive: true });
       await writeFile(join(testDir, 'tests', 'app.test.ts'), 'x');
@@ -204,7 +205,7 @@ describe('RecursiveScanner', () => {
       await mkdir(join(testDir, 'tests'), { recursive: true });
       await writeFile(join(testDir, 'tests', 'app.test.ts'), 'x');
 
-      const scanner = new RecursiveScanner({ includeTests: true });
+      const scanner = new RecursiveScanner({ includeTests: true, useGitIgnore: false });
       const files = await scanner.scan(testDir);
 
       const testFile = files.find((f) => f.basename === 'app.test');
@@ -222,7 +223,7 @@ describe('RecursiveScanner', () => {
       await writeFile(join(testDir, 'package.json'), '{}');
       await writeFile(join(testDir, 'tests', 'test.ts'), 'x');
 
-      const scanner = new RecursiveScanner({ includeTests: true });
+      const scanner = new RecursiveScanner({ includeTests: true, useGitIgnore: false });
       const files = await scanner.scan(testDir);
 
       // Should be sorted: config, entry, module, test
@@ -246,7 +247,7 @@ describe('RecursiveScanner', () => {
       await writeFile(join(testDir, 'a', 'b', 'level2.ts'), 'x');
       await writeFile(join(testDir, 'a', 'b', 'c', 'level3.ts'), 'x');
 
-      const scanner = new RecursiveScanner({ maxDepth: 1 });
+      const scanner = new RecursiveScanner({ maxDepth: 1, useGitIgnore: false });
       const files = await scanner.scan(testDir);
 
       // Should include level0 and level1, but not level2 or level3
