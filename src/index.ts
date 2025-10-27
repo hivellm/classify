@@ -5,4 +5,3 @@
 
 export { ClassifyClient } from './client.js';
 export type { ClassifyOptions, ClassifyResult } from './types.js';
-

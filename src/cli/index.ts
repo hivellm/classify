@@ -14,7 +14,11 @@ program
 program
   .command('document <file>')
   .description('Classify a single document')
-  .option('-o, --output <type>', 'Output format (nexus-cypher, fulltext-metadata, combined)', 'combined')
+  .option(
+    '-o, --output <type>',
+    'Output format (nexus-cypher, fulltext-metadata, combined)',
+    'combined'
+  )
   .option('-m, --model <model>', 'LLM model to use', 'deepseek-chat')
   .option('--no-cache', 'Disable caching')
   .option('--no-compress', 'Disable prompt compression')
@@ -101,4 +105,3 @@ program
   });
 
 program.parse();
-

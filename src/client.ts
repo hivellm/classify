@@ -17,7 +17,7 @@ export class ClassifyClient {
       compressionEnabled: options.compressionEnabled ?? true,
       compressionRatio: options.compressionRatio ?? 0.5,
     };
-    
+
     // Validate API key if provided
     if (this.options.apiKey === '') {
       console.warn('Warning: No API key provided. Set DEEPSEEK_API_KEY or pass apiKey in options.');
@@ -34,4 +34,3 @@ export class ClassifyClient {
     throw new Error(`Not implemented yet. File: ${filePath}`);
   }
 }
-
