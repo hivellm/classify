@@ -1,0 +1,75 @@
+{
+  "name": "@hivellm/classify",
+  "version": "0.1.0",
+  "description": "Intelligent document classification for graph databases and full-text search using modern LLMs",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "classify": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "templates",
+    "schemas",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest --coverage",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "keywords": [
+    "classification",
+    "llm",
+    "document-analysis",
+    "graph-database",
+    "fulltext-search",
+    "neo4j",
+    "nexus",
+    "elasticsearch",
+    "typescript",
+    "cli"
+  ],
+  "author": "HiveLLM Development Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hivellm/classify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hivellm/classify/issues"
+  },
+  "homepage": "https://github.com/hivellm/classify#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.12",
+    "@typescript-eslint/eslint-plugin": "^8.20.0",
+    "@typescript-eslint/parser": "^8.20.0",
+    "@vitest/coverage-v8": "^2.1.9",
+    "eslint": "^9.19.0",
+    "prettier": "^3.4.2",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.9"
+  },
+  "dependencies": {
+    "commander": "^14.0.2"
+  }
+}
