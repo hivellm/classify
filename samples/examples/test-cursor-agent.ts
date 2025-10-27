@@ -38,8 +38,8 @@ async function testCursorAgent() {
   // Create project mapper
   const mapper = new ProjectMapper(client);
 
-  // Test with vectorizer project (3 levels up from samples/examples)
-  const vectorizerPath = path.join(__dirname, '../../../vectorizer');
+  // Test with vectorizer project (use relative path for WSL compatibility)
+  const vectorizerPath = path.join(process.cwd(), '../vectorizer');
 
   console.log(`📁 Scanning: ${vectorizerPath}`);
   console.log('⏳ This may take 10-30 minutes with cursor-agent...\n');

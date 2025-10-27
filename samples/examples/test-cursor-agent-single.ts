@@ -14,8 +14,8 @@ async function testSingle() {
 
   console.log('✅ Client created\n');
 
-  // Test with a simple markdown file
-  const testFile = 'F:\\Node\\hivellm\\classify\\README.md';
+  // Test with a simple markdown file (use WSL path or relative path)
+  const testFile = './README.md';
 
   console.log(`📄 Classifying: ${testFile}\n`);
   console.log('⏳ Waiting for cursor-agent response...\n');
