@@ -7,6 +7,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.0] - 2025-01-27
+
+### Added
+- **GitIgnore Parser**: Full `.gitignore` support with cascading from parent directories
+  - Pattern matching for glob patterns, negations, comments
+  - Windows and Unix path support
+  - 16 comprehensive unit tests
+- **Relationship Builder**: Import/dependency analysis for multiple languages
+  - TypeScript/JavaScript: ES6 imports, require(), dynamic imports, export from
+  - Python: import and from...import statements
+  - Rust: use and mod statements
+  - Java: import and static import
+  - Go: single and block import statements
+  - 17 comprehensive unit tests
+- **Dependency Graph Analysis**:
+  - Build file-to-file dependency graph
+  - Detect circular dependencies
+  - Filter external vs internal imports
+- **Enhanced ProjectMapper**:
+  - `useGitIgnore` option (default: true)
+  - `buildRelationships` option (default: true)
+  - `FileRelationship[]` in results
+  - `circularDependencies` detection
+  - `totalImports` in statistics
+  - Import relationships in generated Cypher
+- **New Exports**:
+  - `GitIgnoreParser` class
+  - `GitIgnorePattern` interface
+  - `RelationshipBuilder` class
+  - `FileRelationship` interface
+
+### Changed
+- ProjectMapper now includes import relationships in Cypher output
+- Project node creation includes file relationships via `[:IMPORTS]` edges
+
+### Fixed
+- Path normalization for Windows compatibility in relationship analysis
+
 ## [0.5.0] - 2025-10-27
 
 ### Added - MAJOR COST OPTIMIZATION UPDATE ⭐

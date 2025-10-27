@@ -56,6 +56,8 @@ export {
   shouldIgnore,
 } from './utils/ignore-patterns.js';
 
+export { GitIgnoreParser, type GitIgnorePattern } from './utils/gitignore-parser.js';
+
 // Integrations
 export {
   Neo4jClient,
@@ -68,6 +70,8 @@ export {
 export {
   ProjectDetector,
   ProjectMapper,
+  RelationshipBuilder,
   type ProjectInfo,
   type ProjectMapResult,
+  type FileRelationship,
 } from './project/index.js';

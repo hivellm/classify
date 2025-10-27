@@ -2,11 +2,11 @@
 
 ## 1. Directory Scanner ⏳ PENDING
 
-### 1.1 GitIgnore Parser
-- [ ] Parse .gitignore files in project root
-- [ ] Support .gitignore syntax (glob patterns, negations, comments)
-- [ ] Cascade .gitignore from parent directories
-- [ ] Test with various .gitignore patterns
+### 1.1 GitIgnore Parser ✅ COMPLETED (v0.6.0)
+- [x] Parse .gitignore files in project root
+- [x] Support .gitignore syntax (glob patterns, negations, comments)
+- [x] Cascade .gitignore from parent directories
+- [x] Test with various .gitignore patterns
 
 ### 1.2 Smart File Filter ✅ COMPLETED (v0.4.0)
 - [x] Create default ignore list (node_modules, target, dist, build, coverage, .git, etc)
@@ -43,12 +43,13 @@
 - [x] Progress reporting per file
 - [x] Aggregate results
 
-### 2.3 Relationship Builder
-- [ ] Parse import statements (TypeScript, JavaScript)
-- [ ] Parse import statements (Python)
-- [ ] Parse use/mod statements (Rust)
-- [ ] Build file-to-file relationship graph
-- [ ] Detect circular dependencies
+### 2.3 Relationship Builder ✅ COMPLETED (v0.6.0)
+- [x] Parse import statements (TypeScript, JavaScript)
+- [x] Parse import statements (Python)
+- [x] Parse use/mod statements (Rust)
+- [x] Parse import statements (Java, Go)
+- [x] Build file-to-file relationship graph
+- [x] Detect circular dependencies
 
 ### 2.4 Project-Level Aggregation ✅ COMPLETED (v0.5.0)
 - [x] Aggregate entities across all files
@@ -72,11 +73,11 @@
 
 ## 4. Testing ⏳ PENDING
 
-### 4.1 Unit Tests
-- [ ] Test .gitignore parsing
-- [ ] Test file filtering
-- [ ] Test project detection
-- [ ] Test relationship extraction
+### 4.1 Unit Tests ✅ COMPLETED (v0.6.0)
+- [x] Test .gitignore parsing (16 tests)
+- [x] Test file filtering
+- [x] Test project detection
+- [x] Test relationship extraction (17 tests)
 
 ### 4.2 Integration Tests
 - [ ] Test with real TypeScript project (classify itself)
@@ -129,12 +130,17 @@
 - **Real-world validation** (71% cost savings, 72% search overlap) ✅ v0.5.0
 - **Comparison tooling** (scripts for template validation) ✅ v0.5.0
 
+**✅ v0.6.0 Additions:**
+- GitIgnore parser with cascading support
+- Relationship builder for TS/JS/Python/Rust/Java/Go
+- File-to-file dependency graph
+- Circular dependency detection
+- 33 additional unit tests (all passing)
+
 **⏳ Remaining:**
-- GitIgnore parser integration
-- Project structure auto-detection
-- Import statement parsing for relationships
 - Dedicated `map-project` CLI command
-- Relationship builder (file-to-file graph)
+- Integration tests with real projects
+- Performance benchmarks
 
 ---
 

@@ -2,8 +2,8 @@
 
 > Intelligent document classification for graph databases and full-text search using modern LLMs
 
-**Version:** 0.5.0 (Cost-Optimized)  
-**Status:** ⭐ Ultra Cost-Optimized - TINY Templates Default (70-80% Savings) - Production Ready ✅
+**Version:** 0.6.0 (Project Mapping)  
+**Status:** ⭐ Ultra Cost-Optimized + Project Analysis - TINY Templates Default (70-80% Savings) - Production Ready ✅
 
 ## Overview
 
@@ -24,6 +24,9 @@ Classify is a TypeScript-based CLI tool that automatically classifies documents 
 - ✅ **Incremental Indexing**: Send to databases progressively during processing
 - ✅ **Multi-Language Support**: Ignore patterns for 10+ programming languages
 - ✅ **Semantic Search**: Find code by meaning, not just text matching
+- 🆕 **Project Mapping**: Analyze entire codebases with relationship graphs
+- 🆕 **GitIgnore Support**: Respects .gitignore patterns (cascading)
+- 🆕 **Dependency Analysis**: Detects imports and circular dependencies (TS/JS/Python/Rust/Java/Go)
 
 ## Quick Start
 
@@ -223,6 +226,53 @@ cat result.json | jq '.fulltext_metadata' | \
 cat result.json | jq '.fulltext_metadata' | \
   curl -X POST http://localhost:9200/documents/_doc -d @-
 ```
+
+## Project Mapping 🆕 v0.6.0
+
+Map entire codebases with file relationship analysis and gitignore support:
+
+```typescript
+import { ProjectMapper, ClassifyClient } from '@hivellm/classify';
+
+const client = new ClassifyClient({
+  provider: 'deepseek',
+  model: 'deepseek-chat',
+});
+
+const mapper = new ProjectMapper(client);
+
+const result = await mapper.mapProject('./my-project', {
+  concurrency: 20,              // Process 20 files in parallel
+  includeTests: false,          // Skip test files
+  useGitIgnore: true,           // Respect .gitignore patterns
+  buildRelationships: true,     // Analyze import/dependency graph
+  onProgress: (current, total, file) => {
+    console.log(`[${current}/${total}] ${file}`);
+  },
+});
+
+console.log(`
+  📊 Project Analysis:
+  - Files: ${result.statistics.totalFiles}
+  - Entities: ${result.statistics.totalEntities}
+  - Imports: ${result.statistics.totalImports}
+  - Circular Dependencies: ${result.circularDependencies.length}
+  - Cost: $${result.statistics.totalCost.toFixed(4)}
+`);
+
+// Export to Neo4j
+fs.writeFileSync('project-map.cypher', result.projectCypher);
+```
+
+### Features
+
+- **GitIgnore Support**: Automatically respects `.gitignore` patterns (cascading)
+- **Relationship Analysis**: Parses imports for TypeScript, JavaScript, Python, Rust, Java, Go
+- **Circular Dependencies**: Detects and reports circular import chains
+- **Multi-Language**: Smart filtering for 10+ programming languages
+- **Parallel Processing**: Up to 20 concurrent file classifications
+- **Incremental Progress**: Real-time progress callbacks
+- **Neo4j Export**: Generates unified Cypher with file relationships
 
 ## Documentation
 
