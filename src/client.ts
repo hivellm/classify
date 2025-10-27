@@ -42,16 +42,20 @@ export class ClassifyClient {
       compressionRatio: options.compressionRatio ?? 0.5,
     };
 
-    // Validate API key if provided
-    if (this.options.apiKey === '') {
+    // Validate API key if provided (unless using cursor-agent)
+    if (this.options.apiKey === '' && this.options.provider !== 'cursor-agent') {
       console.warn('Warning: No API key provided. Set DEEPSEEK_API_KEY or pass apiKey in options.');
     }
 
     // Initialize components
     this.documentProcessor = new DocumentProcessor();
     this.templateLoader = new TemplateLoader();
+    
+    // cursor-agent doesn't need API key, others do
+    const apiKey = this.options.provider === 'cursor-agent' ? 'not-needed' : this.options.apiKey;
+    
     this.llmProvider = ProviderFactory.create(this.options.provider, {
-      apiKey: this.options.apiKey,
+      apiKey,
       model: this.options.model,
     });
     this.templateSelector = new TemplateSelector(this.llmProvider, this.templateLoader, {

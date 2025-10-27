@@ -42,15 +42,20 @@ describe('ClassifyClient', () => {
       expect(envClient).toBeDefined();
     });
 
-    it('should warn when no API key provided', () => {
+    it('should warn when no API key provided for API providers', () => {
       const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
       // Create client with empty API key (will throw due to provider requirement)
       expect(() => {
-        new ClassifyClient({ apiKey: '' });
+        new ClassifyClient({ apiKey: '', provider: 'deepseek' });
       }).toThrow('API key required');
 
       consoleSpy.mockRestore();
+    });
+
+    it('should not require API key for cursor-agent', () => {
+      const client = new ClassifyClient({ provider: 'cursor-agent' });
+      expect(client).toBeDefined();
     });
 
     it('should accept custom cache directory', () => {

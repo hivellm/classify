@@ -5,11 +5,19 @@ import { AnthropicProvider } from './providers/anthropic.js';
 import { GeminiProvider } from './providers/gemini.js';
 import { XAIProvider } from './providers/xai.js';
 import { GroqProvider } from './providers/groq.js';
+import { CursorAgentProvider } from './providers/cursor-agent.js';
 
 /**
  * Supported LLM provider names
  */
-export type ProviderName = 'deepseek' | 'openai' | 'anthropic' | 'gemini' | 'xai' | 'groq';
+export type ProviderName =
+  | 'deepseek'
+  | 'openai'
+  | 'anthropic'
+  | 'gemini'
+  | 'xai'
+  | 'groq'
+  | 'cursor-agent';
 
 /**
  * Factory for creating LLM providers
@@ -29,6 +37,7 @@ export class ProviderFactory {
       gemini: 'gemini-2.5-flash',
       xai: 'grok-3',
       groq: 'llama-3.3-70b-versatile',
+      'cursor-agent': 'cursor-agent',
     };
 
     const providerConfig: LLMProviderConfig = {
@@ -49,6 +58,8 @@ export class ProviderFactory {
         return new XAIProvider(providerConfig);
       case 'groq':
         return new GroqProvider(providerConfig);
+      case 'cursor-agent':
+        return new CursorAgentProvider(providerConfig);
       default:
         throw new Error(`Unknown provider: ${provider}`);
     }
@@ -65,6 +76,7 @@ export class ProviderFactory {
       gemini: 'gemini-2.5-flash',
       xai: 'grok-3',
       groq: 'llama-3.3-70b-versatile',
+      'cursor-agent': 'cursor-agent',
     };
 
     return defaults[provider];
@@ -81,6 +93,7 @@ export class ProviderFactory {
       gemini: 'GEMINI_API_KEY',
       xai: 'XAI_API_KEY',
       groq: 'GROQ_API_KEY',
+      'cursor-agent': '', // No API key needed
     };
 
     return envVars[provider];

@@ -10,6 +10,7 @@ export { AnthropicProvider } from './providers/anthropic.js';
 export { GeminiProvider } from './providers/gemini.js';
 export { XAIProvider } from './providers/xai.js';
 export { GroqProvider } from './providers/groq.js';
+export { CursorAgentProvider } from './providers/cursor-agent.js';
 export { ProviderFactory, type ProviderName } from './provider-factory.js';
 
 export type {

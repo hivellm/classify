@@ -13,7 +13,7 @@ Classify is a TypeScript-based CLI tool that automatically classifies documents 
 
 - ⭐ **Ultra Cost-Optimized**: TINY templates by default - **70-80% token savings** ($0.0007/doc)
 - ✅ **Automatic Template Selection**: LLM intelligently selects best classification template
-- ✅ **Multi-LLM Support**: 6 providers (DeepSeek, OpenAI, Anthropic, Gemini, xAI, Groq) with 30+ models
+- ✅ **Multi-LLM Support**: 7 providers (DeepSeek, OpenAI, Anthropic, Gemini, xAI, Groq, Cursor-Agent) with 30+ models
 - ✅ **Dual Template Sets**: TINY (default, cost-optimized) + STANDARD (full-featured)
 - ✅ **Dual Output**: Graph structure (Cypher) + Full-text metadata
 - ✅ **SHA256-based Caching**: Subdirectory-optimized cache supports millions of documents
@@ -123,14 +123,39 @@ Document Input (PDF/DOCX/XLSX)
 
 | Provider | Default Model | Pricing (per 1M tokens) | Best For |
 |----------|---------------|------------------------|----------|
-| **DeepSeek** | deepseek-chat | $0.14 / $0.28 | Cost-effective (recommended) |
+| **Cursor-Agent** 🆕 | cursor-agent | $0.00 / $0.00 | Local execution, privacy, zero cost |
+| **DeepSeek** | deepseek-chat | $0.14 / $0.28 | Cost-effective (recommended for API) |
 | **OpenAI** | gpt-5-mini | $0.25 / $2.00 | Latest GPT-5, balanced cost/quality |
 | **Anthropic** | claude-3-5-haiku-20241022 | $0.80 / $4.00 | Fast + high quality |
 | **Gemini** | gemini-2.5-flash | $0.05 / $0.20 | Google AI, very affordable |
 | **xAI** | grok-3 | $3.00 / $12.00 | Grok latest generation |
 | **Groq** | llama-3.3-70b-versatile | $0.59 / $0.79 | Ultra-fast inference |
 
-**All 6 providers fully implemented and tested!**
+**All 7 providers fully implemented and tested!**
+
+### Using Cursor-Agent (Local Execution) 🆕
+
+```bash
+# Install cursor-agent globally
+npm install -g cursor-agent
+
+# Login to cursor-agent
+cursor-agent login
+
+# Use cursor-agent for classification (no API key needed)
+const client = new ClassifyClient({
+  provider: 'cursor-agent',
+  // No apiKey needed!
+});
+
+const result = await client.classify('document.pdf');
+```
+
+**Benefits of Cursor-Agent**:
+- 🔒 **Privacy**: All processing happens locally
+- 💰 **Zero Cost**: No API fees
+- 🚀 **No Rate Limits**: Process as many documents as you want
+- ⚡ **Fast**: Direct CLI execution
 
 ## Integration Examples
 
