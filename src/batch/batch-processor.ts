@@ -264,7 +264,7 @@ export class BatchProcessor {
 
       // Show batch stats
       const batchSuccess = batchResults.filter(r => r.success).length;
-      const batchCached = batchResults.filter(r => r.success && 'result' in r && r.result && r.result.cacheInfo.cached).length;
+      const batchCached = batchResults.filter(r => r.success && 'result' in r && r.result?.cacheInfo.cached).length;
       console.log(`   ✅ ${batchSuccess}/${batch.length} classified | 📦 ${batchCached} from cache`);
 
       // Call incremental callback if provided

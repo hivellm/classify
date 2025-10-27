@@ -96,9 +96,15 @@ async function main() {
   ];
 
   const files: string[] = [];
+  const ignorePatterns = (DEFAULT_IGNORE_PATTERNS as unknown as string[])
+    .filter(p => !p.includes('samples')); // Don't ignore samples when classifying samples!
+  
   for (const pattern of patterns) {
     const matches = await glob(join(SAMPLES_DIR, pattern), {
-      ignore: DEFAULT_IGNORE_PATTERNS as unknown as string[],
+      ignore: [
+        ...ignorePatterns,
+        '**/results/**',  // Don't classify our own results
+      ],
     });
     files.push(...matches);
   }

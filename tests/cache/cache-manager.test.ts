@@ -101,14 +101,45 @@ describe('CacheManager', () => {
   describe('clear', () => {
     it('should clear all cache entries', async () => {
       // Add some entries
-      await cacheManager.set('hash1', {} as ClassifyResult);
-      await cacheManager.set('hash2', {} as ClassifyResult);
+      const mockResult: ClassifyResult = {
+        classification: {
+          template: 'legal',
+          confidence: 0.95,
+          domain: 'legal',
+          docType: 'contract',
+        },
+        graphStructure: {
+          cypher: 'CREATE (doc:Document)',
+          entities: [],
+          relationships: [],
+        },
+        fulltextMetadata: {
+          keywords: [],
+          summary: '',
+          searchFields: {},
+        },
+        cacheInfo: {
+          cached: false,
+          cachedAt: Date.now(),
+        },
+      };
+      
+      await cacheManager.set('hash1', mockResult);
+      await cacheManager.set('hash2', mockResult);
+
+      // Verify entries were created
+      const has1 = await cacheManager.has('hash1');
+      const has2 = await cacheManager.has('hash2');
+      expect(has1).toBe(true);
+      expect(has2).toBe(true);
 
       const cleared = await cacheManager.clear();
-      expect(cleared).toBeGreaterThanOrEqual(2); // May have more from previous runs
+      expect(cleared).toBe(2);
 
-      const exists = await cacheManager.has('hash1');
-      expect(exists).toBe(false);
+      const exists1 = await cacheManager.has('hash1');
+      const exists2 = await cacheManager.has('hash2');
+      expect(exists1).toBe(false);
+      expect(exists2).toBe(false);
     });
   });
 

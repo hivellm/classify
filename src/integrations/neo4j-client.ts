@@ -26,7 +26,7 @@ export class Neo4jClient {
   async initialize(): Promise<void> {
     try {
       // Try to get server info to test connection
-      const database = this.config.database || 'neo4j';
+      const database = this.config.database ?? 'neo4j';
       const response = await fetch(`${this.config.url}/db/${database}/tx/commit`, {
         method: 'POST',
         headers: {
@@ -58,7 +58,7 @@ export class Neo4jClient {
    * Execute Cypher query via REST API
    */
   private async executeCypher(cypher: string): Promise<any> {
-    const database = this.config.database || 'neo4j';
+    const database = this.config.database ?? 'neo4j';
     const response = await fetch(`${this.config.url}/db/${database}/tx/commit`, {
       method: 'POST',
       headers: {

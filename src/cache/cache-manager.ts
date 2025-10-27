@@ -152,14 +152,28 @@ export class CacheManager {
     if (!this.enabled) return 0;
 
     try {
-      const files = await readdir(this.cacheDir);
-      const cacheFiles = files.filter((f) => f.endsWith('.json'));
+      let cleared = 0;
+      const entries = await readdir(this.cacheDir, { withFileTypes: true });
 
-      for (const file of cacheFiles) {
-        await unlink(join(this.cacheDir, file));
+      for (const entry of entries) {
+        if (entry.isDirectory()) {
+          // Read subdirectory
+          const subdirPath = join(this.cacheDir, entry.name);
+          const files = await readdir(subdirPath);
+          const cacheFiles = files.filter((f) => f.endsWith('.json'));
+
+          for (const file of cacheFiles) {
+            await unlink(join(subdirPath, file));
+            cleared++;
+          }
+        } else if (entry.name.endsWith('.json')) {
+          // Handle files in root directory (legacy)
+          await unlink(join(this.cacheDir, entry.name));
+          cleared++;
+        }
       }
 
-      return cacheFiles.length;
+      return cleared;
     } catch (error) {
       console.warn(`Failed to clear cache: ${error}`);
       return 0;
@@ -176,17 +190,35 @@ export class CacheManager {
     let cleared = 0;
 
     try {
-      const files = await readdir(this.cacheDir);
-      const cacheFiles = files.filter((f) => f.endsWith('.json'));
+      const entries = await readdir(this.cacheDir, { withFileTypes: true });
 
-      for (const file of cacheFiles) {
-        const filePath = join(this.cacheDir, file);
-        const content = await readFile(filePath, 'utf-8');
-        const entry: CacheEntry = JSON.parse(content);
+      for (const entry of entries) {
+        if (entry.isDirectory()) {
+          // Read subdirectory
+          const subdirPath = join(this.cacheDir, entry.name);
+          const files = await readdir(subdirPath);
+          const cacheFiles = files.filter((f) => f.endsWith('.json'));
 
-        if (entry.cachedAt < cutoffTime) {
-          await unlink(filePath);
-          cleared++;
+          for (const file of cacheFiles) {
+            const filePath = join(subdirPath, file);
+            const content = await readFile(filePath, 'utf-8');
+            const cacheEntry: CacheEntry = JSON.parse(content);
+
+            if (cacheEntry.cachedAt < cutoffTime) {
+              await unlink(filePath);
+              cleared++;
+            }
+          }
+        } else if (entry.name.endsWith('.json')) {
+          // Handle files in root directory (legacy)
+          const filePath = join(this.cacheDir, entry.name);
+          const content = await readFile(filePath, 'utf-8');
+          const cacheEntry: CacheEntry = JSON.parse(content);
+
+          if (cacheEntry.cachedAt < cutoffTime) {
+            await unlink(filePath);
+            cleared++;
+          }
         }
       }
 

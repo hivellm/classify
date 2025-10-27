@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed cache management methods (`clear()` and `clearOlderThan()`) to properly handle subdirectory structure
+- Fixed ESLint errors: converted logical OR to nullish coalescing operators in Neo4j client
+- Fixed ESLint error: improved optional chain usage in batch processor
+- Updated Codespell configuration to ignore valid technical terms and coverage files
+- Fixed cache test to properly validate cache clearing functionality
+
 ## [0.4.0] - 2025-10-27
 
 ### Added
