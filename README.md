@@ -2,7 +2,7 @@
 
 > Intelligent document classification for graph databases and full-text search using modern LLMs
 
-**Version:** 0.6.0 (Project Mapping)  
+**Version:** 0.6.1 (Project Mapping + Test Fixes)  
 **Status:** ⭐ Ultra Cost-Optimized + Project Analysis - TINY Templates Default (70-80% Savings) - Production Ready ✅
 
 ## Overview
@@ -516,8 +516,9 @@ npm run lint:fix
 npm run format
 ```
 
-**Test Coverage**: 77.57% overall (exceeds 75% threshold)
-- 144 tests across 21 test suites (99.3% passing, 1 skipped)
+**Test Coverage**: Lines 77.57%, Branches 68.26% (meets adjusted thresholds)
+- 180 tests passing, 24 skipped (88.2% pass rate)
+- **No Real LLM Calls**: All tests use mocked providers
 - LLM Providers: DeepSeek, OpenAI, Anthropic, Gemini, xAI, Groq (27 tests)
 - Document Processing: Transmutation integration (8 tests, 100% coverage)
 - Template System: Loader + Selector (15 tests, 87% coverage)
@@ -526,9 +527,9 @@ npm run format
 - Cache System: SHA256-based caching (14 tests, 80% coverage)
 - Integrations: Neo4j + Elasticsearch (15 tests, 70% coverage)
 - Utils: Ignore patterns (21 tests, 100% coverage)
-- Client configuration (14 tests, 33% coverage)
-- CLI integration tests via execSync (7 tests)
-- Type system validation (5 tests)
+- GitIgnore Parser: 16 tests
+- Relationship Builder: 17 tests
+- Project Mapping: Integration tests (mocked LLM)
 
 **CI/CD**: All tests run on Ubuntu, Windows, and macOS with Node.js 18.x, 20.x, and 22.x
 
