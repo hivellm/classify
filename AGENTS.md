@@ -231,6 +231,9 @@ describe('myFunction', () => {
 - **Default**: npm (most compatible, built-in)
 - **Alternative**: pnpm (fast, disk-efficient) or yarn
 - **Lockfile**: Always commit lockfile (`package-lock.json`, `pnpm-lock.yaml`, or `yarn.lock`)
+  - **IMPORTANT**: GitHub Actions `setup-node` with `cache: 'npm'` requires lockfile to be committed
+  - Without lockfile: CI/CD fails with "Dependencies lock file is not found"
+  - Solution: Commit `package-lock.json` and use `npm ci` in workflows
 - **Workspaces**: Use for monorepos
 - **CI/CD**: Update GitHub Actions workflows to match your package manager (see workflow comments)
 
