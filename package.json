@@ -30,7 +30,7 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "test": "vitest --run",
     "test:watch": "vitest",
-    "test:coverage": "vitest --coverage",
+    "test:coverage": "vitest --coverage --run",
     "prepublishOnly": "npm run build && npm test"
   },
   "keywords": [
