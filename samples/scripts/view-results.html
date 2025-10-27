@@ -165,8 +165,8 @@
     </div>
 
     <script>
-        // Load summary.json from test-results/
-        fetch('../test-results/summary.json')
+        // Load summary.json from tests/test-results/
+        fetch('../../tests/test-results/summary.json')
             .then(r => r.json())
             .then(data => {
                 // Update summary stats
@@ -208,7 +208,7 @@
 
         function showDetails(filename) {
             const resultFile = filename.replace('.md', '-result.json');
-            fetch(`../test-results/${resultFile}`)
+            fetch(`../../tests/test-results/${resultFile}`)
                 .then(r => r.json())
                 .then(data => {
                     const detailsContent = document.getElementById('detailsContent');

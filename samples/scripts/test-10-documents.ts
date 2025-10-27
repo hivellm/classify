@@ -485,8 +485,8 @@ async function main() {
   console.log('🚀 Starting classification test with 10 documents...\n');
 
   // Create directories
-  const testDir = join(process.cwd(), 'test-documents');
-  const resultsDir = join(process.cwd(), 'test-results');
+  const testDir = join(process.cwd(), 'tests', 'test-documents');
+  const resultsDir = join(process.cwd(), 'tests', 'test-results');
   await mkdir(testDir, { recursive: true });
   await mkdir(resultsDir, { recursive: true });
 

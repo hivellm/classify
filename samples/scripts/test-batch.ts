@@ -20,7 +20,7 @@ async function main() {
   // Create batch processor
   const batchProcessor = new BatchProcessor(client);
 
-  console.log('📦 Processing test-documents/ directory\n');
+  console.log('📦 Processing tests/test-documents/ directory\n');
   console.log('Expected behavior:');
   console.log('  - First run: All 10 documents classified (COLD)');
   console.log('  - If run again: All from cache (WARM)\n');
@@ -28,7 +28,7 @@ async function main() {
   console.log('');
 
   // Process directory
-  const result = await batchProcessor.processDirectory('./test-documents', {
+  const result = await batchProcessor.processDirectory('./tests/test-documents', {
     recursive: false,
     concurrency: 3, // Process 3 at a time
     extensions: ['md'],

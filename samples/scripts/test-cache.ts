@@ -10,7 +10,7 @@ async function main() {
   console.log('🧪 Testing Cache Functionality\n');
 
   // Create test document
-  const testDir = join(process.cwd(), 'test-documents');
+  const testDir = join(process.cwd(), 'tests', 'test-documents');
   await mkdir(testDir, { recursive: true });
 
   const testFile = join(testDir, 'cache-test-contract.md');

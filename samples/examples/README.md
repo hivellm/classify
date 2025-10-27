@@ -21,7 +21,7 @@ export DEEPSEEK_API_KEY=sk-your-key-here
 Convert a document to Markdown and then classify it.
 
 ```bash
-npx tsx examples/convert-and-classify.ts path/to/document.pdf
+npx tsx samples/examples/convert-and-classify.ts path/to/document.pdf
 ```
 
 **What it does:**
@@ -35,7 +35,7 @@ npx tsx examples/convert-and-classify.ts path/to/document.pdf
 Process an entire directory of documents.
 
 ```bash
-npx tsx examples/batch-convert-classify.ts path/to/documents
+npx tsx samples/examples/batch-convert-classify.ts path/to/documents
 ```
 
 **What it does:**
@@ -84,6 +84,6 @@ console.log(result.classification.doc_type); // e.g., "contract"
 
 ## See Also
 
-- [Classify README](../README.md)
-- [Transmutation Lite README](../../transmutation-lite/README.md)
+- [Classify README](../../README.md)
+- [Transmutation Lite README](../../../transmutation-lite/README.md)
 
