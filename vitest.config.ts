@@ -10,10 +10,12 @@ export default defineConfig({
       exclude: [
         'node_modules/',
         'dist/',
+        'tests/',
         '**/*.config.ts',
         '**/*.test.ts',
         '**/types.ts',
       ],
+      include: ['src/**/*.ts'],
       thresholds: {
         lines: 80,
         functions: 80,
@@ -21,7 +23,7 @@ export default defineConfig({
         statements: 80,
       },
     },
-    include: ['src/**/*.test.ts'],
+    include: ['tests/**/*.test.ts'],
     exclude: ['node_modules', 'dist'],
   },
 });

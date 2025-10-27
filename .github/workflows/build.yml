@@ -1,0 +1,58 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Check dist folder
+        run: |
+          if [ ! -f dist/index.js ]; then
+            echo "Build failed: dist/index.js not found"
+            exit 1
+          fi
+          if [ ! -f dist/cli.js ]; then
+            echo "Build failed: dist/cli.js not found"
+            exit 1
+          fi
+          if [ ! -f dist/index.d.ts ]; then
+            echo "Build failed: dist/index.d.ts not found"
+            exit 1
+          fi
+          echo "Build successful!"
+
+      - name: Test CLI
+        run: |
+          node dist/cli.js --version
+          node dist/cli.js --help
+          node dist/cli.js list-templates
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 7
+
