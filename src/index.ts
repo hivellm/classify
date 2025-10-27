@@ -55,3 +55,11 @@ export {
   mergeIgnorePatterns,
   shouldIgnore,
 } from './utils/ignore-patterns.js';
+
+// Integrations
+export {
+  Neo4jClient,
+  ElasticsearchClient,
+  type Neo4jConfig,
+  type ElasticsearchConfig,
+} from './integrations/index.js';

@@ -7,7 +7,13 @@
 import { config } from 'dotenv';
 config(); // Load .env
 
-import { ClassifyClient, DEFAULT_IGNORE_PATTERNS, type ClassifyResult } from '../../src/index.js';
+import {
+  ClassifyClient,
+  DEFAULT_IGNORE_PATTERNS,
+  Neo4jClient,
+  ElasticsearchClient,
+  type ClassifyResult,
+} from '../../src/index.js';
 import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import { glob } from 'glob';
@@ -23,12 +29,61 @@ async function main() {
   // Create results directory
   await mkdir(RESULTS_DIR, { recursive: true });
 
-  // Initialize client
+  // Initialize Classify client
   const client = new ClassifyClient({
     apiKey: process.env.DEEPSEEK_API_KEY,
     cacheEnabled: true,
     compressionEnabled: true,
   });
+
+  // Initialize database clients (optional)
+  let neo4jClient: Neo4jClient | null = null;
+  let elasticsearchClient: ElasticsearchClient | null = null;
+
+  // Check if Neo4j is configured
+  if (process.env.NEO4J_URL && process.env.NEO4J_USERNAME && process.env.NEO4J_PASSWORD) {
+    console.log('🔵 Initializing Neo4j client...');
+    try {
+      neo4jClient = new Neo4jClient({
+        url: process.env.NEO4J_URL,
+        username: process.env.NEO4J_USERNAME,
+        password: process.env.NEO4J_PASSWORD,
+        database: process.env.NEO4J_DATABASE || 'neo4j',
+      });
+      await neo4jClient.initialize();
+    } catch (error) {
+      console.warn(`⚠️  Neo4j unavailable: ${error instanceof Error ? error.message : error}`);
+      console.warn('   Continuing without Neo4j integration\n');
+      neo4jClient = null;
+    }
+  } else {
+    console.log('ℹ️  Neo4j not configured (set NEO4J_URL, NEO4J_USERNAME, NEO4J_PASSWORD)\n');
+  }
+
+  // Check if Elasticsearch is configured
+  if (process.env.ELASTICSEARCH_URL) {
+    console.log('🟢 Initializing Elasticsearch client...');
+    try {
+      elasticsearchClient = new ElasticsearchClient({
+        url: process.env.ELASTICSEARCH_URL,
+        auth: process.env.ELASTICSEARCH_USERNAME && process.env.ELASTICSEARCH_PASSWORD
+          ? {
+              username: process.env.ELASTICSEARCH_USERNAME,
+              password: process.env.ELASTICSEARCH_PASSWORD,
+            }
+          : undefined,
+        apiKey: process.env.ELASTICSEARCH_API_KEY,
+        index: process.env.ELASTICSEARCH_INDEX || 'classify-documents',
+      });
+      await elasticsearchClient.initialize();
+    } catch (error) {
+      console.warn(`⚠️  Elasticsearch unavailable: ${error instanceof Error ? error.message : error}`);
+      console.warn('   Continuing without Elasticsearch integration\n');
+      elasticsearchClient = null;
+    }
+  } else {
+    console.log('ℹ️  Elasticsearch not configured (set ELASTICSEARCH_URL)\n');
+  }
 
   // Find all sample files
   const patterns = [
@@ -116,6 +171,44 @@ async function main() {
 
   await writeFile(join(RESULTS_DIR, 'summary.json'), JSON.stringify(summary, null, 2));
 
+  // Send to databases
+  if (neo4jClient || elasticsearchClient) {
+    console.log('\n╔═══════════════════════════════════════════════════╗');
+    console.log('║  Sending to Databases                             ║');
+    console.log('╚═══════════════════════════════════════════════════╝\n');
+
+    const batchData = results.map((r) => ({
+      result: r,
+      file: r.file,
+    }));
+
+    // Send to Neo4j
+    if (neo4jClient) {
+      try {
+        console.log('🔵 Sending to Neo4j...');
+        await neo4jClient.insertBatch(batchData);
+        console.log(`   ✅ Inserted ${results.length} documents into Neo4j\n`);
+      } catch (error) {
+        console.error(`   ❌ Neo4j insert failed: ${error instanceof Error ? error.message : error}\n`);
+      } finally {
+        await neo4jClient.close();
+      }
+    }
+
+    // Send to Elasticsearch
+    if (elasticsearchClient) {
+      try {
+        console.log('🟢 Sending to Elasticsearch...');
+        await elasticsearchClient.insertBatch(batchData);
+        console.log(`   ✅ Indexed ${results.length} documents in Elasticsearch\n`);
+      } catch (error) {
+        console.error(`   ❌ Elasticsearch indexing failed: ${error instanceof Error ? error.message : error}\n`);
+      } finally {
+        await elasticsearchClient.close();
+      }
+    }
+  }
+
   // Get cache stats
   const cacheStats = await client.getCacheStats();
 
@@ -136,7 +229,12 @@ async function main() {
   console.log(`   Entries: ${cacheStats.entryCount}`);
   console.log(`   Size: ${(cacheStats.totalSizeBytes / 1024).toFixed(1)}KB`);
   console.log(`   Hit rate: ${(cacheStats.hitRate * 100).toFixed(1)}%`);
-  console.log(`\n✅ Ready for Elasticsearch and Neo4j indexing!`);
+  
+  if (neo4jClient || elasticsearchClient) {
+    console.log(`\n✅ Data sent to:`);
+    if (neo4jClient) console.log(`   🔵 Neo4j: ${results.length} documents`);
+    if (elasticsearchClient) console.log(`   🟢 Elasticsearch: ${results.length} documents`);
+  }
 }
 
 main().catch(console.error);

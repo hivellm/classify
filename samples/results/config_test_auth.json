@@ -577,7 +577,7 @@
     "hash": "69ca154a02339174e8a42b9605ab921fd94e3f15028d5a5726ae5b513f9a5a9d"
   },
   "performance": {
-    "totalTimeMs": 7,
+    "totalTimeMs": 1,
     "tokens": {
       "input": 2775,
       "output": 2786,

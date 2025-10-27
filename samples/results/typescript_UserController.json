@@ -391,7 +391,7 @@
     "hash": "21080d426b044ff56f9d62f3423e64dd57a510e6b47331676ca5d517fdaccae9"
   },
   "performance": {
-    "totalTimeMs": 7,
+    "totalTimeMs": 1,
     "tokens": {
       "input": 2373,
       "output": 1368,
