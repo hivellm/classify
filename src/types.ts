@@ -17,11 +17,22 @@ export interface ClassifyOptions {
   /** Cache directory path (default: '.classify-cache') */
   cacheDir?: string;
 
+  /** Templates directory (default: auto-detect) */
+  templatesDir?: string;
+
   /** Enable prompt compression (default: true) */
   compressionEnabled?: boolean;
 
   /** Compression ratio 0-1 (default: 0.5 = 50% reduction) */
   compressionRatio?: number;
+}
+
+/**
+ * Options for individual file classification
+ */
+export interface ClassifyFileOptions {
+  /** Force a specific template ID instead of auto-selection */
+  templateId?: string;
 }
 
 /**

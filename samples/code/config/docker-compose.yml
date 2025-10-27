@@ -1,0 +1,123 @@
+version: '3.8'
+
+services:
+  # PostgreSQL database
+  postgres:
+    image: postgres:16-alpine
+    container_name: user-db
+    environment:
+      POSTGRES_DB: users
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-secret}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+
+  # Node.js API server
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: user-api
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgresql://admin:${DB_PASSWORD:-secret}@postgres:5432/users
+      JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./src:/app/src:ro
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # Rust vector database
+  vector-db:
+    build:
+      context: ./rust-vector-db
+      dockerfile: Dockerfile
+    container_name: vector-db
+    environment:
+      RUST_LOG: info
+      BIND_ADDRESS: 0.0.0.0:8080
+      DATA_DIR: /data
+    ports:
+      - "8080:8080"
+    volumes:
+      - vector_data:/data
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # Python data processor
+  processor:
+    build:
+      context: ./python-pipeline
+      dockerfile: Dockerfile
+    container_name: data-processor
+    environment:
+      VECTOR_DB_URL: http://vector-db:8080
+      DATABASE_URL: postgresql://admin:${DB_PASSWORD:-secret}@postgres:5432/users
+    depends_on:
+      - postgres
+      - vector-db
+    volumes:
+      - ./data:/app/data:ro
+      - ./output:/app/output
+    networks:
+      - app-network
+    command: python process_data.py
+
+  # React frontend (production build)
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: user-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # Nginx reverse proxy
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-proxy
+    ports:
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - frontend
+      - api
+    networks:
+      - app-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+  vector_data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge
+

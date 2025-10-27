@@ -1,0 +1,588 @@
+{
+  "file": "config/test_auth.py",
+  "classification": {
+    "template": "software_project",
+    "confidence": 0.95,
+    "domain": "software",
+    "docType": "Test Suite Document"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"Authentication Test Suite\",\n      title: \"Authentication Test Suite\",\n      domain: \"software\",\n      doc_type: \"Test Suite Document\"\n    })\nCREATE (e0:Module {name: \"pytest\", description: \"Testing framework used for writing and running tests\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Module {name: \"asyncio\", description: \"Library for asynchronous programming\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Module {name: \"unittest.mock\", description: \"Provides Mock and AsyncMock for testing\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Module {name: \"datetime\", description: \"Handles date and time operations\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Module {name: \"jwt\", description: \"Library for encoding and decoding JSON Web Tokens\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Module {name: \"fastapi.testclient\", description: \"Provides TestClient for testing FastAPI applications\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Class {name: \"TestAuthentication\", description: \"Test class for authentication endpoints\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Class {name: \"TestPasswordHashing\", description: \"Test class for password hashing functionality\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Class {name: \"TestJWTTokens\", description: \"Test class for JWT token generation and validation\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Function {name: \"test_register_success\", description: \"Tests successful user registration\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Function {name: \"test_register_weak_password\", description: \"Tests registration with a weak password\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Function {name: \"test_register_missing_fields\", description: \"Tests registration with missing fields\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Function {name: \"test_login_success\", description: \"Tests successful user login\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Function {name: \"test_login_invalid_credentials\", description: \"Tests login with invalid credentials\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Function {name: \"test_get_profile_authenticated\", description: \"Tests accessing profile with valid authentication\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Function {name: \"test_get_profile_unauthenticated\", description: \"Tests accessing profile without authentication\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:Function {name: \"test_get_profile_invalid_token\", description: \"Tests accessing profile with an invalid token\"})\nCREATE (doc)-[:MENTIONS]->(e16)\nCREATE (e17:Function {name: \"test_bcrypt_hashing\", description: \"Tests bcrypt password hashing\"})\nCREATE (doc)-[:MENTIONS]->(e17)\nCREATE (e18:Function {name: \"test_bcrypt_wrong_password\", description: \"Tests bcrypt with incorrect password\"})\nCREATE (doc)-[:MENTIONS]->(e18)\nCREATE (e19:Function {name: \"test_jwt_generation\", description: \"Tests JWT token generation\"})\nCREATE (doc)-[:MENTIONS]->(e19)\nCREATE (e20:Function {name: \"test_jwt_expiration\", description: \"Tests JWT token expiration\"})\nCREATE (doc)-[:MENTIONS]->(e20)\nCREATE (e21:Function {name: \"test_jwt_invalid_signature\", description: \"Tests JWT with invalid signature\"})\nCREATE (doc)-[:MENTIONS]->(e21)\nCREATE (e22:Function {name: \"test_concurrent_requests\", description: \"Tests concurrent user registration requests\"})\nCREATE (doc)-[:MENTIONS]->(e22)\nCREATE (e23:API {name: \"/register\", description: \"Endpoint for user registration\"})\nCREATE (doc)-[:MENTIONS]->(e23)\nCREATE (e24:API {name: \"/login\", description: \"Endpoint for user login\"})\nCREATE (doc)-[:MENTIONS]->(e24)\nCREATE (e25:API {name: \"/profile\", description: \"Endpoint for accessing user profile\"})\nCREATE (doc)-[:MENTIONS]->(e25)\nCREATE (e26:Configuration {name: \"JWT_SECRET\", description: \"Secret key used for JWT encoding and decoding\"})\nCREATE (doc)-[:MENTIONS]->(e26)\nCREATE (e27:Dependency {name: \"bcrypt\", description: \"Library for password hashing\"})\nCREATE (doc)-[:MENTIONS]->(e27)\nCREATE (e28:Test {name: \"Authentication Test Suite\", description: \"Suite of tests for authentication service\"})\nCREATE (doc)-[:MENTIONS]->(e28)\nCREATE (e29:Script {name: \"pytest_main\", description: \"Script to run tests using pytest\"})\nCREATE (doc)-[:MENTIONS]->(e29)\nCREATE (e30:Documentation {name: \"Test Documentation\", description: \"Documentation embedded in test code\"})\nCREATE (doc)-[:MENTIONS]->(e30)",
+    "entities": [
+      {
+        "type": "Module",
+        "properties": {
+          "name": "pytest",
+          "description": "Testing framework used for writing and running tests"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "asyncio",
+          "description": "Library for asynchronous programming"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "unittest.mock",
+          "description": "Provides Mock and AsyncMock for testing"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "datetime",
+          "description": "Handles date and time operations"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "jwt",
+          "description": "Library for encoding and decoding JSON Web Tokens"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "fastapi.testclient",
+          "description": "Provides TestClient for testing FastAPI applications"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "TestAuthentication",
+          "description": "Test class for authentication endpoints"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "TestPasswordHashing",
+          "description": "Test class for password hashing functionality"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "TestJWTTokens",
+          "description": "Test class for JWT token generation and validation"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "test_register_success",
+          "description": "Tests successful user registration"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "test_register_weak_password",
+          "description": "Tests registration with a weak password"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "test_register_missing_fields",
+          "description": "Tests registration with missing fields"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "test_login_success",
+          "description": "Tests successful user login"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "test_login_invalid_credentials",
+          "description": "Tests login with invalid credentials"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "test_get_profile_authenticated",
+          "description": "Tests accessing profile with valid authentication"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "test_get_profile_unauthenticated",
+          "description": "Tests accessing profile without authentication"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "test_get_profile_invalid_token",
+          "description": "Tests accessing profile with an invalid token"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "test_bcrypt_hashing",
+          "description": "Tests bcrypt password hashing"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "test_bcrypt_wrong_password",
+          "description": "Tests bcrypt with incorrect password"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "test_jwt_generation",
+          "description": "Tests JWT token generation"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "test_jwt_expiration",
+          "description": "Tests JWT token expiration"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "test_jwt_invalid_signature",
+          "description": "Tests JWT with invalid signature"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "test_concurrent_requests",
+          "description": "Tests concurrent user registration requests"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "/register",
+          "description": "Endpoint for user registration"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "/login",
+          "description": "Endpoint for user login"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "/profile",
+          "description": "Endpoint for accessing user profile"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "JWT_SECRET",
+          "description": "Secret key used for JWT encoding and decoding"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "bcrypt",
+          "description": "Library for password hashing"
+        }
+      },
+      {
+        "type": "Test",
+        "properties": {
+          "name": "Authentication Test Suite",
+          "description": "Suite of tests for authentication service"
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "pytest_main",
+          "description": "Script to run tests using pytest"
+        }
+      },
+      {
+        "type": "Documentation",
+        "properties": {
+          "name": "Test Documentation",
+          "description": "Documentation embedded in test code"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "IMPORTS",
+        "source": "TestAuthentication",
+        "target": "pytest",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "TestAuthentication",
+        "target": "fastapi.testclient",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "TestAuthentication",
+        "target": "jwt",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "TestPasswordHashing",
+        "target": "bcrypt",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "TestJWTTokens",
+        "target": "jwt",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "TestJWTTokens",
+        "target": "datetime",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "test_concurrent_requests",
+        "target": "asyncio",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "TestAuthentication",
+        "target": "test_register_success",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "TestAuthentication",
+        "target": "test_register_weak_password",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "TestAuthentication",
+        "target": "test_register_missing_fields",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "TestAuthentication",
+        "target": "test_login_success",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "TestAuthentication",
+        "target": "test_login_invalid_credentials",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "TestAuthentication",
+        "target": "test_get_profile_authenticated",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "TestAuthentication",
+        "target": "test_get_profile_unauthenticated",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "TestAuthentication",
+        "target": "test_get_profile_invalid_token",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "TestPasswordHashing",
+        "target": "test_bcrypt_hashing",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "TestPasswordHashing",
+        "target": "test_bcrypt_wrong_password",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "TestJWTTokens",
+        "target": "test_jwt_generation",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "TestJWTTokens",
+        "target": "test_jwt_expiration",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "TestJWTTokens",
+        "target": "test_jwt_invalid_signature",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "test_register_success",
+        "target": "/register",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "test_register_weak_password",
+        "target": "/register",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "test_register_missing_fields",
+        "target": "/register",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "test_login_success",
+        "target": "/login",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "test_login_invalid_credentials",
+        "target": "/login",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "test_get_profile_authenticated",
+        "target": "/profile",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "test_get_profile_unauthenticated",
+        "target": "/profile",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "test_get_profile_invalid_token",
+        "target": "/profile",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "test_bcrypt_hashing",
+        "target": "bcrypt",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "test_bcrypt_wrong_password",
+        "target": "bcrypt",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "test_jwt_generation",
+        "target": "jwt",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "test_jwt_expiration",
+        "target": "jwt",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "test_jwt_invalid_signature",
+        "target": "jwt",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "test_concurrent_requests",
+        "target": "/register",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "TestAuthentication",
+        "target": "JWT_SECRET",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "TestJWTTokens",
+        "target": "JWT_SECRET",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "test_concurrent_requests",
+        "target": "make_request",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Test Documentation",
+        "target": "Authentication Test Suite",
+        "properties": {}
+      },
+      {
+        "type": "BUILDS",
+        "source": "pytest_main",
+        "target": "Authentication Test Suite",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "Authentication Test Suite",
+    "domain": "software",
+    "docType": "Test Suite Document",
+    "extractedFields": {
+      "module_name": [
+        "pytest",
+        "asyncio",
+        "unittest.mock",
+        "datetime",
+        "jwt",
+        "fastapi.testclient"
+      ],
+      "module_description": [
+        "Testing framework used for writing and running tests",
+        "Library for asynchronous programming",
+        "Provides Mock and AsyncMock for testing",
+        "Handles date and time operations",
+        "Library for encoding and decoding JSON Web Tokens",
+        "Provides TestClient for testing FastAPI applications"
+      ],
+      "class_name": [
+        "TestAuthentication",
+        "TestPasswordHashing",
+        "TestJWTTokens"
+      ],
+      "class_description": [
+        "Test class for authentication endpoints",
+        "Test class for password hashing functionality",
+        "Test class for JWT token generation and validation"
+      ],
+      "function_name": [
+        "test_register_success",
+        "test_register_weak_password",
+        "test_register_missing_fields",
+        "test_login_success",
+        "test_login_invalid_credentials",
+        "test_get_profile_authenticated",
+        "test_get_profile_unauthenticated",
+        "test_get_profile_invalid_token",
+        "test_bcrypt_hashing",
+        "test_bcrypt_wrong_password",
+        "test_jwt_generation",
+        "test_jwt_expiration",
+        "test_jwt_invalid_signature",
+        "test_concurrent_requests"
+      ],
+      "function_description": [
+        "Tests successful user registration",
+        "Tests registration with a weak password",
+        "Tests registration with missing fields",
+        "Tests successful user login",
+        "Tests login with invalid credentials",
+        "Tests accessing profile with valid authentication",
+        "Tests accessing profile without authentication",
+        "Tests accessing profile with an invalid token",
+        "Tests bcrypt password hashing",
+        "Tests bcrypt with incorrect password",
+        "Tests JWT token generation",
+        "Tests JWT token expiration",
+        "Tests JWT with invalid signature",
+        "Tests concurrent user registration requests"
+      ],
+      "api_name": [
+        "/register",
+        "/login",
+        "/profile"
+      ],
+      "api_description": [
+        "Endpoint for user registration",
+        "Endpoint for user login",
+        "Endpoint for accessing user profile"
+      ],
+      "configuration_name": "JWT_SECRET",
+      "configuration_description": "Secret key used for JWT encoding and decoding",
+      "dependency_name": "bcrypt",
+      "dependency_description": "Library for password hashing",
+      "test_name": "Authentication Test Suite",
+      "test_description": "Suite of tests for authentication service",
+      "script_name": "pytest_main",
+      "script_description": "Script to run tests using pytest",
+      "documentation_name": "Test Documentation",
+      "documentation_description": "Documentation embedded in test code"
+    },
+    "keywords": [
+      "test",
+      "password",
+      "response",
+      "token",
+      "assert",
+      "user",
+      "profile",
+      "json",
+      "email",
+      "data",
+      "login",
+      "client",
+      "self",
+      "bcrypt",
+      "register",
+      "example",
+      "secret",
+      "post",
+      "status",
+      "code"
+    ],
+    "summary": "This document contains an authentication test suite for a FastAPI application, focusing on user registration and login endpoints. The tests verify successful registration with proper field validation, rejection of weak passwords, and handling of missing required fields. Additional tests cover successful login scenarios and proper authentication flow validation."
+  },
+  "cacheInfo": {
+    "cached": true,
+    "hash": "69ca154a02339174e8a42b9605ab921fd94e3f15028d5a5726ae5b513f9a5a9d"
+  },
+  "performance": {
+    "totalTimeMs": 1,
+    "tokens": {
+      "input": 2775,
+      "output": 2786,
+      "total": 5561
+    },
+    "costUsd": 0.00116858
+  }
+}

@@ -1,0 +1,283 @@
+{
+  "file": "config/build.sh",
+  "classification": {
+    "template": "software_project",
+    "confidence": 0.95,
+    "domain": "software",
+    "docType": "Build Script"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"User Management System Build Script\",\n      title: \"User Management System Build Script\",\n      domain: \"software\",\n      doc_type: \"Build Script\"\n    })\nCREATE (e0:Script {name: \"build_script\", language: \"Bash\", description: \"Shell script to build all components of the User Management System\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Module {name: \"TypeScript API\", description: \"TypeScript-based API module\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Module {name: \"Rust Database\", description: \"Rust-based database module\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Module {name: \"Python Pipeline\", description: \"Python-based pipeline module\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Module {name: \"Frontend\", description: \"Frontend module, likely built with a framework like React\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Dependency {name: \"Node.js\", description: \"JavaScript runtime required for TypeScript and frontend builds\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Dependency {name: \"Rust\", description: \"Programming language required for building the database\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Dependency {name: \"Python 3\", description: \"Programming language required for the Python pipeline\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Configuration {name: \"Environment Setup\", description: \"Configuration for setting up Python virtual environment\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:API {name: \"TypeScript API\", description: \"API server component\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Database {name: \"Rust Vector DB\", description: \"Database component built with Rust\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Test {name: \"Rust Tests\", description: \"Tests for the Rust database module\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Test {name: \"Python Tests\", description: \"Tests for the Python pipeline module\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Documentation {name: \"Build Summary\", description: \"Summary of build artifacts and service start instructions\"})\nCREATE (doc)-[:MENTIONS]->(e13)",
+    "entities": [
+      {
+        "type": "Script",
+        "properties": {
+          "name": "build_script",
+          "language": "Bash",
+          "description": "Shell script to build all components of the User Management System"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "TypeScript API",
+          "description": "TypeScript-based API module"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "Rust Database",
+          "description": "Rust-based database module"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "Python Pipeline",
+          "description": "Python-based pipeline module"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "Frontend",
+          "description": "Frontend module, likely built with a framework like React"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Node.js",
+          "description": "JavaScript runtime required for TypeScript and frontend builds"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Rust",
+          "description": "Programming language required for building the database"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Python 3",
+          "description": "Programming language required for the Python pipeline"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "Environment Setup",
+          "description": "Configuration for setting up Python virtual environment"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "TypeScript API",
+          "description": "API server component"
+        }
+      },
+      {
+        "type": "Database",
+        "properties": {
+          "name": "Rust Vector DB",
+          "description": "Database component built with Rust"
+        }
+      },
+      {
+        "type": "Test",
+        "properties": {
+          "name": "Rust Tests",
+          "description": "Tests for the Rust database module"
+        }
+      },
+      {
+        "type": "Test",
+        "properties": {
+          "name": "Python Tests",
+          "description": "Tests for the Python pipeline module"
+        }
+      },
+      {
+        "type": "Documentation",
+        "properties": {
+          "name": "Build Summary",
+          "description": "Summary of build artifacts and service start instructions"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "DEPENDS_ON",
+        "source": "build_script",
+        "target": "Node.js",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "build_script",
+        "target": "Rust",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "build_script",
+        "target": "Python 3",
+        "properties": {}
+      },
+      {
+        "type": "BUILDS",
+        "source": "build_script",
+        "target": "TypeScript API",
+        "properties": {}
+      },
+      {
+        "type": "BUILDS",
+        "source": "build_script",
+        "target": "Rust Database",
+        "properties": {}
+      },
+      {
+        "type": "BUILDS",
+        "source": "build_script",
+        "target": "Python Pipeline",
+        "properties": {}
+      },
+      {
+        "type": "BUILDS",
+        "source": "build_script",
+        "target": "Frontend",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "Python Pipeline",
+        "target": "Environment Setup",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "build_script",
+        "target": "Rust Tests",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "build_script",
+        "target": "Python Tests",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Build Summary",
+        "target": "TypeScript API",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Build Summary",
+        "target": "Rust Database",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Build Summary",
+        "target": "Frontend",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Build Summary",
+        "target": "Python Pipeline",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "User Management System Build Script",
+    "domain": "software",
+    "docType": "Build Script",
+    "extractedFields": {
+      "script_name": "build_script",
+      "script_language": "Bash",
+      "script_description": "Shell script to build all components of the User Management System",
+      "module_name": [
+        "TypeScript API",
+        "Rust Database",
+        "Python Pipeline",
+        "Frontend"
+      ],
+      "module_description": [
+        "TypeScript-based API module",
+        "Rust-based database module",
+        "Python-based pipeline module",
+        "Frontend module, likely built with a framework like React"
+      ],
+      "dependency_name": [
+        "Node.js",
+        "Rust",
+        "Python 3"
+      ],
+      "dependency_description": [
+        "JavaScript runtime required for TypeScript and frontend builds",
+        "Programming language required for building the database",
+        "Programming language required for the Python pipeline"
+      ],
+      "configuration_name": "Environment Setup",
+      "configuration_description": "Configuration for setting up Python virtual environment",
+      "api_name": "TypeScript API",
+      "api_description": "API server component",
+      "database_name": "Rust Vector DB",
+      "database_description": "Database component built with Rust",
+      "test_name": [
+        "Rust Tests",
+        "Python Tests"
+      ],
+      "test_description": [
+        "Tests for the Rust database module",
+        "Tests for the Python pipeline module"
+      ],
+      "documentation_name": "Build Summary",
+      "documentation_description": "Summary of build artifacts and service start instructions"
+    },
+    "keywords": [
+      "echo",
+      "build",
+      "rust",
+      "vector",
+      "python",
+      "green",
+      "blue",
+      "venv",
+      "typescript",
+      "react",
+      "frontend",
+      "node",
+      "start",
+      "exit",
+      "building",
+      "installed",
+      "cargo",
+      "release",
+      "prerequisites",
+      "command"
+    ],
+    "summary": "This build script automates the compilation and setup process for a multi-language User Management System. It verifies prerequisites (Node.js, Rust, Python 3), installs dependencies, builds TypeScript components, compiles a Rust vector database, sets up a Python virtual environment, and constructs a React frontend. The script concludes by running comprehensive tests across all system components to ensure proper functionality."
+  },
+  "cacheInfo": {
+    "cached": true,
+    "hash": "445f7979cc319d9d5014975144784da925e1ab48feed628246872e82f7da0dcd"
+  },
+  "performance": {
+    "totalTimeMs": 1,
+    "tokens": {
+      "input": 2543,
+      "output": 1172,
+      "total": 3715
+    },
+    "costUsd": 0.00068418
+  }
+}

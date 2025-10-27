@@ -1,0 +1,281 @@
+{
+  "file": "typescript/AuthService.ts",
+  "classification": {
+    "template": "software_project",
+    "confidence": 0.95,
+    "domain": "software",
+    "docType": "Code Documentation"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"Authentication Service Documentation\",\n      title: \"Authentication Service Documentation\",\n      domain: \"software\",\n      doc_type: \"Code Documentation\"\n    })\nCREATE (e0:Module {name: \"jsonwebtoken\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Class {name: \"AuthService\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Class {name: \"User\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Class {name: \"Database\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Function {name: \"register\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Function {name: \"login\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Function {name: \"verifyToken\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Function {name: \"changePassword\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Dependency {name: \"bcrypt\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Configuration {name: \"jwtSecret\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Configuration {name: \"saltRounds\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Database {name: \"users\"})\nCREATE (doc)-[:MENTIONS]->(e11)",
+    "entities": [
+      {
+        "type": "Module",
+        "properties": {
+          "name": "jsonwebtoken"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "AuthService"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "User"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "Database"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "register"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "login"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "verifyToken"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "changePassword"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "bcrypt"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "jwtSecret"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "saltRounds"
+        }
+      },
+      {
+        "type": "Database",
+        "properties": {
+          "name": "users"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "IMPORTS",
+        "source": "AuthService",
+        "target": "jsonwebtoken",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "AuthService",
+        "target": "User",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "AuthService",
+        "target": "Database",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "AuthService",
+        "target": "register",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "AuthService",
+        "target": "login",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "AuthService",
+        "target": "verifyToken",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "AuthService",
+        "target": "changePassword",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "AuthService",
+        "target": "Database",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "AuthService",
+        "target": "bcrypt",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "register",
+        "target": "bcrypt",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "register",
+        "target": "users",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "login",
+        "target": "users",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "login",
+        "target": "bcrypt",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "login",
+        "target": "jsonwebtoken",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "verifyToken",
+        "target": "jsonwebtoken",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "changePassword",
+        "target": "users",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "changePassword",
+        "target": "bcrypt",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "AuthService",
+        "target": "jwtSecret",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "AuthService",
+        "target": "saltRounds",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "register",
+        "target": "users",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "login",
+        "target": "users",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "changePassword",
+        "target": "users",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "Authentication Service Documentation",
+    "domain": "software",
+    "docType": "Code Documentation",
+    "extractedFields": {
+      "module_name": "jsonwebtoken",
+      "class_name": [
+        "AuthService",
+        "User",
+        "Database"
+      ],
+      "function_name": [
+        "register",
+        "login",
+        "verifyToken",
+        "changePassword"
+      ],
+      "dependency_name": "bcrypt",
+      "configuration_name": [
+        "jwtSecret",
+        "saltRounds"
+      ],
+      "database_name": "users"
+    },
+    "keywords": [
+      "user",
+      "password",
+      "string",
+      "email",
+      "token",
+      "const",
+      "database",
+      "param",
+      "await",
+      "bcrypt",
+      "jwtsecret",
+      "import",
+      "async",
+      "promise",
+      "hash",
+      "hashedpassword",
+      "authentication",
+      "private",
+      "saltrounds",
+      "returns"
+    ],
+    "summary": "This document describes an authentication service that handles user registration and login functionality. It securely hashes passwords using bcrypt during registration and verifies credentials during login by comparing hashed values. Upon successful authentication, the service generates a JSON Web Token (JWT) for user sessions and includes token verification capabilities."
+  },
+  "cacheInfo": {
+    "cached": true,
+    "hash": "9de4aec63d0b0f104dcdfc8f796c5f9f7b1710f92b616f4675152e3946ebd107"
+  },
+  "performance": {
+    "totalTimeMs": 1,
+    "tokens": {
+      "input": 2259,
+      "output": 1156,
+      "total": 3415
+    },
+    "costUsd": 0.0006399400000000001
+  }
+}

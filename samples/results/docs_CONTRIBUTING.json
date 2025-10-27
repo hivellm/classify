@@ -1,0 +1,646 @@
+{
+  "file": "docs/CONTRIBUTING.md",
+  "classification": {
+    "template": "software_project",
+    "confidence": 0.95,
+    "domain": "software",
+    "docType": "contributing_guide"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"Contributing Guide\",\n      title: \"Contributing Guide\",\n      domain: \"software\",\n      doc_type: \"contributing_guide\"\n    })\nCREATE (e0:Module {name: \"typescript\", description: \"TypeScript services directory\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Module {name: \"javascript\", description: \"JavaScript files directory\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Module {name: \"rust\", description: \"Rust vector database directory\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Module {name: \"python\", description: \"Python pipeline directory\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Function {name: \"AuthService.ts\", description: \"TypeScript service for authentication\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Function {name: \"UserController.ts\", description: \"TypeScript controller for user operations\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Function {name: \"database.ts\", description: \"TypeScript database connection and repository\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Function {name: \"App.jsx\", description: \"JavaScript React application component\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Function {name: \"server.js\", description: \"JavaScript server file\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Function {name: \"lib.rs\", description: \"Rust library for vector database operations\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Function {name: \"handler.rs\", description: \"Rust HTTP handlers for vector database\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Function {name: \"model.rs\", description: \"Rust models for vector database\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Function {name: \"api.py\", description: \"Python API for data processing\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Function {name: \"process_data.py\", description: \"Python script for data processing\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Dependency {name: \"TypeScript\", version: \"18+\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Dependency {name: \"JavaScript\", version: \"18+\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:Dependency {name: \"Rust\", version: \"1.70+\"})\nCREATE (doc)-[:MENTIONS]->(e16)\nCREATE (e17:Dependency {name: \"Python\", version: \"3.10+\"})\nCREATE (doc)-[:MENTIONS]->(e17)\nCREATE (e18:Dependency {name: \"PostgreSQL\", version: \"14+\"})\nCREATE (doc)-[:MENTIONS]->(e18)\nCREATE (e19:Dependency {name: \"Git\", version: \"Initial\"})\nCREATE (doc)-[:MENTIONS]->(e19)\nCREATE (e20:Configuration {name: \".env\", description: \"Environment configuration file\"})\nCREATE (doc)-[:MENTIONS]->(e20)\nCREATE (e21:Configuration {name: \"ESLint + Prettier\", description: \"Code style configuration for TypeScript/JavaScript\"})\nCREATE (doc)-[:MENTIONS]->(e21)\nCREATE (e22:Configuration {name: \"rustfmt and clippy\", description: \"Code style configuration for Rust\"})\nCREATE (doc)-[:MENTIONS]->(e22)\nCREATE (e23:Configuration {name: \"Black formatter\", description: \"Code style configuration for Python\"})\nCREATE (doc)-[:MENTIONS]->(e23)\nCREATE (e24:API {name: \"API.md\", description: \"API documentation\"})\nCREATE (doc)-[:MENTIONS]->(e24)\nCREATE (e25:Database {name: \"users\", description: \"PostgreSQL database for user management\"})\nCREATE (doc)-[:MENTIONS]->(e25)\nCREATE (e26:Database {name: \"schema.sql\", description: \"Database schema file\"})\nCREATE (doc)-[:MENTIONS]->(e26)\nCREATE (e27:Test {name: \"npm test\", description: \"TypeScript/JavaScript test command\"})\nCREATE (doc)-[:MENTIONS]->(e27)\nCREATE (e28:Test {name: \"cargo test\", description: \"Rust test command\"})\nCREATE (doc)-[:MENTIONS]->(e28)\nCREATE (e29:Test {name: \"pytest\", description: \"Python test command\"})\nCREATE (doc)-[:MENTIONS]->(e29)\nCREATE (e30:Script {name: \"git clone\", description: \"Script to clone repository\"})\nCREATE (doc)-[:MENTIONS]->(e30)\nCREATE (e31:Script {name: \"npm install\", description: \"Script to install Node.js dependencies\"})\nCREATE (doc)-[:MENTIONS]->(e31)\nCREATE (e32:Script {name: \"cargo build\", description: \"Script to build Rust project\"})\nCREATE (doc)-[:MENTIONS]->(e32)\nCREATE (e33:Script {name: \"pip install\", description: \"Script to install Python dependencies\"})\nCREATE (doc)-[:MENTIONS]->(e33)\nCREATE (e34:Script {name: \"createdb\", description: \"Script to create database\"})\nCREATE (doc)-[:MENTIONS]->(e34)\nCREATE (e35:Script {name: \"psql\", description: \"Script to execute SQL on database\"})\nCREATE (doc)-[:MENTIONS]->(e35)\nCREATE (e36:Script {name: \"cp .env.example .env\", description: \"Script to copy environment template\"})\nCREATE (doc)-[:MENTIONS]->(e36)\nCREATE (e37:Documentation {name: \"docs\", description: \"Documentation directory\"})\nCREATE (doc)-[:MENTIONS]->(e37)\nCREATE (e38:Documentation {name: \"API.md\", description: \"API documentation file\"})\nCREATE (doc)-[:MENTIONS]->(e38)",
+    "entities": [
+      {
+        "type": "Module",
+        "properties": {
+          "name": "typescript",
+          "description": "TypeScript services directory"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "javascript",
+          "description": "JavaScript files directory"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "rust",
+          "description": "Rust vector database directory"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "python",
+          "description": "Python pipeline directory"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "AuthService.ts",
+          "description": "TypeScript service for authentication"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "UserController.ts",
+          "description": "TypeScript controller for user operations"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "database.ts",
+          "description": "TypeScript database connection and repository"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "App.jsx",
+          "description": "JavaScript React application component"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "server.js",
+          "description": "JavaScript server file"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "lib.rs",
+          "description": "Rust library for vector database operations"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "handler.rs",
+          "description": "Rust HTTP handlers for vector database"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "model.rs",
+          "description": "Rust models for vector database"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "api.py",
+          "description": "Python API for data processing"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "process_data.py",
+          "description": "Python script for data processing"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "TypeScript",
+          "version": "18+"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "JavaScript",
+          "version": "18+"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Rust",
+          "version": "1.70+"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Python",
+          "version": "3.10+"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "PostgreSQL",
+          "version": "14+"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Git",
+          "version": "Initial"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": ".env",
+          "description": "Environment configuration file"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "ESLint + Prettier",
+          "description": "Code style configuration for TypeScript/JavaScript"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "rustfmt and clippy",
+          "description": "Code style configuration for Rust"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "Black formatter",
+          "description": "Code style configuration for Python"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "API.md",
+          "description": "API documentation"
+        }
+      },
+      {
+        "type": "Database",
+        "properties": {
+          "name": "users",
+          "description": "PostgreSQL database for user management"
+        }
+      },
+      {
+        "type": "Database",
+        "properties": {
+          "name": "schema.sql",
+          "description": "Database schema file"
+        }
+      },
+      {
+        "type": "Test",
+        "properties": {
+          "name": "npm test",
+          "description": "TypeScript/JavaScript test command"
+        }
+      },
+      {
+        "type": "Test",
+        "properties": {
+          "name": "cargo test",
+          "description": "Rust test command"
+        }
+      },
+      {
+        "type": "Test",
+        "properties": {
+          "name": "pytest",
+          "description": "Python test command"
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "git clone",
+          "description": "Script to clone repository"
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "npm install",
+          "description": "Script to install Node.js dependencies"
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "cargo build",
+          "description": "Script to build Rust project"
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "pip install",
+          "description": "Script to install Python dependencies"
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "createdb",
+          "description": "Script to create database"
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "psql",
+          "description": "Script to execute SQL on database"
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "cp .env.example .env",
+          "description": "Script to copy environment template"
+        }
+      },
+      {
+        "type": "Documentation",
+        "properties": {
+          "name": "docs",
+          "description": "Documentation directory"
+        }
+      },
+      {
+        "type": "Documentation",
+        "properties": {
+          "name": "API.md",
+          "description": "API documentation file"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "CONTAINS",
+        "source": "src",
+        "target": "typescript",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "src",
+        "target": "javascript",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "src",
+        "target": "rust",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "src",
+        "target": "python",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "typescript",
+        "target": "AuthService.ts",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "typescript",
+        "target": "UserController.ts",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "typescript",
+        "target": "database.ts",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "javascript",
+        "target": "App.jsx",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "javascript",
+        "target": "server.js",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "rust",
+        "target": "lib.rs",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "rust",
+        "target": "handler.rs",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "rust",
+        "target": "model.rs",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "python",
+        "target": "api.py",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "python",
+        "target": "process_data.py",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "typescript",
+        "target": "TypeScript",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "javascript",
+        "target": "JavaScript",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "rust",
+        "target": "Rust",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "python",
+        "target": "Python",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "database.ts",
+        "target": "PostgreSQL",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "database.ts",
+        "target": "users",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "npm test",
+        "target": "typescript",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "cargo test",
+        "target": "rust",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "pytest",
+        "target": "python",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "API.md",
+        "target": "server.js",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "API.md",
+        "target": "UserController.ts",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "API.md",
+        "target": "lib.rs",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "API.md",
+        "target": "handler.rs",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "API.md",
+        "target": "api.py",
+        "properties": {}
+      },
+      {
+        "type": "BUILDS",
+        "source": "cargo build",
+        "target": "rust",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "server.js",
+        "target": "API.md",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "UserController.ts",
+        "target": "API.md",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "lib.rs",
+        "target": "API.md",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "handler.rs",
+        "target": "API.md",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "api.py",
+        "target": "API.md",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "Contributing Guide",
+    "domain": "software",
+    "docType": "contributing_guide",
+    "extractedFields": {
+      "module_name": [
+        "typescript",
+        "javascript",
+        "rust",
+        "python"
+      ],
+      "module_description": [
+        "TypeScript services directory",
+        "JavaScript files directory",
+        "Rust vector database directory",
+        "Python pipeline directory"
+      ],
+      "function_name": [
+        "AuthService.ts",
+        "UserController.ts",
+        "database.ts",
+        "App.jsx",
+        "server.js",
+        "lib.rs",
+        "handler.rs",
+        "model.rs",
+        "api.py",
+        "process_data.py"
+      ],
+      "function_description": [
+        "TypeScript service for authentication",
+        "TypeScript controller for user operations",
+        "TypeScript database connection and repository",
+        "JavaScript React application component",
+        "JavaScript server file",
+        "Rust library for vector database operations",
+        "Rust HTTP handlers for vector database",
+        "Rust models for vector database",
+        "Python API for data processing",
+        "Python script for data processing"
+      ],
+      "dependency_name": [
+        "TypeScript",
+        "JavaScript",
+        "Rust",
+        "Python",
+        "PostgreSQL",
+        "Git"
+      ],
+      "dependency_version": [
+        "18+",
+        "18+",
+        "1.70+",
+        "3.10+",
+        "14+",
+        "Initial"
+      ],
+      "configuration_name": [
+        ".env",
+        "ESLint + Prettier",
+        "rustfmt and clippy",
+        "Black formatter"
+      ],
+      "configuration_description": [
+        "Environment configuration file",
+        "Code style configuration for TypeScript/JavaScript",
+        "Code style configuration for Rust",
+        "Code style configuration for Python"
+      ],
+      "api_name": "API.md",
+      "api_description": "API documentation",
+      "database_name": [
+        "users",
+        "schema.sql"
+      ],
+      "database_description": [
+        "PostgreSQL database for user management",
+        "Database schema file"
+      ],
+      "test_name": [
+        "npm test",
+        "cargo test",
+        "pytest"
+      ],
+      "test_description": [
+        "TypeScript/JavaScript test command",
+        "Rust test command",
+        "Python test command"
+      ],
+      "script_name": [
+        "git clone",
+        "npm install",
+        "cargo build",
+        "pip install",
+        "createdb",
+        "psql",
+        "cp .env.example .env"
+      ],
+      "script_description": [
+        "Script to clone repository",
+        "Script to install Node.js dependencies",
+        "Script to build Rust project",
+        "Script to install Python dependencies",
+        "Script to create database",
+        "Script to execute SQL on database",
+        "Script to copy environment template"
+      ],
+      "documentation_name": [
+        "docs",
+        "API.md"
+      ],
+      "documentation_description": [
+        "Documentation directory",
+        "API documentation file"
+      ]
+    },
+    "keywords": [
+      "tests",
+      "test",
+      "bash",
+      "cargo",
+      "typescript",
+      "rust",
+      "database",
+      "python",
+      "feature",
+      "update",
+      "documentation",
+      "write",
+      "create",
+      "javascript",
+      "vector",
+      "your",
+      "pytest",
+      "code",
+      "user",
+      "management"
+    ],
+    "summary": "This document provides a comprehensive contributing guide for the User Management System project. It outlines development setup requirements including Node.js, Rust, Python, and PostgreSQL, along with detailed instructions for initial project configuration, code style standards across multiple programming languages, and testing procedures. The guide also covers the project's multi-language structure and pull request workflow for contributors."
+  },
+  "cacheInfo": {
+    "cached": true,
+    "hash": "e4c305a10caae224ff08de12ba1448cdc4e6e19f0d909055a31b946b2e94c734"
+  },
+  "performance": {
+    "totalTimeMs": 1,
+    "tokens": {
+      "input": 2851,
+      "output": 2725,
+      "total": 5576
+    },
+    "costUsd": 0.00116214
+  }
+}

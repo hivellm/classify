@@ -1,0 +1,547 @@
+{
+  "file": "python/api.py",
+  "classification": {
+    "template": "software_project",
+    "confidence": 0.95,
+    "domain": "software",
+    "docType": "code_structure_documentation"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"FastAPI REST API Documentation\",\n      title: \"FastAPI REST API Documentation\",\n      domain: \"software\",\n      doc_type: \"code_structure_documentation\"\n    })\nCREATE (e0:Module {name: \"fastapi\", description: \"FastAPI framework for building APIs\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Module {name: \"fastapi.security\", description: \"Security utilities for FastAPI\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Module {name: \"pydantic\", description: \"Data validation and settings management\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Module {name: \"typing\", description: \"Support for type hints\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Module {name: \"bcrypt\", description: \"Library for hashing passwords\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Module {name: \"jwt\", description: \"Library for encoding and decoding JWT tokens\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Module {name: \"datetime\", description: \"Date and time manipulation\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Module {name: \"asyncpg\", description: \"Asynchronous PostgreSQL database adapter\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Module {name: \"uvicorn\", description: \"ASGI server for running FastAPI applications\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Class {name: \"UserCreate\", description: \"Pydantic model for user registration data\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Class {name: \"UserResponse\", description: \"Pydantic model for user response data\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Class {name: \"LoginRequest\", description: \"Pydantic model for login credentials\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Class {name: \"TokenResponse\", description: \"Pydantic model for JWT token response\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Function {name: \"get_db\", description: \"Dependency function to get database connection\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Function {name: \"verify_token\", description: \"Dependency function to verify JWT token\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Function {name: \"register\", description: \"Endpoint function to register a new user\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:Function {name: \"login\", description: \"Endpoint function to authenticate user and return JWT\"})\nCREATE (doc)-[:MENTIONS]->(e16)\nCREATE (e17:Function {name: \"get_profile\", description: \"Endpoint function to get current user profile\"})\nCREATE (doc)-[:MENTIONS]->(e17)\nCREATE (e18:Function {name: \"list_users\", description: \"Endpoint function to list all users with pagination\"})\nCREATE (doc)-[:MENTIONS]->(e18)\nCREATE (e19:Dependency {name: \"Depends\", description: \"FastAPI dependency injection\"})\nCREATE (doc)-[:MENTIONS]->(e19)\nCREATE (e20:Dependency {name: \"HTTPBearer\", description: \"Security scheme for Bearer token authentication\"})\nCREATE (doc)-[:MENTIONS]->(e20)\nCREATE (e21:Configuration {name: \"JWT_SECRET\", description: \"Secret key for JWT encoding and decoding\"})\nCREATE (doc)-[:MENTIONS]->(e21)\nCREATE (e22:Configuration {name: \"DATABASE_URL\", description: \"URL for PostgreSQL database connection\"})\nCREATE (doc)-[:MENTIONS]->(e22)\nCREATE (e23:API {name: \"app\", description: \"FastAPI application instance\"})\nCREATE (doc)-[:MENTIONS]->(e23)\nCREATE (e24:Database {name: \"users\", description: \"PostgreSQL database for storing user data\"})\nCREATE (doc)-[:MENTIONS]->(e24)\nCREATE (e25:Script {name: \"main\", description: \"Script to run the FastAPI application with uvicorn\"})\nCREATE (doc)-[:MENTIONS]->(e25)",
+    "entities": [
+      {
+        "type": "Module",
+        "properties": {
+          "name": "fastapi",
+          "description": "FastAPI framework for building APIs"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "fastapi.security",
+          "description": "Security utilities for FastAPI"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "pydantic",
+          "description": "Data validation and settings management"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "typing",
+          "description": "Support for type hints"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "bcrypt",
+          "description": "Library for hashing passwords"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "jwt",
+          "description": "Library for encoding and decoding JWT tokens"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "datetime",
+          "description": "Date and time manipulation"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "asyncpg",
+          "description": "Asynchronous PostgreSQL database adapter"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "uvicorn",
+          "description": "ASGI server for running FastAPI applications"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "UserCreate",
+          "description": "Pydantic model for user registration data"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "UserResponse",
+          "description": "Pydantic model for user response data"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "LoginRequest",
+          "description": "Pydantic model for login credentials"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "TokenResponse",
+          "description": "Pydantic model for JWT token response"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "get_db",
+          "description": "Dependency function to get database connection"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "verify_token",
+          "description": "Dependency function to verify JWT token"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "register",
+          "description": "Endpoint function to register a new user"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "login",
+          "description": "Endpoint function to authenticate user and return JWT"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "get_profile",
+          "description": "Endpoint function to get current user profile"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "list_users",
+          "description": "Endpoint function to list all users with pagination"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Depends",
+          "description": "FastAPI dependency injection"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "HTTPBearer",
+          "description": "Security scheme for Bearer token authentication"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "JWT_SECRET",
+          "description": "Secret key for JWT encoding and decoding"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "DATABASE_URL",
+          "description": "URL for PostgreSQL database connection"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "app",
+          "description": "FastAPI application instance"
+        }
+      },
+      {
+        "type": "Database",
+        "properties": {
+          "name": "users",
+          "description": "PostgreSQL database for storing user data"
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "main",
+          "description": "Script to run the FastAPI application with uvicorn"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "IMPORTS",
+        "source": "app",
+        "target": "fastapi",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "app",
+        "target": "fastapi.security",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "app",
+        "target": "pydantic",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "app",
+        "target": "typing",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "app",
+        "target": "bcrypt",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "app",
+        "target": "jwt",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "app",
+        "target": "datetime",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "app",
+        "target": "asyncpg",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "main",
+        "target": "uvicorn",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "register",
+        "target": "get_db",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "login",
+        "target": "get_db",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "get_profile",
+        "target": "verify_token",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "get_profile",
+        "target": "get_db",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "list_users",
+        "target": "get_db",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "verify_token",
+        "target": "HTTPBearer",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "get_db",
+        "target": "asyncpg",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "verify_token",
+        "target": "jwt",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "register",
+        "target": "bcrypt",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "login",
+        "target": "bcrypt",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "login",
+        "target": "jwt",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "main",
+        "target": "uvicorn",
+        "properties": {}
+      },
+      {
+        "type": "IMPLEMENTS",
+        "source": "UserCreate",
+        "target": "pydantic",
+        "properties": {}
+      },
+      {
+        "type": "IMPLEMENTS",
+        "source": "UserResponse",
+        "target": "pydantic",
+        "properties": {}
+      },
+      {
+        "type": "IMPLEMENTS",
+        "source": "LoginRequest",
+        "target": "pydantic",
+        "properties": {}
+      },
+      {
+        "type": "IMPLEMENTS",
+        "source": "TokenResponse",
+        "target": "pydantic",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "app",
+        "target": "register",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "app",
+        "target": "login",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "app",
+        "target": "get_profile",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "app",
+        "target": "list_users",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "get_db",
+        "target": "users",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "register",
+        "target": "users",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "login",
+        "target": "users",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "get_profile",
+        "target": "users",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "list_users",
+        "target": "users",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "app",
+        "target": "register",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "app",
+        "target": "login",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "app",
+        "target": "get_profile",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "app",
+        "target": "list_users",
+        "properties": {}
+      },
+      {
+        "type": "BUILDS",
+        "source": "main",
+        "target": "app",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "FastAPI REST API Documentation",
+    "domain": "software",
+    "docType": "code_structure_documentation",
+    "extractedFields": {
+      "module_name": [
+        "fastapi",
+        "fastapi.security",
+        "pydantic",
+        "typing",
+        "bcrypt",
+        "jwt",
+        "datetime",
+        "asyncpg",
+        "uvicorn"
+      ],
+      "module_description": [
+        "FastAPI framework for building APIs",
+        "Security utilities for FastAPI",
+        "Data validation and settings management",
+        "Support for type hints",
+        "Library for hashing passwords",
+        "Library for encoding and decoding JWT tokens",
+        "Date and time manipulation",
+        "Asynchronous PostgreSQL database adapter",
+        "ASGI server for running FastAPI applications"
+      ],
+      "class_name": [
+        "UserCreate",
+        "UserResponse",
+        "LoginRequest",
+        "TokenResponse"
+      ],
+      "class_description": [
+        "Pydantic model for user registration data",
+        "Pydantic model for user response data",
+        "Pydantic model for login credentials",
+        "Pydantic model for JWT token response"
+      ],
+      "function_name": [
+        "get_db",
+        "verify_token",
+        "register",
+        "login",
+        "get_profile",
+        "list_users"
+      ],
+      "function_description": [
+        "Dependency function to get database connection",
+        "Dependency function to verify JWT token",
+        "Endpoint function to register a new user",
+        "Endpoint function to authenticate user and return JWT",
+        "Endpoint function to get current user profile",
+        "Endpoint function to list all users with pagination"
+      ],
+      "dependency_name": [
+        "Depends",
+        "HTTPBearer"
+      ],
+      "dependency_description": [
+        "FastAPI dependency injection",
+        "Security scheme for Bearer token authentication"
+      ],
+      "configuration_name": [
+        "JWT_SECRET",
+        "DATABASE_URL"
+      ],
+      "configuration_description": [
+        "Secret key for JWT encoding and decoding",
+        "URL for PostgreSQL database connection"
+      ],
+      "api_name": "app",
+      "api_description": "FastAPI application instance",
+      "database_name": "users",
+      "database_description": "PostgreSQL database for storing user data",
+      "script_name": "main",
+      "script_description": "Script to run the FastAPI application with uvicorn"
+    },
+    "keywords": [
+      "user",
+      "password",
+      "email",
+      "token",
+      "name",
+      "import",
+      "status",
+      "users",
+      "return",
+      "credentials",
+      "query",
+      "depends",
+      "userresponse",
+      "created",
+      "httpexception",
+      "raise",
+      "response",
+      "async",
+      "await",
+      "code"
+    ],
+    "summary": "This document outlines a FastAPI-based REST API for user management and authentication. It includes endpoints for user registration and login, with JWT token-based security and password validation. The API uses PostgreSQL for data storage and implements secure password hashing with bcrypt."
+  },
+  "cacheInfo": {
+    "cached": true,
+    "hash": "11e5e95fb59022cd3f1c50819fe66096b7f11576f03d84640eabdf3d6ba45adf"
+  },
+  "performance": {
+    "totalTimeMs": 1,
+    "tokens": {
+      "input": 2603,
+      "output": 2413,
+      "total": 5016
+    },
+    "costUsd": 0.00104006
+  }
+}

@@ -4,7 +4,7 @@
  */
 
 export { ClassifyClient } from './client.js';
-export type { ClassifyOptions, ClassifyResult } from './types.js';
+export type { ClassifyOptions, ClassifyResult, ClassifyFileOptions } from './types.js';
 
 // LLM Providers
 export {
@@ -48,3 +48,10 @@ export { CacheManager, type CacheStats } from './cache/index.js';
 
 // Batch Processing
 export { BatchProcessor, type BatchOptions, type BatchResult } from './batch/index.js';
+
+// Utilities
+export {
+  DEFAULT_IGNORE_PATTERNS,
+  mergeIgnorePatterns,
+  shouldIgnore,
+} from './utils/ignore-patterns.js';

@@ -1,4 +1,4 @@
-import type { ClassifyOptions, ClassifyResult } from './types.js';
+import type { ClassifyOptions, ClassifyResult, ClassifyFileOptions } from './types.js';
 import { DocumentProcessor } from './preprocessing/document-processor.js';
 import { TemplateLoader } from './templates/template-loader.js';
 import { TemplateSelector } from './templates/template-selector.js';
@@ -15,7 +15,7 @@ import type { LLMProvider } from './llm/types.js';
  * Main client for document classification
  */
 export class ClassifyClient {
-  private options: Required<ClassifyOptions>;
+  private options: Omit<Required<ClassifyOptions>, 'templatesDir'> & { templatesDir?: string };
   private documentProcessor: DocumentProcessor;
   private templateLoader: TemplateLoader;
   private llmProvider: LLMProvider;
@@ -25,7 +25,11 @@ export class ClassifyClient {
   private cacheManager: CacheManager;
   private templatesLoaded = false;
 
+  private templatesDir?: string;
+
   constructor(options: ClassifyOptions = {}) {
+    this.templatesDir = options.templatesDir;
+    
     // Initialize with defaults, merging provided options
     this.options = {
       provider: options.provider ?? 'deepseek',
@@ -33,6 +37,7 @@ export class ClassifyClient {
       apiKey: options.apiKey ?? process.env.DEEPSEEK_API_KEY ?? '',
       cacheEnabled: options.cacheEnabled ?? true,
       cacheDir: options.cacheDir ?? '.classify-cache',
+      templatesDir: options.templatesDir,
       compressionEnabled: options.compressionEnabled ?? true,
       compressionRatio: options.compressionRatio ?? 0.5,
     };
@@ -67,9 +72,10 @@ export class ClassifyClient {
   /**
    * Classify a document
    * @param filePath - Path to document file
+   * @param options - Classification options
    * @returns Classification result
    */
-  async classify(filePath: string): Promise<ClassifyResult> {
+  async classify(filePath: string, options: ClassifyFileOptions = {}): Promise<ClassifyResult> {
     const startTime = Date.now();
 
     // Initialize cache
@@ -77,7 +83,7 @@ export class ClassifyClient {
 
     // Load templates if not loaded yet
     if (!this.templatesLoaded) {
-      await this.templateLoader.loadTemplates();
+      await this.templateLoader.loadTemplates(this.templatesDir);
       this.templatesLoaded = true;
     }
 
@@ -92,8 +98,20 @@ export class ClassifyClient {
       return cached;
     }
 
-    // Step 3: Select template using LLM
-    const templateSelection = await this.templateSelector.select(processedDoc.markdown);
+    // Step 3: Select template using LLM or use forced templateId
+    let templateSelection;
+    if (options.templateId) {
+      // Use forced template
+      templateSelection = {
+        templateId: options.templateId,
+        confidence: 1.0,
+        tokens: { input: 0, output: 0, total: 0 },
+        costUsd: 0,
+      };
+    } else {
+      // Auto-select template using LLM
+      templateSelection = await this.templateSelector.select(processedDoc.markdown);
+    }
 
     // Get selected template
     const template = this.templateLoader.getTemplate(templateSelection.templateId);
@@ -157,14 +175,14 @@ export class ClassifyClient {
   /**
    * Get cache statistics
    */
-  async getCacheStats() {
+  async getCacheStats(): Promise<import('./cache/cache-manager.js').CacheStats> {
     return this.cacheManager.getStats();
   }
 
   /**
    * Clear cache
    */
-  async clearCache(options?: { olderThanDays?: number }) {
+  async clearCache(options?: { olderThanDays?: number }): Promise<number> {
     if (options?.olderThanDays) {
       return this.cacheManager.clearOlderThan(options.olderThanDays);
     }

@@ -57,8 +57,59 @@ export class DocumentProcessor {
     const buffer = await readFile(filePath);
     const hash = this.calculateHash(buffer);
 
-    // Convert to markdown
-    const result = await this.converter.convertFile(filePath);
+    // Check if it's a source code or text file (read directly)
+    const codeExtensions = [
+      '.ts',
+      '.tsx',
+      '.js',
+      '.jsx',
+      '.rs',
+      '.py',
+      '.go',
+      '.java',
+      '.c',
+      '.cpp',
+      '.h',
+      '.hpp',
+      '.sh',
+      '.bash',
+      '.md',
+      '.json',
+      '.yml',
+      '.yaml',
+      '.toml',
+      '.xml',
+      '.sql',
+      '.css',
+      '.scss',
+      '.less',
+      '.rb',
+      '.php',
+      '.swift',
+      '.kt',
+      '.cs',
+      '.txt',
+    ];
+
+    const ext = filePath.substring(filePath.lastIndexOf('.')).toLowerCase();
+    let result;
+
+    if (codeExtensions.includes(ext)) {
+      // Read as plain text (source code, configs, docs)
+      const content = buffer.toString('utf-8');
+      result = {
+        markdown: content,
+        metadata: {
+          format: ext.substring(1), // Remove dot
+          fileSize: buffer.length,
+          pageCount: 1,
+          warnings: [],
+        },
+      };
+    } else {
+      // Convert binary documents to markdown
+      result = await this.converter.convertFile(filePath);
+    }
 
     const processingTimeMs = Date.now() - startTime;
 

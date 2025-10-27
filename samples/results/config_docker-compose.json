@@ -1,0 +1,477 @@
+{
+  "file": "config/docker-compose.yml",
+  "classification": {
+    "template": "software_project",
+    "confidence": 0.95,
+    "domain": "software",
+    "docType": "docker-compose.yml"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"Docker Compose Configuration\",\n      title: \"Docker Compose Configuration\",\n      domain: \"software\",\n      doc_type: \"docker-compose.yml\"\n    })\nCREATE (e0:Module {name: \"postgres\", description: \"PostgreSQL database service\", version: \"16-alpine\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Module {name: \"api\", description: \"Node.js API server\", build_context: \"./Dockerfile.api\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Module {name: \"vector-db\", description: \"Rust vector database\", build_context: \"./rust-vector-db\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Module {name: \"processor\", description: \"Python data processor\", build_context: \"./python-pipeline\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Module {name: \"frontend\", description: \"React frontend (production build)\", build_context: \"./Dockerfile.frontend\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Module {name: \"nginx\", description: \"Nginx reverse proxy\", image: \"nginx:alpine\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Database {name: \"users\", type: \"PostgreSQL\", user: \"admin\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Configuration {name: \"postgres_config\", environment: \"[object Object]\", ports: \"5432:5432\", volumes: \"postgres_data:/var/lib/postgresql/data,./schema.sql:/docker-entrypoint-initdb.d/schema.sql,./nginx.conf:/etc/nginx/nginx.conf:ro,./ssl:/etc/nginx/ssl:ro\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Configuration {name: \"api_config\", environment: \"[object Object]\", ports: \"3000:3000\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Configuration {name: \"vector_db_config\", environment: \"[object Object]\", ports: \"8080:8080\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Configuration {name: \"processor_config\", environment: \"[object Object]\", command: \"process_data.py\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Configuration {name: \"frontend_config\", ports: \"80:80\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Configuration {name: \"nginx_config\", ports: \"443:443\", volumes: \"./nginx.conf:/etc/nginx/nginx.conf:ro,./ssl:/etc/nginx/ssl:ro\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Script {name: \"schema.sql\", path: \"./schema.sql\", description: \"Database initialization script\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Script {name: \"process_data.py\", description: \"Python data processing script\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:API {name: \"api_endpoint\", port: \"3000\", protocol: \"HTTP\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:API {name: \"vector_db_api\", port: \"8080\", protocol: \"HTTP\"})\nCREATE (doc)-[:MENTIONS]->(e16)\nCREATE (e17:Test {name: \"postgres_healthcheck\", command: \"pg_isready -U admin\", interval: \"10s\", timeout: \"5s\", retries: \"5\"})\nCREATE (doc)-[:MENTIONS]->(e17)",
+    "entities": [
+      {
+        "type": "Module",
+        "properties": {
+          "name": "postgres",
+          "description": "PostgreSQL database service",
+          "version": "16-alpine"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "api",
+          "description": "Node.js API server",
+          "build_context": "./Dockerfile.api"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "vector-db",
+          "description": "Rust vector database",
+          "build_context": "./rust-vector-db"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "processor",
+          "description": "Python data processor",
+          "build_context": "./python-pipeline"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "frontend",
+          "description": "React frontend (production build)",
+          "build_context": "./Dockerfile.frontend"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "nginx",
+          "description": "Nginx reverse proxy",
+          "image": "nginx:alpine"
+        }
+      },
+      {
+        "type": "Database",
+        "properties": {
+          "name": "users",
+          "type": "PostgreSQL",
+          "user": "admin"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "postgres_config",
+          "environment": {
+            "POSTGRES_DB": "users",
+            "POSTGRES_USER": "admin",
+            "POSTGRES_PASSWORD": "${DB_PASSWORD:-secret}"
+          },
+          "ports": "5432:5432",
+          "volumes": [
+            "postgres_data:/var/lib/postgresql/data",
+            "./schema.sql:/docker-entrypoint-initdb.d/schema.sql",
+            [
+              "./nginx.conf:/etc/nginx/nginx.conf:ro",
+              "./ssl:/etc/nginx/ssl:ro"
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "api_config",
+          "environment": {
+            "NODE_ENV": "production",
+            "PORT": "3000",
+            "DATABASE_URL": "postgresql://admin:${DB_PASSWORD:-secret}@postgres:5432/users",
+            "JWT_SECRET": "${JWT_SECRET:-change-me-in-production}"
+          },
+          "ports": "3000:3000"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "vector_db_config",
+          "environment": {
+            "BIND_ADDRESS": "0.0.0.0:8080",
+            "DATA_DIR": "/data"
+          },
+          "ports": "8080:8080"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "processor_config",
+          "environment": {
+            "VECTOR_DB_URL": "http://vector-db:8080",
+            "DATABASE_URL": "postgresql://admin:${DB_PASSWORD:-secret}@postgres:5432/users"
+          },
+          "command": "process_data.py"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "frontend_config",
+          "ports": "80:80"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "nginx_config",
+          "ports": "443:443",
+          "volumes": [
+            "./nginx.conf:/etc/nginx/nginx.conf:ro",
+            "./ssl:/etc/nginx/ssl:ro"
+          ]
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "schema.sql",
+          "path": "./schema.sql",
+          "description": "Database initialization script"
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "process_data.py",
+          "description": "Python data processing script"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "api_endpoint",
+          "port": 3000,
+          "protocol": "HTTP"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "vector_db_api",
+          "port": 8080,
+          "protocol": "HTTP"
+        }
+      },
+      {
+        "type": "Test",
+        "properties": {
+          "name": "postgres_healthcheck",
+          "command": "pg_isready -U admin",
+          "interval": "10s",
+          "timeout": "5s",
+          "retries": 5
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "DEPENDS_ON",
+        "source": "api",
+        "target": "postgres",
+        "properties": {
+          "condition": "service_healthy"
+        }
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "processor",
+        "target": "postgres",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "processor",
+        "target": "vector-db",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "frontend",
+        "target": "api",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "nginx",
+        "target": "frontend",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "api",
+        "target": "users",
+        "properties": {
+          "connection_string": "postgresql://admin:${DB_PASSWORD:-secret}@postgres:5432/users"
+        }
+      },
+      {
+        "type": "ACCESSES",
+        "source": "processor",
+        "target": "users",
+        "properties": {
+          "connection_string": "postgresql://admin:${DB_PASSWORD:-secret}@postgres:5432/users"
+        }
+      },
+      {
+        "type": "ACCESSES",
+        "source": "processor",
+        "target": "vector_db_api",
+        "properties": {
+          "url": "http://vector-db:8080"
+        }
+      },
+      {
+        "type": "EXPOSES",
+        "source": "postgres",
+        "target": "api_endpoint",
+        "properties": {
+          "port": 5432
+        }
+      },
+      {
+        "type": "EXPOSES",
+        "source": "api",
+        "target": "api_endpoint",
+        "properties": {
+          "port": 3000
+        }
+      },
+      {
+        "type": "EXPOSES",
+        "source": "vector-db",
+        "target": "vector_db_api",
+        "properties": {
+          "port": 8080
+        }
+      },
+      {
+        "type": "EXPOSES",
+        "source": "frontend",
+        "target": "api_endpoint",
+        "properties": {
+          "port": 80
+        }
+      },
+      {
+        "type": "EXPOSES",
+        "source": "nginx",
+        "target": "api_endpoint",
+        "properties": {
+          "port": 443
+        }
+      },
+      {
+        "type": "CONTAINS",
+        "source": "postgres",
+        "target": "postgres_config",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "api",
+        "target": "api_config",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "vector-db",
+        "target": "vector_db_config",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "processor",
+        "target": "processor_config",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "frontend",
+        "target": "frontend_config",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "nginx",
+        "target": "nginx_config",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "postgres_healthcheck",
+        "target": "postgres",
+        "properties": {}
+      },
+      {
+        "type": "BUILDS",
+        "source": "api",
+        "target": "api_endpoint",
+        "properties": {}
+      },
+      {
+        "type": "BUILDS",
+        "source": "frontend",
+        "target": "api_endpoint",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "Docker Compose Configuration",
+    "domain": "software",
+    "docType": "docker-compose.yml",
+    "extractedFields": {
+      "module_name": [
+        "postgres",
+        "api",
+        "vector-db",
+        "processor",
+        "frontend",
+        "nginx"
+      ],
+      "module_description": [
+        "PostgreSQL database service",
+        "Node.js API server",
+        "Rust vector database",
+        "Python data processor",
+        "React frontend (production build)",
+        "Nginx reverse proxy"
+      ],
+      "module_version": "16-alpine",
+      "module_build_context": [
+        "./Dockerfile.api",
+        "./rust-vector-db",
+        "./python-pipeline",
+        "./Dockerfile.frontend"
+      ],
+      "module_image": "nginx:alpine",
+      "database_name": "users",
+      "database_type": "PostgreSQL",
+      "database_user": "admin",
+      "configuration_name": [
+        "postgres_config",
+        "api_config",
+        "vector_db_config",
+        "processor_config",
+        "frontend_config",
+        "nginx_config"
+      ],
+      "configuration_environment": [
+        {
+          "POSTGRES_DB": "users",
+          "POSTGRES_USER": "admin",
+          "POSTGRES_PASSWORD": "${DB_PASSWORD:-secret}"
+        },
+        {
+          "NODE_ENV": "production",
+          "PORT": "3000",
+          "DATABASE_URL": "postgresql://admin:${DB_PASSWORD:-secret}@postgres:5432/users",
+          "JWT_SECRET": "${JWT_SECRET:-change-me-in-production}"
+        },
+        {
+          "BIND_ADDRESS": "0.0.0.0:8080",
+          "DATA_DIR": "/data"
+        },
+        {
+          "VECTOR_DB_URL": "http://vector-db:8080",
+          "DATABASE_URL": "postgresql://admin:${DB_PASSWORD:-secret}@postgres:5432/users"
+        }
+      ],
+      "configuration_ports": [
+        "5432:5432",
+        "3000:3000",
+        "8080:8080",
+        "80:80",
+        "443:443"
+      ],
+      "configuration_volumes": [
+        "postgres_data:/var/lib/postgresql/data",
+        "./schema.sql:/docker-entrypoint-initdb.d/schema.sql",
+        [
+          "./nginx.conf:/etc/nginx/nginx.conf:ro",
+          "./ssl:/etc/nginx/ssl:ro"
+        ]
+      ],
+      "configuration_command": "process_data.py",
+      "script_name": [
+        "schema.sql",
+        "process_data.py"
+      ],
+      "script_path": "./schema.sql",
+      "script_description": [
+        "Database initialization script",
+        "Python data processing script"
+      ],
+      "api_name": [
+        "api_endpoint",
+        "vector_db_api"
+      ],
+      "api_port": [
+        3000,
+        8080
+      ],
+      "api_protocol": [
+        "HTTP",
+        "HTTP"
+      ],
+      "test_name": "postgres_healthcheck",
+      "test_command": "pg_isready -U admin",
+      "test_interval": "10s",
+      "test_timeout": "5s",
+      "test_retries": 5
+    },
+    "keywords": [
+      "data",
+      "postgres",
+      "vector",
+      "dockerfile",
+      "nginx",
+      "networks",
+      "network",
+      "container",
+      "name",
+      "volumes",
+      "secret",
+      "ports",
+      "build",
+      "frontend",
+      "5432",
+      "8080",
+      "postgresql",
+      "database",
+      "user",
+      "environment"
+    ],
+    "summary": "This Docker Compose configuration defines a multi-service application with a PostgreSQL database for user data, a Node.js API server, a Rust-based vector database, and a Python data processor. The services are interconnected through a shared network and include health checks, volume mounts for data persistence, and environment-specific configurations. The setup enables containerized deployment with dependencies between services and production-ready settings."
+  },
+  "cacheInfo": {
+    "cached": true,
+    "hash": "5d7acf91049067cb85512cd4dd722473676d11512ecacacca5a00dd65a40e9c4"
+  },
+  "performance": {
+    "totalTimeMs": 1,
+    "tokens": {
+      "input": 2323,
+      "output": 2037,
+      "total": 4360
+    },
+    "costUsd": 0.0008955800000000002
+  }
+}

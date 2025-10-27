@@ -1,0 +1,548 @@
+{
+  "file": "config/Cargo.toml",
+  "classification": {
+    "template": "software_project",
+    "confidence": 0.95,
+    "domain": "software",
+    "docType": "Cargo Manifest"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"vector-db Cargo.toml\",\n      title: \"vector-db Cargo.toml\",\n      domain: \"software\",\n      doc_type: \"Cargo Manifest\"\n    })\nCREATE (e0:Module {name: \"vector-db\", version: \"0.3.0\", edition: \"2024\", rust_version: \"1.75\", authors: \"Development Team <dev@example.com>\", description: \"High-performance database HNSW indexing\", license: \"MIT\", repository: \"https://github.com/example/vector-db\", keywords: \"vector,database,hnsw,search,embeddings\", categories: \"database,algorithms\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Dependency {name: \"Web framework\", version: \"0.7\", features: \"ws,multipart,full,cors,trace,compression-gzip,derive,v4,serde,serde,derive,env-filter\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Dependency {name: \"tokio\", version: \"1.35\", features: \"full\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Dependency {name: \"tower\", version: \"0.4\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Dependency {name: \"tower\", version: \"0.5\", features: \"cors,trace,compression-gzip\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Dependency {name: \"Vector search\", version: \"0.12\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Dependency {name: \"Vector search\", version: \"0.15\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Dependency {name: \"Serialization\", version: \"1.0\", features: \"derive\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Dependency {name: \"serde_json\", version: \"1.0\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Dependency {name: \"Storage\", version: \"2.1\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Dependency {name: \"Storage\", version: \"0.13\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Dependency {name: \"Storage\", version: \"0.9\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Dependency {name: \"Utilities\", version: \"1.6\", features: \"v4,serde\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Dependency {name: \"chrono\", version: \"0.4\", features: \"serde\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Dependency {name: \"Validation\", version: \"0.16\", features: \"derive\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Dependency {name: \"Logging\", version: \"0.3\", features: \"env-filter\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:Dependency {name: \"Async\", version: \"0.3\"})\nCREATE (doc)-[:MENTIONS]->(e16)\nCREATE (e17:Dependency {name: \"dev-dependency\", version: \"0.5\"})\nCREATE (doc)-[:MENTIONS]->(e17)\nCREATE (e18:Dependency {name: \"dev-dependency\", version: \"1.4\"})\nCREATE (doc)-[:MENTIONS]->(e18)\nCREATE (e19:Dependency {name: \"dev-dependency\", version: \"3.8\"})\nCREATE (doc)-[:MENTIONS]->(e19)\nCREATE (e20:Test {name: \"search_benchmark\", harness: \"true\"})\nCREATE (doc)-[:MENTIONS]->(e20)\nCREATE (e21:Configuration {name: \"profile.release\", lto: \"true\", codegen_units: \"3\", opt_level: \"thin\"})\nCREATE (doc)-[:MENTIONS]->(e21)\nCREATE (e22:Configuration {name: \"profile.dev\", codegen_units: \"0\"})\nCREATE (doc)-[:MENTIONS]->(e22)\nCREATE (e23:Configuration {name: \"profile.test\", codegen_units: \"1\"})\nCREATE (doc)-[:MENTIONS]->(e23)\nCREATE (e24:Configuration {name: \"features\", default: \"hnsw,compression\", compression: \"zstd\", hnsw: \"hnsw,compression\"})\nCREATE (doc)-[:MENTIONS]->(e24)",
+    "entities": [
+      {
+        "type": "Module",
+        "properties": {
+          "name": "vector-db",
+          "version": "0.3.0",
+          "edition": "2024",
+          "rust_version": "1.75",
+          "authors": [
+            "Development Team <dev@example.com>"
+          ],
+          "description": "High-performance database HNSW indexing",
+          "license": "MIT",
+          "repository": "https://github.com/example/vector-db",
+          "keywords": [
+            "vector",
+            "database",
+            "hnsw",
+            "search",
+            "embeddings"
+          ],
+          "categories": [
+            "database",
+            "algorithms"
+          ]
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Web framework",
+          "version": "0.7",
+          "features": [
+            "ws",
+            "multipart",
+            [
+              "full"
+            ],
+            [
+              "cors",
+              "trace",
+              "compression-gzip"
+            ],
+            [
+              "derive"
+            ],
+            [
+              "v4",
+              "serde"
+            ],
+            [
+              "serde"
+            ],
+            [
+              "derive"
+            ],
+            [
+              "env-filter"
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "tokio",
+          "version": "1.35",
+          "features": [
+            "full"
+          ]
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "tower",
+          "version": "0.4"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "tower",
+          "version": "0.5",
+          "features": [
+            "cors",
+            "trace",
+            "compression-gzip"
+          ]
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Vector search",
+          "version": "0.12"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Vector search",
+          "version": "0.15"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Serialization",
+          "version": "1.0",
+          "features": [
+            "derive"
+          ]
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "serde_json",
+          "version": "1.0"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Storage",
+          "version": "2.1"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Storage",
+          "version": "0.13"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Storage",
+          "version": "0.9"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Utilities",
+          "version": "1.6",
+          "features": [
+            "v4",
+            "serde"
+          ]
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "chrono",
+          "version": "0.4",
+          "features": [
+            "serde"
+          ]
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Validation",
+          "version": "0.16",
+          "features": [
+            "derive"
+          ]
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Logging",
+          "version": "0.3",
+          "features": [
+            "env-filter"
+          ]
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Async",
+          "version": "0.3"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "dev-dependency",
+          "version": "0.5"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "dev-dependency",
+          "version": "1.4"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "dev-dependency",
+          "version": "3.8"
+        }
+      },
+      {
+        "type": "Test",
+        "properties": {
+          "name": "search_benchmark",
+          "harness": true
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "profile.release",
+          "lto": true,
+          "codegen_units": 3,
+          "opt_level": "thin"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "profile.dev",
+          "codegen_units": 0
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "profile.test",
+          "codegen_units": 1
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "features",
+          "default": [
+            "hnsw",
+            "compression"
+          ],
+          "compression": [
+            "zstd"
+          ],
+          "hnsw": [
+            "hnsw",
+            "compression"
+          ]
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "DEPENDS_ON",
+        "source": "vector-db",
+        "target": "Web framework",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "vector-db",
+        "target": "tokio",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "vector-db",
+        "target": "tower",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "vector-db",
+        "target": "Vector search",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "vector-db",
+        "target": "Serialization",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "vector-db",
+        "target": "serde_json",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "vector-db",
+        "target": "Storage",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "vector-db",
+        "target": "Utilities",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "vector-db",
+        "target": "chrono",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "vector-db",
+        "target": "Validation",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "vector-db",
+        "target": "Logging",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "vector-db",
+        "target": "Async",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "vector-db",
+        "target": "dev-dependency",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "vector-db",
+        "target": "search_benchmark",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "vector-db",
+        "target": "profile.release",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "vector-db",
+        "target": "profile.dev",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "vector-db",
+        "target": "profile.test",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "vector-db",
+        "target": "features",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "search_benchmark",
+        "target": "vector-db",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "vector-db Cargo.toml",
+    "domain": "software",
+    "docType": "Cargo Manifest",
+    "extractedFields": {
+      "module_name": "vector-db",
+      "module_version": "0.3.0",
+      "module_edition": "2024",
+      "module_rust_version": "1.75",
+      "module_authors": [
+        "Development Team <dev@example.com>"
+      ],
+      "module_description": "High-performance database HNSW indexing",
+      "module_license": "MIT",
+      "module_repository": "https://github.com/example/vector-db",
+      "module_keywords": [
+        "vector",
+        "database",
+        "hnsw",
+        "search",
+        "embeddings"
+      ],
+      "module_categories": [
+        "database",
+        "algorithms"
+      ],
+      "dependency_name": [
+        "Web framework",
+        "tokio",
+        "tower",
+        "tower",
+        "Vector search",
+        "Vector search",
+        "Serialization",
+        "serde_json",
+        "Storage",
+        "Storage",
+        "Storage",
+        "Utilities",
+        "chrono",
+        "Validation",
+        "Logging",
+        "Async",
+        "dev-dependency",
+        "dev-dependency",
+        "dev-dependency"
+      ],
+      "dependency_version": [
+        "0.7",
+        "1.35",
+        "0.4",
+        "0.5",
+        "0.12",
+        "0.15",
+        "1.0",
+        "1.0",
+        "2.1",
+        "0.13",
+        "0.9",
+        "1.6",
+        "0.4",
+        "0.16",
+        "0.3",
+        "0.3",
+        "0.5",
+        "1.4",
+        "3.8"
+      ],
+      "dependency_features": [
+        "ws",
+        "multipart",
+        [
+          "full"
+        ],
+        [
+          "cors",
+          "trace",
+          "compression-gzip"
+        ],
+        [
+          "derive"
+        ],
+        [
+          "v4",
+          "serde"
+        ],
+        [
+          "serde"
+        ],
+        [
+          "derive"
+        ],
+        [
+          "env-filter"
+        ]
+      ],
+      "test_name": "search_benchmark",
+      "test_harness": true,
+      "configuration_name": [
+        "profile.release",
+        "profile.dev",
+        "profile.test",
+        "features"
+      ],
+      "configuration_lto": true,
+      "configuration_codegen_units": [
+        3,
+        0,
+        1
+      ],
+      "configuration_opt_level": "thin",
+      "configuration_default": [
+        "hnsw",
+        "compression"
+      ],
+      "configuration_compression": [
+        "zstd"
+      ],
+      "configuration_hnsw": [
+        "hnsw",
+        "compression"
+      ]
+    },
+    "keywords": [
+      "version",
+      "features",
+      "hnsw",
+      "vector",
+      "compression",
+      "serde",
+      "database",
+      "search",
+      "profile",
+      "level",
+      "name",
+      "example",
+      "dependencies",
+      "full",
+      "tower",
+      "derive",
+      "zstd",
+      "tracing",
+      "async",
+      "2024"
+    ],
+    "summary": "This document describes a high-performance vector database package called \"vector-db\" version 0.3.0, built in Rust for efficient vector search operations using HNSW indexing. The package includes dependencies for web services, vector search algorithms, data serialization, storage management, and performance optimization features. It supports compression and is configured for both development and production environments with benchmarking capabilities."
+  },
+  "cacheInfo": {
+    "cached": true,
+    "hash": "c8c6a1dbb3accaa73e3ae0df984e0fb320655aebdc435695fbae0dd4b8faddbe"
+  },
+  "performance": {
+    "totalTimeMs": 1,
+    "tokens": {
+      "input": 2187,
+      "output": 1894,
+      "total": 4081
+    },
+    "costUsd": 0.0008365
+  }
+}

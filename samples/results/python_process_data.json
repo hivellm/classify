@@ -1,0 +1,510 @@
+{
+  "file": "python/process_data.py",
+  "classification": {
+    "template": "software_project",
+    "confidence": 0.95,
+    "domain": "software",
+    "docType": "code_document"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"Data Processing Pipeline\",\n      title: \"Data Processing Pipeline\",\n      domain: \"software\",\n      doc_type: \"code_document\"\n    })\nCREATE (e0:Module {name: \"main_module\", description: \"Primary module for data processing pipeline\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Class {name: \"DataProcessor\", description: \"Processes and embeds documents for search\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Function {name: \"__init__\", description: \"Initialize embedding model\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Function {name: \"load_data\", description: \"Load CSV or JSON file into DataFrame\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Function {name: \"generate_embeddings\", description: \"Generate embeddings for list of texts\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Function {name: \"upload_to_vectordb\", description: \"Upload documents to vector database\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Function {name: \"process_file\", description: \"Complete processing from input file to database upload\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Function {name: \"main\", description: \"Main entry point for the script\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Dependency {name: \"asyncio\", description: \"Asynchronous I/O support\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Dependency {name: \"pandas\", description: \"Data manipulation library\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Dependency {name: \"numpy\", description: \"Numerical computing library\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Dependency {name: \"typing\", description: \"Type hints support\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Dependency {name: \"pathlib\", description: \"Object-oriented filesystem paths\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Dependency {name: \"json\", description: \"JSON encoding and decoding\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Dependency {name: \"logging\", description: \"Logging framework\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Dependency {name: \"sentence_transformers\", description: \"Sentence embedding models\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:Dependency {name: \"httpx\", description: \"HTTP client library\"})\nCREATE (doc)-[:MENTIONS]->(e16)\nCREATE (e17:Configuration {name: \"VECTOR_DB_URL\", description: \"URL for the vector database\"})\nCREATE (doc)-[:MENTIONS]->(e17)\nCREATE (e18:Configuration {name: \"MODEL_NAME\", description: \"Name of the embedding model\"})\nCREATE (doc)-[:MENTIONS]->(e18)\nCREATE (e19:Configuration {name: \"BATCH_SIZE\", description: \"Batch size for embedding generation\"})\nCREATE (doc)-[:MENTIONS]->(e19)\nCREATE (e20:API {name: \"vector_db_api\", description: \"API for vector database interactions\"})\nCREATE (doc)-[:MENTIONS]->(e20)\nCREATE (e21:Database {name: \"vector_database\", description: \"Vector database for storing embeddings\"})\nCREATE (doc)-[:MENTIONS]->(e21)\nCREATE (e22:Script {name: \"main_script\", description: \"Executable script entry point\"})\nCREATE (doc)-[:MENTIONS]->(e22)\nCREATE (e23:Documentation {name: \"class_doc\", description: \"Class-level documentation for DataProcessor\"})\nCREATE (doc)-[:MENTIONS]->(e23)\nCREATE (e24:Documentation {name: \"function_doc\", description: \"Function-level documentation for various methods\"})\nCREATE (doc)-[:MENTIONS]->(e24)",
+    "entities": [
+      {
+        "type": "Module",
+        "properties": {
+          "name": "main_module",
+          "description": "Primary module for data processing pipeline"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "DataProcessor",
+          "description": "Processes and embeds documents for search"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "__init__",
+          "description": "Initialize embedding model"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "load_data",
+          "description": "Load CSV or JSON file into DataFrame"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "generate_embeddings",
+          "description": "Generate embeddings for list of texts"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "upload_to_vectordb",
+          "description": "Upload documents to vector database"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "process_file",
+          "description": "Complete processing from input file to database upload"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "main",
+          "description": "Main entry point for the script"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "asyncio",
+          "description": "Asynchronous I/O support"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "pandas",
+          "description": "Data manipulation library"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "numpy",
+          "description": "Numerical computing library"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "typing",
+          "description": "Type hints support"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "pathlib",
+          "description": "Object-oriented filesystem paths"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "json",
+          "description": "JSON encoding and decoding"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "logging",
+          "description": "Logging framework"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "sentence_transformers",
+          "description": "Sentence embedding models"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "httpx",
+          "description": "HTTP client library"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "VECTOR_DB_URL",
+          "description": "URL for the vector database"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "MODEL_NAME",
+          "description": "Name of the embedding model"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "BATCH_SIZE",
+          "description": "Batch size for embedding generation"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "vector_db_api",
+          "description": "API for vector database interactions"
+        }
+      },
+      {
+        "type": "Database",
+        "properties": {
+          "name": "vector_database",
+          "description": "Vector database for storing embeddings"
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "main_script",
+          "description": "Executable script entry point"
+        }
+      },
+      {
+        "type": "Documentation",
+        "properties": {
+          "name": "class_doc",
+          "description": "Class-level documentation for DataProcessor"
+        }
+      },
+      {
+        "type": "Documentation",
+        "properties": {
+          "name": "function_doc",
+          "description": "Function-level documentation for various methods"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "IMPORTS",
+        "source": "main_module",
+        "target": "asyncio",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "main_module",
+        "target": "pandas",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "main_module",
+        "target": "numpy",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "main_module",
+        "target": "typing",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "main_module",
+        "target": "pathlib",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "main_module",
+        "target": "json",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "main_module",
+        "target": "logging",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "main_module",
+        "target": "sentence_transformers",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "main_module",
+        "target": "httpx",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "main_module",
+        "target": "DataProcessor",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "main_module",
+        "target": "main",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "DataProcessor",
+        "target": "__init__",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "DataProcessor",
+        "target": "load_data",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "DataProcessor",
+        "target": "generate_embeddings",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "DataProcessor",
+        "target": "upload_to_vectordb",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "DataProcessor",
+        "target": "process_file",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "DataProcessor",
+        "target": "sentence_transformers",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "DataProcessor",
+        "target": "httpx",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "load_data",
+        "target": "pandas",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "generate_embeddings",
+        "target": "numpy",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "upload_to_vectordb",
+        "target": "httpx",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "process_file",
+        "target": "load_data",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "process_file",
+        "target": "generate_embeddings",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "process_file",
+        "target": "upload_to_vectordb",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "main",
+        "target": "process_file",
+        "properties": {}
+      },
+      {
+        "type": "IMPLEMENTS",
+        "source": "DataProcessor",
+        "target": "class_doc",
+        "properties": {}
+      },
+      {
+        "type": "IMPLEMENTS",
+        "source": "__init__",
+        "target": "function_doc",
+        "properties": {}
+      },
+      {
+        "type": "IMPLEMENTS",
+        "source": "load_data",
+        "target": "function_doc",
+        "properties": {}
+      },
+      {
+        "type": "IMPLEMENTS",
+        "source": "generate_embeddings",
+        "target": "function_doc",
+        "properties": {}
+      },
+      {
+        "type": "IMPLEMENTS",
+        "source": "upload_to_vectordb",
+        "target": "function_doc",
+        "properties": {}
+      },
+      {
+        "type": "IMPLEMENTS",
+        "source": "process_file",
+        "target": "function_doc",
+        "properties": {}
+      },
+      {
+        "type": "IMPLEMENTS",
+        "source": "main",
+        "target": "function_doc",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "upload_to_vectordb",
+        "target": "vector_db_api",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "vector_db_api",
+        "target": "vector_database",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "main_script",
+        "target": "main",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "Data Processing Pipeline",
+    "domain": "software",
+    "docType": "code_document",
+    "extractedFields": {
+      "module_name": "main_module",
+      "module_description": "Primary module for data processing pipeline",
+      "class_name": "DataProcessor",
+      "class_description": "Processes and embeds documents for search",
+      "function_name": [
+        "__init__",
+        "load_data",
+        "generate_embeddings",
+        "upload_to_vectordb",
+        "process_file",
+        "main"
+      ],
+      "function_description": [
+        "Initialize embedding model",
+        "Load CSV or JSON file into DataFrame",
+        "Generate embeddings for list of texts",
+        "Upload documents to vector database",
+        "Complete processing from input file to database upload",
+        "Main entry point for the script"
+      ],
+      "dependency_name": [
+        "asyncio",
+        "pandas",
+        "numpy",
+        "typing",
+        "pathlib",
+        "json",
+        "logging",
+        "sentence_transformers",
+        "httpx"
+      ],
+      "dependency_description": [
+        "Asynchronous I/O support",
+        "Data manipulation library",
+        "Numerical computing library",
+        "Type hints support",
+        "Object-oriented filesystem paths",
+        "JSON encoding and decoding",
+        "Logging framework",
+        "Sentence embedding models",
+        "HTTP client library"
+      ],
+      "configuration_name": [
+        "VECTOR_DB_URL",
+        "MODEL_NAME",
+        "BATCH_SIZE"
+      ],
+      "configuration_description": [
+        "URL for the vector database",
+        "Name of the embedding model",
+        "Batch size for embedding generation"
+      ],
+      "api_name": "vector_db_api",
+      "api_description": "API for vector database interactions",
+      "database_name": "vector_database",
+      "database_description": "Vector database for storing embeddings",
+      "script_name": "main_script",
+      "script_description": "Executable script entry point",
+      "documentation_name": [
+        "class_doc",
+        "function_doc"
+      ],
+      "documentation_description": [
+        "Class-level documentation for DataProcessor",
+        "Function-level documentation for various methods"
+      ]
+    },
+    "keywords": [
+      "path",
+      "file",
+      "documents",
+      "self",
+      "data",
+      "embeddings",
+      "model",
+      "text",
+      "import",
+      "logger",
+      "vector",
+      "info",
+      "name",
+      "texts",
+      "input",
+      "list",
+      "upload",
+      "column",
+      "json",
+      "logging"
+    ],
+    "summary": "This document describes a data processing pipeline that loads user data from CSV or JSON files, generates vector embeddings using a sentence transformer model, and stores them in a vector database. The system processes data in batches and includes logging, configuration management, and asynchronous operations for database uploads. The pipeline is designed for vector search applications with configurable model parameters and batch processing capabilities."
+  },
+  "cacheInfo": {
+    "cached": true,
+    "hash": "da5ea935dcc413759ef87a98a7b3ba7e7138276444cc57d20cca859517e60eac"
+  },
+  "performance": {
+    "totalTimeMs": 0,
+    "tokens": {
+      "input": 2415,
+      "output": 2309,
+      "total": 4724
+    },
+    "costUsd": 0.0009846200000000003
+  }
+}

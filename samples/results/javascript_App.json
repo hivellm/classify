@@ -1,0 +1,325 @@
+{
+  "file": "javascript/App.jsx",
+  "classification": {
+    "template": "software_project",
+    "confidence": 0.95,
+    "domain": "software",
+    "docType": "React Component Code"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"User Management System React Application\",\n      title: \"User Management System React Application\",\n      domain: \"software\",\n      doc_type: \"React Component Code\"\n    })\nCREATE (e0:Module {name: \"react\", imports: \"useState,useEffect,useAuth,UserList,LoginForm,Dashboard\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Module {name: \"./hooks/useAuth\", imports: \"useAuth\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Module {name: \"./components/UserList\", imports: \"UserList\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Module {name: \"./components/LoginForm\", imports: \"LoginForm\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Module {name: \"./components/Dashboard\", imports: \"Dashboard\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Function {name: \"App\", component_type: \"React Functional Component\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Function {name: \"ProfileView\", component_type: \"React Functional Component\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Function {name: \"handleLogin\", scope: \"App component\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Function {name: \"handleLogout\", scope: \"App component\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Function {name: \"handleSave\", scope: \"ProfileView component\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:API {name: \"/api/users/profile\", method: \"PUT\", requires_auth: \"true\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Configuration {name: \"localStorage\", key: \"authToken\"})\nCREATE (doc)-[:MENTIONS]->(e11)",
+    "entities": [
+      {
+        "type": "Module",
+        "properties": {
+          "name": "react",
+          "imports": [
+            "useState",
+            "useEffect",
+            [
+              "useAuth"
+            ],
+            [
+              "UserList"
+            ],
+            [
+              "LoginForm"
+            ],
+            [
+              "Dashboard"
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "./hooks/useAuth",
+          "imports": [
+            "useAuth"
+          ]
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "./components/UserList",
+          "imports": [
+            "UserList"
+          ]
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "./components/LoginForm",
+          "imports": [
+            "LoginForm"
+          ]
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "./components/Dashboard",
+          "imports": [
+            "Dashboard"
+          ]
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "App",
+          "component_type": "React Functional Component"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "ProfileView",
+          "component_type": "React Functional Component"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "handleLogin",
+          "scope": "App component"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "handleLogout",
+          "scope": "App component"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "handleSave",
+          "scope": "ProfileView component"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "/api/users/profile",
+          "method": "PUT",
+          "requires_auth": true
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "localStorage",
+          "key": "authToken"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "IMPORTS",
+        "source": "App",
+        "target": "react",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "App",
+        "target": "./hooks/useAuth",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "App",
+        "target": "./components/UserList",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "App",
+        "target": "./components/LoginForm",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "App",
+        "target": "./components/Dashboard",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "App",
+        "target": "useAuth",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "App",
+        "target": "useState",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "App",
+        "target": "useEffect",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "handleLogin",
+        "target": "login",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "handleLogout",
+        "target": "logout",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "ProfileView",
+        "target": "useState",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "handleSave",
+        "target": "fetch",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "App",
+        "target": "handleLogin",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "App",
+        "target": "handleLogout",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "ProfileView",
+        "target": "handleSave",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "App",
+        "target": "localStorage",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "handleSave",
+        "target": "localStorage",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "handleSave",
+        "target": "/api/users/profile",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "App",
+        "target": "useAuth",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "User Management System React Application",
+    "domain": "software",
+    "docType": "React Component Code",
+    "extractedFields": {
+      "module_name": [
+        "react",
+        "./hooks/useAuth",
+        "./components/UserList",
+        "./components/LoginForm",
+        "./components/Dashboard"
+      ],
+      "module_imports": [
+        "useState",
+        "useEffect",
+        [
+          "useAuth"
+        ],
+        [
+          "UserList"
+        ],
+        [
+          "LoginForm"
+        ],
+        [
+          "Dashboard"
+        ]
+      ],
+      "function_name": [
+        "App",
+        "ProfileView",
+        "handleLogin",
+        "handleLogout",
+        "handleSave"
+      ],
+      "function_component_type": [
+        "React Functional Component",
+        "React Functional Component"
+      ],
+      "function_scope": [
+        "App component",
+        "App component",
+        "ProfileView component"
+      ],
+      "api_name": "/api/users/profile",
+      "api_method": "PUT",
+      "api_requires_auth": true,
+      "configuration_name": "localStorage",
+      "configuration_key": "authToken"
+    },
+    "keywords": [
+      "user",
+      "classname",
+      "profile",
+      "button",
+      "email",
+      "dashboard",
+      "const",
+      "view",
+      "name",
+      "formdata",
+      "error",
+      "onclick",
+      "setview",
+      "value",
+      "strong",
+      "import",
+      "login",
+      "failed",
+      "users",
+      "usestate"
+    ],
+    "summary": "This React application manages user authentication and navigation between different views. It displays a login form for unauthenticated users and a dashboard interface with navigation options for authenticated users. The app handles login/logout functionality and automatically checks for existing authentication tokens on initial load."
+  },
+  "cacheInfo": {
+    "cached": true,
+    "hash": "83ca70c66be4755861663d3e937978f135ed43df19c68d391b88460cdc64f7d3"
+  },
+  "performance": {
+    "totalTimeMs": 1,
+    "tokens": {
+      "input": 2354,
+      "output": 1172,
+      "total": 3526
+    },
+    "costUsd": 0.0006577200000000001
+  }
+}

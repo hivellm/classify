@@ -1,0 +1,539 @@
+{
+  "file": "docs/CHANGELOG.md",
+  "classification": {
+    "template": "software_project",
+    "confidence": 0.95,
+    "domain": "software",
+    "docType": "changelog"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"Changelog All notable changes Management System\",\n      title: \"Changelog All notable changes Management System\",\n      domain: \"software\",\n      doc_type: \"changelog\"\n    })\nCREATE (e0:Module {name: \"Vector database integration\", version: \"1.2.0\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Module {name: \"Semantic search\", version: \"1.2.0\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Module {name: \"Python processing pipeline\", version: \"1.2.0\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Module {name: \"Batch embedding generation\", version: \"1.2.0\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Module {name: \"FastAPI alternative\", version: \"1.2.0\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Module {name: \"Profile update endpoint\", version: \"1.1.0\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Module {name: \"Health check\", version: \"1.1.0\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Module {name: \"CORS configuration\", version: \"1.1.0\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Module {name: \"Initial release\", version: \"1.0.0\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Module {name: \"Beta Basic authentication\", version: \"0.9.0\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Function {name: \"deletion\", version: \"1.1.0\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Function {name: \"Rate all endpoints\", version: \"1.1.0\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Function {name: \"registration\", version: \"1.0.0\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Function {name: \"CRUD operations\", version: \"0.9.0\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Class {name: \"AuthService\", version: \"1.0.0\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Class {name: \"UserController\", version: \"1.0.0\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:Dependency {name: \"Rust HNSW\", version: \"1.2.0\"})\nCREATE (doc)-[:MENTIONS]->(e16)\nCREATE (e17:Dependency {name: \"Express\", version: \"1.1.0\"})\nCREATE (doc)-[:MENTIONS]->(e17)\nCREATE (e18:Dependency {name: \"Helmet.js\", version: \"1.1.0\"})\nCREATE (doc)-[:MENTIONS]->(e18)\nCREATE (e19:Dependency {name: \"bcrypt\", version: \"1.0.0\"})\nCREATE (doc)-[:MENTIONS]->(e19)\nCREATE (e20:Configuration {name: \"JWT expiration\", version: \"1.2.0\"})\nCREATE (doc)-[:MENTIONS]->(e20)\nCREATE (e21:Configuration {name: \"Connection pool\", version: \"1.2.0\"})\nCREATE (doc)-[:MENTIONS]->(e21)\nCREATE (e22:Configuration {name: \"Rate edge cases\", version: \"1.2.0\"})\nCREATE (doc)-[:MENTIONS]->(e22)\nCREATE (e23:Configuration {name: \"Security headers\", version: \"1.1.0\"})\nCREATE (doc)-[:MENTIONS]->(e23)\nCREATE (e24:Configuration {name: \"JWT tokens 24h expiry\", version: \"1.0.0\"})\nCREATE (doc)-[:MENTIONS]->(e24)\nCREATE (e25:Configuration {name: \"Input\", version: \"1.0.0\"})\nCREATE (doc)-[:MENTIONS]->(e25)\nCREATE (e26:API {name: \"REST API\", version: \"1.0.0\"})\nCREATE (doc)-[:MENTIONS]->(e26)\nCREATE (e27:Database {name: \"PostgreSQL\", version: \"1.0.0\"})\nCREATE (doc)-[:MENTIONS]->(e27)\nCREATE (e28:Database {name: \"Database schema\", version: \"0.9.0\"})\nCREATE (doc)-[:MENTIONS]->(e28)\nCREATE (e29:Documentation {name: \"Changelog\", version: \"1.2.0\"})\nCREATE (doc)-[:MENTIONS]->(e29)",
+    "entities": [
+      {
+        "type": "Module",
+        "properties": {
+          "name": "Vector database integration",
+          "version": "1.2.0"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "Semantic search",
+          "version": "1.2.0"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "Python processing pipeline",
+          "version": "1.2.0"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "Batch embedding generation",
+          "version": "1.2.0"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "FastAPI alternative",
+          "version": "1.2.0"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "Profile update endpoint",
+          "version": "1.1.0"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "Health check",
+          "version": "1.1.0"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "CORS configuration",
+          "version": "1.1.0"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "Initial release",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "Beta Basic authentication",
+          "version": "0.9.0"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "deletion",
+          "version": "1.1.0"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "Rate all endpoints",
+          "version": "1.1.0"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "registration",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "CRUD operations",
+          "version": "0.9.0"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "AuthService",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "UserController",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Rust HNSW",
+          "version": "1.2.0"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Express",
+          "version": "1.1.0"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Helmet.js",
+          "version": "1.1.0"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "bcrypt",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "JWT expiration",
+          "version": "1.2.0"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "Connection pool",
+          "version": "1.2.0"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "Rate edge cases",
+          "version": "1.2.0"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "Security headers",
+          "version": "1.1.0"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "JWT tokens 24h expiry",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "Input",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "REST API",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "type": "Database",
+        "properties": {
+          "name": "PostgreSQL",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "type": "Database",
+        "properties": {
+          "name": "Database schema",
+          "version": "0.9.0"
+        }
+      },
+      {
+        "type": "Documentation",
+        "properties": {
+          "name": "Changelog",
+          "version": "1.2.0"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "DEPENDS_ON",
+        "source": "Vector database integration",
+        "target": "Rust HNSW",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Initial release",
+        "target": "Express.js",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Initial release",
+        "target": "bcrypt",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Initial release",
+        "target": "PostgreSQL",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Profile update endpoint",
+        "target": "Express",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Health check",
+        "target": "Express",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "CORS configuration",
+        "target": "Express",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Security headers",
+        "target": "Helmet.js",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "Initial release",
+        "target": "AuthService",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "Initial release",
+        "target": "UserController",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "Initial release",
+        "target": "REST API",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "Beta Basic authentication",
+        "target": "CRUD operations",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "Beta Basic authentication",
+        "target": "Database schema",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "AuthService",
+        "target": "PostgreSQL",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "UserController",
+        "target": "PostgreSQL",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "CRUD operations",
+        "target": "Database schema",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "REST API",
+        "target": "Profile update endpoint",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "REST API",
+        "target": "Health check",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "REST API",
+        "target": "Rate all endpoints",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "REST API",
+        "target": "registration",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "REST API",
+        "target": "deletion",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Changelog",
+        "target": "Vector database integration",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Changelog",
+        "target": "Semantic search",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Changelog",
+        "target": "Python processing pipeline",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Changelog",
+        "target": "Batch embedding generation",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Changelog",
+        "target": "FastAPI alternative",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Changelog",
+        "target": "Profile update endpoint",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Changelog",
+        "target": "Health check",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Changelog",
+        "target": "CORS configuration",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Changelog",
+        "target": "Initial release",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Changelog",
+        "target": "Beta Basic authentication",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "Changelog All notable changes Management System",
+    "domain": "software",
+    "docType": "changelog",
+    "extractedFields": {
+      "module_name": [
+        "Vector database integration",
+        "Semantic search",
+        "Python processing pipeline",
+        "Batch embedding generation",
+        "FastAPI alternative",
+        "Profile update endpoint",
+        "Health check",
+        "CORS configuration",
+        "Initial release",
+        "Beta Basic authentication"
+      ],
+      "module_version": [
+        "1.2.0",
+        "1.2.0",
+        "1.2.0",
+        "1.2.0",
+        "1.2.0",
+        "1.1.0",
+        "1.1.0",
+        "1.1.0",
+        "1.0.0",
+        "0.9.0"
+      ],
+      "function_name": [
+        "deletion",
+        "Rate all endpoints",
+        "registration",
+        "CRUD operations"
+      ],
+      "function_version": [
+        "1.1.0",
+        "1.1.0",
+        "1.0.0",
+        "0.9.0"
+      ],
+      "class_name": [
+        "AuthService",
+        "UserController"
+      ],
+      "class_version": [
+        "1.0.0",
+        "1.0.0"
+      ],
+      "dependency_name": [
+        "Rust HNSW",
+        "Express",
+        "Helmet.js",
+        "bcrypt"
+      ],
+      "dependency_version": [
+        "1.2.0",
+        "1.1.0",
+        "1.1.0",
+        "1.0.0"
+      ],
+      "configuration_name": [
+        "JWT expiration",
+        "Connection pool",
+        "Rate edge cases",
+        "Security headers",
+        "JWT tokens 24h expiry",
+        "Input"
+      ],
+      "configuration_version": [
+        "1.2.0",
+        "1.2.0",
+        "1.2.0",
+        "1.1.0",
+        "1.0.0",
+        "1.0.0"
+      ],
+      "api_name": "REST API",
+      "api_version": "1.0.0",
+      "database_name": [
+        "PostgreSQL",
+        "Database schema"
+      ],
+      "database_version": [
+        "1.0.0",
+        "0.9.0"
+      ],
+      "documentation_name": "Changelog",
+      "documentation_version": "1.2.0"
+    },
+    "keywords": [
+      "user",
+      "added",
+      "2025",
+      "database",
+      "updated",
+      "rate",
+      "limiting",
+      "bcrypt",
+      "security",
+      "integration",
+      "data",
+      "backend",
+      "changed",
+      "improved",
+      "password",
+      "validation",
+      "error",
+      "fixed",
+      "handling",
+      "connection"
+    ],
+    "summary": "The User Management System has evolved from basic authentication in version 0.9.0 to advanced features in version 1.2.0, including vector database integration for semantic search and enhanced security measures. Key additions across versions include JWT-based authorization, rate limiting, security headers, and improved error handling. The system now offers both Express.js and FastAPI backends with robust password validation and SQL injection protection."
+  },
+  "cacheInfo": {
+    "cached": true,
+    "hash": "3e6dba78f7a66ff31920bac0f0c0ad896462a31d958bc095a3afb829c2c28ab2"
+  },
+  "performance": {
+    "totalTimeMs": 2,
+    "tokens": {
+      "input": 1959,
+      "output": 2331,
+      "total": 4290
+    },
+    "costUsd": 0.0009269400000000001
+  }
+}

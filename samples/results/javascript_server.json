@@ -1,0 +1,353 @@
+{
+  "file": "javascript/server.js",
+  "classification": {
+    "template": "software_project",
+    "confidence": 0.95,
+    "domain": "software",
+    "docType": "API Documentation"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"REST API Management\",\n      title: \"REST API Management\",\n      domain: \"software\",\n      doc_type: \"API Documentation\"\n    })\nCREATE (e0:Module {name: \"express\", description: \"Web framework for Node.js\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Module {name: \"cors\", description: \"CORS middleware for Express\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Module {name: \"helmet\", description: \"Security middleware for Express\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Module {name: \"morgan\", description: \"HTTP request logger middleware\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Module {name: \"express-rate-limit\", description: \"Rate limiting middleware for Express\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Module {name: \"pg\", description: \"PostgreSQL client for Node.js\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Module {name: \"bcrypt\", description: \"Password hashing library\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Module {name: \"jsonwebtoken\", description: \"JWT token generation and verification\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Function {name: \"authenticate\", description: \"JWT authentication middleware\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:API {name: \"POST /api/register\", description: \"User registration endpoint\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:API {name: \"POST /api/login\", description: \"User login endpoint\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:API {name: \"GET /api/profile\", description: \"User profile endpoint\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Database {name: \"users\", description: \"User database table\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Configuration {name: \"PORT\", description: \"Server port configuration\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Configuration {name: \"JWT_SECRET\", description: \"JWT secret key configuration\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Configuration {name: \"DATABASE_URL\", description: \"Database connection string\"})\nCREATE (doc)-[:MENTIONS]->(e15)",
+    "entities": [
+      {
+        "type": "Module",
+        "properties": {
+          "name": "express",
+          "description": "Web framework for Node.js"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "cors",
+          "description": "CORS middleware for Express"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "helmet",
+          "description": "Security middleware for Express"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "morgan",
+          "description": "HTTP request logger middleware"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "express-rate-limit",
+          "description": "Rate limiting middleware for Express"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "pg",
+          "description": "PostgreSQL client for Node.js"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "bcrypt",
+          "description": "Password hashing library"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "jsonwebtoken",
+          "description": "JWT token generation and verification"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "authenticate",
+          "description": "JWT authentication middleware"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "POST /api/register",
+          "description": "User registration endpoint"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "POST /api/login",
+          "description": "User login endpoint"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "GET /api/profile",
+          "description": "User profile endpoint"
+        }
+      },
+      {
+        "type": "Database",
+        "properties": {
+          "name": "users",
+          "description": "User database table"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "PORT",
+          "description": "Server port configuration"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "JWT_SECRET",
+          "description": "JWT secret key configuration"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "DATABASE_URL",
+          "description": "Database connection string"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "IMPORTS",
+        "source": "REST API Management",
+        "target": "express",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "REST API Management",
+        "target": "cors",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "REST API Management",
+        "target": "helmet",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "REST API Management",
+        "target": "morgan",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "REST API Management",
+        "target": "express-rate-limit",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "REST API Management",
+        "target": "pg",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "REST API Management",
+        "target": "bcrypt",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "REST API Management",
+        "target": "jsonwebtoken",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "authenticate",
+        "target": "jsonwebtoken",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "POST /api/register",
+        "target": "bcrypt",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "POST /api/register",
+        "target": "pg",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "POST /api/login",
+        "target": "bcrypt",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "POST /api/login",
+        "target": "pg",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "POST /api/login",
+        "target": "jsonwebtoken",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "GET /api/profile",
+        "target": "pg",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "POST /api/register",
+        "target": "authenticate",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "GET /api/profile",
+        "target": "authenticate",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "POST /api/register",
+        "target": "users",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "POST /api/login",
+        "target": "users",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "GET /api/profile",
+        "target": "users",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "REST API Management",
+        "target": "POST /api/register",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "REST API Management",
+        "target": "POST /api/login",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "REST API Management",
+        "target": "GET /api/profile",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "REST API Management",
+    "domain": "software",
+    "docType": "API Documentation",
+    "extractedFields": {
+      "module_name": [
+        "express",
+        "cors",
+        "helmet",
+        "morgan",
+        "express-rate-limit",
+        "pg",
+        "bcrypt",
+        "jsonwebtoken"
+      ],
+      "module_description": [
+        "Web framework for Node.js",
+        "CORS middleware for Express",
+        "Security middleware for Express",
+        "HTTP request logger middleware",
+        "Rate limiting middleware for Express",
+        "PostgreSQL client for Node.js",
+        "Password hashing library",
+        "JWT token generation and verification"
+      ],
+      "function_name": "authenticate",
+      "function_description": "JWT authentication middleware",
+      "api_name": [
+        "POST /api/register",
+        "POST /api/login",
+        "GET /api/profile"
+      ],
+      "api_description": [
+        "User registration endpoint",
+        "User login endpoint",
+        "User profile endpoint"
+      ],
+      "database_name": "users",
+      "database_description": "User database table",
+      "configuration_name": [
+        "PORT",
+        "JWT_SECRET",
+        "DATABASE_URL"
+      ],
+      "configuration_description": [
+        "Server port configuration",
+        "JWT secret key configuration",
+        "Database connection string"
+      ]
+    },
+    "keywords": [
+      "error",
+      "const",
+      "user",
+      "json",
+      "status",
+      "email",
+      "password",
+      "pool",
+      "require",
+      "token",
+      "return",
+      "name",
+      "await",
+      "console",
+      "express",
+      "server",
+      "port",
+      "async",
+      "result",
+      "process"
+    ],
+    "summary": "This document outlines an Express.js REST API server for user management, implementing security measures including Helmet, CORS, rate limiting, and JWT authentication. It connects to a PostgreSQL database and includes endpoints for user registration and authentication, with middleware for token verification and input validation. The server is configured to handle user data securely with password hashing and structured error handling."
+  },
+  "cacheInfo": {
+    "cached": true,
+    "hash": "58153003d4cab03a7176db74bc99f2cccbb934a65c7694f40d586c2956c07d56"
+  },
+  "performance": {
+    "totalTimeMs": 1,
+    "tokens": {
+      "input": 2748,
+      "output": 1545,
+      "total": 4293
+    },
+    "costUsd": 0.0008173200000000001
+  }
+}

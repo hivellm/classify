@@ -1,0 +1,302 @@
+{
+  "file": "typescript/database.ts",
+  "classification": {
+    "template": "software_project",
+    "confidence": 0.95,
+    "domain": "software",
+    "docType": "TypeScript/JavaScript Database Module"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"PostgreSQL Database Connection and Repository Implementation\",\n      title: \"PostgreSQL Database Connection and Repository Implementation\",\n      domain: \"software\",\n      doc_type: \"TypeScript/JavaScript Database Module\"\n    })\nCREATE (e0:Module {name: \"Database Module\", language: \"TypeScript/JavaScript\", purpose: \"Database connection management and repository pattern implementation\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Class {name: \"Connection\", access_modifier: \"public\", methods: \"constructor,query,transaction,close,healthCheck,create,findByEmail,findById,update,delete,create,findByToken,deleteExpired\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Class {name: \"UserRepository\", access_modifier: \"public\", methods: \"create,findByEmail,findById,update,delete\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Class {name: \"SessionRepository\", access_modifier: \"public\", methods: \"create,findByToken,deleteExpired\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Dependency {name: \"pg\", type: \"PostgreSQL client library\", version: \"unknown\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Dependency {name: \"util\", type: \"Node.js built-in module\", purpose: \"promisify function\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Database {name: \"PostgreSQL\", type: \"relational database\", tables: \"users,sessions\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Configuration {name: \"Pool Configuration\", max_connections: \"20\", idle_timeout: \"30000\", connection_timeout: \"2000\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Function {name: \"promisify\", source: \"util module\", purpose: \"Convert callback-based functions to promises\"})\nCREATE (doc)-[:MENTIONS]->(e8)",
+    "entities": [
+      {
+        "type": "Module",
+        "properties": {
+          "name": "Database Module",
+          "language": "TypeScript/JavaScript",
+          "purpose": "Database connection management and repository pattern implementation"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "Connection",
+          "access_modifier": "public",
+          "methods": [
+            "constructor",
+            "query",
+            "transaction",
+            "close",
+            "healthCheck",
+            [
+              "create",
+              "findByEmail",
+              "findById",
+              "update",
+              "delete"
+            ],
+            [
+              "create",
+              "findByToken",
+              "deleteExpired"
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "UserRepository",
+          "access_modifier": "public",
+          "methods": [
+            "create",
+            "findByEmail",
+            "findById",
+            "update",
+            "delete"
+          ]
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "SessionRepository",
+          "access_modifier": "public",
+          "methods": [
+            "create",
+            "findByToken",
+            "deleteExpired"
+          ]
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "pg",
+          "type": "PostgreSQL client library",
+          "version": "unknown"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "util",
+          "type": "Node.js built-in module",
+          "purpose": "promisify function"
+        }
+      },
+      {
+        "type": "Database",
+        "properties": {
+          "name": "PostgreSQL",
+          "type": "relational database",
+          "tables": [
+            "users",
+            "sessions"
+          ]
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "Pool Configuration",
+          "max_connections": 20,
+          "idle_timeout": 30000,
+          "connection_timeout": 2000
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "promisify",
+          "source": "util module",
+          "purpose": "Convert callback-based functions to promises"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "IMPORTS",
+        "source": "Database Module",
+        "target": "pg",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "Database Module",
+        "target": "util",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "Connection",
+        "target": "UserRepository",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "Connection",
+        "target": "SessionRepository",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Connection",
+        "target": "pg",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "UserRepository",
+        "target": "pg",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "SessionRepository",
+        "target": "pg",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "UserRepository",
+        "target": "users table",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "SessionRepository",
+        "target": "sessions table",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "Connection",
+        "target": "Pool constructor",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "Connection",
+        "target": "UserRepository constructor",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "Connection",
+        "target": "SessionRepository constructor",
+        "properties": {}
+      },
+      {
+        "type": "IMPLEMENTS",
+        "source": "UserRepository",
+        "target": "CRUD operations",
+        "properties": {}
+      },
+      {
+        "type": "IMPLEMENTS",
+        "source": "SessionRepository",
+        "target": "Session management operations",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "PostgreSQL Database Connection and Repository Implementation",
+    "domain": "software",
+    "docType": "TypeScript/JavaScript Database Module",
+    "extractedFields": {
+      "module_name": "Database Module",
+      "module_language": "TypeScript/JavaScript",
+      "module_purpose": "Database connection management and repository pattern implementation",
+      "class_name": [
+        "Connection",
+        "UserRepository",
+        "SessionRepository"
+      ],
+      "class_access_modifier": [
+        "public",
+        "public",
+        "public"
+      ],
+      "class_methods": [
+        "constructor",
+        "query",
+        "transaction",
+        "close",
+        "healthCheck",
+        [
+          "create",
+          "findByEmail",
+          "findById",
+          "update",
+          "delete"
+        ],
+        [
+          "create",
+          "findByToken",
+          "deleteExpired"
+        ]
+      ],
+      "dependency_name": [
+        "pg",
+        "util"
+      ],
+      "dependency_type": [
+        "PostgreSQL client library",
+        "Node.js built-in module"
+      ],
+      "dependency_version": "unknown",
+      "dependency_purpose": "promisify function",
+      "database_name": "PostgreSQL",
+      "database_type": "relational database",
+      "database_tables": [
+        "users",
+        "sessions"
+      ],
+      "configuration_name": "Pool Configuration",
+      "configuration_max_connections": 20,
+      "configuration_idle_timeout": 30000,
+      "configuration_connection_timeout": 2000,
+      "function_name": "promisify",
+      "function_source": "util module",
+      "function_purpose": "Convert callback-based functions to promises"
+    },
+    "keywords": [
+      "pool",
+      "query",
+      "string",
+      "await",
+      "result",
+      "const",
+      "promise",
+      "async",
+      "client",
+      "return",
+      "users",
+      "database",
+      "sessions",
+      "rows",
+      "callback",
+      "interface",
+      "class",
+      "private",
+      "userrepository",
+      "sessionrepository"
+    ],
+    "summary": "This document presents a PostgreSQL database connection manager class that handles connection pooling, query execution, and transactions. It includes repository classes for users and sessions, and provides methods for database health checks and connection management. The implementation supports both direct queries and transactional operations with proper error handling and resource cleanup."
+  },
+  "cacheInfo": {
+    "cached": true,
+    "hash": "98a73c3b4bd6baee27768fffc452d73e6eb65b1862b3d152f847589555d2af14"
+  },
+  "performance": {
+    "totalTimeMs": 7,
+    "tokens": {
+      "input": 2489,
+      "output": 1051,
+      "total": 3540
+    },
+    "costUsd": 0.00064274
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "file": "rust/model.rs",
+  "classification": {
+    "template": "software_project",
+    "confidence": 0.95,
+    "domain": "software",
+    "docType": "Rust Code Snippets"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"Data Structures for Vector Operations\",\n      title: \"Data Structures for Vector Operations\",\n      domain: \"software\",\n      doc_type: \"Rust Code Snippets\"\n    })\nCREATE (e0:Class {name: \"InsertRequest\", traits: \"Debug, Clone, Serialize, Deserialize, Validate\", fields: \"id: String, vector: Vec<f32>, metadata: serde_json::Value\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Class {name: \"SearchRequest\", traits: \"Debug, Clone, Serialize, Deserialize, Validate\", fields: \"query: Vec<f32>, k: Option<usize>, threshold: Option<f32>, filters: Option<serde_json::Value>\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Class {name: \"SearchResponse\", traits: \"Debug, Clone, Serialize, Deserialize\", fields: \"success: bool, results: Vec<SearchResult>, total: usize\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Class {name: \"SearchResult\", traits: \"Debug, Clone, Serialize, Deserialize\", fields: \"id: String, score: f32, metadata: Option<serde_json::Value>\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Dependency {name: \"serde\", crates: \"serde, serde_json\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Dependency {name: \"validator\", crates: \"validate\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Documentation {name: \"Inline Docs\", content: \"Comments describing fields and constraints\"})\nCREATE (doc)-[:MENTIONS]->(e6)",
+    "entities": [
+      {
+        "type": "Class",
+        "properties": {
+          "name": "InsertRequest",
+          "traits": "Debug, Clone, Serialize, Deserialize, Validate",
+          "fields": "id: String, vector: Vec<f32>, metadata: serde_json::Value"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "SearchRequest",
+          "traits": "Debug, Clone, Serialize, Deserialize, Validate",
+          "fields": "query: Vec<f32>, k: Option<usize>, threshold: Option<f32>, filters: Option<serde_json::Value>"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "SearchResponse",
+          "traits": "Debug, Clone, Serialize, Deserialize",
+          "fields": "success: bool, results: Vec<SearchResult>, total: usize"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "SearchResult",
+          "traits": "Debug, Clone, Serialize, Deserialize",
+          "fields": "id: String, score: f32, metadata: Option<serde_json::Value>"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "serde",
+          "crates": "serde, serde_json"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "validator",
+          "crates": "validate"
+        }
+      },
+      {
+        "type": "Documentation",
+        "properties": {
+          "name": "Inline Docs",
+          "content": "Comments describing fields and constraints"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "DEPENDS_ON",
+        "source": "InsertRequest",
+        "target": "serde",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "InsertRequest",
+        "target": "validator",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "SearchRequest",
+        "target": "serde",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "SearchRequest",
+        "target": "validator",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "SearchResponse",
+        "target": "serde",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "SearchResult",
+        "target": "serde",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "SearchResponse",
+        "target": "SearchResult",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Inline Docs",
+        "target": "InsertRequest",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Inline Docs",
+        "target": "SearchRequest",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Inline Docs",
+        "target": "SearchResponse",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Inline Docs",
+        "target": "SearchResult",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "Data Structures for Vector Operations",
+    "domain": "software",
+    "docType": "Rust Code Snippets",
+    "extractedFields": {
+      "class_name": [
+        "InsertRequest",
+        "SearchRequest",
+        "SearchResponse",
+        "SearchResult"
+      ],
+      "class_traits": [
+        "Debug, Clone, Serialize, Deserialize, Validate",
+        "Debug, Clone, Serialize, Deserialize, Validate",
+        "Debug, Clone, Serialize, Deserialize",
+        "Debug, Clone, Serialize, Deserialize"
+      ],
+      "class_fields": [
+        "id: String, vector: Vec<f32>, metadata: serde_json::Value",
+        "query: Vec<f32>, k: Option<usize>, threshold: Option<f32>, filters: Option<serde_json::Value>",
+        "success: bool, results: Vec<SearchResult>, total: usize",
+        "id: String, score: f32, metadata: Option<serde_json::Value>"
+      ],
+      "dependency_name": [
+        "serde",
+        "validator"
+      ],
+      "dependency_crates": [
+        "serde, serde_json",
+        "validate"
+      ],
+      "documentation_name": "Inline Docs",
+      "documentation_content": "Comments describing fields and constraints"
+    },
+    "keywords": [
+      "string",
+      "metadata",
+      "test",
+      "validate",
+      "self",
+      "deserialize",
+      "serialize",
+      "tags",
+      "meta",
+      "vector",
+      "derive",
+      "debug",
+      "clone",
+      "struct",
+      "document",
+      "title",
+      "type",
+      "serde",
+      "search",
+      "results"
+    ],
+    "summary": "This document defines data structures and validation rules for a vector database system. It includes request models for inserting vectors (with ID, vector data, and metadata) and searching vectors (with query, result limits, and filters), plus response models for search results. All structures feature validation constraints and serialization capabilities."
+  },
+  "cacheInfo": {
+    "cached": true,
+    "hash": "0c0d8cd51baebd484082755aab796786bff9033a6b115c5963a45427e8ec7f46"
+  },
+  "performance": {
+    "totalTimeMs": 0,
+    "tokens": {
+      "input": 2253,
+      "output": 878,
+      "total": 3131
+    },
+    "costUsd": 0.0005612600000000001
+  }
+}

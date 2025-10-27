@@ -1,0 +1,551 @@
+{
+  "file": "rust/handler.rs",
+  "classification": {
+    "template": "software_project",
+    "confidence": 0.95,
+    "domain": "software",
+    "docType": "API Documentation"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"HTTP Handlers API\",\n      title: \"HTTP Handlers API\",\n      domain: \"software\",\n      doc_type: \"API Documentation\"\n    })\nCREATE (e0:Module {name: \"HTTP Handlers API\", description: \"REST API operations for vector database\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Function {name: \"create_router\", description: \"Creates the API router with all routes\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Function {name: \"insert_vector\", description: \"POST /vectors handler for inserting vectors\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Function {name: \"search_vectors\", description: \"POST /search handler for searching vectors\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Function {name: \"delete_vector\", properties: \"[object Object]\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Function {name: \"health_check\", description: \"GET /health handler for health check\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Function {name: \"get_stats\", description: \"GET /stats handler for getting statistics\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:API {name: \"/vectors\", method: \"POST\", description: \"Insert vector endpoint\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:API {name: \"/search\", method: \"POST\", description: \"Search vectors endpoint\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:API {name: \"/vectors/:id\", method: \"DELETE\", description: \"Delete vector endpoint\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:API {name: \"/health\", method: \"GET\", description: \"Health check endpoint\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:API {name: \"/stats\", method: \"GET\", description: \"Statistics endpoint\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Database {name: \"VectorDB\", description: \"Vector database instance\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Dependency {name: \"axum\", description: \"Web framework for Rust\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Dependency {name: \"serde\", description: \"Serialization/deserialization framework\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Dependency {name: \"tokio\", description: \"Async runtime\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:Class {name: \"InsertRequest\", description: \"Request model for insert operation\"})\nCREATE (doc)-[:MENTIONS]->(e16)\nCREATE (e17:Class {name: \"SearchRequest\", description: \"Request model for search operation\"})\nCREATE (doc)-[:MENTIONS]->(e17)\nCREATE (e18:Class {name: \"SearchResponse\", description: \"Response model for search operation\"})\nCREATE (doc)-[:MENTIONS]->(e18)\nCREATE (e19:Class {name: \"InsertResponse\", description: \"Response model for insert operation\"})\nCREATE (doc)-[:MENTIONS]->(e19)\nCREATE (e20:Class {name: \"DeleteResponse\", description: \"Response model for delete operation\"})\nCREATE (doc)-[:MENTIONS]->(e20)\nCREATE (e21:Class {name: \"HealthResponse\", description: \"Response model for health check\"})\nCREATE (doc)-[:MENTIONS]->(e21)\nCREATE (e22:Class {name: \"SearchResult\", description: \"Individual search result item\"})\nCREATE (doc)-[:MENTIONS]->(e22)\nCREATE (e23:Configuration {name: \"SharedDB\", description: \"Shared database configuration using Arc<RwLock<VectorDB>>\"})\nCREATE (doc)-[:MENTIONS]->(e23)",
+    "entities": [
+      {
+        "type": "Module",
+        "properties": {
+          "name": "HTTP Handlers API",
+          "description": "REST API operations for vector database"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "create_router",
+          "description": "Creates the API router with all routes"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "insert_vector",
+          "description": "POST /vectors handler for inserting vectors"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "search_vectors",
+          "description": "POST /search handler for searching vectors"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "delete_vector",
+          "properties": {
+            "name": "delete_vector",
+            "description": "DELETE /vectors/:id handler for deleting vectors"
+          }
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "health_check",
+          "description": "GET /health handler for health check"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "get_stats",
+          "description": "GET /stats handler for getting statistics"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "/vectors",
+          "method": "POST",
+          "description": "Insert vector endpoint"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "/search",
+          "method": "POST",
+          "description": "Search vectors endpoint"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "/vectors/:id",
+          "method": "DELETE",
+          "description": "Delete vector endpoint"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "/health",
+          "method": "GET",
+          "description": "Health check endpoint"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "/stats",
+          "method": "GET",
+          "description": "Statistics endpoint"
+        }
+      },
+      {
+        "type": "Database",
+        "properties": {
+          "name": "VectorDB",
+          "description": "Vector database instance"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "axum",
+          "description": "Web framework for Rust"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "serde",
+          "description": "Serialization/deserialization framework"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "tokio",
+          "description": "Async runtime"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "InsertRequest",
+          "description": "Request model for insert operation"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "SearchRequest",
+          "description": "Request model for search operation"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "SearchResponse",
+          "description": "Response model for search operation"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "InsertResponse",
+          "description": "Response model for insert operation"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "DeleteResponse",
+          "description": "Response model for delete operation"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "HealthResponse",
+          "description": "Response model for health check"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "SearchResult",
+          "description": "Individual search result item"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "SharedDB",
+          "description": "Shared database configuration using Arc<RwLock<VectorDB>>"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "IMPORTS",
+        "source": "HTTP Handlers API",
+        "target": "axum",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "HTTP Handlers API",
+        "target": "serde",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "HTTP Handlers API",
+        "target": "tokio",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "HTTP Handlers API",
+        "target": "InsertRequest",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "HTTP Handlers API",
+        "target": "SearchRequest",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "HTTP Handlers API",
+        "target": "SearchResponse",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "HTTP Handlers API",
+        "target": "VectorDB",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "HTTP Handlers API",
+        "target": "create_router",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "HTTP Handlers API",
+        "target": "insert_vector",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "HTTP Handlers API",
+        "target": "search_vectors",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "HTTP Handlers API",
+        "target": "delete_vector",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "HTTP Handlers API",
+        "target": "health_check",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "HTTP Handlers API",
+        "target": "get_stats",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "create_router",
+        "target": "/vectors",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "create_router",
+        "target": "/search",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "create_router",
+        "target": "/vectors/:id",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "create_router",
+        "target": "/health",
+        "properties": {}
+      },
+      {
+        "type": "EXPOSES",
+        "source": "create_router",
+        "target": "/stats",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "insert_vector",
+        "target": "VectorDB",
+        "properties": {
+          "method": "insert"
+        }
+      },
+      {
+        "type": "CALLS",
+        "source": "search_vectors",
+        "target": "VectorDB",
+        "properties": {
+          "method": "search"
+        }
+      },
+      {
+        "type": "CALLS",
+        "source": "delete_vector",
+        "target": "VectorDB",
+        "properties": {
+          "method": "delete"
+        }
+      },
+      {
+        "type": "CALLS",
+        "source": "health_check",
+        "target": "VectorDB",
+        "properties": {
+          "method": "count"
+        }
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "insert_vector",
+        "target": "InsertRequest",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "insert_vector",
+        "target": "InsertResponse",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "search_vectors",
+        "target": "SearchRequest",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "search_vectors",
+        "target": "SearchResponse",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "search_vectors",
+        "target": "SearchResult",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "delete_vector",
+        "target": "DeleteResponse",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "health_check",
+        "target": "HealthResponse",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "insert_vector",
+        "target": "SharedDB",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "search_vectors",
+        "target": "SharedDB",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "delete_vector",
+        "target": "SharedDB",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "health_check",
+        "target": "SharedDB",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "HTTP Handlers API",
+        "target": "create_router",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "HTTP Handlers API",
+        "target": "insert_vector",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "HTTP Handlers API",
+        "target": "search_vectors",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "HTTP Handlers API",
+        "target": "delete_vector",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "HTTP Handlers API",
+        "target": "health_check",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "HTTP Handlers API",
+        "target": "get_stats",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "HTTP Handlers API",
+    "domain": "software",
+    "docType": "API Documentation",
+    "extractedFields": {
+      "module_name": "HTTP Handlers API",
+      "module_description": "REST API operations for vector database",
+      "function_name": [
+        "create_router",
+        "insert_vector",
+        "search_vectors",
+        "delete_vector",
+        "health_check",
+        "get_stats"
+      ],
+      "function_description": [
+        "Creates the API router with all routes",
+        "POST /vectors handler for inserting vectors",
+        "POST /search handler for searching vectors",
+        "GET /health handler for health check",
+        "GET /stats handler for getting statistics"
+      ],
+      "function_properties": {
+        "name": "delete_vector",
+        "description": "DELETE /vectors/:id handler for deleting vectors"
+      },
+      "api_name": [
+        "/vectors",
+        "/search",
+        "/vectors/:id",
+        "/health",
+        "/stats"
+      ],
+      "api_method": [
+        "POST",
+        "POST",
+        "DELETE",
+        "GET",
+        "GET"
+      ],
+      "api_description": [
+        "Insert vector endpoint",
+        "Search vectors endpoint",
+        "Delete vector endpoint",
+        "Health check endpoint",
+        "Statistics endpoint"
+      ],
+      "database_name": "VectorDB",
+      "database_description": "Vector database instance",
+      "dependency_name": [
+        "axum",
+        "serde",
+        "tokio"
+      ],
+      "dependency_description": [
+        "Web framework for Rust",
+        "Serialization/deserialization framework",
+        "Async runtime"
+      ],
+      "class_name": [
+        "InsertRequest",
+        "SearchRequest",
+        "SearchResponse",
+        "InsertResponse",
+        "DeleteResponse",
+        "HealthResponse",
+        "SearchResult"
+      ],
+      "class_description": [
+        "Request model for insert operation",
+        "Request model for search operation",
+        "Response model for search operation",
+        "Response model for insert operation",
+        "Response model for delete operation",
+        "Response model for health check",
+        "Individual search result item"
+      ],
+      "configuration_name": "SharedDB",
+      "configuration_description": "Shared database configuration using Arc<RwLock<VectorDB>>"
+    },
+    "keywords": [
+      "json",
+      "state",
+      "string",
+      "vectors",
+      "vector",
+      "await",
+      "statuscode",
+      "delete",
+      "shareddb",
+      "serialize",
+      "search",
+      "post",
+      "router",
+      "route",
+      "health",
+      "async",
+      "success",
+      "derive",
+      "struct",
+      "insert"
+    ],
+    "summary": "This Rust code implements HTTP handlers for a vector database API using the Axum framework. It provides REST endpoints for inserting vectors, performing similarity searches, deleting vectors, and checking system health/stats. The API supports concurrent operations through thread-safe database access and returns appropriate HTTP status codes with JSON responses."
+  },
+  "cacheInfo": {
+    "cached": true,
+    "hash": "019fa67359fdb056dd06895a2f482566db2ac75c44807e3deda21ac76e006221"
+  },
+  "performance": {
+    "totalTimeMs": 0,
+    "tokens": {
+      "input": 2458,
+      "output": 2473,
+      "total": 4931
+    },
+    "costUsd": 0.0010365600000000002
+  }
+}

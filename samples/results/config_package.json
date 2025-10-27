@@ -1,0 +1,353 @@
+{
+  "file": "config/package.json",
+  "classification": {
+    "template": "software_project",
+    "confidence": 0.95,
+    "domain": "software",
+    "docType": "package.json"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"user-management-system\",\n      title: \"user-management-system\",\n      domain: \"software\",\n      doc_type: \"package.json\"\n    })\nCREATE (e0:Module {name: \"user-management-system\", version: \"1.2.0\", description: \"Full-stack user authentication and management system\", type: \"module\", main: \"dist/index.js\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Script {name: \"dev\", command: \"tsx watch src/server.ts\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Script {name: \"dev:client\", command: \"vite\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Script {name: \"build\", command: \"tsc && vite build\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Script {name: \"start\", command: \"node dist/server.js\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Test {name: \"test\", command: \"vitest\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Test {name: \"test:coverage\", command: \"vitest --coverage\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Script {name: \"lint\", command: \"eslint src/**/*.ts\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Script {name: \"lint:fix\", command: \"eslint src/**/*.ts --fix\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Script {name: \"format\", command: \"prettier --write \\\"src/**/*.{ts,tsx,js,jsx}\\\"\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Script {name: \"migrate\", command: \"scripts/migrate.js\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Script {name: \"seed\", command: \"scripts/seed.js\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Dependency {name: \"express\", version: \"^4.18.2\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Dependency {name: \"cors\", version: \"^2.8.5\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Dependency {name: \"helmet\", version: \"^7.1.0\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Dependency {name: \"morgan\", version: \"^1.10.0\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:Dependency {name: \"express-rate-limit\", version: \"^7.1.5\"})\nCREATE (doc)-[:MENTIONS]->(e16)\nCREATE (e17:Dependency {name: \"pg\", version: \"^8.11.3\"})\nCREATE (doc)-[:MENTIONS]->(e17)\nCREATE (e18:Dependency {name: \"bcrypt\", version: \"^5.1.1\"})\nCREATE (doc)-[:MENTIONS]->(e18)\nCREATE (e19:Dependency {name: \"jsonwebtoken\", version: \"^9.0.2\"})\nCREATE (doc)-[:MENTIONS]->(e19)\nCREATE (e20:Dependency {name: \"dotenv\", version: \"^16.3.1\"})\nCREATE (doc)-[:MENTIONS]->(e20)\nCREATE (e21:Dependency {name: \"zod\", version: \"\"})\nCREATE (doc)-[:MENTIONS]->(e21)",
+    "entities": [
+      {
+        "type": "Module",
+        "properties": {
+          "name": "user-management-system",
+          "version": "1.2.0",
+          "description": "Full-stack user authentication and management system",
+          "type": "module",
+          "main": "dist/index.js"
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "dev",
+          "command": "tsx watch src/server.ts"
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "dev:client",
+          "command": "vite"
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "build",
+          "command": "tsc && vite build"
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "start",
+          "command": "node dist/server.js"
+        }
+      },
+      {
+        "type": "Test",
+        "properties": {
+          "name": "test",
+          "command": "vitest"
+        }
+      },
+      {
+        "type": "Test",
+        "properties": {
+          "name": "test:coverage",
+          "command": "vitest --coverage"
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "lint",
+          "command": "eslint src/**/*.ts"
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "lint:fix",
+          "command": "eslint src/**/*.ts --fix"
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "format",
+          "command": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\""
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "migrate",
+          "command": "scripts/migrate.js"
+        }
+      },
+      {
+        "type": "Script",
+        "properties": {
+          "name": "seed",
+          "command": "scripts/seed.js"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "express",
+          "version": "^4.18.2"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "cors",
+          "version": "^2.8.5"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "helmet",
+          "version": "^7.1.0"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "morgan",
+          "version": "^1.10.0"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "express-rate-limit",
+          "version": "^7.1.5"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "pg",
+          "version": "^8.11.3"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "bcrypt",
+          "version": "^5.1.1"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "jsonwebtoken",
+          "version": "^9.0.2"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "dotenv",
+          "version": "^16.3.1"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "zod",
+          "version": ""
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "DEPENDS_ON",
+        "source": "user-management-system",
+        "target": "express",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "user-management-system",
+        "target": "cors",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "user-management-system",
+        "target": "helmet",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "user-management-system",
+        "target": "morgan",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "user-management-system",
+        "target": "express-rate-limit",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "user-management-system",
+        "target": "pg",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "user-management-system",
+        "target": "bcrypt",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "user-management-system",
+        "target": "jsonwebtoken",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "user-management-system",
+        "target": "dotenv",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "user-management-system",
+        "target": "zod",
+        "properties": {}
+      },
+      {
+        "type": "BUILDS",
+        "source": "build",
+        "target": "user-management-system",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "test",
+        "target": "user-management-system",
+        "properties": {}
+      },
+      {
+        "type": "TESTS",
+        "source": "test:coverage",
+        "target": "user-management-system",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "user-management-system",
+    "domain": "software",
+    "docType": "package.json",
+    "extractedFields": {
+      "module_name": "user-management-system",
+      "module_version": "1.2.0",
+      "module_description": "Full-stack user authentication and management system",
+      "module_type": "module",
+      "module_main": "dist/index.js",
+      "script_name": [
+        "dev",
+        "dev:client",
+        "build",
+        "start",
+        "lint",
+        "lint:fix",
+        "format",
+        "migrate",
+        "seed"
+      ],
+      "script_command": [
+        "tsx watch src/server.ts",
+        "vite",
+        "tsc && vite build",
+        "node dist/server.js",
+        "eslint src/**/*.ts",
+        "eslint src/**/*.ts --fix",
+        "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
+        "scripts/migrate.js",
+        "scripts/seed.js"
+      ],
+      "test_name": [
+        "test",
+        "test:coverage"
+      ],
+      "test_command": [
+        "vitest",
+        "vitest --coverage"
+      ],
+      "dependency_name": [
+        "express",
+        "cors",
+        "helmet",
+        "morgan",
+        "express-rate-limit",
+        "pg",
+        "bcrypt",
+        "jsonwebtoken",
+        "dotenv",
+        "zod"
+      ],
+      "dependency_version": [
+        "^4.18.2",
+        "^2.8.5",
+        "^7.1.0",
+        "^1.10.0",
+        "^7.1.5",
+        "^8.11.3",
+        "^5.1.1",
+        "^9.0.2",
+        "^16.3.1",
+        ""
+      ]
+    },
+    "keywords": [
+      "types",
+      "eslint",
+      "node",
+      "vitest",
+      "express",
+      "typescript",
+      "user",
+      "management",
+      "scripts",
+      "vite",
+      "coverage",
+      "bcrypt",
+      "react",
+      "system",
+      "authentication",
+      "dist",
+      "server",
+      "build",
+      "test",
+      "lint"
+    ],
+    "summary": "This document describes a full-stack user authentication and management system (version 1.2.0) built with TypeScript, Express, React, and PostgreSQL. The system includes security features like bcrypt password hashing, JWT authentication, rate limiting, and CORS protection. It provides development scripts for building, testing, linting, and database operations, requiring Node.js 18 or higher."
+  },
+  "cacheInfo": {
+    "cached": true,
+    "hash": "f08a0144ff5f7e68c93e96feba9a21f0e4b27f52bf766eec16d7b0871a5449df"
+  },
+  "performance": {
+    "totalTimeMs": 1,
+    "tokens": {
+      "input": 2115,
+      "output": 1437,
+      "total": 3552
+    },
+    "costUsd": 0.00069846
+  }
+}

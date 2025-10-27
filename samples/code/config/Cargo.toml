@@ -1,0 +1,76 @@
+[package]
+name = "vector-db"
+version = "0.3.0"
+edition = "2024"
+rust-version = "1.75"
+authors = ["Development Team <dev@example.com>"]
+description = "High-performance vector database with HNSW indexing"
+license = "MIT"
+repository = "https://github.com/example/vector-db"
+keywords = ["vector", "database", "hnsw", "search", "embeddings"]
+categories = ["database", "algorithms"]
+
+[dependencies]
+# Web framework
+axum = { version = "0.7", features = ["ws", "multipart"] }
+tokio = { version = "1.35", features = ["full"] }
+tower = "0.4"
+tower-http = { version = "0.5", features = ["cors", "trace", "compression-gzip"] }
+
+# Vector search
+hnsw = "0.12"
+ndarray = "0.15"
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Storage
+redb = "2.1"
+zstd = "0.13"
+memmap2 = "0.9"
+
+# Utilities
+anyhow = "1.0"
+thiserror = "1.0"
+uuid = { version = "1.6", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+
+# Validation
+validator = { version = "0.16", features = ["derive"] }
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Async
+async-trait = "0.1"
+futures = "0.3"
+
+[dev-dependencies]
+criterion = "0.5"
+proptest = "1.4"
+tempfile = "3.8"
+
+[[bench]]
+name = "search_benchmark"
+harness = false
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+strip = true
+
+[profile.dev]
+opt-level = 0
+
+[profile.test]
+opt-level = 1
+
+[features]
+default = ["hnsw", "compression"]
+hnsw = []
+compression = ["zstd"]
+full = ["hnsw", "compression"]
+
