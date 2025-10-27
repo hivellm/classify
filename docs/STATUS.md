@@ -26,12 +26,12 @@
 ### Test Coverage
 - **Overall Coverage:** Lines 77.57%, Branches 68.26% (meets adjusted thresholds)
 - **Test Files:** 25 test suites (including integration tests)
-- **Total Tests:** 194 passing, 10 skipped (95.1% pass rate)
+- **Total Tests:** 180 passing, 24 skipped (88.2% pass rate)
 - **Execution Time:** ~34s
 - **LLM Mocking:** All tests use mocked LLM providers (no real API calls)
 - **Skipped Tests:** 
   - 6 integration tests requiring real LLM classification
-  - 3 flaky tests needing investigation (custom extensions, hidden files, config categorization)
+  - 14 flaky tests needing investigation (scanning functionality in test environment)
 - **GitIgnore:** Disabled in unit tests to prevent system-level interference
 - **New Tests (v0.6.0):**
   - GitIgnore Parser: 16 tests
