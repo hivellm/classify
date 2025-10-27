@@ -1,0 +1,332 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://hivellm.org/schemas/classify-template-tiny-v1.json",
+  "title": "Classify Tiny Template Schema",
+  "description": "Simplified schema for ultra-lightweight Classify CLI templates optimized for minimal token usage",
+  "type": "object",
+  "required": ["version", "metadata", "llm_config", "entity_definitions", "graph_schema", "fulltext_schema"],
+  
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$",
+      "description": "Template version (e.g., '1.0')"
+    },
+    
+    "metadata": {
+      "type": "object",
+      "required": ["name", "display_name", "description", "domains"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "description": "Unique template identifier (lowercase, no spaces)"
+        },
+        "display_name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-readable template name"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 10,
+          "description": "Detailed description of template purpose"
+        },
+        "domains": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "description": "List of domains this template covers"
+        },
+        "priority": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 150,
+          "default": 50,
+          "description": "Selection priority (higher = preferred)"
+        }
+      }
+    },
+    
+    "llm_config": {
+      "type": "object",
+      "required": ["system_prompt", "max_tokens"],
+      "properties": {
+        "provider": {
+          "type": "string",
+          "enum": ["deepseek", "openai", "anthropic", "gemini", "xai", "groq"],
+          "default": "deepseek"
+        },
+        "model": {
+          "type": "string",
+          "default": "deepseek-chat"
+        },
+        "temperature": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.0,
+          "description": "LLM temperature (0.0-1.0, lower = more deterministic)"
+        },
+        "max_tokens": {
+          "type": "number",
+          "minimum": 100,
+          "maximum": 1000,
+          "description": "Maximum output tokens (100-1000 for tiny templates)"
+        },
+        "system_prompt": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 200,
+          "description": "Brief system prompt for classification"
+        }
+      }
+    },
+    
+    "entity_definitions": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "description": "Maximum 3 entity types for tiny templates",
+      "items": {
+        "type": "object",
+        "required": ["type", "properties"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "pattern": "^[A-Z][a-zA-Z0-9]*$",
+            "description": "Entity type (PascalCase)"
+          },
+          "properties": {
+            "type": "object",
+            "minProperties": 1,
+            "maxProperties": 3,
+            "description": "Maximum 3 properties per entity",
+            "patternProperties": {
+              "^[a-z][a-z0-9_]*$": {
+                "type": "object",
+                "required": ["type"],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": ["string", "array"]
+                  },
+                  "required": {
+                    "type": "boolean",
+                    "default": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    
+    "relationship_definitions": {
+      "type": "array",
+      "maxItems": 2,
+      "description": "Maximum 2 relationship types for tiny templates (can be empty)",
+      "items": {
+        "type": "object",
+        "required": ["type", "source", "target"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]*$"
+          },
+          "source": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    
+    "graph_schema": {
+      "type": "object",
+      "required": ["nodes"],
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "description": "Maximum 3 node types",
+          "items": {
+            "type": "object",
+            "required": ["type", "labels", "required_properties"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "pattern": "^[A-Z][a-zA-Z0-9]*$"
+              },
+              "labels": {
+                "type": "array",
+                "items": { "type": "string" },
+                "minItems": 1,
+                "maxItems": 2
+              },
+              "required_properties": {
+                "type": "array",
+                "items": { "type": "string" },
+                "minItems": 1,
+                "maxItems": 3
+              },
+              "indexes": {
+                "type": "array",
+                "maxItems": 2,
+                "items": {
+                  "type": "object",
+                  "required": ["property", "type"],
+                  "properties": {
+                    "property": { "type": "string" },
+                    "type": {
+                      "type": "string",
+                      "enum": ["unique", "index"]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "relationships": {
+          "type": "array",
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "required": ["type", "source", "target"],
+            "properties": {
+              "type": { "type": "string" },
+              "source": { "type": "string" },
+              "target": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    
+    "fulltext_schema": {
+      "type": "object",
+      "required": ["required_fields"],
+      "properties": {
+        "required_fields": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 4,
+          "description": "2-4 required fields only"
+        },
+        "extracted_fields": {
+          "type": "array",
+          "maxItems": 2,
+          "description": "Maximum 2 extracted fields",
+          "items": {
+            "type": "object",
+            "required": ["name", "type", "extraction_method"],
+            "properties": {
+              "name": { "type": "string" },
+              "type": {
+                "type": "string",
+                "enum": ["string", "array"]
+              },
+              "extraction_method": {
+                "type": "string",
+                "enum": ["llm", "pattern"]
+              },
+              "index": {
+                "type": "boolean",
+                "default": true
+              }
+            }
+          }
+        },
+        "keyword_extraction": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean", "default": true },
+            "method": {
+              "type": "string",
+              "enum": ["tfidf"]
+            },
+            "min_frequency": { "type": "number", "minimum": 2, "default": 3 },
+            "max_keywords": { "type": "number", "maximum": 10, "default": 5 }
+          }
+        },
+        "summary": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean", "default": true },
+            "method": {
+              "type": "string",
+              "enum": ["llm"]
+            },
+            "max_length": {
+              "type": "number",
+              "minimum": 50,
+              "maximum": 150,
+              "default": 80
+            }
+          }
+        }
+      }
+    },
+    
+    "extraction_rules": {
+      "type": "array",
+      "maxItems": 2,
+      "description": "Maximum 2 extraction rules",
+      "items": {
+        "type": "object",
+        "required": ["name", "method"],
+        "properties": {
+          "name": { "type": "string" },
+          "method": {
+            "type": "string",
+            "enum": ["llm", "pattern"]
+          },
+          "prompt": { 
+            "type": "string",
+            "maxLength": 100,
+            "description": "Short prompt only"
+          }
+        }
+      }
+    },
+    
+    "validation_rules": {
+      "type": "array",
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["field", "rules"],
+        "properties": {
+          "field": { "type": "string" },
+          "rules": {
+            "type": "array",
+            "maxItems": 2,
+            "items": {
+              "type": "object",
+              "required": ["type"],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": ["required", "max_length"]
+                },
+                "value": { "type": "number" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,117 @@
+{
+  "$schema": "https://hivellm.org/schemas/classify-template-tiny-v1.json",
+  "version": "1.0",
+  
+  "metadata": {
+    "name": "base",
+    "display_name": "Base (Tiny)",
+    "description": "Ultra-lightweight default template for general documents",
+    "domains": ["general", "default"],
+    "priority": 100
+  },
+  
+  "llm_config": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "temperature": 0.0,
+    "max_tokens": 400,
+    "system_prompt": "Extract title, type, and main topic only. Be extremely concise."
+  },
+  
+  "entity_definitions": [
+    {
+      "type": "Document",
+      "properties": {
+        "title": { "type": "string", "required": true },
+        "doc_type": { "type": "string", "required": true }
+      }
+    },
+    {
+      "type": "Topic",
+      "properties": {
+        "name": { "type": "string", "required": true }
+      }
+    }
+  ],
+  
+  "relationship_definitions": [
+    {
+      "type": "HAS_TOPIC",
+      "source": "Document",
+      "target": "Topic"
+    }
+  ],
+  
+  "graph_schema": {
+    "nodes": [
+      {
+        "type": "Document",
+        "labels": ["Document"],
+        "required_properties": ["id", "title", "doc_type"],
+        "indexes": [
+          { "property": "id", "type": "unique" }
+        ]
+      },
+      {
+        "type": "Topic",
+        "labels": ["Topic"],
+        "required_properties": ["name"],
+        "indexes": [
+          { "property": "name", "type": "index" }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "type": "HAS_TOPIC",
+        "source": "Document",
+        "target": "Topic"
+      }
+    ]
+  },
+  
+  "fulltext_schema": {
+    "required_fields": ["title", "domain", "doc_type"],
+    
+    "extracted_fields": [
+      {
+        "name": "main_topic",
+        "type": "string",
+        "extraction_method": "llm",
+        "index": true
+      }
+    ],
+    
+    "keyword_extraction": {
+      "enabled": true,
+      "method": "tfidf",
+      "min_frequency": 3,
+      "max_keywords": 5
+    },
+    
+    "summary": {
+      "enabled": true,
+      "method": "llm",
+      "max_length": 80
+    }
+  },
+  
+  "extraction_rules": [
+    {
+      "name": "extract_basics",
+      "method": "llm",
+      "prompt": "Extract title, type, and 1 main topic"
+    }
+  ],
+  
+  "validation_rules": [
+    {
+      "field": "title",
+      "rules": [
+        { "type": "required" },
+        { "type": "max_length", "value": 150 }
+      ]
+    }
+  ]
+}
+

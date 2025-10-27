@@ -1,0 +1,117 @@
+{
+  "$schema": "https://hivellm.org/schemas/classify-template-tiny-v1.json",
+  "version": "1.0",
+  
+  "metadata": {
+    "name": "compliance",
+    "display_name": "Compliance (Tiny)",
+    "description": "Lightweight template for compliance and audit documents",
+    "domains": ["compliance", "audit", "regulatory"],
+    "priority": 86
+  },
+  
+  "llm_config": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "temperature": 0.0,
+    "max_tokens": 450,
+    "system_prompt": "Extract title, regulation type, and compliance area. Brief."
+  },
+  
+  "entity_definitions": [
+    {
+      "type": "Document",
+      "properties": {
+        "title": { "type": "string", "required": true },
+        "regulation": { "type": "string", "required": false }
+      }
+    },
+    {
+      "type": "Requirement",
+      "properties": {
+        "name": { "type": "string", "required": true }
+      }
+    }
+  ],
+  
+  "relationship_definitions": [
+    {
+      "type": "HAS_REQUIREMENT",
+      "source": "Document",
+      "target": "Requirement"
+    }
+  ],
+  
+  "graph_schema": {
+    "nodes": [
+      {
+        "type": "Document",
+        "labels": ["Document", "Compliance"],
+        "required_properties": ["id", "title"],
+        "indexes": [
+          { "property": "id", "type": "unique" }
+        ]
+      },
+      {
+        "type": "Requirement",
+        "labels": ["Requirement"],
+        "required_properties": ["name"],
+        "indexes": [
+          { "property": "name", "type": "index" }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "type": "HAS_REQUIREMENT",
+        "source": "Document",
+        "target": "Requirement"
+      }
+    ]
+  },
+  
+  "fulltext_schema": {
+    "required_fields": ["title", "domain", "doc_type"],
+    
+    "extracted_fields": [
+      {
+        "name": "regulation",
+        "type": "string",
+        "extraction_method": "llm",
+        "index": true
+      }
+    ],
+    
+    "keyword_extraction": {
+      "enabled": true,
+      "method": "tfidf",
+      "min_frequency": 3,
+      "max_keywords": 7
+    },
+    
+    "summary": {
+      "enabled": true,
+      "method": "llm",
+      "max_length": 90
+    }
+  },
+  
+  "extraction_rules": [
+    {
+      "name": "extract_compliance",
+      "method": "llm",
+      "prompt": "Extract regulation and main requirement"
+    }
+  ],
+  
+  "validation_rules": [
+    {
+      "field": "title",
+      "rules": [
+        { "type": "required" },
+        { "type": "max_length", "value": 180 }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,255 @@
+{
+  "$schema": "https://hivellm.org/schemas/classify-template-v1.json",
+  "version": "1.0",
+  
+  "metadata": {
+    "name": "operations",
+    "display_name": "Operations Documents",
+    "description": "Classification template for operations documents including SOPs, process documentation, logistics, and operational reports",
+    "domains": ["operations", "process", "logistics", "supply_chain"],
+    "priority": 80,
+    
+    "indicators": [
+      "sop", "procedure", "process", "workflow", "operations",
+      "logistics", "supply chain", "inventory", "shipping",
+      "fulfillment", "warehouse", "production", "quality",
+      "step", "instruction", "guideline"
+    ],
+    
+    "document_types": [
+      "sop", "process_documentation", "workflow", "operations_report",
+      "logistics_plan", "inventory_report", "quality_checklist", "runbook"
+    ],
+    
+    "example_titles": [
+      "SOP - Order Fulfillment Process",
+      "Warehouse Operations Manual",
+      "Inventory Management Procedure",
+      "Shipping Logistics Plan",
+      "Quality Control Checklist",
+      "Production Runbook"
+    ],
+    
+    "use_cases": [
+      "Process standardization and documentation",
+      "Operational efficiency tracking",
+      "Quality assurance and compliance",
+      "Logistics and supply chain management",
+      "Training and onboarding"
+    ]
+  },
+  
+  "llm_config": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "temperature": 0.15,
+    "max_tokens": 2000,
+    "system_prompt": "You are an expert operations analyst. Extract process steps, procedures, workflows, responsibilities, timelines, quality metrics, and operational KPIs. Identify dependencies, resources, and success criteria. Preserve exact process sequences and requirements.",
+    "fallback_models": ["gpt-4o-mini", "gemini-2.0-flash"]
+  },
+  
+  "document_types": [
+    {
+      "type": "sop",
+      "display_name": "Standard Operating Procedure",
+      "description": "Standard operating procedure document",
+      "indicators": ["sop", "procedure", "steps", "instructions"],
+      "required_entities": ["process_name", "steps"],
+      "optional_entities": ["owner", "version", "approval"],
+      "priority": 100
+    },
+    {
+      "type": "operations_report",
+      "display_name": "Operations Report",
+      "description": "Operational performance report",
+      "indicators": ["report", "metrics", "performance", "efficiency"],
+      "required_entities": ["period", "metrics"],
+      "optional_entities": ["issues", "recommendations"],
+      "priority": 85
+    }
+  ],
+  
+  "entity_definitions": [
+    {
+      "type": "Process",
+      "description": "Operational process or procedure",
+      "properties": {
+        "name": { "type": "string", "required": true },
+        "description": { "type": "string", "required": false },
+        "owner": { "type": "string", "required": false },
+        "frequency": { "type": "string", "required": false }
+      },
+      "extraction_methods": ["llm"]
+    },
+    {
+      "type": "Step",
+      "description": "Process step or action",
+      "properties": {
+        "number": { "type": "number", "required": true },
+        "description": { "type": "string", "required": true },
+        "responsible": { "type": "string", "required": false },
+        "duration": { "type": "string", "required": false }
+      },
+      "extraction_methods": ["llm", "pattern"]
+    },
+    {
+      "type": "Metric",
+      "description": "Operational metric or KPI",
+      "properties": {
+        "name": { "type": "string", "required": true },
+        "value": { "type": "number", "required": true },
+        "target": { "type": "number", "required": false },
+        "unit": { "type": "string", "required": false }
+      },
+      "extraction_methods": ["llm"]
+    }
+  ],
+  
+  "relationship_definitions": [
+    {
+      "type": "HAS_STEP",
+      "description": "Process has step",
+      "source": "Process",
+      "target": ["Step"],
+      "properties": {
+        "order": { "type": "number", "required": true }
+      },
+      "extraction_methods": ["llm"]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "description": "Step depends on another step",
+      "source": "Step",
+      "target": ["Step"],
+      "properties": {},
+      "extraction_methods": ["llm"]
+    },
+    {
+      "type": "MEASURES",
+      "description": "Process measures metric",
+      "source": "Process",
+      "target": ["Metric"],
+      "properties": {},
+      "extraction_methods": ["llm"]
+    }
+  ],
+  
+  "graph_schema": {
+    "nodes": [
+      {
+        "type": "OperationsDocument",
+        "labels": ["Document", "OperationsDocument"],
+        "required_properties": ["id", "title", "doc_type"],
+        "optional_properties": ["process_name", "owner", "version"],
+        "indexes": [
+          { "property": "id", "type": "unique" },
+          { "property": "process_name", "type": "index" }
+        ]
+      },
+      {
+        "type": "Process",
+        "labels": ["Process"],
+        "required_properties": ["name"],
+        "optional_properties": ["owner", "frequency"],
+        "indexes": [{ "property": "name", "type": "index" }]
+      }
+    ],
+    
+    "relationships": [
+      {
+        "type": "HAS_STEP",
+        "source": "Process",
+        "target": "Step",
+        "properties": ["order"],
+        "required": ["order"]
+      }
+    ]
+  },
+  
+  "fulltext_schema": {
+    "required_fields": ["title", "domain", "doc_type"],
+    
+    "extracted_fields": [
+      {
+        "name": "process_name",
+        "type": "string",
+        "description": "Process or procedure name",
+        "extraction_method": "llm",
+        "index": true
+      },
+      {
+        "name": "steps",
+        "type": "array",
+        "description": "Process steps",
+        "extraction_method": "llm",
+        "index": false
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "description": "Process owner",
+        "extraction_method": "ner",
+        "index": true
+      },
+      {
+        "name": "department",
+        "type": "string",
+        "description": "Responsible department",
+        "extraction_method": "llm",
+        "index": true
+      }
+    ],
+    
+    "keyword_extraction": {
+      "enabled": true,
+      "method": "tfidf",
+      "min_frequency": 2,
+      "max_keywords": 20,
+      "exclude_stopwords": true,
+      "preserve_entities": true
+    },
+    
+    "categories": ["operations", "process", "sop", "logistics"],
+    
+    "summary": {
+      "enabled": true,
+      "method": "llm",
+      "max_length": 400
+    }
+  },
+  
+  "extraction_rules": [
+    {
+      "name": "extract_steps",
+      "description": "Extract process steps",
+      "method": "pattern",
+      "patterns": [
+        "(?:Step|\\d+\\.)\\s+([^\\n]+)",
+        "^\\d+\\.\\s+(.+)$"
+      ],
+      "flags": "m"
+    },
+    {
+      "name": "extract_process_details",
+      "description": "Extract process information",
+      "method": "llm",
+      "prompt": "Extract process name, owner, steps, dependencies, and success criteria."
+    }
+  ],
+  
+  "validation_rules": [
+    {
+      "field": "process_name",
+      "rules": [
+        { "type": "min_length", "value": 3 }
+      ]
+    },
+    {
+      "field": "steps",
+      "rules": [
+        { "type": "min_length", "value": 1, "message": "At least one step required" }
+      ]
+    }
+  ]
+}
+

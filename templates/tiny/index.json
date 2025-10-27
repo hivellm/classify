@@ -1,0 +1,404 @@
+{
+  "$schema": "https://hivellm.org/schemas/classify-template-index-v1.json",
+  "version": "1.0",
+  "metadata": {
+    "description": "Tiny Template Index - Ultra cost-optimized templates with 70-80% token savings",
+    "total_templates": 16,
+    "last_updated": "2025-10-27",
+    "cost_savings": "70-80% vs standard templates",
+    "max_output_tokens": "400-500 per document"
+  },
+  
+  "templates": [
+    {
+      "name": "base",
+      "priority": 100,
+      "display_name": "Base (Tiny) - DEFAULT",
+      "description": "Ultra-lightweight default for all general documents. Use unless specialized domain needed.",
+      "best_for": [
+        "General documents (DEFAULT)",
+        "Reports and memos",
+        "Articles and notes",
+        "Any document without specialized needs"
+      ],
+      "key_indicators": [
+        "document", "report", "article", "note", "memo", "general"
+      ],
+      "token_limits": {
+        "max_output": 400,
+        "entities": 2,
+        "relationships": 1
+      },
+      "cost_per_doc": "$0.0007"
+    },
+    
+    {
+      "name": "legal",
+      "priority": 95,
+      "display_name": "Legal (Tiny)",
+      "description": "Minimal legal document classification - extracts type and parties only",
+      "best_for": [
+        "Contracts and agreements",
+        "Legal documents",
+        "NDAs",
+        "Terms of service"
+      ],
+      "key_indicators": [
+        "contract", "agreement", "party", "legal", "nda",
+        "whereas", "hereby", "clause", "terms"
+      ],
+      "token_limits": {
+        "max_output": 500,
+        "entities": 2,
+        "relationships": 1
+      },
+      "cost_per_doc": "$0.0008"
+    },
+    
+    {
+      "name": "financial",
+      "priority": 92,
+      "display_name": "Financial (Tiny)",
+      "description": "Minimal financial classification - extracts period and key metrics only",
+      "best_for": [
+        "Financial statements",
+        "Budget documents",
+        "Financial reports",
+        "Invoices"
+      ],
+      "key_indicators": [
+        "revenue", "expense", "profit", "financial", "budget",
+        "invoice", "statement", "balance", "cash flow"
+      ],
+      "token_limits": {
+        "max_output": 450,
+        "entities": 2,
+        "relationships": 1
+      },
+      "cost_per_doc": "$0.0007"
+    },
+    
+    {
+      "name": "engineering",
+      "priority": 85,
+      "display_name": "Engineering (Tiny)",
+      "description": "Minimal technical classification - extracts language and main components",
+      "best_for": [
+        "Source code",
+        "Technical documentation",
+        "API specs",
+        "Engineering documents"
+      ],
+      "key_indicators": [
+        "function", "class", "api", "code", "implementation",
+        "module", "component", "technical", "engineering"
+      ],
+      "token_limits": {
+        "max_output": 500,
+        "entities": 2,
+        "relationships": 1
+      },
+      "cost_per_doc": "$0.0008"
+    },
+    
+    {
+      "name": "academic_paper",
+      "priority": 93,
+      "display_name": "Academic Paper (Tiny)",
+      "description": "Minimal academic classification - extracts title, authors, contribution",
+      "best_for": [
+        "Research papers",
+        "Academic articles",
+        "Theses",
+        "Conference papers"
+      ],
+      "key_indicators": [
+        "abstract", "methodology", "results", "author", "affiliation",
+        "doi", "arxiv", "conference", "journal", "research"
+      ],
+      "token_limits": {
+        "max_output": 500,
+        "entities": 2,
+        "relationships": 1
+      },
+      "cost_per_doc": "$0.0008"
+    },
+    
+    {
+      "name": "accounting",
+      "priority": 90,
+      "display_name": "Accounting (Tiny)",
+      "description": "Minimal accounting classification - extracts period and account type",
+      "best_for": [
+        "Ledgers",
+        "Journal entries",
+        "Reconciliations",
+        "Accounting reports"
+      ],
+      "key_indicators": [
+        "ledger", "journal", "debit", "credit", "account",
+        "reconciliation", "posting", "gaap", "accrual"
+      ],
+      "token_limits": {
+        "max_output": 450,
+        "entities": 2,
+        "relationships": 1
+      },
+      "cost_per_doc": "$0.0007"
+    },
+    
+    {
+      "name": "compliance",
+      "priority": 86,
+      "display_name": "Compliance (Tiny)",
+      "description": "Minimal compliance classification - extracts regulation and requirements",
+      "best_for": [
+        "Compliance reports",
+        "Audit documents",
+        "Policy documents",
+        "Risk assessments"
+      ],
+      "key_indicators": [
+        "compliance", "audit", "regulatory", "policy", "risk",
+        "sox", "gdpr", "iso", "certification"
+      ],
+      "token_limits": {
+        "max_output": 450,
+        "entities": 2,
+        "relationships": 1
+      },
+      "cost_per_doc": "$0.0007"
+    },
+    
+    {
+      "name": "customer_support",
+      "priority": 78,
+      "display_name": "Customer Support (Tiny)",
+      "description": "Minimal support classification - extracts issue type only",
+      "best_for": [
+        "Support tickets",
+        "KB articles",
+        "FAQs",
+        "Resolution guides"
+      ],
+      "key_indicators": [
+        "ticket", "support", "customer", "issue", "problem",
+        "resolution", "faq", "help"
+      ],
+      "token_limits": {
+        "max_output": 400,
+        "entities": 2,
+        "relationships": 1
+      },
+      "cost_per_doc": "$0.0006"
+    },
+    
+    {
+      "name": "hr",
+      "priority": 88,
+      "display_name": "HR (Tiny)",
+      "description": "Minimal HR classification - extracts position and employee",
+      "best_for": [
+        "Employment contracts",
+        "HR policies",
+        "Performance reviews",
+        "Job descriptions"
+      ],
+      "key_indicators": [
+        "employee", "employment", "position", "salary", "benefits",
+        "performance", "recruitment", "onboarding"
+      ],
+      "token_limits": {
+        "max_output": 450,
+        "entities": 2,
+        "relationships": 1
+      },
+      "cost_per_doc": "$0.0007"
+    },
+    
+    {
+      "name": "investor_relations",
+      "priority": 87,
+      "display_name": "Investor Relations (Tiny)",
+      "description": "Minimal investor classification - extracts period and key metrics",
+      "best_for": [
+        "Earnings reports",
+        "Investor presentations",
+        "SEC filings",
+        "Annual reports"
+      ],
+      "key_indicators": [
+        "investor", "shareholder", "earnings", "eps", "stock",
+        "sec", "10-k", "10-q", "guidance"
+      ],
+      "token_limits": {
+        "max_output": 450,
+        "entities": 2,
+        "relationships": 1
+      },
+      "cost_per_doc": "$0.0007"
+    },
+    
+    {
+      "name": "marketing",
+      "priority": 82,
+      "display_name": "Marketing (Tiny)",
+      "description": "Minimal marketing classification - extracts campaign and channel",
+      "best_for": [
+        "Campaign briefs",
+        "Marketing reports",
+        "Content calendars",
+        "Brand guidelines"
+      ],
+      "key_indicators": [
+        "campaign", "marketing", "advertising", "brand",
+        "content", "seo", "social media", "email"
+      ],
+      "token_limits": {
+        "max_output": 400,
+        "entities": 2,
+        "relationships": 1
+      },
+      "cost_per_doc": "$0.0006"
+    },
+    
+    {
+      "name": "operations",
+      "priority": 80,
+      "display_name": "Operations (Tiny)",
+      "description": "Minimal operations classification - extracts process type",
+      "best_for": [
+        "SOPs",
+        "Process documentation",
+        "Workflow guides",
+        "Operations reports"
+      ],
+      "key_indicators": [
+        "sop", "procedure", "process", "workflow", "operations",
+        "logistics", "step", "instruction"
+      ],
+      "token_limits": {
+        "max_output": 400,
+        "entities": 2,
+        "relationships": 1
+      },
+      "cost_per_doc": "$0.0006"
+    },
+    
+    {
+      "name": "product",
+      "priority": 81,
+      "display_name": "Product (Tiny)",
+      "description": "Minimal product classification - extracts product and feature",
+      "best_for": [
+        "Product requirements",
+        "Product roadmaps",
+        "Feature requests",
+        "Release notes"
+      ],
+      "key_indicators": [
+        "product", "feature", "requirement", "roadmap", "prd",
+        "user story", "epic", "release"
+      ],
+      "token_limits": {
+        "max_output": 450,
+        "entities": 2,
+        "relationships": 1
+      },
+      "cost_per_doc": "$0.0007"
+    },
+    
+    {
+      "name": "sales",
+      "priority": 83,
+      "display_name": "Sales (Tiny)",
+      "description": "Minimal sales classification - extracts customer and deal type",
+      "best_for": [
+        "Sales proposals",
+        "Quotes",
+        "Pipeline reports",
+        "Sales forecasts"
+      ],
+      "key_indicators": [
+        "proposal", "quote", "sales", "deal", "opportunity",
+        "pipeline", "forecast", "customer"
+      ],
+      "token_limits": {
+        "max_output": 400,
+        "entities": 2,
+        "relationships": 1
+      },
+      "cost_per_doc": "$0.0006"
+    },
+    
+    {
+      "name": "software_project",
+      "priority": 89,
+      "display_name": "Software Project (Tiny)",
+      "description": "Minimal code classification - extracts language and main modules",
+      "best_for": [
+        "Source code",
+        "Scripts",
+        "READMEs",
+        "Build configs"
+      ],
+      "key_indicators": [
+        "import", "function", "class", "module", "package",
+        "dependency", "npm", "pip", "cargo", "script"
+      ],
+      "token_limits": {
+        "max_output": 500,
+        "entities": 2,
+        "relationships": 1
+      },
+      "cost_per_doc": "$0.0008"
+    },
+    
+    {
+      "name": "strategic",
+      "priority": 84,
+      "display_name": "Strategic (Tiny)",
+      "description": "Minimal strategic classification - extracts timeframe and goal",
+      "best_for": [
+        "Strategic plans",
+        "Business plans",
+        "Market analysis",
+        "Vision documents"
+      ],
+      "key_indicators": [
+        "strategy", "strategic", "vision", "mission", "goals",
+        "objectives", "initiative", "market"
+      ],
+      "token_limits": {
+        "max_output": 450,
+        "entities": 2,
+        "relationships": 1
+      },
+      "cost_per_doc": "$0.0007"
+    }
+  ],
+  
+  "selection_guidelines": {
+    "default_template": "base",
+    "decision_process": [
+      "1. START with 'base' template as default",
+      "2. Is document legal/contract? → Use 'legal'",
+      "3. Is document financial/budget? → Use 'financial'",
+      "4. Is document code/technical? → Use 'engineering'",
+      "5. Otherwise → Use 'base'",
+      "6. Remember: ALL tiny templates save 70-80% tokens"
+    ],
+    "cost_optimization": "All tiny templates are cost-optimized. Selection is about accuracy, not cost."
+  },
+  
+  "usage_instructions": {
+    "for_llm": "Select template based on document domain:\n- Legal/Contract → legal\n- Financial/Budget → financial\n- Code/Technical → engineering\n- Everything else → base (default)\n\nAll templates are ultra cost-optimized.",
+    
+    "output_format": {
+      "template": "base",
+      "confidence": 0.95,
+      "reasoning": "General document without specialized requirements"
+    }
+  }
+}
+

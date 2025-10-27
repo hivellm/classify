@@ -1,0 +1,561 @@
+{
+  "$schema": "https://hivellm.org/schemas/classify-template-index-v1.json",
+  "version": "1.0",
+  "metadata": {
+    "description": "Template Index for Document Classification - Use this to select the most appropriate template for a given document",
+    "total_templates": 17,
+    "last_updated": "2025-10-27"
+  },
+  
+  "templates": [
+    {
+      "name": "tiny",
+      "priority": 110,
+      "display_name": "Tiny (Ultra Cost-Optimized - DEFAULT)",
+      "description": "ULTRA-lightweight default template for maximum token savings. Use for ALL documents unless specific domain expertise is absolutely required.",
+      "best_for": [
+        "Default for ALL documents",
+        "Maximum cost savings (70-80% reduction)",
+        "Ultra high-volume processing",
+        "Basic fulltext indexing",
+        "Minimal graph nodes"
+      ],
+      "key_indicators": [
+        "*"
+      ],
+      "example_documents": [
+        "Any document type",
+        "Use this by default"
+      ],
+      "domain_expertise": ["general", "ultra-minimal", "default"],
+      "use_when": "DEFAULT TEMPLATE - Use unless you specifically need domain expertise (legal, financial, etc). Provides 70-80% cost savings.",
+      "token_optimization": {
+        "max_output_tokens": 400,
+        "entities_extracted": "1 topic only",
+        "relationships": "none",
+        "cost_savings": "70-80% vs full templates",
+        "output_format": "minimal JSON"
+      }
+    },
+    
+    {
+      "name": "lite",
+      "priority": 100,
+      "display_name": "Lite (Cost-Optimized Default)",
+      "description": "Lightweight template optimized for low token consumption. Use by default for most documents unless specific domain expertise is required.",
+      "best_for": [
+        "General documents",
+        "Cost-sensitive processing",
+        "High-volume classification",
+        "Basic fulltext indexing",
+        "Simple graph relationships"
+      ],
+      "key_indicators": [
+        "document", "text", "content", "file", "general"
+      ],
+      "example_documents": [
+        "General reports",
+        "Notes and memos",
+        "Simple documentation",
+        "Text files",
+        "Basic articles"
+      ],
+      "domain_expertise": ["general", "cost-optimized", "fast"],
+      "use_when": "Default choice for most documents to minimize token usage. Only use specialized templates when domain expertise is truly needed.",
+      "token_optimization": {
+        "max_output_tokens": 800,
+        "entities_extracted": "2-3 topics only",
+        "relationships": "minimal",
+        "cost_savings": "60-70% vs full templates"
+      }
+    },
+    
+    {
+      "name": "legal",
+      "priority": 95,
+      "display_name": "Legal Documents",
+      "description": "For legal documents including contracts, agreements, NDAs, legal opinions, terms of service, and regulatory filings",
+      "best_for": [
+        "Contracts and agreements",
+        "Legal opinions and memos",
+        "NDAs and confidentiality agreements",
+        "Terms of service and privacy policies",
+        "Legal correspondence",
+        "Regulatory filings"
+      ],
+      "key_indicators": [
+        "contract", "agreement", "party", "clause", "terms",
+        "legal", "liability", "indemnification", "jurisdiction",
+        "whereas", "hereby", "notwithstanding"
+      ],
+      "example_documents": [
+        "Service Agreement with Vendor X",
+        "Non-Disclosure Agreement",
+        "Legal Opinion - Patent Infringement",
+        "Terms of Service v2.0"
+      ],
+      "domain_expertise": ["legal", "contracts", "compliance_legal"],
+      "use_when": "Document contains legal language, contract terms, party obligations, or regulatory requirements"
+    },
+    
+    {
+      "name": "financial",
+      "priority": 92,
+      "display_name": "Financial Documents",
+      "description": "For financial documents including statements, reports, budgets, invoices, and financial analysis",
+      "best_for": [
+        "Financial statements and reports",
+        "Budget documents and forecasts",
+        "Invoices and payment records",
+        "Financial analysis and projections",
+        "Tax documents",
+        "Investment reports"
+      ],
+      "key_indicators": [
+        "revenue", "expense", "profit", "loss", "balance sheet",
+        "income statement", "cash flow", "budget", "forecast",
+        "tax", "invoice", "payment", "financial"
+      ],
+      "example_documents": [
+        "Q4 2024 Financial Statement",
+        "Annual Budget 2025",
+        "Invoice #INV-2024-001",
+        "Tax Filing Q1 2024"
+      ],
+      "domain_expertise": ["finance", "accounting", "budget"],
+      "use_when": "Document contains financial data, monetary amounts, accounting information, or financial analysis"
+    },
+    
+    {
+      "name": "hr",
+      "priority": 88,
+      "display_name": "Human Resources Documents",
+      "description": "For HR documents including employment contracts, policies, performance reviews, and recruitment",
+      "best_for": [
+        "Employment contracts and offers",
+        "HR policies and handbooks",
+        "Performance reviews",
+        "Job descriptions and postings",
+        "Benefits documentation",
+        "Training materials"
+      ],
+      "key_indicators": [
+        "employee", "employment", "position", "salary", "benefits",
+        "performance", "review", "recruitment", "onboarding",
+        "termination", "pto", "vacation", "leave"
+      ],
+      "example_documents": [
+        "Employment Contract - Software Engineer",
+        "Employee Handbook 2025",
+        "Performance Review Q4",
+        "Job Posting - Product Manager"
+      ],
+      "domain_expertise": ["hr", "recruitment", "people_ops"],
+      "use_when": "Document relates to employees, hiring, HR policies, or workforce management"
+    },
+    
+    {
+      "name": "engineering",
+      "priority": 85,
+      "display_name": "Engineering Documents",
+      "description": "For technical engineering documents including specifications, architecture, design documents, and technical reports",
+      "best_for": [
+        "Technical specifications",
+        "Architecture documentation",
+        "Design documents",
+        "Technical reports",
+        "API documentation",
+        "System diagrams"
+      ],
+      "key_indicators": [
+        "architecture", "api", "specification", "design", "technical",
+        "system", "component", "module", "interface", "database",
+        "algorithm", "implementation", "protocol"
+      ],
+      "example_documents": [
+        "API Specification v2.0",
+        "System Architecture Document",
+        "Database Design - User Service",
+        "Technical Proposal - Microservices"
+      ],
+      "domain_expertise": ["engineering", "software", "architecture"],
+      "use_when": "Document contains technical specifications, architecture details, or engineering design"
+    },
+    
+    {
+      "name": "accounting",
+      "priority": 90,
+      "display_name": "Accounting Documents",
+      "description": "For accounting documents including ledgers, journals, reconciliations, and accounting reports",
+      "best_for": [
+        "General ledgers",
+        "Journal entries",
+        "Bank reconciliations",
+        "Accounting reports",
+        "Chart of accounts",
+        "Closing statements"
+      ],
+      "key_indicators": [
+        "ledger", "journal", "debit", "credit", "account",
+        "reconciliation", "posting", "closing", "trial balance",
+        "gaap", "ifrs", "accrual"
+      ],
+      "example_documents": [
+        "General Ledger December 2024",
+        "Bank Reconciliation Statement",
+        "Journal Entry #JE-2024-456",
+        "Month-End Closing Report"
+      ],
+      "domain_expertise": ["accounting", "bookkeeping", "finance"],
+      "use_when": "Document contains accounting entries, ledgers, reconciliations, or bookkeeping information"
+    },
+    
+    {
+      "name": "strategic",
+      "priority": 84,
+      "display_name": "Strategic Documents",
+      "description": "For strategic planning documents including business plans, strategy documents, and strategic initiatives",
+      "best_for": [
+        "Strategic plans",
+        "Business plans",
+        "Strategic initiatives",
+        "Vision and mission documents",
+        "Market analysis",
+        "Competitive analysis"
+      ],
+      "key_indicators": [
+        "strategy", "strategic", "vision", "mission", "goals",
+        "objectives", "initiative", "market", "competition",
+        "swot", "opportunity", "threat"
+      ],
+      "example_documents": [
+        "Strategic Plan 2025-2027",
+        "Business Plan - New Market Entry",
+        "Competitive Analysis Q4",
+        "Strategic Initiative - Digital Transformation"
+      ],
+      "domain_expertise": ["strategy", "business_planning", "executive"],
+      "use_when": "Document outlines strategic goals, business plans, or high-level organizational direction"
+    },
+    
+    {
+      "name": "investor_relations",
+      "priority": 87,
+      "display_name": "Investor Relations Documents",
+      "description": "For investor-focused documents including earnings reports, investor presentations, and shareholder communications",
+      "best_for": [
+        "Earnings reports",
+        "Investor presentations",
+        "Shareholder letters",
+        "SEC filings",
+        "Investor updates",
+        "Annual reports"
+      ],
+      "key_indicators": [
+        "investor", "shareholder", "earnings", "eps", "stock",
+        "dividend", "sec", "10-k", "10-q", "annual report",
+        "quarterly results", "guidance"
+      ],
+      "example_documents": [
+        "Q4 2024 Earnings Report",
+        "Investor Presentation - Annual Meeting",
+        "Form 10-K Annual Report",
+        "Shareholder Letter Q1 2025"
+      ],
+      "domain_expertise": ["investor_relations", "public_company", "finance"],
+      "use_when": "Document is intended for investors or contains financial disclosures for public companies"
+    },
+    
+    {
+      "name": "marketing",
+      "priority": 82,
+      "display_name": "Marketing Documents",
+      "description": "For marketing documents including campaigns, content, analytics, and marketing materials",
+      "best_for": [
+        "Campaign briefs and plans",
+        "Marketing reports",
+        "Content calendars",
+        "Brand guidelines",
+        "Social media plans",
+        "Email campaigns"
+      ],
+      "key_indicators": [
+        "campaign", "marketing", "advertising", "brand",
+        "content", "seo", "social media", "email marketing",
+        "conversion", "engagement", "ctr", "roi"
+      ],
+      "example_documents": [
+        "Q1 Marketing Campaign",
+        "Social Media Analytics Report",
+        "Brand Guidelines v2.0",
+        "Email Campaign Performance"
+      ],
+      "domain_expertise": ["marketing", "advertising", "branding"],
+      "use_when": "Document relates to marketing campaigns, brand management, or marketing performance"
+    },
+    
+    {
+      "name": "sales",
+      "priority": 83,
+      "display_name": "Sales Documents",
+      "description": "For sales documents including proposals, quotes, pipeline reports, and sales presentations",
+      "best_for": [
+        "Sales proposals",
+        "Quotes and pricing",
+        "Pipeline reports",
+        "Sales forecasts",
+        "Account plans",
+        "Territory plans"
+      ],
+      "key_indicators": [
+        "proposal", "quote", "sales", "deal", "opportunity",
+        "pipeline", "forecast", "revenue", "customer",
+        "close date", "win rate"
+      ],
+      "example_documents": [
+        "Sales Proposal - Enterprise Deal",
+        "Q4 Sales Forecast",
+        "Quote #12345",
+        "Pipeline Report December"
+      ],
+      "domain_expertise": ["sales", "revenue", "business_development"],
+      "use_when": "Document contains sales opportunities, quotes, or sales performance data"
+    },
+    
+    {
+      "name": "operations",
+      "priority": 80,
+      "display_name": "Operations Documents",
+      "description": "For operations documents including SOPs, process documentation, and operational reports",
+      "best_for": [
+        "Standard Operating Procedures",
+        "Process documentation",
+        "Workflow guides",
+        "Operations reports",
+        "Logistics plans",
+        "Quality checklists"
+      ],
+      "key_indicators": [
+        "sop", "procedure", "process", "workflow", "operations",
+        "logistics", "supply chain", "step", "instruction"
+      ],
+      "example_documents": [
+        "SOP - Order Fulfillment",
+        "Warehouse Operations Manual",
+        "Inventory Management Procedure",
+        "Quality Control Checklist"
+      ],
+      "domain_expertise": ["operations", "process", "logistics"],
+      "use_when": "Document describes operational processes, procedures, or operational metrics"
+    },
+    
+    {
+      "name": "compliance",
+      "priority": 86,
+      "display_name": "Compliance Documents",
+      "description": "For compliance, audit, and regulatory documents",
+      "best_for": [
+        "Compliance reports",
+        "Audit reports",
+        "Policy documents",
+        "Risk assessments",
+        "Certifications",
+        "Regulatory filings"
+      ],
+      "key_indicators": [
+        "compliance", "audit", "regulatory", "policy", "risk",
+        "sox", "gdpr", "iso", "certification", "assessment"
+      ],
+      "example_documents": [
+        "SOX Compliance Report Q4",
+        "GDPR Assessment",
+        "Internal Audit Report",
+        "ISO 27001 Certification"
+      ],
+      "domain_expertise": ["compliance", "audit", "regulatory"],
+      "use_when": "Document relates to compliance requirements, audits, or regulatory matters"
+    },
+    
+    {
+      "name": "customer_support",
+      "priority": 78,
+      "display_name": "Customer Support Documents",
+      "description": "For customer support documents including tickets, knowledge base, and support reports",
+      "best_for": [
+        "Support tickets",
+        "Knowledge base articles",
+        "FAQs",
+        "Support reports",
+        "Resolution guides",
+        "Customer feedback"
+      ],
+      "key_indicators": [
+        "ticket", "support", "customer", "issue", "problem",
+        "resolution", "faq", "help", "troubleshoot"
+      ],
+      "example_documents": [
+        "Support Ticket #12345",
+        "FAQ - Account Setup",
+        "Monthly Support Report",
+        "Resolution Guide - Login Problems"
+      ],
+      "domain_expertise": ["customer_support", "service", "help_desk"],
+      "use_when": "Document relates to customer support, help desk, or customer service operations"
+    },
+    
+    {
+      "name": "product",
+      "priority": 81,
+      "display_name": "Product Documents",
+      "description": "For product management documents including specifications, roadmaps, and requirements",
+      "best_for": [
+        "Product requirements (PRD)",
+        "Product specifications",
+        "Product roadmaps",
+        "Feature requests",
+        "Release notes",
+        "Product plans"
+      ],
+      "key_indicators": [
+        "product", "feature", "requirement", "roadmap", "prd",
+        "specification", "user story", "epic", "release"
+      ],
+      "example_documents": [
+        "PRD - Feature X",
+        "Product Roadmap Q1 2025",
+        "Feature Request - Dark Mode",
+        "Release Notes v2.5.0"
+      ],
+      "domain_expertise": ["product", "product_management", "development"],
+      "use_when": "Document describes product features, requirements, or product planning"
+    },
+    
+    {
+      "name": "software_project",
+      "priority": 89,
+      "display_name": "Software Project Documents",
+      "description": "For source code, scripts, documentation, and software project artifacts with code correlation and dependencies",
+      "best_for": [
+        "Source code files",
+        "Scripts and automation",
+        "Code documentation",
+        "API specifications",
+        "Configuration files",
+        "README and changelogs",
+        "Test suites",
+        "Build and deployment scripts"
+      ],
+      "key_indicators": [
+        "import", "export", "function", "class", "module", "package",
+        "dependency", "npm", "pip", "cargo", "script", "build",
+        "test", "api", "endpoint", "database", "schema",
+        "typescript", "python", "rust", "javascript", "async",
+        "await", "const", "let", "def", "fn", "struct"
+      ],
+      "example_documents": [
+        "AuthService.ts - User Authentication Module",
+        "README.md - Project Documentation",
+        "package.json - Dependencies Configuration",
+        "test_auth.py - Authentication Tests",
+        "deploy.sh - Deployment Script",
+        "API.md - REST API Specification"
+      ],
+      "domain_expertise": ["software", "programming", "development", "engineering"],
+      "use_when": "Document is source code, script, or technical software project artifact"
+    },
+    
+    {
+      "name": "academic_paper",
+      "priority": 93,
+      "display_name": "Academic Papers",
+      "description": "For research papers, theses, dissertations, and scientific articles with citations and methodologies",
+      "best_for": [
+        "Research papers",
+        "Theses and dissertations",
+        "Conference papers",
+        "Journal articles",
+        "Technical reports",
+        "Preprints",
+        "Review papers",
+        "Case studies"
+      ],
+      "key_indicators": [
+        "abstract", "introduction", "methodology", "results", "discussion",
+        "conclusion", "references", "citation", "author", "affiliation",
+        "dataset", "experiment", "hypothesis", "model", "metric",
+        "accuracy", "precision", "recall", "baseline", "improvement",
+        "doi", "arxiv", "conference", "journal", "peer review",
+        "statistical", "analysis", "findings", "contribution"
+      ],
+      "example_documents": [
+        "Deep Learning for Image Classification",
+        "A Novel Approach to Natural Language Processing",
+        "PhD Thesis - Quantum Computing Applications",
+        "Case Study - Climate Change Impact",
+        "Review Paper - Machine Learning in Healthcare"
+      ],
+      "domain_expertise": ["research", "academic", "science", "education"],
+      "use_when": "Document is a research paper, academic article, or scientific publication"
+    },
+    
+    {
+      "name": "base",
+      "priority": 50,
+      "display_name": "Base Template (Fallback)",
+      "description": "Generic fallback template for documents that don't fit other categories or multi-domain documents",
+      "best_for": [
+        "General documents",
+        "Multi-domain documents",
+        "Unclassified content",
+        "Mixed content"
+      ],
+      "key_indicators": [
+        "document", "report", "analysis", "summary", "overview"
+      ],
+      "example_documents": [
+        "General Report",
+        "Company Overview",
+        "Meeting Notes",
+        "Research Summary"
+      ],
+      "domain_expertise": ["general"],
+      "use_when": "No other template matches or document spans multiple domains"
+    }
+  ],
+  
+  "selection_guidelines": {
+    "primary_criteria": [
+      "COST OPTIMIZATION: Default to 'tiny' template for 70-80% token savings",
+      "Use specialized templates ONLY when domain expertise is absolutely necessary",
+      "Match document content with template key_indicators only if specialized needed",
+      "Consider template priority (higher = more specialized, higher cost)"
+    ],
+    
+    "decision_process": [
+      "1. START WITH 'tiny' template as default (priority 110)",
+      "2. Analyze document: Does it REQUIRE specialized knowledge?",
+      "3. Legal/Financial/Compliance docs? Use specific template. Otherwise stay with 'tiny'",
+      "4. If specialized needed: Match key_indicators and choose highest priority match",
+      "5. When in doubt: USE 'tiny' to save costs",
+      "6. Remember: 'tiny' provides 70-80% cost savings"
+    ],
+    
+    "multi_domain_handling": "If document spans multiple domains but none require specialized extraction, USE 'tiny' template",
+    
+    "confidence_threshold": "If confidence < 70% for specialized template, USE 'tiny' template instead",
+    
+    "cost_optimization_rule": "ALWAYS prefer 'tiny' unless document is: Legal, Financial, Compliance, Academic, or Code with complex dependencies"
+  },
+  
+  "usage_instructions": {
+    "for_llm": "When classifying a document:\n1. START WITH 'tiny' as default choice\n2. Read document title and first paragraph\n3. Ask: Does this REQUIRE specialized extraction (legal/financial/code)?\n4. If NO specialized needs: RETURN 'tiny' template\n5. If YES: Match key_indicators and select specialized template\n6. Remember: 'tiny' saves 70-80% costs - use it whenever possible",
+    
+    "output_format": {
+      "template": "tiny",
+      "confidence": 0.95,
+      "reasoning": "General document without specialized requirements - using cost-optimized default",
+      "matched_indicators": ["default"]
+    }
+  }
+}
+

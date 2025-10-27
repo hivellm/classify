@@ -1,0 +1,506 @@
+{
+  "timestamp": "2025-10-27T18:16:22.545Z",
+  "summary": {
+    "filesProcessed": 20,
+    "standard": {
+      "totalCost": 0.011709740000000001,
+      "avgCost": 0.0005854870000000001,
+      "avgEntities": 18.3,
+      "avgRelationships": 23.95
+    },
+    "tiny": {
+      "totalCost": 0.0033958246,
+      "avgCost": 0.00016979123,
+      "avgEntities": 4.4,
+      "avgRelationships": 2.5
+    },
+    "savings": {
+      "cost": "71.0%",
+      "costUsd": "0.0083",
+      "entities": "76.0%",
+      "relationships": "89.6%"
+    }
+  },
+  "detailedComparison": [
+    {
+      "file": "HTTP Handlers API",
+      "hash": "019fa67359fdb056dd06895a2f482566db2ac75c44807e3deda21ac76e006221",
+      "standard": {
+        "entities": 21,
+        "relationships": 33,
+        "keywords": 20,
+        "summaryLength": 322,
+        "cost": 0.0006805400000000001
+      },
+      "tiny": {
+        "entities": 5,
+        "relationships": 3,
+        "keywords": 7,
+        "summaryLength": 80,
+        "cost": 0.0001973566
+      },
+      "savings": {
+        "entities": "76%",
+        "relationships": "91%",
+        "keywords": "65%",
+        "cost": "71%"
+      }
+    },
+    {
+      "file": "Data Structures for Vector Operations",
+      "hash": "0c0d8cd51baebd484082755aab796786bff9033a6b115c5963a45427e8ec7f46",
+      "standard": {
+        "entities": 7,
+        "relationships": 11,
+        "keywords": 20,
+        "summaryLength": 435,
+        "cost": 0.00033824
+      },
+      "tiny": {
+        "entities": 2,
+        "relationships": 1,
+        "keywords": 7,
+        "summaryLength": 108,
+        "cost": 0.0000980896
+      },
+      "savings": {
+        "entities": "71%",
+        "relationships": "91%",
+        "keywords": "65%",
+        "cost": "71%"
+      }
+    },
+    {
+      "file": "Normalization Pipeline Implementation",
+      "hash": "0d256441532bfa318adaa8d7695dc292181a79ec60bfefee866798c59f9b2758",
+      "standard": {
+        "entities": 21,
+        "relationships": 27,
+        "keywords": 20,
+        "summaryLength": 302,
+        "cost": 0.00067774
+      },
+      "tiny": {
+        "entities": 5,
+        "relationships": 3,
+        "keywords": 7,
+        "summaryLength": 80,
+        "cost": 0.00019654459999999998
+      },
+      "savings": {
+        "entities": "76%",
+        "relationships": "89%",
+        "keywords": "65%",
+        "cost": "71%"
+      }
+    },
+    {
+      "file": "Monitoring Capabilities Documentation",
+      "hash": "0d6c1df7b36801dcd1b9dcdd9ffaf200fd2c01fc153321f7958ea05cacdc7df2",
+      "standard": {
+        "entities": 18,
+        "relationships": 26,
+        "keywords": 20,
+        "summaryLength": 466,
+        "cost": 0.00055482
+      },
+      "tiny": {
+        "entities": 4,
+        "relationships": 3,
+        "keywords": 7,
+        "summaryLength": 116,
+        "cost": 0.0001608978
+      },
+      "savings": {
+        "entities": "78%",
+        "relationships": "88%",
+        "keywords": "65%",
+        "cost": "71%"
+      }
+    },
+    {
+      "file": "Text Normalization Module",
+      "hash": "0f81999b28c30cd5cef51dda454ec4369c1898933739439108076c80d0b4d606",
+      "standard": {
+        "entities": 18,
+        "relationships": 23,
+        "keywords": 20,
+        "summaryLength": 381,
+        "cost": 0.00066738
+      },
+      "tiny": {
+        "entities": 4,
+        "relationships": 2,
+        "keywords": 7,
+        "summaryLength": 95,
+        "cost": 0.00019354019999999998
+      },
+      "savings": {
+        "entities": "78%",
+        "relationships": "91%",
+        "keywords": "65%",
+        "cost": "71%"
+      }
+    },
+    {
+      "file": "FastAPI REST API Documentation",
+      "hash": "11e5e95fb59022cd3f1c50819fe66096b7f11576f03d84640eabdf3d6ba45adf",
+      "standard": {
+        "entities": 25,
+        "relationships": 42,
+        "keywords": 20,
+        "summaryLength": 331,
+        "cost": 0.00080486
+      },
+      "tiny": {
+        "entities": 6,
+        "relationships": 5,
+        "keywords": 7,
+        "summaryLength": 82,
+        "cost": 0.0002334094
+      },
+      "savings": {
+        "entities": "76%",
+        "relationships": "88%",
+        "keywords": "65%",
+        "cost": "71%"
+      }
+    },
+    {
+      "file": "BLAKE3 Content Hash Implementation",
+      "hash": "1ee136b9664e5b33549c4ec4daf6b4e57f5b7212aeacf1dc3d6d3caaffa2905e",
+      "standard": {
+        "entities": 25,
+        "relationships": 40,
+        "keywords": 20,
+        "summaryLength": 421,
+        "cost": 0.00079268
+      },
+      "tiny": {
+        "entities": 6,
+        "relationships": 4,
+        "keywords": 7,
+        "summaryLength": 105,
+        "cost": 0.00022987719999999998
+      },
+      "savings": {
+        "entities": "76%",
+        "relationships": "90%",
+        "keywords": "65%",
+        "cost": "71%"
+      }
+    },
+    {
+      "file": "UserController",
+      "hash": "21080d426b044ff56f9d62f3423e64dd57a510e6b47331676ca5d517fdaccae9",
+      "standard": {
+        "entities": 11,
+        "relationships": 17,
+        "keywords": 20,
+        "summaryLength": 357,
+        "cost": 0.00040404000000000004
+      },
+      "tiny": {
+        "entities": 2,
+        "relationships": 2,
+        "keywords": 7,
+        "summaryLength": 89,
+        "cost": 0.00011717160000000001
+      },
+      "savings": {
+        "entities": "82%",
+        "relationships": "88%",
+        "keywords": "65%",
+        "cost": "71%"
+      }
+    },
+    {
+      "file": "Monitoring Metrics Definitions",
+      "hash": "2c5180fce940ea30899be828fb0bd3cca9fb64f259b760acf90da302a8df3033",
+      "standard": {
+        "entities": 6,
+        "relationships": 7,
+        "keywords": 20,
+        "summaryLength": 338,
+        "cost": 0.00030856000000000004
+      },
+      "tiny": {
+        "entities": 2,
+        "relationships": 1,
+        "keywords": 7,
+        "summaryLength": 84,
+        "cost": 0.00008948240000000001
+      },
+      "savings": {
+        "entities": "67%",
+        "relationships": "86%",
+        "keywords": "65%",
+        "cost": "71%"
+      }
+    },
+    {
+      "file": "Management System A full-stack user management system REST API React frontend",
+      "hash": "2d377c08d36e07b4f7833d90ba5f7fae5d53b50b54810356f6aad9c2fa1a0a08",
+      "standard": {
+        "entities": 42,
+        "relationships": 41,
+        "keywords": 20,
+        "summaryLength": 435,
+        "cost": 0.00097874
+      },
+      "tiny": {
+        "entities": 10,
+        "relationships": 4,
+        "keywords": 7,
+        "summaryLength": 108,
+        "cost": 0.0002838346
+      },
+      "savings": {
+        "entities": "76%",
+        "relationships": "90%",
+        "keywords": "65%",
+        "cost": "71%"
+      }
+    },
+    {
+      "file": "Management Module",
+      "hash": "2d43eb0f197168da16daa4654b4fc2d6df1ec390cd5d54de08ce884a88da57eb",
+      "standard": {
+        "entities": 12,
+        "relationships": 22,
+        "keywords": 20,
+        "summaryLength": 359,
+        "cost": 0.00045472000000000004
+      },
+      "tiny": {
+        "entities": 3,
+        "relationships": 2,
+        "keywords": 7,
+        "summaryLength": 89,
+        "cost": 0.0001318688
+      },
+      "savings": {
+        "entities": "75%",
+        "relationships": "91%",
+        "keywords": "65%",
+        "cost": "71%"
+      }
+    },
+    {
+      "file": "Advanced Machine Integration Module Documentation",
+      "hash": "345c1faf422de92dfd044ce287cd9a73688d2fd5e87a8da449e4d640c0fa6933",
+      "standard": {
+        "entities": 3,
+        "relationships": 2,
+        "keywords": 20,
+        "summaryLength": 287,
+        "cost": 0.00011942000000000002
+      },
+      "tiny": {
+        "entities": 2,
+        "relationships": 1,
+        "keywords": 7,
+        "summaryLength": 80,
+        "cost": 0.0000346318
+      },
+      "savings": {
+        "entities": "33%",
+        "relationships": "50%",
+        "keywords": "65%",
+        "cost": "71%"
+      }
+    },
+    {
+      "file": "Changelog All notable changes Management System",
+      "hash": "3e6dba78f7a66ff31920bac0f0c0ad896462a31d958bc095a3afb829c2c28ab2",
+      "standard": {
+        "entities": 41,
+        "relationships": 23,
+        "keywords": 20,
+        "summaryLength": 459,
+        "cost": 0.00074284
+      },
+      "tiny": {
+        "entities": 10,
+        "relationships": 2,
+        "keywords": 7,
+        "summaryLength": 114,
+        "cost": 0.0002154236
+      },
+      "savings": {
+        "entities": "76%",
+        "relationships": "91%",
+        "keywords": "65%",
+        "cost": "71%"
+      }
+    },
+    {
+      "file": "User Management System Build Script",
+      "hash": "445f7979cc319d9d5014975144784da925e1ab48feed628246872e82f7da0dcd",
+      "standard": {
+        "entities": 14,
+        "relationships": 17,
+        "keywords": 20,
+        "summaryLength": 379,
+        "cost": 0.00046704000000000005
+      },
+      "tiny": {
+        "entities": 3,
+        "relationships": 2,
+        "keywords": 7,
+        "summaryLength": 94,
+        "cost": 0.0001354416
+      },
+      "savings": {
+        "entities": "79%",
+        "relationships": "88%",
+        "keywords": "65%",
+        "cost": "71%"
+      }
+    },
+    {
+      "file": "Correlation ID Module",
+      "hash": "50e90b95ad8f02d18bbad8064968396ee6cd3fe00c4f08cd087b0db1fa4afc02",
+      "standard": {
+        "entities": 12,
+        "relationships": 20,
+        "keywords": 20,
+        "summaryLength": 382,
+        "cost": 0.00049252
+      },
+      "tiny": {
+        "entities": 3,
+        "relationships": 2,
+        "keywords": 7,
+        "summaryLength": 95,
+        "cost": 0.0001428308
+      },
+      "savings": {
+        "entities": "75%",
+        "relationships": "90%",
+        "keywords": "65%",
+        "cost": "71%"
+      }
+    },
+    {
+      "file": "REST API Management",
+      "hash": "58153003d4cab03a7176db74bc99f2cccbb934a65c7694f40d586c2956c07d56",
+      "standard": {
+        "entities": 16,
+        "relationships": 26,
+        "keywords": 20,
+        "summaryLength": 329,
+        "cost": 0.0005888400000000001
+      },
+      "tiny": {
+        "entities": 4,
+        "relationships": 3,
+        "keywords": 7,
+        "summaryLength": 82,
+        "cost": 0.0001707636
+      },
+      "savings": {
+        "entities": "75%",
+        "relationships": "88%",
+        "keywords": "65%",
+        "cost": "71%"
+      }
+    },
+    {
+      "file": "Software Metadata and Configuration Document",
+      "hash": "59bba8855f2e2a6f3a10e4862452dc77ddca72ce3ba2b04a3470951371487f28",
+      "standard": {
+        "entities": 8,
+        "relationships": 10,
+        "keywords": 20,
+        "summaryLength": 375,
+        "cost": 0.00028882
+      },
+      "tiny": {
+        "entities": 2,
+        "relationships": 1,
+        "keywords": 7,
+        "summaryLength": 93,
+        "cost": 0.00008375779999999999
+      },
+      "savings": {
+        "entities": "75%",
+        "relationships": "90%",
+        "keywords": "65%",
+        "cost": "71%"
+      }
+    },
+    {
+      "file": "Docker Compose Configuration",
+      "hash": "5d7acf91049067cb85512cd4dd722473676d11512ecacacca5a00dd65a40e9c4",
+      "standard": {
+        "entities": 22,
+        "relationships": 21,
+        "keywords": 20,
+        "summaryLength": 532,
+        "cost": 0.00063686
+      },
+      "tiny": {
+        "entities": 5,
+        "relationships": 2,
+        "keywords": 7,
+        "summaryLength": 133,
+        "cost": 0.0001846894
+      },
+      "savings": {
+        "entities": "77%",
+        "relationships": "90%",
+        "keywords": "65%",
+        "cost": "71%"
+      }
+    },
+    {
+      "file": "Authentication Test Suite",
+      "hash": "69ca154a02339174e8a42b9605ab921fd94e3f15028d5a5726ae5b513f9a5a9d",
+      "standard": {
+        "entities": 31,
+        "relationships": 55,
+        "keywords": 20,
+        "summaryLength": 393,
+        "cost": 0.0011051600000000002
+      },
+      "tiny": {
+        "entities": 7,
+        "relationships": 6,
+        "keywords": 7,
+        "summaryLength": 98,
+        "cost": 0.00032049640000000006
+      },
+      "savings": {
+        "entities": "77%",
+        "relationships": "89%",
+        "keywords": "65%",
+        "cost": "71%"
+      }
+    },
+    {
+      "file": "Content Type Detection Module",
+      "hash": "6e2284783faad0522a2bfd7a334ea19975844d84198ae0505fc16a21960026fc",
+      "standard": {
+        "entities": 13,
+        "relationships": 16,
+        "keywords": 20,
+        "summaryLength": 453,
+        "cost": 0.00060592
+      },
+      "tiny": {
+        "entities": 3,
+        "relationships": 1,
+        "keywords": 7,
+        "summaryLength": 113,
+        "cost": 0.0001757168
+      },
+      "savings": {
+        "entities": "77%",
+        "relationships": "94%",
+        "keywords": "65%",
+        "cost": "71%"
+      }
+    }
+  ]
+}

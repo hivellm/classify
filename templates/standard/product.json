@@ -1,0 +1,234 @@
+{
+  "$schema": "https://hivellm.org/schemas/classify-template-v1.json",
+  "version": "1.0",
+  
+  "metadata": {
+    "name": "product",
+    "display_name": "Product Documents",
+    "description": "Classification template for product documents including specifications, roadmaps, requirements, and product plans",
+    "domains": ["product", "product_management", "development"],
+    "priority": 81,
+    
+    "indicators": [
+      "product", "feature", "requirement", "roadmap", "spec",
+      "specification", "prd", "user story", "epic",
+      "backlog", "release", "milestone", "sprint"
+    ],
+    
+    "document_types": [
+      "prd", "product_spec", "roadmap", "requirements_doc",
+      "feature_request", "release_notes", "product_plan"
+    ],
+    
+    "example_titles": [
+      "Product Requirements Document - Feature X",
+      "Product Roadmap Q1 2025",
+      "Technical Specification - API v2",
+      "Feature Request - Dark Mode",
+      "Release Notes v2.5.0",
+      "Product Plan 2025"
+    ],
+    
+    "use_cases": [
+      "Product planning and roadmapping",
+      "Requirements management",
+      "Feature tracking",
+      "Release management",
+      "Product documentation"
+    ]
+  },
+  
+  "llm_config": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "temperature": 0.2,
+    "max_tokens": 2000,
+    "system_prompt": "You are an expert product manager. Extract product features, requirements, user stories, acceptance criteria, dependencies, milestones, and release information. Identify priorities, owners, and timelines.",
+    "fallback_models": ["gpt-4o-mini", "gemini-2.0-flash"]
+  },
+  
+  "document_types": [
+    {
+      "type": "prd",
+      "display_name": "Product Requirements Document",
+      "description": "Product requirements document",
+      "indicators": ["prd", "requirements", "specifications", "features"],
+      "required_entities": ["product_name", "features"],
+      "optional_entities": ["milestones", "dependencies"],
+      "priority": 100
+    }
+  ],
+  
+  "entity_definitions": [
+    {
+      "type": "Feature",
+      "description": "Product feature",
+      "properties": {
+        "name": { "type": "string", "required": true },
+        "description": { "type": "string", "required": true },
+        "priority": { "type": "enum", "values": ["critical", "high", "medium", "low"], "required": false },
+        "status": { "type": "enum", "values": ["planned", "in_progress", "completed", "cancelled"], "required": false },
+        "release": { "type": "string", "required": false }
+      },
+      "extraction_methods": ["llm"]
+    },
+    {
+      "type": "Requirement",
+      "description": "Product requirement",
+      "properties": {
+        "id": { "type": "string", "required": false },
+        "description": { "type": "string", "required": true },
+        "type": { "type": "enum", "values": ["functional", "non_functional", "business"], "required": false }
+      },
+      "extraction_methods": ["llm"]
+    },
+    {
+      "type": "Milestone",
+      "description": "Product milestone",
+      "properties": {
+        "name": { "type": "string", "required": true },
+        "target_date": { "type": "date", "required": false },
+        "status": { "type": "enum", "values": ["planned", "in_progress", "completed", "at_risk"], "required": false }
+      },
+      "extraction_methods": ["llm"]
+    }
+  ],
+  
+  "relationship_definitions": [
+    {
+      "type": "HAS_FEATURE",
+      "description": "Product has feature",
+      "source": "Product",
+      "target": ["Feature"],
+      "properties": {
+        "priority": { "type": "string", "required": false }
+      },
+      "extraction_methods": ["llm"]
+    },
+    {
+      "type": "REQUIRES",
+      "description": "Feature requires requirement",
+      "source": "Feature",
+      "target": ["Requirement"],
+      "properties": {},
+      "extraction_methods": ["llm"]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "description": "Feature depends on another feature",
+      "source": "Feature",
+      "target": ["Feature"],
+      "properties": {},
+      "extraction_methods": ["llm"]
+    }
+  ],
+  
+  "graph_schema": {
+    "nodes": [
+      {
+        "type": "ProductDocument",
+        "labels": ["Document", "ProductDocument"],
+        "required_properties": ["id", "title", "doc_type"],
+        "optional_properties": ["product_name", "version", "release_date"],
+        "indexes": [
+          { "property": "id", "type": "unique" },
+          { "property": "product_name", "type": "index" }
+        ]
+      }
+    ],
+    
+    "relationships": [
+      {
+        "type": "HAS_FEATURE",
+        "source": "Product",
+        "target": "Feature",
+        "properties": ["priority"],
+        "required": []
+      }
+    ]
+  },
+  
+  "fulltext_schema": {
+    "required_fields": ["title", "domain", "doc_type"],
+    
+    "extracted_fields": [
+      {
+        "name": "product_name",
+        "type": "string",
+        "description": "Product name",
+        "extraction_method": "llm",
+        "index": true
+      },
+      {
+        "name": "version",
+        "type": "string",
+        "description": "Product version",
+        "extraction_method": "pattern",
+        "patterns": ["v?\\d+\\.\\d+(?:\\.\\d+)?"],
+        "index": true
+      },
+      {
+        "name": "features",
+        "type": "array",
+        "description": "Product features",
+        "extraction_method": "llm",
+        "index": true
+      },
+      {
+        "name": "release_date",
+        "type": "date",
+        "description": "Release date",
+        "extraction_method": "pattern",
+        "index": true
+      }
+    ],
+    
+    "keyword_extraction": {
+      "enabled": true,
+      "method": "tfidf",
+      "min_frequency": 2,
+      "max_keywords": 20,
+      "exclude_stopwords": true,
+      "preserve_entities": true
+    },
+    
+    "categories": ["product", "feature", "requirements", "roadmap"],
+    
+    "summary": {
+      "enabled": true,
+      "method": "llm",
+      "max_length": 350
+    }
+  },
+  
+  "extraction_rules": [
+    {
+      "name": "extract_features",
+      "description": "Extract product features",
+      "method": "llm",
+      "prompt": "Extract all product features with names, descriptions, priorities, status, and dependencies."
+    },
+    {
+      "name": "extract_requirements",
+      "description": "Extract product requirements",
+      "method": "llm",
+      "prompt": "Extract all requirements with their type (functional/non-functional) and description."
+    }
+  ],
+  
+  "validation_rules": [
+    {
+      "field": "product_name",
+      "rules": [
+        { "type": "min_length", "value": 2 }
+      ]
+    },
+    {
+      "field": "features",
+      "rules": [
+        { "type": "min_length", "value": 1, "message": "At least one feature required" }
+      ]
+    }
+  ]
+}
+

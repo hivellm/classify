@@ -1,0 +1,30 @@
+{
+  "timestamp": "2025-10-27T18:11:47.091Z",
+  "summary": {
+    "filesProcessed": 0,
+    "standard": {
+      "totalCost": 0,
+      "totalTime": 0,
+      "avgCost": null,
+      "avgTime": null,
+      "avgEntities": null,
+      "avgRelationships": null
+    },
+    "tiny": {
+      "totalCost": 0,
+      "totalTime": 0,
+      "avgCost": null,
+      "avgTime": null,
+      "avgEntities": null,
+      "avgRelationships": null
+    },
+    "savings": {
+      "cost": "NaN%",
+      "time": "NaN%",
+      "costUsd": "0.0000"
+    }
+  },
+  "detailedComparison": [],
+  "searchQualityComparison": [],
+  "averageSearchOverlap": 0
+}

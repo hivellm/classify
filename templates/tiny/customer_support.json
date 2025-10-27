@@ -1,0 +1,117 @@
+{
+  "$schema": "https://hivellm.org/schemas/classify-template-tiny-v1.json",
+  "version": "1.0",
+  
+  "metadata": {
+    "name": "customer_support",
+    "display_name": "Customer Support (Tiny)",
+    "description": "Lightweight template for support tickets and KB articles",
+    "domains": ["support", "customer_service"],
+    "priority": 78
+  },
+  
+  "llm_config": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "temperature": 0.0,
+    "max_tokens": 400,
+    "system_prompt": "Extract title, issue type, and status. Minimal."
+  },
+  
+  "entity_definitions": [
+    {
+      "type": "Document",
+      "properties": {
+        "title": { "type": "string", "required": true },
+        "issue_type": { "type": "string", "required": false }
+      }
+    },
+    {
+      "type": "Issue",
+      "properties": {
+        "name": { "type": "string", "required": true }
+      }
+    }
+  ],
+  
+  "relationship_definitions": [
+    {
+      "type": "HAS_ISSUE",
+      "source": "Document",
+      "target": "Issue"
+    }
+  ],
+  
+  "graph_schema": {
+    "nodes": [
+      {
+        "type": "Document",
+        "labels": ["Document", "Support"],
+        "required_properties": ["id", "title"],
+        "indexes": [
+          { "property": "id", "type": "unique" }
+        ]
+      },
+      {
+        "type": "Issue",
+        "labels": ["Issue"],
+        "required_properties": ["name"],
+        "indexes": [
+          { "property": "name", "type": "index" }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "type": "HAS_ISSUE",
+        "source": "Document",
+        "target": "Issue"
+      }
+    ]
+  },
+  
+  "fulltext_schema": {
+    "required_fields": ["title", "domain", "doc_type"],
+    
+    "extracted_fields": [
+      {
+        "name": "issue_type",
+        "type": "string",
+        "extraction_method": "llm",
+        "index": true
+      }
+    ],
+    
+    "keyword_extraction": {
+      "enabled": true,
+      "method": "tfidf",
+      "min_frequency": 3,
+      "max_keywords": 5
+    },
+    
+    "summary": {
+      "enabled": true,
+      "method": "llm",
+      "max_length": 80
+    }
+  },
+  
+  "extraction_rules": [
+    {
+      "name": "extract_support",
+      "method": "llm",
+      "prompt": "Extract issue type only"
+    }
+  ],
+  
+  "validation_rules": [
+    {
+      "field": "title",
+      "rules": [
+        { "type": "required" },
+        { "type": "max_length", "value": 150 }
+      ]
+    }
+  ]
+}
+

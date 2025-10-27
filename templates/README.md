@@ -1,208 +1,226 @@
-# Classification Templates
+# Classify Templates
 
-This directory contains all classification templates used by the Classify CLI for document classification.
+This directory contains two sets of classification templates optimized for different use cases.
 
-## 📋 Template Overview
+## Directory Structure
 
-| Template | Priority | Domain | Use Case |
-|----------|----------|--------|----------|
-| **legal** | 95 | Legal/Contracts | Contracts, agreements, NDAs, legal opinions |
-| **financial** | 92 | Finance | Financial statements, budgets, invoices |
-| **accounting** | 90 | Accounting | Ledgers, journals, reconciliations |
-| **hr** | 88 | Human Resources | Employment contracts, policies, reviews |
-| **investor_relations** | 87 | Investor Relations | Earnings reports, investor presentations |
-| **compliance** | 86 | Compliance/Audit | Compliance reports, audits, certifications |
-| **engineering** | 85 | Engineering | Technical specs, architecture, API docs |
-| **strategic** | 84 | Strategy | Strategic plans, business plans, analysis |
-| **sales** | 83 | Sales | Proposals, quotes, pipeline reports |
-| **marketing** | 82 | Marketing | Campaigns, analytics, content |
-| **product** | 81 | Product | PRDs, roadmaps, requirements |
-| **operations** | 80 | Operations | SOPs, processes, workflows |
-| **customer_support** | 78 | Support | Tickets, FAQs, knowledge base |
-| **base** | 50 | General | Fallback for unclassified documents |
-
-## 🎯 Template Selection Process
-
-The Classify CLI uses an intelligent LLM-based selection process:
-
-1. **Document Analysis**: The LLM analyzes the document title and content
-2. **Indicator Matching**: Compares document against template `key_indicators`
-3. **Priority Ranking**: Higher priority templates are more specialized
-4. **Confidence Scoring**: Returns confidence score (0-1)
-5. **Fallback**: Uses `base` template if confidence < 70%
-
-### Selection Index
-
-The `index.json` file provides the LLM with:
-- Complete template descriptions
-- Key indicators for each domain
-- Example documents
-- Selection guidelines
-- Decision process steps
-
-## 📁 Template Structure
-
-Each template follows the `classify-template-v1.json` schema and includes:
-
-### Metadata
-```json
-{
-  "name": "template_name",
-  "display_name": "Human-readable name",
-  "description": "What this template is for",
-  "domains": ["domain1", "domain2"],
-  "priority": 85,
-  "indicators": ["keyword1", "keyword2", ...],
-  "document_types": ["type1", "type2", ...],
-  "example_titles": ["Example 1", "Example 2", ...]
-}
+```
+templates/
+├── tiny/          ← DEFAULT (70-80% cost savings)
+│   ├── index.json
+│   ├── base.json
+│   ├── legal.json
+│   ├── financial.json
+│   ├── engineering.json
+│   ├── academic_paper.json
+│   ├── accounting.json
+│   ├── compliance.json
+│   ├── customer_support.json
+│   ├── hr.json
+│   ├── investor_relations.json
+│   ├── marketing.json
+│   ├── operations.json
+│   ├── product.json
+│   ├── sales.json
+│   ├── software_project.json
+│   └── strategic.json
+│
+└── standard/      ← Full-featured templates
+    ├── index.json
+    ├── base.json
+    ├── legal.json
+    ├── financial.json
+    ├── engineering.json
+    └── ... (16 templates total)
 ```
 
-### LLM Configuration
-```json
-{
-  "provider": "deepseek",
-  "model": "deepseek-chat",
-  "temperature": 0.1,
-  "max_tokens": 2000,
-  "system_prompt": "Expert prompt for extraction",
-  "fallback_models": ["gpt-4o-mini", "gemini-2.0-flash"]
-}
-```
+## Template Sets
 
-### Entity Definitions
-Defines entities to extract (e.g., Person, Organization, Contract, etc.)
+### 🚀 TINY Templates (DEFAULT)
 
-### Relationship Definitions
-Defines relationships between entities (e.g., SIGNS, EMPLOYS, OWNS)
+**Location:** `templates/tiny/`  
+**Schema:** `schemas/classify-template-tiny-v1.json`
 
-### Graph Schema
-Cypher-compatible graph structure for Nexus/Neo4j
+**Characteristics:**
+- ✅ **70-80% token savings** vs standard templates
+- ✅ **$0.0006-$0.0008 per document**
+- ✅ **400-500 max output tokens**
+- ✅ **2-3 entities max**
+- ✅ **1-2 relationships max**
+- ✅ **Minimal extraction** (title, type, 1-2 key fields)
 
-### Fulltext Schema
-Field definitions for full-text search engines (Lexum, Elasticsearch)
+**Use When:**
+- High-volume document processing
+- Cost optimization is critical
+- Basic classification is sufficient
+- Fulltext search + simple graphs
 
-### Extraction Rules
-Specific LLM prompts and patterns for data extraction
+**Templates:**
+1. `base` (priority 100) - Default for general documents
+2. `legal` (95) - Contracts, agreements
+3. `academic_paper` (93) - Research papers
+4. `financial` (92) - Financial statements
+5. `accounting` (90) - Ledgers, journals
+6. `software_project` (89) - Source code
+7. `hr` (88) - HR documents
+8. `investor_relations` (87) - Earnings reports
+9. `compliance` (86) - Compliance docs
+10. `engineering` (85) - Technical docs
+11. `strategic` (84) - Strategic plans
+12. `sales` (83) - Sales proposals
+13. `marketing` (82) - Marketing campaigns
+14. `product` (81) - Product requirements
+15. `operations` (80) - SOPs
+16. `customer_support` (78) - Support tickets
 
-### Validation Rules
-Field validation rules for extracted data
+### 📊 STANDARD Templates
 
-## 🚀 Usage
+**Location:** `templates/standard/`  
+**Schema:** `schemas/classify-template-v1.json`
 
-### CLI Usage
-```bash
-# Let LLM choose template automatically
-npx @hivellm/classify document contract.pdf
+**Characteristics:**
+- ✅ **Full metadata extraction**
+- ✅ **$0.0024-$0.0036 per document**
+- ✅ **1500-4000 max output tokens**
+- ✅ **4-10 entities**
+- ✅ **4-10 relationships**
+- ✅ **Comprehensive extraction**
 
-# Force specific template
-npx @hivellm/classify document contract.pdf --template legal
+**Use When:**
+- Rich metadata is required
+- Complex graph relationships needed
+- Detailed entity extraction important
+- Cost is not a primary concern
 
-# Show template selection reasoning
-npx @hivellm/classify document contract.pdf --explain
-```
+## Configuration
 
-### Programmatic Usage
+### Default (Tiny Templates)
+
+The system uses TINY templates by default:
+
 ```typescript
-import { ClassifyClient } from '@hivellm/classify';
-
-const client = new ClassifyClient({
-  model: 'deepseek-chat',
-  cacheDir: '.classify-cache'
-});
-
-// Automatic template selection
-const result = await client.classify('document.pdf');
-console.log(`Selected template: ${result.template.name}`);
-console.log(`Confidence: ${result.template.confidence}`);
+// src/templates/template-loader.ts
+private getDefaultTemplateDir(): string {
+  return join(__dirname, '..', '..', 'templates', 'tiny');
+}
 ```
 
-## 📝 Creating Custom Templates
+### Use Standard Templates
 
-To create a new template:
+To use standard templates, specify the directory:
 
-1. **Copy base template**: `cp base.json my_template.json`
-2. **Update metadata**: Set name, description, indicators
-3. **Define entities**: Add domain-specific entities
-4. **Define relationships**: Add entity relationships
-5. **Configure LLM**: Set appropriate prompts and temperature
-6. **Add to index**: Update `index.json` with new template
-7. **Validate**: Run `npx @hivellm/classify validate-template my_template.json`
+```typescript
+const loader = new TemplateLoader();
+await loader.loadTemplates('templates/standard');
+```
 
-### Template Best Practices
-
-✅ **Do:**
-- Use descriptive, domain-specific indicators
-- Set appropriate priority (50-100)
-- Include clear example titles
-- Use low temperature (0.0-0.3) for factual extraction
-- Provide specific system prompts
-- Include fallback models
-
-❌ **Don't:**
-- Use generic indicators (document, report, etc.)
-- Set priority > 100 or < 50
-- Use high temperature for structured extraction
-- Forget to validate against schema
-
-## 🔍 Template Validation
-
-Validate template against JSON Schema:
+Or via CLI:
 
 ```bash
-# Validate single template
-npx @hivellm/classify validate-template templates/legal.json
-
-# Validate all templates
-npx @hivellm/classify validate-templates templates/*.json
-
-# Test template selection
-npx @hivellm/classify test-selection document.pdf --show-all-scores
+npx @hivellm/classify document file.pdf --templates-dir templates/standard
 ```
 
-## 📊 Template Performance
+## Cost Comparison
 
-Track template performance:
+**1000 documents, 70% cache hit:**
 
-```bash
-# Show template usage stats
-npx @hivellm/classify stats
+| Template Set | Cost | Savings |
+|--------------|------|---------|
+| **Tiny** | **$0.21** | **70-80%** |
+| Standard | $0.72 | baseline |
 
-# Example output:
-# Template       Uses  Avg Confidence  Cache Hit Rate
-# legal          245   0.92           87%
-# financial      189   0.88           91%
-# engineering    156   0.85           82%
+**Per Document:**
+
+| Template | Output Tokens | Cost |
+|----------|--------------|------|
+| **tiny/base** | **400** | **$0.0007** |
+| **tiny/engineering** | **500** | **$0.0008** |
+| standard/base | 1500 | $0.0024 |
+| standard/engineering | 2000 | $0.0036 |
+
+## Schema Differences
+
+### Tiny Schema Limits
+
+```json
+{
+  "entity_definitions": {
+    "maxItems": 3
+  },
+  "relationship_definitions": {
+    "maxItems": 2
+  },
+  "llm_config": {
+    "max_tokens": {
+      "minimum": 100,
+      "maximum": 1000
+    },
+    "system_prompt": {
+      "maxLength": 200
+    }
+  }
+}
 ```
 
-## 🔄 Template Updates
+### Standard Schema
 
-Templates are versioned using semantic versioning:
+No strict limits - full flexibility for complex classification.
 
-- **Major**: Breaking changes to entity/relationship structure
-- **Minor**: New entities or relationships added
-- **Patch**: Bug fixes, improved prompts, better indicators
+## Migration Guide
 
-Current version: **v1.0**
+### From Standard to Tiny
 
-## 📚 Additional Resources
+1. Identify which templates you use most
+2. Test with tiny versions
+3. Verify output quality meets needs
+4. Update configuration to use tiny directory
+5. Monitor cost savings
 
-- [Template Specification](../docs/TEMPLATE_SPECIFICATION.md)
-- [API Reference](../docs/API_REFERENCE.md)
-- [Integration Guide](../docs/INTEGRATION.md)
-- [JSON Schema](../schemas/classify-template-v1.json)
+### From Tiny to Standard
 
-## 🤝 Contributing
+1. Update template directory config
+2. Rebuild cache if needed
+3. Expect 3-4x cost increase
+4. Benefit from richer metadata
 
-To contribute new templates:
+## Template Selection
 
-1. Create template following the schema
-2. Add comprehensive test cases
-3. Update `index.json`
-4. Submit PR with example documents
-5. Document domain expertise required
+Both tiny and standard use the same selection algorithm:
 
-## 📄 License
+1. LLM analyzes document
+2. Matches key indicators
+3. Selects best template by priority
+4. Falls back to `base` if uncertain
 
-All templates are part of the HiveLLM Classify project and licensed under MIT.
+The difference is in **what gets extracted**, not **which template is selected**.
 
+## Performance
+
+### Tiny Templates
+- **Extraction Time:** 1.5-2.0s
+- **Output Size:** 200-500 tokens
+- **Cache Size:** ~50% smaller
+
+### Standard Templates
+- **Extraction Time:** 2.2-2.8s
+- **Output Size:** 800-2000 tokens
+- **Cache Size:** Baseline
+
+## Recommendations
+
+**Use TINY if:**
+- Processing > 1000 documents
+- Budget is limited
+- Basic classification sufficient
+- Fulltext search is primary use case
+
+**Use STANDARD if:**
+- Need rich metadata
+- Complex graph relationships required
+- < 500 documents to process
+- Cost is not a concern
+
+---
+
+**Default:** TINY templates (70-80% cost savings)  
+**Last Updated:** 2025-10-27

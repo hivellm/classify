@@ -1,0 +1,117 @@
+{
+  "$schema": "https://hivellm.org/schemas/classify-template-tiny-v1.json",
+  "version": "1.0",
+  
+  "metadata": {
+    "name": "operations",
+    "display_name": "Operations (Tiny)",
+    "description": "Lightweight template for operations and SOP documents",
+    "domains": ["operations", "process"],
+    "priority": 80
+  },
+  
+  "llm_config": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "temperature": 0.0,
+    "max_tokens": 400,
+    "system_prompt": "Extract title, process type, and area. Brief."
+  },
+  
+  "entity_definitions": [
+    {
+      "type": "Document",
+      "properties": {
+        "title": { "type": "string", "required": true },
+        "process_type": { "type": "string", "required": false }
+      }
+    },
+    {
+      "type": "Process",
+      "properties": {
+        "name": { "type": "string", "required": true }
+      }
+    }
+  ],
+  
+  "relationship_definitions": [
+    {
+      "type": "DESCRIBES_PROCESS",
+      "source": "Document",
+      "target": "Process"
+    }
+  ],
+  
+  "graph_schema": {
+    "nodes": [
+      {
+        "type": "Document",
+        "labels": ["Document", "Operations"],
+        "required_properties": ["id", "title"],
+        "indexes": [
+          { "property": "id", "type": "unique" }
+        ]
+      },
+      {
+        "type": "Process",
+        "labels": ["Process"],
+        "required_properties": ["name"],
+        "indexes": [
+          { "property": "name", "type": "index" }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "type": "DESCRIBES_PROCESS",
+        "source": "Document",
+        "target": "Process"
+      }
+    ]
+  },
+  
+  "fulltext_schema": {
+    "required_fields": ["title", "domain", "doc_type"],
+    
+    "extracted_fields": [
+      {
+        "name": "process_type",
+        "type": "string",
+        "extraction_method": "llm",
+        "index": true
+      }
+    ],
+    
+    "keyword_extraction": {
+      "enabled": true,
+      "method": "tfidf",
+      "min_frequency": 3,
+      "max_keywords": 5
+    },
+    
+    "summary": {
+      "enabled": true,
+      "method": "llm",
+      "max_length": 80
+    }
+  },
+  
+  "extraction_rules": [
+    {
+      "name": "extract_operations",
+      "method": "llm",
+      "prompt": "Extract process type only"
+    }
+  ],
+  
+  "validation_rules": [
+    {
+      "field": "title",
+      "rules": [
+        { "type": "required" },
+        { "type": "max_length", "value": 150 }
+      ]
+    }
+  ]
+}
+

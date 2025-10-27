@@ -1,0 +1,117 @@
+{
+  "$schema": "https://hivellm.org/schemas/classify-template-tiny-v1.json",
+  "version": "1.0",
+  
+  "metadata": {
+    "name": "academic_paper",
+    "display_name": "Academic Paper (Tiny)",
+    "description": "Lightweight template for research papers and academic articles",
+    "domains": ["academic", "research", "science"],
+    "priority": 93
+  },
+  
+  "llm_config": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "temperature": 0.0,
+    "max_tokens": 500,
+    "system_prompt": "Extract title, authors, and main contribution. Be brief."
+  },
+  
+  "entity_definitions": [
+    {
+      "type": "Paper",
+      "properties": {
+        "title": { "type": "string", "required": true },
+        "contribution": { "type": "string", "required": false }
+      }
+    },
+    {
+      "type": "Author",
+      "properties": {
+        "name": { "type": "string", "required": true }
+      }
+    }
+  ],
+  
+  "relationship_definitions": [
+    {
+      "type": "AUTHORED_BY",
+      "source": "Paper",
+      "target": "Author"
+    }
+  ],
+  
+  "graph_schema": {
+    "nodes": [
+      {
+        "type": "Paper",
+        "labels": ["Document", "Paper"],
+        "required_properties": ["id", "title"],
+        "indexes": [
+          { "property": "id", "type": "unique" }
+        ]
+      },
+      {
+        "type": "Author",
+        "labels": ["Author"],
+        "required_properties": ["name"],
+        "indexes": [
+          { "property": "name", "type": "index" }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "type": "AUTHORED_BY",
+        "source": "Paper",
+        "target": "Author"
+      }
+    ]
+  },
+  
+  "fulltext_schema": {
+    "required_fields": ["title", "domain", "doc_type"],
+    
+    "extracted_fields": [
+      {
+        "name": "authors",
+        "type": "array",
+        "extraction_method": "llm",
+        "index": true
+      }
+    ],
+    
+    "keyword_extraction": {
+      "enabled": true,
+      "method": "tfidf",
+      "min_frequency": 2,
+      "max_keywords": 8
+    },
+    
+    "summary": {
+      "enabled": true,
+      "method": "llm",
+      "max_length": 100
+    }
+  },
+  
+  "extraction_rules": [
+    {
+      "name": "extract_paper",
+      "method": "llm",
+      "prompt": "Extract title, authors, and main contribution"
+    }
+  ],
+  
+  "validation_rules": [
+    {
+      "field": "title",
+      "rules": [
+        { "type": "required" },
+        { "type": "max_length", "value": 200 }
+      ]
+    }
+  ]
+}
+

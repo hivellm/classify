@@ -1,0 +1,117 @@
+{
+  "$schema": "https://hivellm.org/schemas/classify-template-tiny-v1.json",
+  "version": "1.0",
+  
+  "metadata": {
+    "name": "product",
+    "display_name": "Product (Tiny)",
+    "description": "Lightweight template for product management documents",
+    "domains": ["product", "product_management"],
+    "priority": 81
+  },
+  
+  "llm_config": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "temperature": 0.0,
+    "max_tokens": 450,
+    "system_prompt": "Extract title, product name, and feature. Concise."
+  },
+  
+  "entity_definitions": [
+    {
+      "type": "Document",
+      "properties": {
+        "title": { "type": "string", "required": true },
+        "product": { "type": "string", "required": false }
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": { "type": "string", "required": true }
+      }
+    }
+  ],
+  
+  "relationship_definitions": [
+    {
+      "type": "HAS_FEATURE",
+      "source": "Document",
+      "target": "Feature"
+    }
+  ],
+  
+  "graph_schema": {
+    "nodes": [
+      {
+        "type": "Document",
+        "labels": ["Document", "Product"],
+        "required_properties": ["id", "title"],
+        "indexes": [
+          { "property": "id", "type": "unique" }
+        ]
+      },
+      {
+        "type": "Feature",
+        "labels": ["Feature"],
+        "required_properties": ["name"],
+        "indexes": [
+          { "property": "name", "type": "index" }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "type": "HAS_FEATURE",
+        "source": "Document",
+        "target": "Feature"
+      }
+    ]
+  },
+  
+  "fulltext_schema": {
+    "required_fields": ["title", "domain", "doc_type"],
+    
+    "extracted_fields": [
+      {
+        "name": "product",
+        "type": "string",
+        "extraction_method": "llm",
+        "index": true
+      }
+    ],
+    
+    "keyword_extraction": {
+      "enabled": true,
+      "method": "tfidf",
+      "min_frequency": 3,
+      "max_keywords": 6
+    },
+    
+    "summary": {
+      "enabled": true,
+      "method": "llm",
+      "max_length": 85
+    }
+  },
+  
+  "extraction_rules": [
+    {
+      "name": "extract_product",
+      "method": "llm",
+      "prompt": "Extract product and main feature"
+    }
+  ],
+  
+  "validation_rules": [
+    {
+      "field": "title",
+      "rules": [
+        { "type": "required" },
+        { "type": "max_length", "value": 160 }
+      ]
+    }
+  ]
+}
+
