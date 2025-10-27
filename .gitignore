@@ -2,6 +2,8 @@
 node_modules/
 test-results/
 test-documents/
+.test-cache/
+.classify-cache/
 
 # Build output
 dist/

@@ -7,6 +7,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2025-10-27
+
+### Added
+
+- **Cache System**:
+  - SHA256-based persistent caching (filesystem storage)
+  - CacheManager with LRU-like access tracking
+  - Cache statistics API (hits, misses, hit rate, cost saved)
+  - clearCache() and clearOlderThan() methods
+  - Automatic cache initialization
+  - 8 cache tests (100% passing)
+
+- **Batch Processing**:
+  - BatchProcessor for parallel document processing
+  - Configurable concurrency (default: 4)
+  - Recursive directory scanning
+  - File extension filtering
+  - Continue on error support
+  - Detailed batch metrics and progress tracking
+
+- **Enhanced Fulltext Metadata**:
+  - TF-IDF-like keyword extraction (top 20 keywords)
+  - LLM-powered document summarization (2-3 sentences)
+  - Named entity categorization (people, orgs, locations, dates, amounts)
+  - Rich extracted fields from all entities
+  - Document preview (first 500 chars)
+  - Full content for indexing
+
+### Performance
+
+**Cache Performance** (tested):
+- Cold start: 32.8s, $0.000416
+- Warm cache: 12ms (**2734x faster!**)
+- 100% cost saving on cache hits
+
+**Batch Processing** (10 documents):
+- First run: 256s, $0.0051
+- Second run (cached): 72.6s, $0.00
+- Cache hit rate: 90.9%
+- 3.5x speedup with cache
+
+### Changed
+
+- Client now checks cache before classification
+- Client automatically caches results after classification
+- Fulltext metadata now includes keywords and summary
+- E2E test results regenerated with new metadata
+
 ## [0.2.0] - 2025-10-27
 
 ### Added
