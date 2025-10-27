@@ -70,6 +70,7 @@
     "vitest": "^2.1.9"
   },
   "dependencies": {
+    "@hivellm/transmutation-lite": "^0.6.1",
     "commander": "^14.0.2"
   }
 }
