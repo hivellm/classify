@@ -54,10 +54,10 @@ export class ProjectDetector {
       // Find entry points
       const pkgContent = await this.readJson(join(directory, 'package.json'));
       name = pkgContent.name ?? name;
-      
+
       if (pkgContent.main) entryPoints.push(pkgContent.main);
       if (pkgContent.module) entryPoints.push(pkgContent.module);
-      
+
       // Common Node.js entry points
       if (await this.fileExists(join(directory, 'src/index.ts'))) entryPoints.push('src/index.ts');
       if (await this.fileExists(join(directory, 'src/index.js'))) entryPoints.push('src/index.js');
@@ -100,7 +100,8 @@ export class ProjectDetector {
       // Common Python entry points
       if (await this.fileExists(join(directory, '__init__.py'))) entryPoints.push('__init__.py');
       if (await this.fileExists(join(directory, 'main.py'))) entryPoints.push('main.py');
-      if (await this.fileExists(join(directory, 'src/__init__.py'))) entryPoints.push('src/__init__.py');
+      if (await this.fileExists(join(directory, 'src/__init__.py')))
+        entryPoints.push('src/__init__.py');
     }
 
     // Multi-language detection
@@ -147,4 +148,3 @@ export class ProjectDetector {
     }
   }
 }
-

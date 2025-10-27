@@ -57,11 +57,7 @@ export {
 } from './utils/ignore-patterns.js';
 
 export { GitIgnoreParser, type GitIgnorePattern } from './utils/gitignore-parser.js';
-export {
-  RecursiveScanner,
-  type ScannedFile,
-  type ScanOptions,
-} from './utils/recursive-scanner.js';
+export { RecursiveScanner, type ScannedFile, type ScanOptions } from './utils/recursive-scanner.js';
 
 // Integrations
 export {

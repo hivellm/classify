@@ -170,7 +170,7 @@ node_modules
 
       const patterns = parser.getPatterns();
       expect(patterns.length).toBeGreaterThan(0);
-      
+
       // Should have patterns from both files
       expect(parser.shouldIgnore('node_modules/lib.js')).toBe(true);
       expect(parser.shouldIgnore('dist/bundle.js')).toBe(true);
@@ -217,7 +217,10 @@ node_modules
         '.env.local',
       ];
 
-      parser.addPatterns(realWorldPatterns.filter(p => p && !p.startsWith('#')), 'real-world');
+      parser.addPatterns(
+        realWorldPatterns.filter((p) => p && !p.startsWith('#')),
+        'real-world'
+      );
     });
 
     it('should handle typical project structure', () => {
@@ -228,11 +231,10 @@ node_modules
       expect(parser.shouldIgnore('logs/debug.log')).toBe(true);
       expect(parser.shouldIgnore('.vscode/settings.json')).toBe(true);
       expect(parser.shouldIgnore('.env.local')).toBe(true);
-      
+
       expect(parser.shouldIgnore('src/index.js')).toBe(false);
       expect(parser.shouldIgnore('src/components/App.tsx')).toBe(false);
       expect(parser.shouldIgnore('package.json')).toBe(false);
     });
   });
 });
-

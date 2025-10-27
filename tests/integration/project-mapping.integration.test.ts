@@ -42,7 +42,7 @@ describe('Project Mapping Integration', () => {
     it('should scan and filter files correctly', async () => {
       // This is a quick test that doesn't actually classify (would be expensive)
       // We just test the scanning and filtering logic
-      
+
       const result = await mapper.mapProject(projectRoot, {
         concurrency: 1,
         includeTests: false,
@@ -52,12 +52,12 @@ describe('Project Mapping Integration', () => {
 
       // Should find source files
       expect(result.statistics.totalFiles).toBeGreaterThan(0);
-      
+
       // Should exclude node_modules, dist, etc
-      const filePaths = result.files.map(f => f.path);
-      expect(filePaths.every(p => !p.includes('node_modules'))).toBe(true);
-      expect(filePaths.every(p => !p.includes('dist'))).toBe(true);
-      expect(filePaths.every(p => !p.includes('coverage'))).toBe(true);
+      const filePaths = result.files.map((f) => f.path);
+      expect(filePaths.every((p) => !p.includes('node_modules'))).toBe(true);
+      expect(filePaths.every((p) => !p.includes('dist'))).toBe(true);
+      expect(filePaths.every((p) => !p.includes('coverage'))).toBe(true);
 
       console.log(`\n📊 Classify Project Analysis:`);
       console.log(`   Files scanned: ${result.statistics.totalFiles}`);
@@ -75,11 +75,11 @@ describe('Project Mapping Integration', () => {
 
       // Should find import relationships
       expect(result.relationships.length).toBeGreaterThan(0);
-      
+
       // Should distinguish internal vs external imports
-      const internalImports = result.relationships.filter(r => !r.isExternal);
-      const externalImports = result.relationships.filter(r => r.isExternal);
-      
+      const internalImports = result.relationships.filter((r) => !r.isExternal);
+      const externalImports = result.relationships.filter((r) => r.isExternal);
+
       expect(internalImports.length).toBeGreaterThan(0);
       expect(externalImports.length).toBeGreaterThan(0);
 
@@ -100,12 +100,12 @@ describe('Project Mapping Integration', () => {
         buildRelationships: false,
       });
 
-      const filePaths = result.files.map(f => f.path);
+      const filePaths = result.files.map((f) => f.path);
 
       // Should NOT include any of these (they're in .gitignore)
-      expect(filePaths.every(p => !p.includes('node_modules'))).toBe(true);
-      expect(filePaths.every(p => !p.includes('.cache'))).toBe(true);
-      expect(filePaths.every(p => !p.includes('dist/'))).toBe(true);
+      expect(filePaths.every((p) => !p.includes('node_modules'))).toBe(true);
+      expect(filePaths.every((p) => !p.includes('.cache'))).toBe(true);
+      expect(filePaths.every((p) => !p.includes('dist/'))).toBe(true);
     }, 60000);
 
     it('should include all files when gitignore is disabled', async () => {
@@ -176,10 +176,10 @@ describe('Project Mapping Integration', () => {
       expect(stats.totalEntities).toBeGreaterThan(0);
       expect(stats.totalRelationships).toBeGreaterThan(0);
       expect(stats.processingTime).toBeGreaterThan(0);
-      
+
       // Should have language breakdown
       expect(Object.keys(stats.byLanguage).length).toBeGreaterThan(0);
-      
+
       // Should have document type breakdown
       expect(Object.keys(stats.byDocType).length).toBeGreaterThan(0);
 
@@ -221,4 +221,3 @@ describe('Project Mapping Integration', () => {
     }, 30000);
   });
 });
-

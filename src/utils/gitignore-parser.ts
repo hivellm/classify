@@ -125,7 +125,7 @@ export class GitIgnoreParser {
    */
   private patternToRegex(pattern: string): RegExp {
     const originalPattern = pattern;
-    
+
     // Escape special regex characters except *, ?, [, ]
     let regexPattern = pattern.replace(/[.+^${}()|\\]/g, '\\$&');
 
@@ -135,14 +135,14 @@ export class GitIgnoreParser {
     // Handle * (match anything except /)
     regexPattern = regexPattern.replace(/\\\*/g, '[^/]*');
 
-    // Restore ** to match everything including / 
+    // Restore ** to match everything including /
     // Special handling for leading **/
     if (regexPattern.startsWith('<<<DOUBLESTAR>>>/')) {
       regexPattern = regexPattern.replace(/^<<<DOUBLESTAR>>>\//g, '(^|.*/)');
     } else if (regexPattern.startsWith('<<<DOUBLESTAR>>>')) {
       regexPattern = regexPattern.replace(/^<<<DOUBLESTAR>>>/g, '(^|.*)');
     }
-    
+
     // Replace remaining ** (in middle or end of pattern)
     regexPattern = regexPattern.replace(/<<<DOUBLESTAR>>>/g, '.*');
 
@@ -226,4 +226,3 @@ export class GitIgnoreParser {
     }
   }
 }
-

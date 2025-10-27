@@ -68,7 +68,7 @@ export class ProjectMapper {
     console.log('🔍 Detecting project structure...');
     const detector = new ProjectDetector();
     const project = await detector.detect(directory);
-    
+
     console.log(`✅ Project: ${project.name} (${project.primaryLanguage})`);
     console.log(`   Types: ${project.types.join(', ')}`);
     console.log(`   Entry points: ${project.entryPoints.join(', ')}\n`);
@@ -92,7 +92,7 @@ export class ProjectMapper {
     });
 
     // Filter files
-    const filteredFiles = allFiles.filter(file => {
+    const filteredFiles = allFiles.filter((file) => {
       // Check gitignore first
       if (gitignoreParser?.shouldIgnore(file, directory)) {
         return false;
@@ -100,12 +100,12 @@ export class ProjectMapper {
 
       // Check default ignore patterns
       const shouldSkip = shouldIgnore(file, [...DEFAULT_IGNORE_PATTERNS]);
-      
+
       // Optionally exclude tests
       if (!options.includeTests && file.match(/test|spec|__tests__|__mocks__/i)) {
         return false;
       }
-      
+
       return !shouldSkip;
     });
 
@@ -114,22 +114,22 @@ export class ProjectMapper {
     // Classify files in parallel
     console.log('📊 Classifying files...');
     const processor = new BatchProcessor(this.client);
-    
+
     const results: Array<{ path: string; result: ClassifyResult }> = [];
-    
+
     const batchResult = await processor.processFiles(filteredFiles, {
       concurrency: options.concurrency ?? 20,
       continueOnError: true,
       templateId: options.templateId,
       onBatchComplete: async (batch) => {
         // Filter successful results
-        const successful = batch.filter(b => b.result);
+        const successful = batch.filter((b) => b.result);
         for (const item of successful) {
           if (item.result) {
             results.push({ path: item.filePath, result: item.result });
           }
         }
-        
+
         // Call user progress callback if provided
         if (options.onProgress) {
           const lastFile = batch[batch.length - 1];
@@ -138,7 +138,9 @@ export class ProjectMapper {
       },
     });
 
-    console.log(`\n✅ Classified ${batchResult.successCount} files (${batchResult.failureCount} failed)\n`);
+    console.log(
+      `\n✅ Classified ${batchResult.successCount} files (${batchResult.failureCount} failed)\n`
+    );
 
     // Build file relationships (imports/dependencies)
     let relationships: FileRelationship[] = [];
@@ -266,7 +268,7 @@ export class ProjectMapper {
       statements.push(`// File: ${path}`);
       statements.push(result.graphStructure.cypher);
       statements.push('');
-      
+
       // Link file to project
       const docTitle = result.fulltextMetadata.title;
       statements.push(
@@ -291,9 +293,7 @@ export class ProjectMapper {
             statements.push(
               `MATCH (from:Document {title: "${fromTitle}"}), (to:Document {title: "${toTitle}"})`
             );
-            statements.push(
-              `CREATE (from)-[:IMPORTS {type: "${rel.type}"}]->(to)`
-            );
+            statements.push(`CREATE (from)-[:IMPORTS {type: "${rel.type}"}]->(to)`);
           }
         }
       }
@@ -303,4 +303,3 @@ export class ProjectMapper {
     return statements.join('\n');
   }
 }
-

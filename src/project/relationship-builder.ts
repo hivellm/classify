@@ -86,14 +86,15 @@ export class RelationshipBuilder {
     const imports: FileRelationship[] = [];
 
     // Match ES6 imports: import ... from '...'
-    const es6ImportRegex = /import\s+(?:(?:\{[^}]*\})|(?:\*\s+as\s+\w+)|(?:\w+))\s+from\s+['"]([^'"]+)['"]/g;
-    
+    const es6ImportRegex =
+      /import\s+(?:(?:\{[^}]*\})|(?:\*\s+as\s+\w+)|(?:\w+))\s+from\s+['"]([^'"]+)['"]/g;
+
     // Match dynamic imports: import('...')
     const dynamicImportRegex = /import\s*\(\s*['"]([^'"]+)['"]\s*\)/g;
-    
+
     // Match require: require('...')
     const requireRegex = /require\s*\(\s*['"]([^'"]+)['"]\s*\)/g;
-    
+
     // Match export from: export ... from '...'
     const exportFromRegex = /export\s+(?:\{[^}]*\}|\*)\s+from\s+['"]([^'"]+)['"]/g;
 
@@ -145,7 +146,7 @@ export class RelationshipBuilder {
 
     // Match: import module
     const importRegex = /^import\s+([\w.]+)/gm;
-    
+
     // Match: from module import ...
     const fromImportRegex = /^from\s+([\w.]+)\s+import\s+/gm;
 
@@ -179,7 +180,7 @@ export class RelationshipBuilder {
 
     // Match: use crate::module::...
     const useRegex = /^use\s+(?:crate::)?([^;{]+)/gm;
-    
+
     // Match: mod module;
     const modRegex = /^mod\s+(\w+)\s*;/gm;
 
@@ -237,7 +238,7 @@ export class RelationshipBuilder {
 
     // Match: import "package"
     const singleImportRegex = /^import\s+"([^"]+)"/gm;
-    
+
     // Match: import ( ... )
     const blockImportRegex = /import\s*\(\s*([^)]+)\)/gs;
 
@@ -253,12 +254,14 @@ export class RelationshipBuilder {
       const block = match[1];
       if (block) {
         const lines = block.split('\n');
-        
+
         for (const line of lines) {
           const lineMatch = line.match(/"([^"]+)"/);
           if (lineMatch?.[1]) {
             const importPath = lineMatch[1];
-            imports.push(this.createRelationship(filePath, importPath, 'import', projectRoot, '.go'));
+            imports.push(
+              this.createRelationship(filePath, importPath, 'import', projectRoot, '.go')
+            );
           }
         }
       }
@@ -330,7 +333,7 @@ export class RelationshipBuilder {
    */
   getRelationshipsFor(filePath: string, projectRoot: string): FileRelationship[] {
     const normalizedPath = relative(projectRoot, filePath).replace(/\\/g, '/');
-    return this.relationships.filter(r => r.from.replace(/\\/g, '/') === normalizedPath);
+    return this.relationships.filter((r) => r.from.replace(/\\/g, '/') === normalizedPath);
   }
 
   /**
@@ -387,7 +390,7 @@ export class RelationshipBuilder {
       path.push(node);
 
       const neighbors = graph.get(node) ?? [];
-      
+
       for (const neighbor of neighbors) {
         dfs(neighbor, [...path]);
       }
@@ -412,4 +415,3 @@ export class RelationshipBuilder {
     this.fileCache.clear();
   }
 }
-

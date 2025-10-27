@@ -33,9 +33,9 @@ describe('RecursiveScanner', () => {
       const files = await scanner.scan(testDir);
 
       expect(files.length).toBeGreaterThanOrEqual(3);
-      expect(files.some(f => f.basename === 'index')).toBe(true);
-      expect(files.some(f => f.basename === 'app')).toBe(true);
-      expect(files.some(f => f.basename === 'utils')).toBe(true);
+      expect(files.some((f) => f.basename === 'index')).toBe(true);
+      expect(files.some((f) => f.basename === 'app')).toBe(true);
+      expect(files.some((f) => f.basename === 'utils')).toBe(true);
     });
 
     it('should collect file metadata', async () => {
@@ -66,9 +66,21 @@ describe('RecursiveScanner', () => {
       const files = await scanner.scan(testDir);
 
       expect(files.length).toBe(3);
-      expect(files.some(f => f.relativePath.includes('a/file1.ts') || f.relativePath.includes('a\\file1.ts'))).toBe(true);
-      expect(files.some(f => f.relativePath.includes('b/file2.ts') || f.relativePath.includes('b\\file2.ts'))).toBe(true);
-      expect(files.some(f => f.relativePath.includes('c/file3.ts') || f.relativePath.includes('c\\file3.ts'))).toBe(true);
+      expect(
+        files.some(
+          (f) => f.relativePath.includes('a/file1.ts') || f.relativePath.includes('a\\file1.ts')
+        )
+      ).toBe(true);
+      expect(
+        files.some(
+          (f) => f.relativePath.includes('b/file2.ts') || f.relativePath.includes('b\\file2.ts')
+        )
+      ).toBe(true);
+      expect(
+        files.some(
+          (f) => f.relativePath.includes('c/file3.ts') || f.relativePath.includes('c\\file3.ts')
+        )
+      ).toBe(true);
     });
   });
 
@@ -82,10 +94,10 @@ describe('RecursiveScanner', () => {
       const files = await scanner.scan(testDir);
 
       // Should include .ts and .js, but not .txt or .exe
-      expect(files.some(f => f.extension === '.ts')).toBe(true);
-      expect(files.some(f => f.extension === '.js')).toBe(true);
-      expect(files.some(f => f.extension === '.txt')).toBe(false);
-      expect(files.some(f => f.extension === '.exe')).toBe(false);
+      expect(files.some((f) => f.extension === '.ts')).toBe(true);
+      expect(files.some((f) => f.extension === '.js')).toBe(true);
+      expect(files.some((f) => f.extension === '.txt')).toBe(false);
+      expect(files.some((f) => f.extension === '.exe')).toBe(false);
     });
 
     it('should respect custom extensions', async () => {
@@ -100,9 +112,9 @@ describe('RecursiveScanner', () => {
       const files = await customScanner.scan(testDir);
 
       expect(files.length).toBe(2);
-      expect(files.some(f => f.extension === '.custom')).toBe(true);
-      expect(files.some(f => f.extension === '.special')).toBe(true);
-      expect(files.some(f => f.extension === '.ts')).toBe(false);
+      expect(files.some((f) => f.extension === '.custom')).toBe(true);
+      expect(files.some((f) => f.extension === '.special')).toBe(true);
+      expect(files.some((f) => f.extension === '.ts')).toBe(false);
     });
 
     it('should exclude test files by default', async () => {
@@ -116,7 +128,9 @@ describe('RecursiveScanner', () => {
 
       const files = await scanner.scan(testDir);
 
-      expect(files.some(f => f.basename === 'app' && !f.relativePath.includes('test'))).toBe(true);
+      expect(files.some((f) => f.basename === 'app' && !f.relativePath.includes('test'))).toBe(
+        true
+      );
       // Tests might still appear if they pass other filters - the important part is they're categorized
     });
 
@@ -139,9 +153,9 @@ describe('RecursiveScanner', () => {
 
       const files = await scanner.scan(testDir);
 
-      expect(files.some(f => f.basename === 'normal')).toBe(true);
-      expect(files.some(f => f.relativePath.includes('.hidden'))).toBe(false);
-      expect(files.some(f => f.basename === '.dotfile')).toBe(false);
+      expect(files.some((f) => f.basename === 'normal')).toBe(true);
+      expect(files.some((f) => f.relativePath.includes('.hidden'))).toBe(false);
+      expect(files.some((f) => f.basename === '.dotfile')).toBe(false);
     });
   });
 
@@ -152,8 +166,8 @@ describe('RecursiveScanner', () => {
 
       const files = await scanner.scan(testDir);
 
-      const packageJson = files.find(f => f.basename === 'package');
-      const tsconfig = files.find(f => f.basename === 'tsconfig');
+      const packageJson = files.find((f) => f.basename === 'package');
+      const tsconfig = files.find((f) => f.basename === 'tsconfig');
 
       expect(packageJson?.category).toBe('config');
       expect(tsconfig?.category).toBe('config');
@@ -165,8 +179,8 @@ describe('RecursiveScanner', () => {
 
       const files = await scanner.scan(testDir);
 
-      const index = files.find(f => f.basename === 'index');
-      const main = files.find(f => f.basename === 'main');
+      const index = files.find((f) => f.basename === 'index');
+      const main = files.find((f) => f.basename === 'main');
 
       expect(index?.category).toBe('entry');
       expect(main?.category).toBe('entry');
@@ -179,8 +193,8 @@ describe('RecursiveScanner', () => {
 
       const files = await scanner.scan(testDir);
 
-      const utils = files.find(f => f.basename === 'utils');
-      const helpers = files.find(f => f.basename === 'helpers');
+      const utils = files.find((f) => f.basename === 'utils');
+      const helpers = files.find((f) => f.basename === 'helpers');
 
       expect(utils?.category).toBe('module');
       expect(helpers?.category).toBe('module');
@@ -193,7 +207,7 @@ describe('RecursiveScanner', () => {
       const scanner = new RecursiveScanner({ includeTests: true });
       const files = await scanner.scan(testDir);
 
-      const testFile = files.find(f => f.basename === 'app.test');
+      const testFile = files.find((f) => f.basename === 'app.test');
       expect(testFile?.category).toBe('test');
     });
   });
@@ -202,7 +216,7 @@ describe('RecursiveScanner', () => {
     it('should sort files by category', async () => {
       await mkdir(join(testDir, 'src'), { recursive: true });
       await mkdir(join(testDir, 'tests'), { recursive: true });
-      
+
       await writeFile(join(testDir, 'src', 'utils.ts'), 'x');
       await writeFile(join(testDir, 'index.ts'), 'x');
       await writeFile(join(testDir, 'package.json'), '{}');
@@ -212,12 +226,12 @@ describe('RecursiveScanner', () => {
       const files = await scanner.scan(testDir);
 
       // Should be sorted: config, entry, module, test
-      const categories = files.map(f => f.category);
-      
+      const categories = files.map((f) => f.category);
+
       // Config should come before others
       const configIndex = categories.indexOf('config');
       const moduleIndex = categories.indexOf('module');
-      
+
       if (configIndex !== -1 && moduleIndex !== -1) {
         expect(configIndex).toBeLessThan(moduleIndex);
       }
@@ -236,10 +250,10 @@ describe('RecursiveScanner', () => {
       const files = await scanner.scan(testDir);
 
       // Should include level0 and level1, but not level2 or level3
-      expect(files.some(f => f.basename === 'level0')).toBe(true);
-      expect(files.some(f => f.basename === 'level1')).toBe(true);
-      expect(files.some(f => f.basename === 'level2')).toBe(false);
-      expect(files.some(f => f.basename === 'level3')).toBe(false);
+      expect(files.some((f) => f.basename === 'level0')).toBe(true);
+      expect(files.some((f) => f.basename === 'level1')).toBe(true);
+      expect(files.some((f) => f.basename === 'level2')).toBe(false);
+      expect(files.some((f) => f.basename === 'level3')).toBe(false);
     });
   });
 
@@ -263,9 +277,7 @@ describe('RecursiveScanner', () => {
 
   describe('Error Handling', () => {
     it('should handle non-existent directory', async () => {
-      await expect(
-        scanner.scan('/non/existent/path')
-      ).rejects.toThrow();
+      await expect(scanner.scan('/non/existent/path')).rejects.toThrow();
     });
 
     it('should continue on permission errors', async () => {
@@ -276,4 +288,3 @@ describe('RecursiveScanner', () => {
     });
   });
 });
-

@@ -116,8 +116,8 @@ from utils.helpers import format_date
       const relationships = await builder.analyzeFile(filePath, testDir);
 
       expect(relationships.length).toBeGreaterThan(0);
-      expect(relationships.some(r => r.to.includes('os'))).toBe(true);
-      expect(relationships.some(r => r.to.includes('datetime'))).toBe(true);
+      expect(relationships.some((r) => r.to.includes('os'))).toBe(true);
+      expect(relationships.some((r) => r.to.includes('datetime'))).toBe(true);
     });
   });
 
@@ -206,8 +206,8 @@ import (
       const relationships = await builder.analyzeFile(filePath, testDir);
 
       expect(relationships).toHaveLength(4);
-      expect(relationships.some(r => r.to === 'fmt')).toBe(true);
-      expect(relationships.some(r => r.to === 'net/http')).toBe(true);
+      expect(relationships.some((r) => r.to === 'fmt')).toBe(true);
+      expect(relationships.some((r) => r.to === 'net/http')).toBe(true);
     });
   });
 
@@ -223,9 +223,9 @@ import { helpers } from '../helpers';
       await writeFile(filePath, content, 'utf-8');
       const relationships = await builder.analyzeFile(filePath, testDir);
 
-      const reactImport = relationships.find(r => r.to === 'react');
-      const utilsImport = relationships.find(r => r.to.includes('utils'));
-      const helpersImport = relationships.find(r => r.to.includes('helpers'));
+      const reactImport = relationships.find((r) => r.to === 'react');
+      const utilsImport = relationships.find((r) => r.to.includes('utils'));
+      const helpersImport = relationships.find((r) => r.to.includes('helpers'));
 
       expect(reactImport?.isExternal).toBe(true);
       expect(reactImport?.isRelative).toBe(false);
@@ -243,7 +243,7 @@ import { helpers } from '../helpers';
 
       await writeFile(file1, "import { x } from './file2';", 'utf-8');
       await writeFile(file2, "import { y } from './file3';", 'utf-8');
-      await writeFile(file3, "export const y = 1;", 'utf-8');
+      await writeFile(file3, 'export const y = 1;', 'utf-8');
 
       await builder.analyzeFile(file1, testDir);
       await builder.analyzeFile(file2, testDir);
@@ -289,7 +289,7 @@ import { helpers } from '../helpers';
       // Create linear dependency: a -> b -> c
       await writeFile(file1, "import './b';", 'utf-8');
       await writeFile(file2, "import './c';", 'utf-8');
-      await writeFile(file3, "export const x = 1;", 'utf-8');
+      await writeFile(file3, 'export const x = 1;', 'utf-8');
 
       await builder.analyzeFile(file1, testDir);
       await builder.analyzeFile(file2, testDir);
@@ -313,13 +313,13 @@ import { helpers } from '../helpers';
       await builder.analyzeFile(file2, testDir);
 
       const allRels = builder.getRelationships();
-      
+
       // Should have found some relationships
       expect(allRels.length).toBeGreaterThan(0);
-      
+
       // Check that external imports were detected
-      const hasReact = allRels.some(r => r.to === 'react');
-      const hasLodash = allRels.some(r => r.to === 'lodash');
+      const hasReact = allRels.some((r) => r.to === 'react');
+      const hasLodash = allRels.some((r) => r.to === 'lodash');
       expect(hasReact || hasLodash).toBe(true);
     });
   });
@@ -334,7 +334,7 @@ import { helpers } from '../helpers';
 
       builder.clear();
       const relationshipsAfter = builder.getRelationships();
-      
+
       expect(relationshipsAfter).toHaveLength(0);
       // Verify clear actually removed data if there was any
       if (relationshipsBefore.length > 0) {
@@ -343,4 +343,3 @@ import { helpers } from '../helpers';
     });
   });
 });
-
