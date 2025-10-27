@@ -31,7 +31,8 @@
     "test": "vitest --run",
     "test:watch": "vitest",
     "test:coverage": "vitest --coverage --run",
-    "prepublishOnly": "npm run build && npm test"
+    "prepublishOnly": "npm run build && npm test",
+    "publish:wsl": "export BROWSER=wslview && npm publish"
   },
   "keywords": [
     "classification",
@@ -57,6 +58,9 @@
   "homepage": "https://github.com/hivellm/classify#readme",
   "engines": {
     "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
     "@fission-ai/openspec": "^0.13.0",
