@@ -3,19 +3,33 @@
 ## Overview
 This example demonstrates using the cursor-agent provider to map a real Rust project (vectorizer) with **zero API costs** and **100% local execution**.
 
+⚠️ **IMPORTANT**: cursor-agent is a CLI tool that comes with Cursor IDE. It requires:
+1. **Cursor IDE Pro** subscription
+2. **Manual enablement** in Cursor settings
+3. Authentication with your Cursor account
+
 ## Prerequisites
 
-### 1. Install cursor-agent CLI
+### 1. Install Cursor IDE
+Download from: https://cursor.com
+
+### 2. Enable cursor-agent
+In Cursor IDE:
+- Go to Settings → Features
+- Enable "Agent Mode" or "CLI Tools"
+- Restart Cursor
+
+### 3. Verify installation
 ```bash
-npm install -g cursor-agent
+cursor-agent --version
 ```
 
-### 2. Login to cursor-agent
-```bash
-cursor-agent login
-```
+If `cursor-agent` is not found:
+- Check Cursor IDE settings
+- Verify your subscription includes CLI access
+- Contact Cursor support
 
-### 3. Build the classify package
+### 4. Build the classify package
 ```bash
 cd F:\Node\hivellm\classify
 npm run build

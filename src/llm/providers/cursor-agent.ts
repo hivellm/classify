@@ -102,6 +102,7 @@ export class CursorAgentProvider implements LLMProvider {
         prompt,
       ];
 
+      console.log('🔧 [DEBUG] Spawning cursor-agent with args:', args.slice(0, -1), `[prompt: ${prompt.substring(0, 50)}...]`);
       const child = spawn('cursor-agent', args);
 
       let stdout = '';
@@ -124,11 +125,16 @@ export class CursorAgentProvider implements LLMProvider {
       child.on('close', (code) => {
         clearTimeout(timeoutId);
 
+        console.log(`🔧 [DEBUG] cursor-agent exited with code ${code}, stdout length: ${stdout.length}, stderr: ${stderr.substring(0, 200)}`);
+
         if (code !== 0) {
           reject(
             new Error(`cursor-agent exited with code ${code}\nStderr: ${stderr}\nStdout: ${stdout}`)
           );
         } else {
+          if (stdout.length === 0) {
+            console.warn('⚠️  cursor-agent returned empty output!');
+          }
           resolve(stdout);
         }
       });
