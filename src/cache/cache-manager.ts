@@ -213,14 +213,30 @@ export class CacheManager {
     }
 
     try {
-      const files = await readdir(this.cacheDir);
-      const cacheFiles = files.filter((f) => f.endsWith('.json'));
-
+      // Read all subdirectories and cache files
       let totalSize = 0;
-      for (const file of cacheFiles) {
-        const filePath = join(this.cacheDir, file);
-        const fileStats = await stat(filePath);
-        totalSize += fileStats.size;
+      let fileCount = 0;
+
+      const subdirs = await readdir(this.cacheDir).catch(() => []);
+      
+      for (const subdir of subdirs) {
+        const subdirPath = join(this.cacheDir, subdir);
+        try {
+          const subdirStat = await stat(subdirPath);
+          if (!subdirStat.isDirectory()) continue;
+
+          const files = await readdir(subdirPath);
+          const cacheFiles = files.filter((f) => f.endsWith('.json'));
+
+          for (const file of cacheFiles) {
+            const filePath = join(subdirPath, file);
+            const fileStats = await stat(filePath);
+            totalSize += fileStats.size;
+            fileCount++;
+          }
+        } catch {
+          // Skip problematic subdirectories
+        }
       }
 
       const total = this.stats.hits + this.stats.misses;
@@ -228,7 +244,7 @@ export class CacheManager {
 
       return {
         totalSizeBytes: totalSize,
-        entryCount: cacheFiles.length,
+        entryCount: fileCount,
         hits: this.stats.hits,
         misses: this.stats.misses,
         hitRate,
@@ -248,10 +264,12 @@ export class CacheManager {
   }
 
   /**
-   * Get cache path for hash
+   * Get cache path for hash with subdirectory (first 2 chars of hash)
+   * This prevents too many files in a single directory
    */
   private getCachePath(hash: string): string {
-    return join(this.cacheDir, `${hash}.json`);
+    const subdir = hash.substring(0, 2);
+    return join(this.cacheDir, subdir, `${hash}.json`);
   }
 
   /**
@@ -259,6 +277,9 @@ export class CacheManager {
    */
   private async writeEntry(hash: string, entry: CacheEntry): Promise<void> {
     const cachePath = this.getCachePath(hash);
+    // Ensure subdirectory exists
+    const subdir = join(this.cacheDir, hash.substring(0, 2));
+    await mkdir(subdir, { recursive: true });
     await writeFile(cachePath, JSON.stringify(entry, null, 2));
   }
 

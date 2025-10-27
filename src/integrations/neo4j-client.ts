@@ -25,15 +25,27 @@ export class Neo4jClient {
    */
   async initialize(): Promise<void> {
     try {
-      const response = await fetch(`${this.config.url}/db/data/`, {
+      // Try to get server info to test connection
+      const database = this.config.database || 'neo4j';
+      const response = await fetch(`${this.config.url}/db/${database}/tx/commit`, {
+        method: 'POST',
         headers: {
           'Authorization': this.authHeader,
+          'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
+        body: JSON.stringify({
+          statements: [
+            {
+              statement: 'RETURN 1 as test',
+            },
+          ],
+        }),
       });
 
       if (!response.ok) {
-        throw new Error(`Neo4j connection failed: ${response.status} ${response.statusText}`);
+        const errorText = await response.text();
+        throw new Error(`Neo4j connection failed: ${response.status} ${response.statusText} - ${errorText}`);
       }
 
       console.log('✅ Connected to Neo4j');

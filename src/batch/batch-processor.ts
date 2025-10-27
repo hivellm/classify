@@ -18,6 +18,12 @@ export interface BatchOptions {
 
   /** Skip files that fail */
   continueOnError?: boolean;
+
+  /** Callback called after each batch completes (for incremental indexing) */
+  onBatchComplete?: (results: Array<{ filePath: string; result: ClassifyResult }>) => Promise<void>;
+
+  /** Force specific template ID */
+  templateId?: string;
 }
 
 /**
@@ -69,7 +75,7 @@ export class BatchProcessor {
    * @returns Batch processing result
    */
   async processDirectory(directory: string, options: BatchOptions = {}): Promise<BatchResult> {
-    const { recursive = false, concurrency = 4, extensions, continueOnError = true } = options;
+    const { recursive = false, concurrency = 4, extensions, continueOnError = true, onBatchComplete, templateId } = options;
 
     const startTime = Date.now();
 
@@ -103,7 +109,7 @@ export class BatchProcessor {
 
       const batchPromises = batch.map(async (file) => {
         try {
-          const result = await this.client.classify(file);
+          const result = await this.client.classify(file, templateId ? { templateId } : undefined);
 
           if (result.cacheInfo.cached) {
             cacheHits++;
@@ -143,6 +149,141 @@ export class BatchProcessor {
 
       const batchResults = await Promise.all(batchPromises);
       results.push(...batchResults);
+
+      // Call incremental callback if provided
+      if (onBatchComplete) {
+        const successfulResults = batchResults
+          .filter((r): r is { filePath: string; success: true; result: ClassifyResult } => 
+            r.success && 'result' in r
+          )
+          .map(r => ({ filePath: r.filePath, result: r.result }));
+        
+        if (successfulResults.length > 0) {
+          try {
+            await onBatchComplete(successfulResults);
+          } catch (error) {
+            console.warn(`  ⚠️  Batch callback failed: ${error instanceof Error ? error.message : error}`);
+          }
+        }
+      }
+
+      console.log('');
+    }
+
+    const totalTimeMs = Date.now() - startTime;
+
+    return {
+      totalFiles: files.length,
+      successCount,
+      failureCount,
+      skippedCount: 0,
+      results,
+      performance: {
+        totalTimeMs,
+        averageTimeMs: successCount > 0 ? totalTimeMs / successCount : 0,
+        totalCost,
+        averageCost: successCount > 0 ? totalCost / successCount : 0,
+        cacheHits,
+        cacheMisses,
+      },
+    };
+  }
+
+  /**
+   * Process array of file paths with parallel batching
+   * @param files - Array of file paths
+   * @param options - Batch processing options
+   * @returns Batch processing result
+   */
+  async processFiles(files: string[], options: BatchOptions = {}): Promise<BatchResult> {
+    const { concurrency = 20, continueOnError = true, onBatchComplete, templateId } = options;
+
+    const startTime = Date.now();
+
+    console.log(`📁 Processing ${files.length} files`);
+    console.log(`⚙️  Concurrency: ${concurrency} files per batch\n`);
+
+    const results: Array<{
+      filePath: string;
+      success: boolean;
+      result?: ClassifyResult;
+      error?: string;
+    }> = [];
+
+    let successCount = 0;
+    let failureCount = 0;
+    let totalCost = 0;
+    let cacheHits = 0;
+    let cacheMisses = 0;
+
+    // Process in parallel batches
+    for (let i = 0; i < files.length; i += concurrency) {
+      const batch = files.slice(i, i + concurrency);
+      const batchNumber = Math.floor(i / concurrency) + 1;
+      const totalBatches = Math.ceil(files.length / concurrency);
+      const progress = ((i + batch.length) / files.length * 100).toFixed(1);
+
+      console.log(`📦 Batch ${batchNumber}/${totalBatches} | Progress: ${i + batch.length}/${files.length} (${progress}%)`);
+
+      const batchPromises = batch.map(async (file) => {
+        try {
+          const result = await this.client.classify(file, templateId ? { templateId } : undefined);
+
+          if (result.cacheInfo.cached) {
+            cacheHits++;
+          } else {
+            cacheMisses++;
+          }
+
+          totalCost += result.performance.costUsd ?? 0;
+          successCount++;
+
+          return {
+            filePath: file,
+            success: true,
+            result,
+          };
+        } catch (error) {
+          failureCount++;
+          const errorMsg = error instanceof Error ? error.message : 'Unknown error';
+
+          if (!continueOnError) {
+            throw error;
+          }
+
+          return {
+            filePath: file,
+            success: false,
+            error: errorMsg,
+          };
+        }
+      });
+
+      const batchResults = await Promise.all(batchPromises);
+      results.push(...batchResults);
+
+      // Show batch stats
+      const batchSuccess = batchResults.filter(r => r.success).length;
+      const batchCached = batchResults.filter(r => r.success && 'result' in r && r.result && r.result.cacheInfo.cached).length;
+      console.log(`   ✅ ${batchSuccess}/${batch.length} classified | 📦 ${batchCached} from cache`);
+
+      // Call incremental callback if provided
+      if (onBatchComplete) {
+        const successfulResults = batchResults
+          .filter((r): r is { filePath: string; success: true; result: ClassifyResult } => 
+            r.success && 'result' in r
+          )
+          .map(r => ({ filePath: r.filePath, result: r.result }));
+        
+        if (successfulResults.length > 0) {
+          try {
+            await onBatchComplete(successfulResults);
+            console.log(`   📤 Sent ${successfulResults.length} to databases`);
+          } catch (error) {
+            console.warn(`   ⚠️  Database insert failed: ${error instanceof Error ? error.message : error}`);
+          }
+        }
+      }
 
       console.log('');
     }

@@ -94,6 +94,15 @@ export const DEFAULT_IGNORE_PATTERNS = [
   
   // Data directories
   '**/data/**',
+  
+  // Project-specific large directories
+  '**/client-sdks/**',  // Generated SDKs
+  '**/gui/**',          // GUI with node_modules
+  '**/dashboard/**',    // Dashboard apps
+  '**/qdrant/**',       // Qdrant data/cache
+  '**/sample/**',       // Sample data
+  '**/samples/**',      // Sample files
+  '**/benchmark/reports/**', // Benchmark outputs
 ] as const;
 
 /**
