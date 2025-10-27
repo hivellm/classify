@@ -1,0 +1,266 @@
+{
+  "classification": {
+    "template": "financial",
+    "confidence": 0.95,
+    "domain": "financial",
+    "docType": "financial report"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"Q4 2024 Financial Report\",\n      title: \"Q4 2024 Financial Report\",\n      domain: \"financial\",\n      doc_type: \"financial report\"\n    })\nCREATE (e0:Vendor {name: \"MegaCorp Technologies\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Amount {value: \"45200000\", currency: \"USD\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Amount {value: \"38300000\", currency: \"USD\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Amount {value: \"18500000\", currency: \"USD\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Amount {value: \"15200000\", currency: \"USD\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Amount {value: \"26700000\", currency: \"USD\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Amount {value: \"23100000\", currency: \"USD\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Amount {value: \"15300000\", currency: \"USD\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Amount {value: \"14800000\", currency: \"USD\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Amount {value: \"11400000\", currency: \"USD\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Amount {value: \"8300000\", currency: \"USD\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Amount {value: \"180500000\", currency: \"USD\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Amount {value: \"75200000\", currency: \"USD\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Amount {value: \"105300000\", currency: \"USD\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Amount {value: \"18700000\", currency: \"USD\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Amount {value: \"12400000\", currency: \"USD\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:Date {date: \"2024-10-01\"})\nCREATE (doc)-[:MENTIONS]->(e16)\nCREATE (e17:Date {date: \"2024-12-31\"})\nCREATE (doc)-[:MENTIONS]->(e17)\nCREATE (e18:Date {date: \"2025-01-10\"})\nCREATE (doc)-[:MENTIONS]->(e18)\nCREATE (e19:Account {name: \"Revenue\"})\nCREATE (doc)-[:MENTIONS]->(e19)\nCREATE (e20:Account {name: \"Cost\"})\nCREATE (doc)-[:MENTIONS]->(e20)\nCREATE (e21:Account {name: \"Gross\"})\nCREATE (doc)-[:MENTIONS]->(e21)\nCREATE (e22:Account {name: \"Expenses\"})\nCREATE (doc)-[:MENTIONS]->(e22)\nCREATE (e23:Account {name: \"Net\"})\nCREATE (doc)-[:MENTIONS]->(e23)\nCREATE (e24:Account {name: \"Assets\"})\nCREATE (doc)-[:MENTIONS]->(e24)\nCREATE (e25:Account {name: \"Liabilities\"})\nCREATE (doc)-[:MENTIONS]->(e25)\nCREATE (e26:Account {name: \"Shareholders' Equity\"})\nCREATE (doc)-[:MENTIONS]->(e26)\nCREATE (e27:Account {name: \"Operating Cash Flow\"})\nCREATE (doc)-[:MENTIONS]->(e27)\nCREATE (e28:Account {name: \"Free Cash Flow\"})\nCREATE (doc)-[:MENTIONS]->(e28)\nCREATE (e29:Transaction {id: \"Q4_2024_Financial_Report\"})\nCREATE (doc)-[:MENTIONS]->(e29)\nCREATE (e30:PaymentMethod {method: \"Not specified\"})\nCREATE (doc)-[:MENTIONS]->(e30)",
+    "entities": [
+      {
+        "type": "Vendor",
+        "properties": {
+          "name": "MegaCorp Technologies"
+        }
+      },
+      {
+        "type": "Amount",
+        "properties": {
+          "value": 45200000,
+          "currency": "USD"
+        }
+      },
+      {
+        "type": "Amount",
+        "properties": {
+          "value": 38300000,
+          "currency": "USD"
+        }
+      },
+      {
+        "type": "Amount",
+        "properties": {
+          "value": 18500000,
+          "currency": "USD"
+        }
+      },
+      {
+        "type": "Amount",
+        "properties": {
+          "value": 15200000,
+          "currency": "USD"
+        }
+      },
+      {
+        "type": "Amount",
+        "properties": {
+          "value": 26700000,
+          "currency": "USD"
+        }
+      },
+      {
+        "type": "Amount",
+        "properties": {
+          "value": 23100000,
+          "currency": "USD"
+        }
+      },
+      {
+        "type": "Amount",
+        "properties": {
+          "value": 15300000,
+          "currency": "USD"
+        }
+      },
+      {
+        "type": "Amount",
+        "properties": {
+          "value": 14800000,
+          "currency": "USD"
+        }
+      },
+      {
+        "type": "Amount",
+        "properties": {
+          "value": 11400000,
+          "currency": "USD"
+        }
+      },
+      {
+        "type": "Amount",
+        "properties": {
+          "value": 8300000,
+          "currency": "USD"
+        }
+      },
+      {
+        "type": "Amount",
+        "properties": {
+          "value": 180500000,
+          "currency": "USD"
+        }
+      },
+      {
+        "type": "Amount",
+        "properties": {
+          "value": 75200000,
+          "currency": "USD"
+        }
+      },
+      {
+        "type": "Amount",
+        "properties": {
+          "value": 105300000,
+          "currency": "USD"
+        }
+      },
+      {
+        "type": "Amount",
+        "properties": {
+          "value": 18700000,
+          "currency": "USD"
+        }
+      },
+      {
+        "type": "Amount",
+        "properties": {
+          "value": 12400000,
+          "currency": "USD"
+        }
+      },
+      {
+        "type": "Date",
+        "properties": {
+          "date": "2024-10-01"
+        }
+      },
+      {
+        "type": "Date",
+        "properties": {
+          "date": "2024-12-31"
+        }
+      },
+      {
+        "type": "Date",
+        "properties": {
+          "date": "2025-01-10"
+        }
+      },
+      {
+        "type": "Account",
+        "properties": {
+          "name": "Revenue"
+        }
+      },
+      {
+        "type": "Account",
+        "properties": {
+          "name": "Cost"
+        }
+      },
+      {
+        "type": "Account",
+        "properties": {
+          "name": "Gross"
+        }
+      },
+      {
+        "type": "Account",
+        "properties": {
+          "name": "Expenses"
+        }
+      },
+      {
+        "type": "Account",
+        "properties": {
+          "name": "Net"
+        }
+      },
+      {
+        "type": "Account",
+        "properties": {
+          "name": "Assets"
+        }
+      },
+      {
+        "type": "Account",
+        "properties": {
+          "name": "Liabilities"
+        }
+      },
+      {
+        "type": "Account",
+        "properties": {
+          "name": "Shareholders' Equity"
+        }
+      },
+      {
+        "type": "Account",
+        "properties": {
+          "name": "Operating Cash Flow"
+        }
+      },
+      {
+        "type": "Account",
+        "properties": {
+          "name": "Free Cash Flow"
+        }
+      },
+      {
+        "type": "Transaction",
+        "properties": {
+          "id": "Q4_2024_Financial_Report"
+        }
+      },
+      {
+        "type": "PaymentMethod",
+        "properties": {
+          "method": "Not specified"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "ISSUED_BY",
+        "source": "Q4_2024_Financial_Report",
+        "target": "MegaCorp Technologies",
+        "properties": {}
+      },
+      {
+        "type": "PAID_TO",
+        "source": "MegaCorp Technologies",
+        "target": "Not specified",
+        "properties": {}
+      },
+      {
+        "type": "HAS_AMOUNT",
+        "source": "Q4_2024_Financial_Report",
+        "target": "45200000",
+        "properties": {}
+      },
+      {
+        "type": "PAID_VIA",
+        "source": "Q4_2024_Financial_Report",
+        "target": "Not specified",
+        "properties": {}
+      },
+      {
+        "type": "RELATES_TO_ACCOUNT",
+        "source": "Q4_2024_Financial_Report",
+        "target": "Revenue",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "Q4 2024 Financial Report",
+    "domain": "financial",
+    "docType": "financial report",
+    "extractedFields": {},
+    "keywords": []
+  },
+  "cacheInfo": {
+    "cached": false,
+    "hash": "44eb0e90356226b1fad048b96f2c641e7151184855a244a0ceff7197a06e539b"
+  },
+  "performance": {
+    "totalTimeMs": 44534,
+    "tokens": {
+      "input": 1713,
+      "output": 1258,
+      "total": 2971
+    },
+    "costUsd": 0.00059206
+  }
+}

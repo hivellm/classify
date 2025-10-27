@@ -1,0 +1,208 @@
+{
+  "classification": {
+    "template": "marketing",
+    "confidence": 0.95,
+    "domain": "marketing",
+    "docType": "Campaign Overview Document"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"Q1 2025 Product Campaign: CloudSync Pro\",\n      title: \"Q1 2025 Product Campaign: CloudSync Pro\",\n      domain: \"marketing\",\n      doc_type: \"Campaign Overview Document\"\n    })\nCREATE (e0:Campaign {name: \"CloudSync Pro\", duration: \"March 1 - May 31, 2025\", budget: \"250000\", target_users: \"10000\", campaign_manager: \"Lisa Martinez\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:TargetAudience {name: \"IT Managers\", company_size: \"50-500 employees\", industries: \"Technology,Finance,Healthcare\", geographic_regions: \"North America,Europe\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Channel {name: \"Digital Advertising\", budget: \"120000\", subchannels: \"Google Ads,LinkedIn Sponsored Content,Facebook/Instagram\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Channel {name: \"Content\", budget: \"60000\", assets: \"Blog posts (12),Whitepapers (3 technical),Case studies (5),Webinars (4 live)\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Channel {name: \"Email\", budget: \"30000\", types: \"Newsletter,Drip campaigns,Targeted outreach\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Channel {name: \"Events\", budget: \"40000\", types: \"Conferences,Virtual sessions\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Metric {name: \"Website Traffic Increase\", value: \"150\", unit: \"%\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Metric {name: \"Trial Sign-ups\", value: \"5000\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Metric {name: \"Conversion Rate\", value: \"10\", unit: \"%\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Metric {name: \"Paying Customers\", value: \"500\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Metric {name: \"Customer Acquisition Cost (CAC) Target\", value: \"500\", unit: \"USD\", condition: \"<\"})\nCREATE (doc)-[:MENTIONS]->(e10)",
+    "entities": [
+      {
+        "type": "Campaign",
+        "properties": {
+          "name": "CloudSync Pro",
+          "duration": "March 1 - May 31, 2025",
+          "budget": 250000,
+          "target_users": 10000,
+          "campaign_manager": "Lisa Martinez"
+        }
+      },
+      {
+        "type": "TargetAudience",
+        "properties": {
+          "name": "IT Managers",
+          "company_size": "50-500 employees",
+          "industries": [
+            "Technology",
+            "Finance",
+            "Healthcare"
+          ],
+          "geographic_regions": [
+            "North America",
+            "Europe"
+          ]
+        }
+      },
+      {
+        "type": "Channel",
+        "properties": {
+          "name": "Digital Advertising",
+          "budget": 120000,
+          "subchannels": [
+            "Google Ads",
+            "LinkedIn Sponsored Content",
+            "Facebook/Instagram"
+          ]
+        }
+      },
+      {
+        "type": "Channel",
+        "properties": {
+          "name": "Content",
+          "budget": 60000,
+          "assets": [
+            "Blog posts (12)",
+            "Whitepapers (3 technical)",
+            "Case studies (5)",
+            "Webinars (4 live)"
+          ]
+        }
+      },
+      {
+        "type": "Channel",
+        "properties": {
+          "name": "Email",
+          "budget": 30000,
+          "types": [
+            "Newsletter",
+            "Drip campaigns",
+            "Targeted outreach"
+          ]
+        }
+      },
+      {
+        "type": "Channel",
+        "properties": {
+          "name": "Events",
+          "budget": 40000,
+          "types": [
+            "Conferences",
+            "Virtual sessions"
+          ]
+        }
+      },
+      {
+        "type": "Metric",
+        "properties": {
+          "name": "Website Traffic Increase",
+          "value": 150,
+          "unit": "%"
+        }
+      },
+      {
+        "type": "Metric",
+        "properties": {
+          "name": "Trial Sign-ups",
+          "value": 5000
+        }
+      },
+      {
+        "type": "Metric",
+        "properties": {
+          "name": "Conversion Rate",
+          "value": 10,
+          "unit": "%"
+        }
+      },
+      {
+        "type": "Metric",
+        "properties": {
+          "name": "Paying Customers",
+          "value": 500
+        }
+      },
+      {
+        "type": "Metric",
+        "properties": {
+          "name": "Customer Acquisition Cost (CAC) Target",
+          "value": 500,
+          "unit": "USD",
+          "condition": "<"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "TARGETS",
+        "source": "CloudSync Pro",
+        "target": "IT Managers",
+        "properties": {}
+      },
+      {
+        "type": "USES_CHANNEL",
+        "source": "CloudSync Pro",
+        "target": "Digital Advertising",
+        "properties": {}
+      },
+      {
+        "type": "USES_CHANNEL",
+        "source": "CloudSync Pro",
+        "target": "Content",
+        "properties": {}
+      },
+      {
+        "type": "USES_CHANNEL",
+        "source": "CloudSync Pro",
+        "target": "Email",
+        "properties": {}
+      },
+      {
+        "type": "USES_CHANNEL",
+        "source": "CloudSync Pro",
+        "target": "Events",
+        "properties": {}
+      },
+      {
+        "type": "MEASURES",
+        "source": "CloudSync Pro",
+        "target": "Website Traffic Increase",
+        "properties": {}
+      },
+      {
+        "type": "MEASURES",
+        "source": "CloudSync Pro",
+        "target": "Trial Sign-ups",
+        "properties": {}
+      },
+      {
+        "type": "MEASURES",
+        "source": "CloudSync Pro",
+        "target": "Conversion Rate",
+        "properties": {}
+      },
+      {
+        "type": "MEASURES",
+        "source": "CloudSync Pro",
+        "target": "Paying Customers",
+        "properties": {}
+      },
+      {
+        "type": "MEASURES",
+        "source": "CloudSync Pro",
+        "target": "Customer Acquisition Cost (CAC) Target",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "Q1 2025 Product Campaign: CloudSync Pro",
+    "domain": "marketing",
+    "docType": "Campaign Overview Document",
+    "extractedFields": {},
+    "keywords": []
+  },
+  "cacheInfo": {
+    "cached": false,
+    "hash": "97e18c57b1032cc91d0d90c8e40b7d7ed859f32ab4e82dbf3df3bb64868a1fae"
+  },
+  "performance": {
+    "totalTimeMs": 36912,
+    "tokens": {
+      "input": 1685,
+      "output": 1028,
+      "total": 2713
+    },
+    "costUsd": 0.00052374
+  }
+}

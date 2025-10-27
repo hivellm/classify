@@ -72,6 +72,7 @@
   "dependencies": {
     "@hivellm/compression-prompt": "^0.1.0",
     "@hivellm/transmutation-lite": "^0.6.1",
-    "commander": "^14.0.2"
+    "commander": "^14.0.2",
+    "dotenv": "^17.2.3"
   }
 }

@@ -1,0 +1,98 @@
+{
+  "classification": {
+    "template": "sales",
+    "confidence": 0.85,
+    "domain": "sales",
+    "docType": "Sales Proposal"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"Enterprise Proposal ESP-2025-0042\",\n      title: \"Enterprise Proposal ESP-2025-0042\",\n      domain: \"sales\",\n      doc_type: \"Sales Proposal\"\n    })\nCREATE (e0:Opportunity {name: \"ERP Implementation for Inc.\", deal_value: \"500000\", close_date: \"2025-02-28\", win_probability: \"90\", stage: \"Proposal\", revenue_forecast: \"500000\", terms: \"30% upfront, 40% on milestone, 30% on completion\", valid_until: \"2025-02-28\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Customer {name: \"Inc.\", contact_info: \"Not specified\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Product {name: \"ERP Solution\", modules: \"Finance Accounting, Human Resources, Supply Chain, CRM\", pricing: \"[object Object]\", quantities: \"[object Object]\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:SalesRep {name: \"Jennifer Davis\", contact: \"jennifer.davis@softwaresolutions.com\"})\nCREATE (doc)-[:MENTIONS]->(e3)",
+    "entities": [
+      {
+        "type": "Opportunity",
+        "properties": {
+          "name": "ERP Implementation for Inc.",
+          "deal_value": 500000,
+          "close_date": "2025-02-28",
+          "win_probability": 90,
+          "stage": "Proposal",
+          "revenue_forecast": 500000,
+          "terms": "30% upfront, 40% on milestone, 30% on completion",
+          "valid_until": "2025-02-28"
+        }
+      },
+      {
+        "type": "Customer",
+        "properties": {
+          "name": "Inc.",
+          "contact_info": "Not specified"
+        }
+      },
+      {
+        "type": "Product",
+        "properties": {
+          "name": "ERP Solution",
+          "modules": "Finance Accounting, Human Resources, Supply Chain, CRM",
+          "pricing": {
+            "licenses": 200000,
+            "services": 180000,
+            "training": 40000,
+            "maintenance": 80000,
+            "total": 500000
+          },
+          "quantities": {
+            "users": 500,
+            "training_sessions": 5
+          }
+        }
+      },
+      {
+        "type": "SalesRep",
+        "properties": {
+          "name": "Jennifer Davis",
+          "contact": "jennifer.davis@softwaresolutions.com"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "SELLS_TO",
+        "source": "SoftwareSolutions",
+        "target": "Inc.",
+        "properties": {}
+      },
+      {
+        "type": "INCLUDES_PRODUCT",
+        "source": "ERP Implementation for Inc.",
+        "target": "ERP Solution",
+        "properties": {}
+      },
+      {
+        "type": "OWNED_BY",
+        "source": "ERP Implementation for Inc.",
+        "target": "Jennifer Davis",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "Enterprise Proposal ESP-2025-0042",
+    "domain": "sales",
+    "docType": "Sales Proposal",
+    "extractedFields": {},
+    "keywords": []
+  },
+  "cacheInfo": {
+    "cached": false,
+    "hash": "71ac12c4f7a4cb37bd454decd88577394f6c0aa518a8241483f88fe436497e26"
+  },
+  "performance": {
+    "totalTimeMs": 21195,
+    "tokens": {
+      "input": 1799,
+      "output": 534,
+      "total": 2333
+    },
+    "costUsd": 0.00040138
+  }
+}

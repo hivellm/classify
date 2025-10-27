@@ -1,0 +1,190 @@
+{
+  "classification": {
+    "template": "investor_relations",
+    "confidence": 0.95,
+    "domain": "investor_relations",
+    "docType": "Investor Update"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"Q4 2024 Investor Update\",\n      title: \"Q4 2024 Investor Update\",\n      domain: \"investor_relations\",\n      doc_type: \"Investor Update\"\n    })\nCREATE (e0:Company {name: \"NextGen AI Solutions\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Period {fiscal_period: \"Q4 2024\", date: \"January 20, 2025\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:FinancialMetric {metric: \"Revenue\", value: \"$12.5M\", comparison: \"+45% YoY\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:FinancialMetric {metric: \"ARR\", value: \"$48M\", comparison: \"+52% YoY\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:FinancialMetric {metric: \"Gross Margin\", value: \"78%\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:FinancialMetric {metric: \"Burn\", value: \"$1.2M/month\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:FinancialMetric {metric: \"Runway\", value: \"18 months\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:FinancialMetric {metric: \"Net Revenue Retention\", value: \"135%\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:FinancialMetric {metric: \"Churn\", value: \"2.1%\", comparison: \"industry avg: 5%\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Guidance {description: \"Launch Beta AI\", period: \"Q1 2025\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Guidance {description: \"Complete fundraising\", period: \"Q1 2025\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Guidance {description: \"Expand sales team with 10 new AEs\", period: \"Q1 2025\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Guidance {description: \"International expansion into EU market\", period: \"Q1 2025\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Guidance {description: \"Infrastructure scaling\", period: \"Q1 2025\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Guidance {description: \"Expected $30M funding round\", period: \"Q2 2025\"})\nCREATE (doc)-[:MENTIONS]->(e14)",
+    "entities": [
+      {
+        "type": "Company",
+        "properties": {
+          "name": "NextGen AI Solutions"
+        }
+      },
+      {
+        "type": "Period",
+        "properties": {
+          "fiscal_period": "Q4 2024",
+          "date": "January 20, 2025"
+        }
+      },
+      {
+        "type": "FinancialMetric",
+        "properties": {
+          "metric": "Revenue",
+          "value": "$12.5M",
+          "comparison": "+45% YoY"
+        }
+      },
+      {
+        "type": "FinancialMetric",
+        "properties": {
+          "metric": "ARR",
+          "value": "$48M",
+          "comparison": "+52% YoY"
+        }
+      },
+      {
+        "type": "FinancialMetric",
+        "properties": {
+          "metric": "Gross Margin",
+          "value": "78%"
+        }
+      },
+      {
+        "type": "FinancialMetric",
+        "properties": {
+          "metric": "Burn",
+          "value": "$1.2M/month"
+        }
+      },
+      {
+        "type": "FinancialMetric",
+        "properties": {
+          "metric": "Runway",
+          "value": "18 months"
+        }
+      },
+      {
+        "type": "FinancialMetric",
+        "properties": {
+          "metric": "Net Revenue Retention",
+          "value": "135%"
+        }
+      },
+      {
+        "type": "FinancialMetric",
+        "properties": {
+          "metric": "Churn",
+          "value": "2.1%",
+          "comparison": "industry avg: 5%"
+        }
+      },
+      {
+        "type": "Guidance",
+        "properties": {
+          "description": "Launch Beta AI",
+          "period": "Q1 2025"
+        }
+      },
+      {
+        "type": "Guidance",
+        "properties": {
+          "description": "Complete fundraising",
+          "period": "Q1 2025"
+        }
+      },
+      {
+        "type": "Guidance",
+        "properties": {
+          "description": "Expand sales team with 10 new AEs",
+          "period": "Q1 2025"
+        }
+      },
+      {
+        "type": "Guidance",
+        "properties": {
+          "description": "International expansion into EU market",
+          "period": "Q1 2025"
+        }
+      },
+      {
+        "type": "Guidance",
+        "properties": {
+          "description": "Infrastructure scaling",
+          "period": "Q1 2025"
+        }
+      },
+      {
+        "type": "Guidance",
+        "properties": {
+          "description": "Expected $30M funding round",
+          "period": "Q2 2025"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "REPORTS",
+        "source": "NextGen AI Solutions",
+        "target": "Q4 2024",
+        "properties": {}
+      },
+      {
+        "type": "PROVIDES_GUIDANCE",
+        "source": "NextGen AI Solutions",
+        "target": "Launch Beta AI",
+        "properties": {}
+      },
+      {
+        "type": "PROVIDES_GUIDANCE",
+        "source": "NextGen AI Solutions",
+        "target": "Complete fundraising",
+        "properties": {}
+      },
+      {
+        "type": "PROVIDES_GUIDANCE",
+        "source": "NextGen AI Solutions",
+        "target": "Expand sales team with 10 new AEs",
+        "properties": {}
+      },
+      {
+        "type": "PROVIDES_GUIDANCE",
+        "source": "NextGen AI Solutions",
+        "target": "International expansion into EU market",
+        "properties": {}
+      },
+      {
+        "type": "PROVIDES_GUIDANCE",
+        "source": "NextGen AI Solutions",
+        "target": "Infrastructure scaling",
+        "properties": {}
+      },
+      {
+        "type": "PROVIDES_GUIDANCE",
+        "source": "NextGen AI Solutions",
+        "target": "Expected $30M funding round",
+        "properties": {}
+      },
+      {
+        "type": "FILED_BY",
+        "source": "Q4 2024 Investor Update",
+        "target": "Emily Thompson, CEO",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "Q4 2024 Investor Update",
+    "domain": "investor_relations",
+    "docType": "Investor Update",
+    "extractedFields": {},
+    "keywords": []
+  },
+  "cacheInfo": {
+    "cached": false,
+    "hash": "7f04eec52b8679b7d80b64350dc9220ed70489ae70b719206b913c41b8d0eaca"
+  },
+  "performance": {
+    "totalTimeMs": 38024,
+    "tokens": {
+      "input": 1831,
+      "output": 1045,
+      "total": 2876
+    },
+    "costUsd": 0.00054894
+  }
+}

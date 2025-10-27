@@ -83,13 +83,25 @@ export class ClassificationPipeline {
     // Build extraction prompt
     const messages = this.buildExtractionMessages(document, template);
 
-    // Compress user prompt to save tokens
+    // Compress only document content, keep JSON instructions intact
     const userMessage = messages[1];
     if (!userMessage) {
       throw new Error('User message not found in extraction prompt');
     }
-    const compressionResult = this.compressor.compress(userMessage.content);
-    userMessage.content = compressionResult.compressed;
+    
+    // Extract document content for compression (between ``` markers)
+    let compressionResult = null;
+    const contentMatch = userMessage.content.match(/```markdown\n([\s\S]*?)\n```/);
+    if (contentMatch && contentMatch[1]) {
+      const originalContent = contentMatch[1];
+      compressionResult = this.compressor.compress(originalContent);
+      
+      // Replace only the document content, keep JSON instructions
+      userMessage.content = userMessage.content.replace(
+        /```markdown\n[\s\S]*?\n```/,
+        `\`\`\`markdown\n${compressionResult.compressed}\n\`\`\``
+      );
+    }
 
     // Execute LLM extraction
     const response = await this.llmProvider.complete({
@@ -132,14 +144,15 @@ export class ClassificationPipeline {
         total: response.usage.totalTokens,
       },
       costUsd: response.costUsd,
-      ...(this.compressor.isEnabled() && {
-        compression: {
-          originalTokens: compressionResult.originalTokens,
-          compressedTokens: compressionResult.compressedTokens,
-          tokenReduction: compressionResult.tokenReduction,
-          compressionTimeMs: compressionResult.compressionTimeMs,
-        },
-      }),
+      ...(compressionResult &&
+        this.compressor.isEnabled() && {
+          compression: {
+            originalTokens: compressionResult.originalTokens,
+            compressedTokens: compressionResult.compressedTokens,
+            tokenReduction: compressionResult.tokenReduction,
+            compressionTimeMs: compressionResult.compressionTimeMs,
+          },
+        }),
     };
   }
 
@@ -162,7 +175,7 @@ ${document.markdown.slice(0, 10000)}${document.markdown.length > 10000 ? '\n...(
 Expected entities: ${template.entity_definitions.map((e) => e.type).join(', ')}
 Expected relationships: ${template.relationship_definitions.map((r) => r.type).join(', ')}
 
-Respond with JSON in this format:
+IMPORTANT: Respond with valid JSON in this exact format:
 {
   "title": "Document title",
   "doc_type": "specific document type from template",
@@ -180,7 +193,9 @@ Respond with JSON in this format:
       "properties": {}
     }
   ]
-}`;
+}
+
+Your entire response must be valid JSON. Do not include any other text.`;
 
     return [
       { role: 'system', content: systemPrompt },

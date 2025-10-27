@@ -1,0 +1,154 @@
+{
+  "classification": {
+    "template": "compliance",
+    "confidence": 0.95,
+    "domain": "compliance",
+    "docType": "Compliance Policy"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"Privacy GDPR Policy\",\n      title: \"Privacy GDPR Policy\",\n      domain: \"compliance\",\n      doc_type: \"Compliance Policy\"\n    })\nCREATE (e0:Requirement {name: \"Lawfulness Transparency\", description: \"Obtain explicit consent for collecting personal data, provide privacy notices, and document legal processing.\", regulation: \"GDPR\", reference: \"Article 6, Article 12\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Requirement {name: \"Purpose Limitation\", description: \"Use personal data only for specified purposes and do not use for incompatible purposes; delete when no longer needed.\", regulation: \"GDPR\", reference: \"Article 5(1)(b)\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Requirement {name: \"Data Minimization\", description: \"Collect only necessary personal data, review collection practices, and implement retention schedules.\", regulation: \"GDPR\", reference: \"Article 5(1)(c)\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Requirement {name: \"Accuracy\", description: \"Maintain accurate and up-to-date records, and allow individuals to correct their data.\", regulation: \"GDPR\", reference: \"Article 5(1)(d)\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Requirement {name: \"Storage Limitation\", description: \"Retain personal data for specified periods: 7 years maximum for general data, 2 years for marketing after last contact, and as required by law for financial records.\", regulation: \"GDPR\", reference: \"Article 5(1)(e)\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Requirement {name: \"Security\", description: \"Implement encryption at rest and in transit, access controls, authentication, security assessments, and incident response procedures.\", regulation: \"GDPR\", reference: \"Article 32\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Requirement {name: \"Subject Rights\", description: \"Ensure rights to access, rectification, erasure, data portability, and objection for data subjects.\", regulation: \"GDPR\", reference: \"Articles 15-21\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Finding {name: \"No Explicit Consent Mechanism\", description: \"Policy states to obtain explicit consent but does not specify mechanisms for doing so.\", status: \"Open\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Finding {name: \"Incomplete Retention Details\", description: \"Retention periods are specified but lack details on implementation and enforcement.\", status: \"Open\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Risk {name: \"Non-Compliance with GDPR\", description: \"Risk of regulatory penalties and fines due to failure to fully implement GDPR requirements.\", severity: \"High\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Risk {name: \"Data Breach\", description: \"Risk of unauthorized access or data loss if security measures are not properly enforced.\", severity: \"High\"})\nCREATE (doc)-[:MENTIONS]->(e10)",
+    "entities": [
+      {
+        "type": "Requirement",
+        "properties": {
+          "name": "Lawfulness Transparency",
+          "description": "Obtain explicit consent for collecting personal data, provide privacy notices, and document legal processing.",
+          "regulation": "GDPR",
+          "reference": "Article 6, Article 12"
+        }
+      },
+      {
+        "type": "Requirement",
+        "properties": {
+          "name": "Purpose Limitation",
+          "description": "Use personal data only for specified purposes and do not use for incompatible purposes; delete when no longer needed.",
+          "regulation": "GDPR",
+          "reference": "Article 5(1)(b)"
+        }
+      },
+      {
+        "type": "Requirement",
+        "properties": {
+          "name": "Data Minimization",
+          "description": "Collect only necessary personal data, review collection practices, and implement retention schedules.",
+          "regulation": "GDPR",
+          "reference": "Article 5(1)(c)"
+        }
+      },
+      {
+        "type": "Requirement",
+        "properties": {
+          "name": "Accuracy",
+          "description": "Maintain accurate and up-to-date records, and allow individuals to correct their data.",
+          "regulation": "GDPR",
+          "reference": "Article 5(1)(d)"
+        }
+      },
+      {
+        "type": "Requirement",
+        "properties": {
+          "name": "Storage Limitation",
+          "description": "Retain personal data for specified periods: 7 years maximum for general data, 2 years for marketing after last contact, and as required by law for financial records.",
+          "regulation": "GDPR",
+          "reference": "Article 5(1)(e)"
+        }
+      },
+      {
+        "type": "Requirement",
+        "properties": {
+          "name": "Security",
+          "description": "Implement encryption at rest and in transit, access controls, authentication, security assessments, and incident response procedures.",
+          "regulation": "GDPR",
+          "reference": "Article 32"
+        }
+      },
+      {
+        "type": "Requirement",
+        "properties": {
+          "name": "Subject Rights",
+          "description": "Ensure rights to access, rectification, erasure, data portability, and objection for data subjects.",
+          "regulation": "GDPR",
+          "reference": "Articles 15-21"
+        }
+      },
+      {
+        "type": "Finding",
+        "properties": {
+          "name": "No Explicit Consent Mechanism",
+          "description": "Policy states to obtain explicit consent but does not specify mechanisms for doing so.",
+          "status": "Open"
+        }
+      },
+      {
+        "type": "Finding",
+        "properties": {
+          "name": "Incomplete Retention Details",
+          "description": "Retention periods are specified but lack details on implementation and enforcement.",
+          "status": "Open"
+        }
+      },
+      {
+        "type": "Risk",
+        "properties": {
+          "name": "Non-Compliance with GDPR",
+          "description": "Risk of regulatory penalties and fines due to failure to fully implement GDPR requirements.",
+          "severity": "High"
+        }
+      },
+      {
+        "type": "Risk",
+        "properties": {
+          "name": "Data Breach",
+          "description": "Risk of unauthorized access or data loss if security measures are not properly enforced.",
+          "severity": "High"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "HAS_FINDING",
+        "source": "Lawfulness Transparency",
+        "target": "No Explicit Consent Mechanism",
+        "properties": {}
+      },
+      {
+        "type": "HAS_FINDING",
+        "source": "Storage Limitation",
+        "target": "Incomplete Retention Details",
+        "properties": {}
+      },
+      {
+        "type": "MITIGATES",
+        "source": "Security",
+        "target": "Data Breach",
+        "properties": {}
+      },
+      {
+        "type": "MITIGATES",
+        "source": "Subject Rights",
+        "target": "Non-Compliance with GDPR",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "Privacy GDPR Policy",
+    "domain": "compliance",
+    "docType": "Compliance Policy",
+    "extractedFields": {},
+    "keywords": []
+  },
+  "cacheInfo": {
+    "cached": false,
+    "hash": "b7d8c173827d95166be1db09ee59462d61ee769e0c7740da9c754cfd7655d33b"
+  },
+  "performance": {
+    "totalTimeMs": 35789,
+    "tokens": {
+      "input": 1686,
+      "output": 991,
+      "total": 2677
+    },
+    "costUsd": 0.0005135200000000001
+  }
+}

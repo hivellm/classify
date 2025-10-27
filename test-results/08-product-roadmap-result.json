@@ -1,0 +1,276 @@
+{
+  "classification": {
+    "template": "product",
+    "confidence": 0.95,
+    "domain": "product",
+    "docType": "Product Roadmap"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"Product Roadmap CloudSync Pro\",\n      title: \"Product Roadmap CloudSync Pro\",\n      domain: \"product\",\n      doc_type: \"Product Roadmap\"\n    })\nCREATE (e0:Feature {name: \"Multi-region Sync\", description: \"Sync across AWS, Azure, GCP\", priority: \"P0\", release: \"3.0 Enterprise\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Feature {name: \"Advanced Role-based Control\", description: \"Enhanced role-based access control\", priority: \"P0\", release: \"3.0 Enterprise\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Feature {name: \"Audit Complete Activity\", description: \"Complete activity auditing\", priority: \"P0\", release: \"3.0 Enterprise\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Feature {name: \"RESTful API Webhooks\", description: \"RESTful API with webhooks\", priority: \"P1\", release: \"3.0 Enterprise\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Feature {name: \"Smart Categorization\", description: \"ML-based smart categorization\", priority: \"P2\", release: \"3.1 AI-Powered\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Feature {name: \"Duplicate Intelligent Detection\", description: \"Intelligent duplicate detection\", priority: \"P2\", release: \"3.1 AI-Powered\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Feature {name: \"Content Natural Language Processing\", description: \"Natural language content processing\", priority: \"P2\", release: \"3.1 AI-Powered\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Feature {name: \"Automated If-This-Then-That\", description: \"Automated workflows with if-this-then-that logic\", priority: \"P2\", release: \"3.1 AI-Powered\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Feature {name: \"Performance Bug Fixes\", description: \"Critical performance bug fixes\", priority: \"P0\", release: \"General\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Feature {name: \"Advanced API\", description: \"Advanced API features\", priority: \"P1\", release: \"General\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Feature {name: \"Mobile Improvements\", description: \"Improvements to mobile functionality\", priority: \"P2\", release: \"General\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Feature {name: \"Integrations\", description: \"Integrations with Slack, Teams\", priority: \"P2\", release: \"General\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Requirement {name: \"Infrastructure Setup\", description: \"Setup of infrastructure for features\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Requirement {name: \"ML AI Model Training\", description: \"Training of ML and AI models\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Requirement {name: \"Security Compliance Review\", description: \"Review for security and compliance\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Milestone {name: \"Q1 2025 Release\", date: \"2025-03-15\", description: \"Release of version 3.0 Enterprise\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:Milestone {name: \"Q2 2025 Release\", date: \"2025-06-30\", description: \"Release of version 3.1 AI-Powered\"})\nCREATE (doc)-[:MENTIONS]->(e16)",
+    "entities": [
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Multi-region Sync",
+          "description": "Sync across AWS, Azure, GCP",
+          "priority": "P0",
+          "release": "3.0 Enterprise"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Advanced Role-based Control",
+          "description": "Enhanced role-based access control",
+          "priority": "P0",
+          "release": "3.0 Enterprise"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Audit Complete Activity",
+          "description": "Complete activity auditing",
+          "priority": "P0",
+          "release": "3.0 Enterprise"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "RESTful API Webhooks",
+          "description": "RESTful API with webhooks",
+          "priority": "P1",
+          "release": "3.0 Enterprise"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Smart Categorization",
+          "description": "ML-based smart categorization",
+          "priority": "P2",
+          "release": "3.1 AI-Powered"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Duplicate Intelligent Detection",
+          "description": "Intelligent duplicate detection",
+          "priority": "P2",
+          "release": "3.1 AI-Powered"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Content Natural Language Processing",
+          "description": "Natural language content processing",
+          "priority": "P2",
+          "release": "3.1 AI-Powered"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Automated If-This-Then-That",
+          "description": "Automated workflows with if-this-then-that logic",
+          "priority": "P2",
+          "release": "3.1 AI-Powered"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Performance Bug Fixes",
+          "description": "Critical performance bug fixes",
+          "priority": "P0",
+          "release": "General"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Advanced API",
+          "description": "Advanced API features",
+          "priority": "P1",
+          "release": "General"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Mobile Improvements",
+          "description": "Improvements to mobile functionality",
+          "priority": "P2",
+          "release": "General"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Integrations",
+          "description": "Integrations with Slack, Teams",
+          "priority": "P2",
+          "release": "General"
+        }
+      },
+      {
+        "type": "Requirement",
+        "properties": {
+          "name": "Infrastructure Setup",
+          "description": "Setup of infrastructure for features"
+        }
+      },
+      {
+        "type": "Requirement",
+        "properties": {
+          "name": "ML AI Model Training",
+          "description": "Training of ML and AI models"
+        }
+      },
+      {
+        "type": "Requirement",
+        "properties": {
+          "name": "Security Compliance Review",
+          "description": "Review for security and compliance"
+        }
+      },
+      {
+        "type": "Milestone",
+        "properties": {
+          "name": "Q1 2025 Release",
+          "date": "2025-03-15",
+          "description": "Release of version 3.0 Enterprise"
+        }
+      },
+      {
+        "type": "Milestone",
+        "properties": {
+          "name": "Q2 2025 Release",
+          "date": "2025-06-30",
+          "description": "Release of version 3.1 AI-Powered"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "HAS_FEATURE",
+        "source": "Q1 2025 Release",
+        "target": "Multi-region Sync",
+        "properties": {}
+      },
+      {
+        "type": "HAS_FEATURE",
+        "source": "Q1 2025 Release",
+        "target": "Advanced Role-based Control",
+        "properties": {}
+      },
+      {
+        "type": "HAS_FEATURE",
+        "source": "Q1 2025 Release",
+        "target": "Audit Complete Activity",
+        "properties": {}
+      },
+      {
+        "type": "HAS_FEATURE",
+        "source": "Q1 2025 Release",
+        "target": "RESTful API Webhooks",
+        "properties": {}
+      },
+      {
+        "type": "HAS_FEATURE",
+        "source": "Q2 2025 Release",
+        "target": "Smart Categorization",
+        "properties": {}
+      },
+      {
+        "type": "HAS_FEATURE",
+        "source": "Q2 2025 Release",
+        "target": "Duplicate Intelligent Detection",
+        "properties": {}
+      },
+      {
+        "type": "HAS_FEATURE",
+        "source": "Q2 2025 Release",
+        "target": "Content Natural Language Processing",
+        "properties": {}
+      },
+      {
+        "type": "HAS_FEATURE",
+        "source": "Q2 2025 Release",
+        "target": "Automated If-This-Then-That",
+        "properties": {}
+      },
+      {
+        "type": "REQUIRES",
+        "source": "Smart Categorization",
+        "target": "ML AI Model Training",
+        "properties": {}
+      },
+      {
+        "type": "REQUIRES",
+        "source": "Duplicate Intelligent Detection",
+        "target": "ML AI Model Training",
+        "properties": {}
+      },
+      {
+        "type": "REQUIRES",
+        "source": "Content Natural Language Processing",
+        "target": "ML AI Model Training",
+        "properties": {}
+      },
+      {
+        "type": "REQUIRES",
+        "source": "Automated If-This-Then-That",
+        "target": "ML AI Model Training",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Multi-region Sync",
+        "target": "Infrastructure Setup",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Advanced Role-based Control",
+        "target": "Security Compliance Review",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Audit Complete Activity",
+        "target": "Security Compliance Review",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "RESTful API Webhooks",
+        "target": "Infrastructure Setup",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "Product Roadmap CloudSync Pro",
+    "domain": "product",
+    "docType": "Product Roadmap",
+    "extractedFields": {},
+    "keywords": []
+  },
+  "cacheInfo": {
+    "cached": false,
+    "hash": "57c6c8d8fce97bb8b2a40f1a4a4519bb37f6c2c488b6552ca428723f701b6275"
+  },
+  "performance": {
+    "totalTimeMs": 58466,
+    "tokens": {
+      "input": 1696,
+      "output": 1682,
+      "total": 3378
+    },
+    "costUsd": 0.0007084000000000001
+  }
+}

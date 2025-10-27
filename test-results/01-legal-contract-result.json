@@ -1,0 +1,148 @@
+{
+  "classification": {
+    "template": "legal",
+    "confidence": 0.95,
+    "domain": "legal",
+    "docType": "Service Agreement"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"Agreement\",\n      title: \"Agreement\",\n      domain: \"legal\",\n      doc_type: \"Service Agreement\"\n    })\nCREATE (e0:Party {name: \"TechCorp\", role: \"Client\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Party {name: \"DataSolutions LLC\", role: \"Service Provider\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Date {date: \"January 15, 2025\", description: \"Agreement Date\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Date {date: \"February 1, 2025\", description: \"Term Commencement\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Clause {name: \"Services\", description: \"Provider to provide infrastructure management services including maintenance, 24/7 support\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Clause {name: \"Term\", description: \"Commence February 1, 2025, continue for 12 months\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Clause {name: \"Compensation\", description: \"Client to pay $5,000 USD, payable within 15 days of invoice\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Clause {name: \"Termination\", description: \"Either party may terminate with 30 days written notice\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Clause {name: \"Liability\", description: \"Provider's liability not to exceed fees paid in preceding six months\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Amount {value: \"5000\", currency: \"USD\", description: \"Monthly service fee\"})\nCREATE (doc)-[:MENTIONS]->(e9)",
+    "entities": [
+      {
+        "type": "Party",
+        "properties": {
+          "name": "TechCorp",
+          "role": "Client"
+        }
+      },
+      {
+        "type": "Party",
+        "properties": {
+          "name": "DataSolutions LLC",
+          "role": "Service Provider"
+        }
+      },
+      {
+        "type": "Date",
+        "properties": {
+          "date": "January 15, 2025",
+          "description": "Agreement Date"
+        }
+      },
+      {
+        "type": "Date",
+        "properties": {
+          "date": "February 1, 2025",
+          "description": "Term Commencement"
+        }
+      },
+      {
+        "type": "Clause",
+        "properties": {
+          "name": "Services",
+          "description": "Provider to provide infrastructure management services including maintenance, 24/7 support"
+        }
+      },
+      {
+        "type": "Clause",
+        "properties": {
+          "name": "Term",
+          "description": "Commence February 1, 2025, continue for 12 months"
+        }
+      },
+      {
+        "type": "Clause",
+        "properties": {
+          "name": "Compensation",
+          "description": "Client to pay $5,000 USD, payable within 15 days of invoice"
+        }
+      },
+      {
+        "type": "Clause",
+        "properties": {
+          "name": "Termination",
+          "description": "Either party may terminate with 30 days written notice"
+        }
+      },
+      {
+        "type": "Clause",
+        "properties": {
+          "name": "Liability",
+          "description": "Provider's liability not to exceed fees paid in preceding six months"
+        }
+      },
+      {
+        "type": "Amount",
+        "properties": {
+          "value": "5000",
+          "currency": "USD",
+          "description": "Monthly service fee"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "PARTY_TO",
+        "source": "TechCorp",
+        "target": "DataSolutions LLC",
+        "properties": {}
+      },
+      {
+        "type": "HAS_CLAUSE",
+        "source": "Agreement",
+        "target": "Services",
+        "properties": {}
+      },
+      {
+        "type": "HAS_CLAUSE",
+        "source": "Agreement",
+        "target": "Term",
+        "properties": {}
+      },
+      {
+        "type": "HAS_CLAUSE",
+        "source": "Agreement",
+        "target": "Compensation",
+        "properties": {}
+      },
+      {
+        "type": "HAS_CLAUSE",
+        "source": "Agreement",
+        "target": "Termination",
+        "properties": {}
+      },
+      {
+        "type": "HAS_CLAUSE",
+        "source": "Agreement",
+        "target": "Liability",
+        "properties": {}
+      },
+      {
+        "type": "REFERENCES",
+        "source": "Compensation",
+        "target": "Amount",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "Agreement",
+    "domain": "legal",
+    "docType": "Service Agreement",
+    "extractedFields": {},
+    "keywords": []
+  },
+  "cacheInfo": {
+    "cached": false,
+    "hash": "2cd694d76bfd5a03bfec695a4895faaca8e66183f0e34d2d903b6babccddf732"
+  },
+  "performance": {
+    "totalTimeMs": 29119,
+    "tokens": {
+      "input": 1588,
+      "output": 781,
+      "total": 2369
+    },
+    "costUsd": 0.00044100000000000004
+  }
+}

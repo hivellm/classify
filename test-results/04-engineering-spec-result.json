@@ -1,0 +1,224 @@
+{
+  "classification": {
+    "template": "engineering",
+    "confidence": 0.95,
+    "domain": "engineering",
+    "docType": "API Design Specification"
+  },
+  "graphStructure": {
+    "cypher": "CREATE (doc:Document {\n      id: \"API Design Specification\",\n      title: \"API Design Specification\",\n      domain: \"engineering\",\n      doc_type: \"API Design Specification\"\n    })\nCREATE (e0:Component {name: \"Kong Gateway\", description: \"API routing\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Component {name: \"GraphQL Federation\", description: \"Unified API services\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Component {name: \"Redis Cache\", description: \"Response caching\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Component {name: \"PostgreSQL\", description: \"Configuration storage\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:API {name: \"Authentication API\", endpoints: \"POST /api/v1/auth/login,POST /api/v1/auth/refresh,POST /api/v1/auth/logout\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:API {name: \"GraphQL Gateway\", endpoints: \"POST /graphql,GET /graphql\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Dependency {name: \"JWT\", description: \"JWT-based authentication\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Dependency {name: \"Docker\", description: \"Containerization\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Dependency {name: \"Kubernetes\", description: \"Orchestration platform\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Function {name: \"Rate limiting\", description: \"1000 requests/hour per API key\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Function {name: \"CORS configuration\", description: \"Cross-origin resource sharing setup\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Function {name: \"Request validation middleware\", description: \"Middleware for validating requests\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Function {name: \"Auto-scaling\", description: \"3-10 replicas\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Function {name: \"Blue-green deployment\", description: \"Deployment strategy\"})\nCREATE (doc)-[:MENTIONS]->(e13)",
+    "entities": [
+      {
+        "type": "Component",
+        "properties": {
+          "name": "Kong Gateway",
+          "description": "API routing"
+        }
+      },
+      {
+        "type": "Component",
+        "properties": {
+          "name": "GraphQL Federation",
+          "description": "Unified API services"
+        }
+      },
+      {
+        "type": "Component",
+        "properties": {
+          "name": "Redis Cache",
+          "description": "Response caching"
+        }
+      },
+      {
+        "type": "Component",
+        "properties": {
+          "name": "PostgreSQL",
+          "description": "Configuration storage"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "Authentication API",
+          "endpoints": [
+            "POST /api/v1/auth/login",
+            "POST /api/v1/auth/refresh",
+            "POST /api/v1/auth/logout"
+          ]
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "GraphQL Gateway",
+          "endpoints": [
+            "POST /graphql",
+            "GET /graphql"
+          ]
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "JWT",
+          "description": "JWT-based authentication"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Docker",
+          "description": "Containerization"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Kubernetes",
+          "description": "Orchestration platform"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "Rate limiting",
+          "description": "1000 requests/hour per API key"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "CORS configuration",
+          "description": "Cross-origin resource sharing setup"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "Request validation middleware",
+          "description": "Middleware for validating requests"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "Auto-scaling",
+          "description": "3-10 replicas"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "Blue-green deployment",
+          "description": "Deployment strategy"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "type": "DEPENDS_ON",
+        "source": "Kong Gateway",
+        "target": "GraphQL Federation",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Kong Gateway",
+        "target": "Redis Cache",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Kong Gateway",
+        "target": "PostgreSQL",
+        "properties": {}
+      },
+      {
+        "type": "HAS_ENDPOINT",
+        "source": "Authentication API",
+        "target": "POST /api/v1/auth/login",
+        "properties": {}
+      },
+      {
+        "type": "HAS_ENDPOINT",
+        "source": "Authentication API",
+        "target": "POST /api/v1/auth/refresh",
+        "properties": {}
+      },
+      {
+        "type": "HAS_ENDPOINT",
+        "source": "Authentication API",
+        "target": "POST /api/v1/auth/logout",
+        "properties": {}
+      },
+      {
+        "type": "HAS_ENDPOINT",
+        "source": "GraphQL Gateway",
+        "target": "POST /graphql",
+        "properties": {}
+      },
+      {
+        "type": "HAS_ENDPOINT",
+        "source": "GraphQL Gateway",
+        "target": "GET /graphql",
+        "properties": {}
+      },
+      {
+        "type": "IMPLEMENTS",
+        "source": "Authentication API",
+        "target": "JWT",
+        "properties": {}
+      },
+      {
+        "type": "IMPLEMENTS",
+        "source": "Kong Gateway",
+        "target": "Rate limiting",
+        "properties": {}
+      },
+      {
+        "type": "IMPLEMENTS",
+        "source": "Kong Gateway",
+        "target": "CORS configuration",
+        "properties": {}
+      },
+      {
+        "type": "IMPLEMENTS",
+        "source": "Kong Gateway",
+        "target": "Request validation middleware",
+        "properties": {}
+      },
+      {
+        "type": "IMPLEMENTS",
+        "source": "Kubernetes",
+        "target": "Auto-scaling",
+        "properties": {}
+      },
+      {
+        "type": "IMPLEMENTS",
+        "source": "Kubernetes",
+        "target": "Blue-green deployment",
+        "properties": {}
+      }
+    ]
+  },
+  "fulltextMetadata": {
+    "title": "API Design Specification",
+    "domain": "engineering",
+    "docType": "API Design Specification",
+    "extractedFields": {},
+    "keywords": []
+  },
+  "cacheInfo": {
+    "cached": false,
+    "hash": "b59657329047fbdef3af1d081be617d5b8533006d1179ee6351ce27aeee68efb"
+  },
+  "performance": {
+    "totalTimeMs": 42394,
+    "tokens": {
+      "input": 1705,
+      "output": 1181,
+      "total": 2886
+    },
+    "costUsd": 0.0005693800000000001
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "totalDocuments": 10,
+  "totalCost": 0.005102860000000001,
+  "averageCost": 0.0005102860000000001,
+  "totalTimeMs": 351971,
+  "averageTimeMs": 35197.1,
+  "results": [
+    {
+      "filename": "01-legal-contract.md",
+      "template": "legal",
+      "domain": "legal",
+      "docType": "Service Agreement",
+      "confidence": 0.95,
+      "entities": 10,
+      "cost": 0.00044100000000000004,
+      "timeMs": 29119,
+      "tokens": 2369
+    },
+    {
+      "filename": "02-financial-report.md",
+      "template": "financial",
+      "domain": "financial",
+      "docType": "financial report",
+      "confidence": 0.95,
+      "entities": 31,
+      "cost": 0.00059206,
+      "timeMs": 44534,
+      "tokens": 2971
+    },
+    {
+      "filename": "03-hr-job-posting.md",
+      "template": "hr",
+      "domain": "hr",
+      "docType": "Job Posting",
+      "confidence": 0.9,
+      "entities": 8,
+      "cost": 0.00038864000000000005,
+      "timeMs": 22346,
+      "tokens": 2191
+    },
+    {
+      "filename": "04-engineering-spec.md",
+      "template": "engineering",
+      "domain": "engineering",
+      "docType": "API Design Specification",
+      "confidence": 0.95,
+      "entities": 14,
+      "cost": 0.0005693800000000001,
+      "timeMs": 42394,
+      "tokens": 2886
+    },
+    {
+      "filename": "05-marketing-campaign.md",
+      "template": "marketing",
+      "domain": "marketing",
+      "docType": "Campaign Overview Document",
+      "confidence": 0.95,
+      "entities": 11,
+      "cost": 0.00052374,
+      "timeMs": 36912,
+      "tokens": 2713
+    },
+    {
+      "filename": "06-compliance-policy.md",
+      "template": "compliance",
+      "domain": "compliance",
+      "docType": "Compliance Policy",
+      "confidence": 0.95,
+      "entities": 11,
+      "cost": 0.0005135200000000001,
+      "timeMs": 35789,
+      "tokens": 2677
+    },
+    {
+      "filename": "07-sales-proposal.md",
+      "template": "sales",
+      "domain": "sales",
+      "docType": "Sales Proposal",
+      "confidence": 0.85,
+      "entities": 4,
+      "cost": 0.00040138,
+      "timeMs": 21195,
+      "tokens": 2333
+    },
+    {
+      "filename": "08-product-roadmap.md",
+      "template": "product",
+      "domain": "product",
+      "docType": "Product Roadmap",
+      "confidence": 0.95,
+      "entities": 17,
+      "cost": 0.0007084000000000001,
+      "timeMs": 58466,
+      "tokens": 3378
+    },
+    {
+      "filename": "09-customer-support-ticket.md",
+      "template": "customer_support",
+      "domain": "customer_support",
+      "docType": "Support Ticket",
+      "confidence": 0.95,
+      "entities": 3,
+      "cost": 0.0004158,
+      "timeMs": 23192,
+      "tokens": 2370
+    },
+    {
+      "filename": "10-investor-update.md",
+      "template": "investor_relations",
+      "domain": "investor_relations",
+      "docType": "Investor Update",
+      "confidence": 0.95,
+      "entities": 15,
+      "cost": 0.00054894,
+      "timeMs": 38024,
+      "tokens": 2876
+    }
+  ]
+}

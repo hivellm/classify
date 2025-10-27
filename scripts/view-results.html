@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classify Test Results - 10 Documents</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+            line-height: 1.6;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        h1 { color: #333; margin-bottom: 20px; }
+        .summary {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .stat {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 3px solid #007bff;
+        }
+        .stat-label { font-size: 12px; color: #666; text-transform: uppercase; }
+        .stat-value { font-size: 24px; font-weight: bold; color: #333; margin-top: 5px; }
+        .results-table {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        table { width: 100%; border-collapse: collapse; }
+        th {
+            background: #007bff;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        tr:hover { background: #f8f9fa; }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .badge-success { background: #d4edda; color: #155724; }
+        .badge-info { background: #d1ecf1; color: #0c5460; }
+        .badge-warning { background: #fff3cd; color: #856404; }
+        .confidence-bar {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #ffc107);
+            transition: width 0.3s;
+        }
+        .details {
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 13px;
+        }
+        .entity-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .entity-card {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 3px solid #6c757d;
+        }
+        .entity-type { font-weight: bold; color: #495057; margin-bottom: 5px; }
+        .entity-props { font-size: 13px; color: #6c757d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 Classify Test Results - 10 Documents</h1>
+        
+        <div class="summary">
+            <h2>Summary</h2>
+            <div class="summary-grid">
+                <div class="stat">
+                    <div class="stat-label">Total Documents</div>
+                    <div class="stat-value" id="totalDocs">-</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Total Cost</div>
+                    <div class="stat-value" id="totalCost">-</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Average Cost</div>
+                    <div class="stat-value" id="avgCost">-</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Total Time</div>
+                    <div class="stat-value" id="totalTime">-</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Average Time</div>
+                    <div class="stat-value" id="avgTime">-</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Success Rate</div>
+                    <div class="stat-value" id="successRate">100%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="results-table">
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Template</th>
+                        <th>Domain</th>
+                        <th>Type</th>
+                        <th>Confidence</th>
+                        <th>Entities</th>
+                        <th>Cost</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsBody">
+                </tbody>
+            </table>
+        </div>
+
+        <div class="details" id="detailsSection" style="display: none;">
+            <h2>Classification Details</h2>
+            <div id="detailsContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Load summary.json from test-results/
+        fetch('../test-results/summary.json')
+            .then(r => r.json())
+            .then(data => {
+                // Update summary stats
+                document.getElementById('totalDocs').textContent = data.totalDocuments;
+                document.getElementById('totalCost').textContent = '$' + data.totalCost.toFixed(6);
+                document.getElementById('avgCost').textContent = '$' + data.averageCost.toFixed(6);
+                document.getElementById('totalTime').textContent = (data.totalTimeMs / 1000).toFixed(1) + 's';
+                document.getElementById('avgTime').textContent = (data.averageTimeMs / 1000).toFixed(1) + 's';
+
+                // Populate results table
+                const tbody = document.getElementById('resultsBody');
+                data.results.forEach(r => {
+                    const row = document.createElement('tr');
+                    row.style.cursor = 'pointer';
+                    row.onclick = () => showDetails(r.filename);
+                    
+                    const confidencePercent = (r.confidence * 100).toFixed(0);
+                    const confidenceClass = r.confidence >= 0.9 ? 'success' : r.confidence >= 0.7 ? 'info' : 'warning';
+                    
+                    row.innerHTML = `
+                        <td><strong>${r.filename}</strong></td>
+                        <td><span class="badge badge-info">${r.template}</span></td>
+                        <td>${r.domain}</td>
+                        <td>${r.docType}</td>
+                        <td>
+                            <div class="confidence-bar">
+                                <div class="confidence-fill" style="width: ${confidencePercent}%"></div>
+                            </div>
+                            <small>${confidencePercent}%</small>
+                        </td>
+                        <td>${r.entities}</td>
+                        <td>$${r.cost.toFixed(6)}</td>
+                        <td>${(r.timeMs / 1000).toFixed(1)}s</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            })
+            .catch(err => console.error('Error loading summary:', err));
+
+        function showDetails(filename) {
+            const resultFile = filename.replace('.md', '-result.json');
+            fetch(`../test-results/${resultFile}`)
+                .then(r => r.json())
+                .then(data => {
+                    const detailsContent = document.getElementById('detailsContent');
+                    detailsContent.innerHTML = `
+                        <h3>${filename}</h3>
+                        
+                        <h4>Classification</h4>
+                        <p><strong>Template:</strong> ${data.classification.template}</p>
+                        <p><strong>Domain:</strong> ${data.classification.domain}</p>
+                        <p><strong>Type:</strong> ${data.classification.docType}</p>
+                        <p><strong>Confidence:</strong> ${(data.classification.confidence * 100).toFixed(1)}%</p>
+
+                        <h4>Extracted Entities (${data.graphStructure.entities.length})</h4>
+                        <div class="entity-list">
+                            ${data.graphStructure.entities.map(e => `
+                                <div class="entity-card">
+                                    <div class="entity-type">${e.type}</div>
+                                    <div class="entity-props">${JSON.stringify(e.properties, null, 2)}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        <h4>Cypher Query</h4>
+                        <pre>${data.graphStructure.cypher}</pre>
+
+                        <h4>Performance</h4>
+                        <p><strong>Total Time:</strong> ${data.performance.totalTimeMs}ms</p>
+                        <p><strong>Tokens:</strong> ${data.performance.tokens.input} input + ${data.performance.tokens.output} output = ${data.performance.tokens.total} total</p>
+                        <p><strong>Cost:</strong> $${data.performance.costUsd.toFixed(6)}</p>
+
+                        <h4>Full Result (JSON)</h4>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                    document.getElementById('detailsSection').style.display = 'block';
+                    document.getElementById('detailsSection').scrollIntoView({ behavior: 'smooth' });
+                })
+                .catch(err => console.error('Error loading details:', err));
+        }
+    </script>
+</body>
+</html>
+

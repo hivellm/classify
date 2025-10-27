@@ -60,8 +60,15 @@ export class TemplateSelector {
     const index = this.templateLoader.getIndex();
     const prompt = this.buildSelectionPrompt(index, documentContent);
 
-    // Compress user prompt (document content) to save tokens
-    const compressionResult = this.compressor.compress(prompt.user);
+    // Compress only the document content, keep JSON instructions
+    const documentPart = `\`\`\`markdown\n${documentContent.slice(0, 3000)}${documentContent.length > 3000 ? '\n...(truncated)' : ''}\n\`\`\``;
+    const compressionResult = this.compressor.compress(documentPart);
+    
+    const compressedUserPrompt = `Analyze this document and select the best classification template:
+
+${compressionResult.compressed}
+
+IMPORTANT: Respond with valid JSON in the exact format specified above. Your response must be valid JSON.`;
 
     const response = await this.llmProvider.complete({
       model: this.llmProvider.defaultModel,
@@ -72,7 +79,7 @@ export class TemplateSelector {
         },
         {
           role: 'user',
-          content: compressionResult.compressed,
+          content: compressedUserPrompt,
         },
       ],
       temperature: 0.3, // Low temperature for consistent selection
@@ -159,7 +166,7 @@ If the document doesn't fit any specialized template well, select "base" with ap
 ${documentContent.slice(0, 3000)}${documentContent.length > 3000 ? '\n...(truncated)' : ''}
 \`\`\`
 
-Respond with JSON only.`;
+IMPORTANT: Respond with valid JSON in the exact format specified above. Your response must be valid JSON.`;
 
     return { system, user };
   }
