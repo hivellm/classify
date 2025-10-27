@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.1] - 2025-10-27
+
 ### Fixed
 
 - Fixed cache management methods (`clear()` and `clearOlderThan()`) to properly handle subdirectory structure
@@ -14,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed ESLint error: improved optional chain usage in batch processor
 - Updated Codespell configuration to ignore valid technical terms and coverage files
 - Fixed cache test to properly validate cache clearing functionality
+- Updated package-lock.json to sync with package.json dependencies (glob@11.x)
+
+### Changed
+
+- All CI/CD checks now passing (Build, Lint, Codespell, Tests)
+- Improved code quality with stricter ESLint compliance
 
 ## [0.4.0] - 2025-10-27
 

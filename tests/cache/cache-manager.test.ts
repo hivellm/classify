@@ -123,7 +123,7 @@ describe('CacheManager', () => {
           cachedAt: Date.now(),
         },
       };
-      
+
       await cacheManager.set('hash1', mockResult);
       await cacheManager.set('hash2', mockResult);
 

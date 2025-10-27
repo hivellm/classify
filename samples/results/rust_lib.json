@@ -2,12 +2,12 @@
   "file": "rust/lib.rs",
   "classification": {
     "template": "software_project",
-    "confidence": 0.95,
+    "confidence": 1,
     "domain": "software",
     "docType": "Code Documentation"
   },
   "graphStructure": {
-    "cypher": "CREATE (doc:Document {\n      id: \"VectorDB Library Documentation\",\n      title: \"VectorDB Library Documentation\",\n      domain: \"software\",\n      doc_type: \"Code Documentation\"\n    })\nCREATE (e0:Module {name: \"Library\", description: \"Provides HNSW indexing functionality\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Class {name: \"VectorDB\", description: \"A vector database instance\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Function {name: \"new\", description: \"Create a new vector database instance\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Function {name: \"insert\", description: \"Insert a vector with metadata into the database\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Function {name: \"search\", description: \"Search for similar vectors in the database\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Function {name: \"delete\", description: \"Delete a vector by ID from the database\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Function {name: \"count\", description: \"Get the count of vectors in the database\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Dependency {name: \"anyhow\", description: \"Error handling library\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Dependency {name: \"serde\", description: \"Serialization and deserialization library\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Dependency {name: \"serde_json\", description: \"JSON serialization library\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Dependency {name: \"std::collections::HashMap\", description: \"Standard hash map implementation\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Dependency {name: \"std::path::Path\", description: \"Standard path handling\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:API {name: \"VectorDB API\", description: \"Public methods for vector database operations\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Database {name: \"VectorDB\", description: \"Vector database with HNSW indexing\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Documentation {name: \"Code Comments\", description: \"Inline documentation for functions and structs\"})\nCREATE (doc)-[:MENTIONS]->(e14)",
+    "cypher": "CREATE (doc:Document {\n      id: \"VectorDB Library Documentation\",\n      title: \"VectorDB Library Documentation\",\n      domain: \"software\",\n      doc_type: \"Code Documentation\"\n    })\nCREATE (e0:Module {name: \"Library\", description: \"Provides HNSW indexing functionality\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Class {name: \"VectorDB\", description: \"Vector database instance with storage, index, and metadata\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Function {name: \"new\", description: \"Create a new vector database instance\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Function {name: \"insert\", description: \"Insert a vector with ID and metadata into the database\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Function {name: \"search\", description: \"Search for similar vectors based on a query\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Function {name: \"delete\", description: \"Delete an entry by ID from the database\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Function {name: \"count\", description: \"Get the count of entries in the database\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Dependency {name: \"anyhow\", description: \"Error handling library\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Dependency {name: \"serde\", description: \"Serialization and deserialization framework\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Dependency {name: \"std::collections::HashMap\", description: \"Standard library hash map for key-value storage\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Dependency {name: \"std::path::Path\", description: \"Standard library path handling\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Dependency {name: \"serde_json\", description: \"JSON serialization and deserialization\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:API {name: \"storage::Storage\", description: \"Storage API for data persistence\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:API {name: \"hnsw::Index\", description: \"HNSW indexing API for vector operations\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Database {name: \"VectorDB\", description: \"Vector database handling storage and indexing\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Documentation {name: \"Library Documentation\", description: \"Documentation for the VectorDB library and its functions\"})\nCREATE (doc)-[:MENTIONS]->(e15)",
     "entities": [
       {
         "type": "Module",
@@ -20,7 +20,7 @@
         "type": "Class",
         "properties": {
           "name": "VectorDB",
-          "description": "A vector database instance"
+          "description": "Vector database instance with storage, index, and metadata"
         }
       },
       {
@@ -34,28 +34,28 @@
         "type": "Function",
         "properties": {
           "name": "insert",
-          "description": "Insert a vector with metadata into the database"
+          "description": "Insert a vector with ID and metadata into the database"
         }
       },
       {
         "type": "Function",
         "properties": {
           "name": "search",
-          "description": "Search for similar vectors in the database"
+          "description": "Search for similar vectors based on a query"
         }
       },
       {
         "type": "Function",
         "properties": {
           "name": "delete",
-          "description": "Delete a vector by ID from the database"
+          "description": "Delete an entry by ID from the database"
         }
       },
       {
         "type": "Function",
         "properties": {
           "name": "count",
-          "description": "Get the count of vectors in the database"
+          "description": "Get the count of entries in the database"
         }
       },
       {
@@ -69,49 +69,56 @@
         "type": "Dependency",
         "properties": {
           "name": "serde",
-          "description": "Serialization and deserialization library"
-        }
-      },
-      {
-        "type": "Dependency",
-        "properties": {
-          "name": "serde_json",
-          "description": "JSON serialization library"
+          "description": "Serialization and deserialization framework"
         }
       },
       {
         "type": "Dependency",
         "properties": {
           "name": "std::collections::HashMap",
-          "description": "Standard hash map implementation"
+          "description": "Standard library hash map for key-value storage"
         }
       },
       {
         "type": "Dependency",
         "properties": {
           "name": "std::path::Path",
-          "description": "Standard path handling"
+          "description": "Standard library path handling"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "serde_json",
+          "description": "JSON serialization and deserialization"
         }
       },
       {
         "type": "API",
         "properties": {
-          "name": "VectorDB API",
-          "description": "Public methods for vector database operations"
+          "name": "storage::Storage",
+          "description": "Storage API for data persistence"
+        }
+      },
+      {
+        "type": "API",
+        "properties": {
+          "name": "hnsw::Index",
+          "description": "HNSW indexing API for vector operations"
         }
       },
       {
         "type": "Database",
         "properties": {
           "name": "VectorDB",
-          "description": "Vector database with HNSW indexing"
+          "description": "Vector database handling storage and indexing"
         }
       },
       {
         "type": "Documentation",
         "properties": {
-          "name": "Code Comments",
-          "description": "Inline documentation for functions and structs"
+          "name": "Library Documentation",
+          "description": "Documentation for the VectorDB library and its functions"
         }
       }
     ],
@@ -138,6 +145,12 @@
         "type": "IMPORTS",
         "source": "Library",
         "target": "std::path::Path",
+        "properties": {}
+      },
+      {
+        "type": "IMPORTS",
+        "source": "Library",
+        "target": "serde_json",
         "properties": {}
       },
       {
@@ -191,115 +204,103 @@
       {
         "type": "CALLS",
         "source": "new",
-        "target": "storage::Storage::open",
+        "target": "storage::Storage",
         "properties": {}
       },
       {
         "type": "CALLS",
         "source": "new",
-        "target": "hnsw::Index::new",
+        "target": "hnsw::Index",
         "properties": {}
       },
       {
         "type": "CALLS",
         "source": "insert",
-        "target": "hnsw::Index::insert",
+        "target": "hnsw::Index",
         "properties": {}
       },
       {
         "type": "CALLS",
         "source": "insert",
-        "target": "storage::Storage::put",
+        "target": "storage::Storage",
         "properties": {}
       },
       {
         "type": "CALLS",
         "source": "search",
-        "target": "hnsw::Index::search",
+        "target": "hnsw::Index",
         "properties": {}
       },
       {
         "type": "CALLS",
         "source": "delete",
-        "target": "hnsw::Index::remove",
+        "target": "hnsw::Index",
         "properties": {}
       },
       {
         "type": "CALLS",
         "source": "delete",
-        "target": "storage::Storage::delete",
-        "properties": {}
-      },
-      {
-        "type": "EXPOSES",
-        "source": "VectorDB API",
-        "target": "new",
-        "properties": {}
-      },
-      {
-        "type": "EXPOSES",
-        "source": "VectorDB API",
-        "target": "insert",
-        "properties": {}
-      },
-      {
-        "type": "EXPOSES",
-        "source": "VectorDB API",
-        "target": "search",
-        "properties": {}
-      },
-      {
-        "type": "EXPOSES",
-        "source": "VectorDB API",
-        "target": "delete",
-        "properties": {}
-      },
-      {
-        "type": "EXPOSES",
-        "source": "VectorDB API",
-        "target": "count",
-        "properties": {}
-      },
-      {
-        "type": "DOCUMENTS",
-        "source": "Code Comments",
-        "target": "VectorDB",
-        "properties": {}
-      },
-      {
-        "type": "DOCUMENTS",
-        "source": "Code Comments",
-        "target": "new",
-        "properties": {}
-      },
-      {
-        "type": "DOCUMENTS",
-        "source": "Code Comments",
-        "target": "insert",
-        "properties": {}
-      },
-      {
-        "type": "DOCUMENTS",
-        "source": "Code Comments",
-        "target": "search",
-        "properties": {}
-      },
-      {
-        "type": "DOCUMENTS",
-        "source": "Code Comments",
-        "target": "delete",
-        "properties": {}
-      },
-      {
-        "type": "DOCUMENTS",
-        "source": "Code Comments",
-        "target": "count",
+        "target": "storage::Storage",
         "properties": {}
       },
       {
         "type": "ACCESSES",
         "source": "insert",
-        "target": "serde_json::Value",
+        "target": "VectorDB",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "search",
+        "target": "VectorDB",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "delete",
+        "target": "VectorDB",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "count",
+        "target": "VectorDB",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Library Documentation",
+        "target": "VectorDB",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Library Documentation",
+        "target": "new",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Library Documentation",
+        "target": "insert",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Library Documentation",
+        "target": "search",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Library Documentation",
+        "target": "delete",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Library Documentation",
+        "target": "count",
         "properties": {}
       }
     ]
@@ -312,7 +313,7 @@
       "module_name": "Library",
       "module_description": "Provides HNSW indexing functionality",
       "class_name": "VectorDB",
-      "class_description": "A vector database instance",
+      "class_description": "Vector database instance with storage, index, and metadata",
       "function_name": [
         "new",
         "insert",
@@ -322,31 +323,37 @@
       ],
       "function_description": [
         "Create a new vector database instance",
-        "Insert a vector with metadata into the database",
-        "Search for similar vectors in the database",
-        "Delete a vector by ID from the database",
-        "Get the count of vectors in the database"
+        "Insert a vector with ID and metadata into the database",
+        "Search for similar vectors based on a query",
+        "Delete an entry by ID from the database",
+        "Get the count of entries in the database"
       ],
       "dependency_name": [
         "anyhow",
         "serde",
-        "serde_json",
         "std::collections::HashMap",
-        "std::path::Path"
+        "std::path::Path",
+        "serde_json"
       ],
       "dependency_description": [
         "Error handling library",
-        "Serialization and deserialization library",
-        "JSON serialization library",
-        "Standard hash map implementation",
-        "Standard path handling"
+        "Serialization and deserialization framework",
+        "Standard library hash map for key-value storage",
+        "Standard library path handling",
+        "JSON serialization and deserialization"
       ],
-      "api_name": "VectorDB API",
-      "api_description": "Public methods for vector database operations",
+      "api_name": [
+        "storage::Storage",
+        "hnsw::Index"
+      ],
+      "api_description": [
+        "Storage API for data persistence",
+        "HNSW indexing API for vector operations"
+      ],
       "database_name": "VectorDB",
-      "database_description": "Vector database with HNSW indexing",
-      "documentation_name": "Code Comments",
-      "documentation_description": "Inline documentation for functions and structs"
+      "database_description": "Vector database handling storage and indexing",
+      "documentation_name": "Library Documentation",
+      "documentation_description": "Documentation for the VectorDB library and its functions"
     },
     "keywords": [
       "vector",
@@ -370,19 +377,19 @@
       "hashmap",
       "instance"
     ],
-    "summary": "This document describes a vector database library that provides high-performance vector storage and search capabilities using HNSW indexing. The library supports operations for creating database instances, inserting vectors with metadata, and performing similarity searches. It includes modules for storage, data models, and handlers to manage vector data efficiently."
+    "summary": "This document describes a vector database library that provides high-performance vector storage and similarity search capabilities using HNSW indexing. The library supports operations for creating database instances, inserting vectors with associated metadata, and performing similarity searches. It includes modules for storage handling, data models, and database operations with error handling and serialization support."
   },
   "cacheInfo": {
-    "cached": true,
+    "cached": false,
     "hash": "9222e88176510bc105ebcc3bc8f554a3978b7aa0c3073d4dfa9031084900ba3f"
   },
   "performance": {
-    "totalTimeMs": 1,
+    "totalTimeMs": 55444,
     "tokens": {
-      "input": 2229,
-      "output": 1750,
-      "total": 3979
+      "input": 643,
+      "output": 1683,
+      "total": 2326
     },
-    "costUsd": 0.0008020600000000001
+    "costUsd": 0.0005612600000000001
   }
 }

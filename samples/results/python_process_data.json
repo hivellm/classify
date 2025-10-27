@@ -2,18 +2,18 @@
   "file": "python/process_data.py",
   "classification": {
     "template": "software_project",
-    "confidence": 0.95,
+    "confidence": 1,
     "domain": "software",
-    "docType": "code_document"
+    "docType": "Python source code"
   },
   "graphStructure": {
-    "cypher": "CREATE (doc:Document {\n      id: \"Data Processing Pipeline\",\n      title: \"Data Processing Pipeline\",\n      domain: \"software\",\n      doc_type: \"code_document\"\n    })\nCREATE (e0:Module {name: \"main_module\", description: \"Primary module for data processing pipeline\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Class {name: \"DataProcessor\", description: \"Processes and embeds documents for search\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Function {name: \"__init__\", description: \"Initialize embedding model\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Function {name: \"load_data\", description: \"Load CSV or JSON file into DataFrame\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Function {name: \"generate_embeddings\", description: \"Generate embeddings for list of texts\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Function {name: \"upload_to_vectordb\", description: \"Upload documents to vector database\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Function {name: \"process_file\", description: \"Complete processing from input file to database upload\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Function {name: \"main\", description: \"Main entry point for the script\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Dependency {name: \"asyncio\", description: \"Asynchronous I/O support\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Dependency {name: \"pandas\", description: \"Data manipulation library\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Dependency {name: \"numpy\", description: \"Numerical computing library\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Dependency {name: \"typing\", description: \"Type hints support\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Dependency {name: \"pathlib\", description: \"Object-oriented filesystem paths\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Dependency {name: \"json\", description: \"JSON encoding and decoding\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Dependency {name: \"logging\", description: \"Logging framework\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Dependency {name: \"sentence_transformers\", description: \"Sentence embedding models\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:Dependency {name: \"httpx\", description: \"HTTP client library\"})\nCREATE (doc)-[:MENTIONS]->(e16)\nCREATE (e17:Configuration {name: \"VECTOR_DB_URL\", description: \"URL for the vector database\"})\nCREATE (doc)-[:MENTIONS]->(e17)\nCREATE (e18:Configuration {name: \"MODEL_NAME\", description: \"Name of the embedding model\"})\nCREATE (doc)-[:MENTIONS]->(e18)\nCREATE (e19:Configuration {name: \"BATCH_SIZE\", description: \"Batch size for embedding generation\"})\nCREATE (doc)-[:MENTIONS]->(e19)\nCREATE (e20:API {name: \"vector_db_api\", description: \"API for vector database interactions\"})\nCREATE (doc)-[:MENTIONS]->(e20)\nCREATE (e21:Database {name: \"vector_database\", description: \"Vector database for storing embeddings\"})\nCREATE (doc)-[:MENTIONS]->(e21)\nCREATE (e22:Script {name: \"main_script\", description: \"Executable script entry point\"})\nCREATE (doc)-[:MENTIONS]->(e22)\nCREATE (e23:Documentation {name: \"class_doc\", description: \"Class-level documentation for DataProcessor\"})\nCREATE (doc)-[:MENTIONS]->(e23)\nCREATE (e24:Documentation {name: \"function_doc\", description: \"Function-level documentation for various methods\"})\nCREATE (doc)-[:MENTIONS]->(e24)",
+    "cypher": "CREATE (doc:Document {\n      id: \"Data Processing Pipeline\",\n      title: \"Data Processing Pipeline\",\n      domain: \"software\",\n      doc_type: \"Python source code\"\n    })\nCREATE (e0:Module {name: \"main_module\", description: \"Main data processing pipeline module\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Class {name: \"DataProcessor\", description: \"Processes and embeds documents for search\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Function {name: \"__init__\", description: \"Initialize embedding model\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Function {name: \"load_data\", description: \"Load CSV or JSON file\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Function {name: \"generate_embeddings\", description: \"Generate embeddings for texts\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Function {name: \"upload_to_vectordb\", description: \"Upload documents to vector database\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Function {name: \"process_file\", description: \"Complete file processing pipeline\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Function {name: \"main\", description: \"Main entry point\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Dependency {name: \"asyncio\", description: \"Asynchronous I/O library\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Dependency {name: \"pandas\", description: \"Data manipulation library\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Dependency {name: \"numpy\", description: \"Numerical computing library\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Dependency {name: \"typing\", description: \"Type hints\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Dependency {name: \"pathlib\", description: \"File path handling\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Dependency {name: \"json\", description: \"JSON handling\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Dependency {name: \"logging\", description: \"Logging framework\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Dependency {name: \"sentence_transformers\", description: \"Sentence embedding models\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:Dependency {name: \"httpx\", description: \"HTTP client library\"})\nCREATE (doc)-[:MENTIONS]->(e16)\nCREATE (e17:Configuration {name: \"VECTOR_DB_URL\", value: \"http://localhost:8080\"})\nCREATE (doc)-[:MENTIONS]->(e17)\nCREATE (e18:Configuration {name: \"MODEL_NAME\", value: \"all-MiniLM-L6-v2\"})\nCREATE (doc)-[:MENTIONS]->(e18)\nCREATE (e19:Configuration {name: \"BATCH_SIZE\", value: \"32\"})\nCREATE (doc)-[:MENTIONS]->(e19)\nCREATE (e20:API {name: \"vector_db_api\", description: \"Vector database REST API\"})\nCREATE (doc)-[:MENTIONS]->(e20)\nCREATE (e21:Database {name: \"vector_database\", description: \"Vector database for storing embeddings\"})\nCREATE (doc)-[:MENTIONS]->(e21)\nCREATE (e22:Script {name: \"main_script\", description: \"Main execution script\"})\nCREATE (doc)-[:MENTIONS]->(e22)\nCREATE (e23:Documentation {name: \"class_docstring\", description: \"DataProcessor class documentation\"})\nCREATE (doc)-[:MENTIONS]->(e23)\nCREATE (e24:Documentation {name: \"method_docstrings\", description: \"Method documentation strings\"})\nCREATE (doc)-[:MENTIONS]->(e24)",
     "entities": [
       {
         "type": "Module",
         "properties": {
           "name": "main_module",
-          "description": "Primary module for data processing pipeline"
+          "description": "Main data processing pipeline module"
         }
       },
       {
@@ -34,14 +34,14 @@
         "type": "Function",
         "properties": {
           "name": "load_data",
-          "description": "Load CSV or JSON file into DataFrame"
+          "description": "Load CSV or JSON file"
         }
       },
       {
         "type": "Function",
         "properties": {
           "name": "generate_embeddings",
-          "description": "Generate embeddings for list of texts"
+          "description": "Generate embeddings for texts"
         }
       },
       {
@@ -55,21 +55,21 @@
         "type": "Function",
         "properties": {
           "name": "process_file",
-          "description": "Complete processing from input file to database upload"
+          "description": "Complete file processing pipeline"
         }
       },
       {
         "type": "Function",
         "properties": {
           "name": "main",
-          "description": "Main entry point for the script"
+          "description": "Main entry point"
         }
       },
       {
         "type": "Dependency",
         "properties": {
           "name": "asyncio",
-          "description": "Asynchronous I/O support"
+          "description": "Asynchronous I/O library"
         }
       },
       {
@@ -90,21 +90,21 @@
         "type": "Dependency",
         "properties": {
           "name": "typing",
-          "description": "Type hints support"
+          "description": "Type hints"
         }
       },
       {
         "type": "Dependency",
         "properties": {
           "name": "pathlib",
-          "description": "Object-oriented filesystem paths"
+          "description": "File path handling"
         }
       },
       {
         "type": "Dependency",
         "properties": {
           "name": "json",
-          "description": "JSON encoding and decoding"
+          "description": "JSON handling"
         }
       },
       {
@@ -132,28 +132,28 @@
         "type": "Configuration",
         "properties": {
           "name": "VECTOR_DB_URL",
-          "description": "URL for the vector database"
+          "value": "http://localhost:8080"
         }
       },
       {
         "type": "Configuration",
         "properties": {
           "name": "MODEL_NAME",
-          "description": "Name of the embedding model"
+          "value": "all-MiniLM-L6-v2"
         }
       },
       {
         "type": "Configuration",
         "properties": {
           "name": "BATCH_SIZE",
-          "description": "Batch size for embedding generation"
+          "value": "32"
         }
       },
       {
         "type": "API",
         "properties": {
           "name": "vector_db_api",
-          "description": "API for vector database interactions"
+          "description": "Vector database REST API"
         }
       },
       {
@@ -167,21 +167,21 @@
         "type": "Script",
         "properties": {
           "name": "main_script",
-          "description": "Executable script entry point"
+          "description": "Main execution script"
         }
       },
       {
         "type": "Documentation",
         "properties": {
-          "name": "class_doc",
-          "description": "Class-level documentation for DataProcessor"
+          "name": "class_docstring",
+          "description": "DataProcessor class documentation"
         }
       },
       {
         "type": "Documentation",
         "properties": {
-          "name": "function_doc",
-          "description": "Function-level documentation for various methods"
+          "name": "method_docstrings",
+          "description": "Method documentation strings"
         }
       }
     ],
@@ -296,20 +296,14 @@
       },
       {
         "type": "DEPENDS_ON",
-        "source": "load_data",
+        "source": "DataProcessor",
         "target": "pandas",
         "properties": {}
       },
       {
         "type": "DEPENDS_ON",
-        "source": "generate_embeddings",
+        "source": "DataProcessor",
         "target": "numpy",
-        "properties": {}
-      },
-      {
-        "type": "DEPENDS_ON",
-        "source": "upload_to_vectordb",
-        "target": "httpx",
         "properties": {}
       },
       {
@@ -337,48 +331,6 @@
         "properties": {}
       },
       {
-        "type": "IMPLEMENTS",
-        "source": "DataProcessor",
-        "target": "class_doc",
-        "properties": {}
-      },
-      {
-        "type": "IMPLEMENTS",
-        "source": "__init__",
-        "target": "function_doc",
-        "properties": {}
-      },
-      {
-        "type": "IMPLEMENTS",
-        "source": "load_data",
-        "target": "function_doc",
-        "properties": {}
-      },
-      {
-        "type": "IMPLEMENTS",
-        "source": "generate_embeddings",
-        "target": "function_doc",
-        "properties": {}
-      },
-      {
-        "type": "IMPLEMENTS",
-        "source": "upload_to_vectordb",
-        "target": "function_doc",
-        "properties": {}
-      },
-      {
-        "type": "IMPLEMENTS",
-        "source": "process_file",
-        "target": "function_doc",
-        "properties": {}
-      },
-      {
-        "type": "IMPLEMENTS",
-        "source": "main",
-        "target": "function_doc",
-        "properties": {}
-      },
-      {
         "type": "ACCESSES",
         "source": "upload_to_vectordb",
         "target": "vector_db_api",
@@ -386,8 +338,50 @@
       },
       {
         "type": "ACCESSES",
-        "source": "vector_db_api",
+        "source": "upload_to_vectordb",
         "target": "vector_database",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "class_docstring",
+        "target": "DataProcessor",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "method_docstrings",
+        "target": "__init__",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "method_docstrings",
+        "target": "load_data",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "method_docstrings",
+        "target": "generate_embeddings",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "method_docstrings",
+        "target": "upload_to_vectordb",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "method_docstrings",
+        "target": "process_file",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "method_docstrings",
+        "target": "main",
         "properties": {}
       },
       {
@@ -401,10 +395,10 @@
   "fulltextMetadata": {
     "title": "Data Processing Pipeline",
     "domain": "software",
-    "docType": "code_document",
+    "docType": "Python source code",
     "extractedFields": {
       "module_name": "main_module",
-      "module_description": "Primary module for data processing pipeline",
+      "module_description": "Main data processing pipeline module",
       "class_name": "DataProcessor",
       "class_description": "Processes and embeds documents for search",
       "function_name": [
@@ -417,11 +411,11 @@
       ],
       "function_description": [
         "Initialize embedding model",
-        "Load CSV or JSON file into DataFrame",
-        "Generate embeddings for list of texts",
+        "Load CSV or JSON file",
+        "Generate embeddings for texts",
         "Upload documents to vector database",
-        "Complete processing from input file to database upload",
-        "Main entry point for the script"
+        "Complete file processing pipeline",
+        "Main entry point"
       ],
       "dependency_name": [
         "asyncio",
@@ -435,12 +429,12 @@
         "httpx"
       ],
       "dependency_description": [
-        "Asynchronous I/O support",
+        "Asynchronous I/O library",
         "Data manipulation library",
         "Numerical computing library",
-        "Type hints support",
-        "Object-oriented filesystem paths",
-        "JSON encoding and decoding",
+        "Type hints",
+        "File path handling",
+        "JSON handling",
         "Logging framework",
         "Sentence embedding models",
         "HTTP client library"
@@ -450,24 +444,24 @@
         "MODEL_NAME",
         "BATCH_SIZE"
       ],
-      "configuration_description": [
-        "URL for the vector database",
-        "Name of the embedding model",
-        "Batch size for embedding generation"
+      "configuration_value": [
+        "http://localhost:8080",
+        "all-MiniLM-L6-v2",
+        "32"
       ],
       "api_name": "vector_db_api",
-      "api_description": "API for vector database interactions",
+      "api_description": "Vector database REST API",
       "database_name": "vector_database",
       "database_description": "Vector database for storing embeddings",
       "script_name": "main_script",
-      "script_description": "Executable script entry point",
+      "script_description": "Main execution script",
       "documentation_name": [
-        "class_doc",
-        "function_doc"
+        "class_docstring",
+        "method_docstrings"
       ],
       "documentation_description": [
-        "Class-level documentation for DataProcessor",
-        "Function-level documentation for various methods"
+        "DataProcessor class documentation",
+        "Method documentation strings"
       ]
     },
     "keywords": [
@@ -492,19 +486,19 @@
       "json",
       "logging"
     ],
-    "summary": "This document describes a data processing pipeline that loads user data from CSV or JSON files, generates vector embeddings using a sentence transformer model, and stores them in a vector database. The system processes data in batches and includes logging, configuration management, and asynchronous operations for database uploads. The pipeline is designed for vector search applications with configurable model parameters and batch processing capabilities."
+    "summary": "This document describes a data processing pipeline that loads user data from CSV or JSON files, generates vector embeddings using a sentence transformer model, and stores them in a vector database. The system processes data in batches and includes logging, configuration management, and async capabilities for database operations. The pipeline is designed for vector search applications with configurable model parameters and batch processing."
   },
   "cacheInfo": {
-    "cached": true,
+    "cached": false,
     "hash": "da5ea935dcc413759ef87a98a7b3ba7e7138276444cc57d20cca859517e60eac"
   },
   "performance": {
-    "totalTimeMs": 1,
+    "totalTimeMs": 70589,
     "tokens": {
-      "input": 2415,
-      "output": 2309,
-      "total": 4724
+      "input": 866,
+      "output": 2173,
+      "total": 3039
     },
-    "costUsd": 0.0009846200000000003
+    "costUsd": 0.00072968
   }
 }

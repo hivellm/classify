@@ -29,7 +29,7 @@ export class ClassifyClient {
 
   constructor(options: ClassifyOptions = {}) {
     this.templatesDir = options.templatesDir;
-    
+
     // Initialize with defaults, merging provided options
     this.options = {
       provider: options.provider ?? 'deepseek',

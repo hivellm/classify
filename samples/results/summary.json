@@ -1,13 +1,154 @@
 {
-  "timestamp": "2025-10-27T17:04:47.330Z",
-  "totalFiles": 0,
-  "successCount": 0,
+  "timestamp": "2025-10-27T17:25:52.926Z",
+  "totalFiles": 20,
+  "successCount": 20,
   "failCount": 0,
-  "totalCost": 0,
-  "totalTime": 0,
+  "totalCost": 0.013067460000000003,
+  "totalTime": 1224976,
   "cacheHits": 0,
-  "cacheHitRate": null,
-  "totalEntities": 0,
-  "totalRelationships": 0,
-  "files": []
+  "cacheHitRate": 0,
+  "totalEntities": 440,
+  "totalRelationships": 543,
+  "files": [
+    {
+      "file": "typescript/database.ts",
+      "docType": "TypeScript/JavaScript Code Document",
+      "entities": 11,
+      "relationships": 13,
+      "cached": false
+    },
+    {
+      "file": "typescript/UserController.ts",
+      "docType": "Class Documentation",
+      "entities": 11,
+      "relationships": 17,
+      "cached": false
+    },
+    {
+      "file": "typescript/AuthService.ts",
+      "docType": "Code Documentation",
+      "entities": 9,
+      "relationships": 13,
+      "cached": false
+    },
+    {
+      "file": "rust/model.rs",
+      "docType": "Rust Code Documentation",
+      "entities": 7,
+      "relationships": 11,
+      "cached": false
+    },
+    {
+      "file": "rust/lib.rs",
+      "docType": "Code Documentation",
+      "entities": 16,
+      "relationships": 30,
+      "cached": false
+    },
+    {
+      "file": "rust/handler.rs",
+      "docType": "Code Module",
+      "entities": 21,
+      "relationships": 33,
+      "cached": false
+    },
+    {
+      "file": "python/process_data.py",
+      "docType": "Python source code",
+      "entities": 25,
+      "relationships": 34,
+      "cached": false
+    },
+    {
+      "file": "python/api.py",
+      "docType": "code_structure_documentation",
+      "entities": 25,
+      "relationships": 42,
+      "cached": false
+    },
+    {
+      "file": "javascript/server.js",
+      "docType": "API Documentation",
+      "entities": 16,
+      "relationships": 26,
+      "cached": false
+    },
+    {
+      "file": "javascript/App.jsx",
+      "docType": "source_code",
+      "entities": 12,
+      "relationships": 23,
+      "cached": false
+    },
+    {
+      "file": "docs/README.md",
+      "docType": "software_architecture_document",
+      "entities": 42,
+      "relationships": 41,
+      "cached": false
+    },
+    {
+      "file": "docs/CONTRIBUTING.md",
+      "docType": "contributing_guide",
+      "entities": 37,
+      "relationships": 35,
+      "cached": false
+    },
+    {
+      "file": "docs/CHANGELOG.md",
+      "docType": "changelog",
+      "entities": 41,
+      "relationships": 23,
+      "cached": false
+    },
+    {
+      "file": "docs/ARCHITECTURE.md",
+      "docType": "architecture_document",
+      "entities": 32,
+      "relationships": 50,
+      "cached": false
+    },
+    {
+      "file": "docs/API.md",
+      "docType": "Documentation",
+      "entities": 19,
+      "relationships": 24,
+      "cached": false
+    },
+    {
+      "file": "config/test_auth.py",
+      "docType": "Test Suite Document",
+      "entities": 31,
+      "relationships": 55,
+      "cached": false
+    },
+    {
+      "file": "config/package.json",
+      "docType": "package.json",
+      "entities": 24,
+      "relationships": 16,
+      "cached": false
+    },
+    {
+      "file": "config/docker-compose.yml",
+      "docType": "docker-compose.yml",
+      "entities": 22,
+      "relationships": 21,
+      "cached": false
+    },
+    {
+      "file": "config/build.sh",
+      "docType": "Build Script",
+      "entities": 14,
+      "relationships": 17,
+      "cached": false
+    },
+    {
+      "file": "config/Cargo.toml",
+      "docType": "Cargo Manifest",
+      "entities": 25,
+      "relationships": 19,
+      "cached": false
+    }
+  ]
 }

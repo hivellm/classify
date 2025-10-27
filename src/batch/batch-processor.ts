@@ -75,7 +75,14 @@ export class BatchProcessor {
    * @returns Batch processing result
    */
   async processDirectory(directory: string, options: BatchOptions = {}): Promise<BatchResult> {
-    const { recursive = false, concurrency = 4, extensions, continueOnError = true, onBatchComplete, templateId } = options;
+    const {
+      recursive = false,
+      concurrency = 4,
+      extensions,
+      continueOnError = true,
+      onBatchComplete,
+      templateId,
+    } = options;
 
     const startTime = Date.now();
 
@@ -153,16 +160,19 @@ export class BatchProcessor {
       // Call incremental callback if provided
       if (onBatchComplete) {
         const successfulResults = batchResults
-          .filter((r): r is { filePath: string; success: true; result: ClassifyResult } => 
-            r.success && 'result' in r
+          .filter(
+            (r): r is { filePath: string; success: true; result: ClassifyResult } =>
+              r.success && 'result' in r
           )
-          .map(r => ({ filePath: r.filePath, result: r.result }));
-        
+          .map((r) => ({ filePath: r.filePath, result: r.result }));
+
         if (successfulResults.length > 0) {
           try {
             await onBatchComplete(successfulResults);
           } catch (error) {
-            console.warn(`  ⚠️  Batch callback failed: ${error instanceof Error ? error.message : error}`);
+            console.warn(
+              `  ⚠️  Batch callback failed: ${error instanceof Error ? error.message : error}`
+            );
           }
         }
       }
@@ -221,9 +231,11 @@ export class BatchProcessor {
       const batch = files.slice(i, i + concurrency);
       const batchNumber = Math.floor(i / concurrency) + 1;
       const totalBatches = Math.ceil(files.length / concurrency);
-      const progress = ((i + batch.length) / files.length * 100).toFixed(1);
+      const progress = (((i + batch.length) / files.length) * 100).toFixed(1);
 
-      console.log(`📦 Batch ${batchNumber}/${totalBatches} | Progress: ${i + batch.length}/${files.length} (${progress}%)`);
+      console.log(
+        `📦 Batch ${batchNumber}/${totalBatches} | Progress: ${i + batch.length}/${files.length} (${progress}%)`
+      );
 
       const batchPromises = batch.map(async (file) => {
         try {
@@ -263,24 +275,31 @@ export class BatchProcessor {
       results.push(...batchResults);
 
       // Show batch stats
-      const batchSuccess = batchResults.filter(r => r.success).length;
-      const batchCached = batchResults.filter(r => r.success && 'result' in r && r.result?.cacheInfo.cached).length;
-      console.log(`   ✅ ${batchSuccess}/${batch.length} classified | 📦 ${batchCached} from cache`);
+      const batchSuccess = batchResults.filter((r) => r.success).length;
+      const batchCached = batchResults.filter(
+        (r) => r.success && 'result' in r && r.result?.cacheInfo.cached
+      ).length;
+      console.log(
+        `   ✅ ${batchSuccess}/${batch.length} classified | 📦 ${batchCached} from cache`
+      );
 
       // Call incremental callback if provided
       if (onBatchComplete) {
         const successfulResults = batchResults
-          .filter((r): r is { filePath: string; success: true; result: ClassifyResult } => 
-            r.success && 'result' in r
+          .filter(
+            (r): r is { filePath: string; success: true; result: ClassifyResult } =>
+              r.success && 'result' in r
           )
-          .map(r => ({ filePath: r.filePath, result: r.result }));
-        
+          .map((r) => ({ filePath: r.filePath, result: r.result }));
+
         if (successfulResults.length > 0) {
           try {
             await onBatchComplete(successfulResults);
             console.log(`   📤 Sent ${successfulResults.length} to databases`);
           } catch (error) {
-            console.warn(`   ⚠️  Database insert failed: ${error instanceof Error ? error.message : error}`);
+            console.warn(
+              `   ⚠️  Database insert failed: ${error instanceof Error ? error.message : error}`
+            );
           }
         }
       }

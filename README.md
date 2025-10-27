@@ -2,8 +2,8 @@
 
 > Intelligent document classification for graph databases and full-text search using modern LLMs
 
-**Version:** 0.4.0 (Production Ready)  
-**Status:** 🚀 Production-Ready with Database Integrations - 88/89 Tests Passing
+**Version:** 0.4.1 (Production Ready)  
+**Status:** 🚀 Production-Ready with Database Integrations - 88/89 Tests Passing - All CI/CD Checks ✅
 
 ## Overview
 
@@ -505,7 +505,7 @@ MIT
 
 ---
 
-## 🎉 Current Implementation Status (v0.4.0)
+## 🎉 Current Implementation Status (v0.4.1)
 
 ### Completed ✅
 
@@ -612,10 +612,16 @@ MIT
 - ✅ **Multi-Language Ignore**: Java, C#, C++, Go, Elixir, Ruby, PHP, Rust support
 - ✅ **Production Tested**: 100-file Vectorizer project successfully classified and indexed
 
+### Completed in v0.4.1 ✅
+- ✅ **CI/CD Fixes**: All checks passing (Build, Lint, Codespell, Tests)
+- ✅ **Cache Bug Fixes**: Subdirectory handling in clear methods
+- ✅ **Code Quality**: Improved ESLint compliance and type safety
+- ✅ **Dependency Sync**: Updated package-lock.json to latest dependencies
+
 ### Next Steps 📋
 1. ⏳ Complete CLI commands (interactive mode, progress bars)
 2. ⏳ Add more database connectors (MongoDB, Qdrant, Pinecone)
-3. ⏳ Publish v0.4.0 to npm
+3. ⏳ Publish v0.4.1 to npm
 
 ---
 

@@ -17,7 +17,8 @@ export class Neo4jClient {
 
   constructor(config: Neo4jConfig) {
     this.config = config;
-    this.authHeader = 'Basic ' + Buffer.from(`${config.username}:${config.password}`).toString('base64');
+    this.authHeader =
+      'Basic ' + Buffer.from(`${config.username}:${config.password}`).toString('base64');
   }
 
   /**
@@ -30,9 +31,9 @@ export class Neo4jClient {
       const response = await fetch(`${this.config.url}/db/${database}/tx/commit`, {
         method: 'POST',
         headers: {
-          'Authorization': this.authHeader,
+          Authorization: this.authHeader,
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify({
           statements: [
@@ -45,12 +46,16 @@ export class Neo4jClient {
 
       if (!response.ok) {
         const errorText = await response.text();
-        throw new Error(`Neo4j connection failed: ${response.status} ${response.statusText} - ${errorText}`);
+        throw new Error(
+          `Neo4j connection failed: ${response.status} ${response.statusText} - ${errorText}`
+        );
       }
 
       console.log('✅ Connected to Neo4j');
     } catch (error) {
-      throw new Error(`Failed to connect to Neo4j: ${error instanceof Error ? error.message : error}`);
+      throw new Error(
+        `Failed to connect to Neo4j: ${error instanceof Error ? error.message : error}`
+      );
     }
   }
 
@@ -62,9 +67,9 @@ export class Neo4jClient {
     const response = await fetch(`${this.config.url}/db/${database}/tx/commit`, {
       method: 'POST',
       headers: {
-        'Authorization': this.authHeader,
+        Authorization: this.authHeader,
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        Accept: 'application/json',
       },
       body: JSON.stringify({
         statements: [
@@ -112,5 +117,3 @@ export class Neo4jClient {
     // No persistent connection to close
   }
 }
-
-

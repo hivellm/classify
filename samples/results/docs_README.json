@@ -2,123 +2,123 @@
   "file": "docs/README.md",
   "classification": {
     "template": "software_project",
-    "confidence": 0.95,
+    "confidence": 1,
     "domain": "software",
-    "docType": "software_architecture_documentation"
+    "docType": "software_architecture_document"
   },
   "graphStructure": {
-    "cypher": "CREATE (doc:Document {\n      id: \"Management System A full-stack user management system REST API React frontend\",\n      title: \"Management System A full-stack user management system REST API React frontend\",\n      domain: \"software\",\n      doc_type: \"software_architecture_documentation\"\n    })\nCREATE (e0:Module {name: \"Backend\", description: \"Handles server-side logic including authentication and database interactions\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Module {name: \"Frontend\", description: \"User interface built with React for interacting with the backend API\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Module {name: \"Processing\", description: \"Handles data processing tasks using Python and related libraries\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Module {name: \"Vector Database\", description: \"Manages high-performance vector search operations\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Class {name: \"AuthService\", description: \"Service for handling authentication logic\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Class {name: \"UserController\", description: \"Controller for managing user-related operations\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Dependency {name: \"TypeScript\", description: \"Programming language used for backend development\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Dependency {name: \"Node.js\", description: \"Runtime environment for the backend\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Dependency {name: \"Express.js\", description: \"Web framework for building the REST API\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Dependency {name: \"PostgreSQL\", description: \"Relational database for data storage\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Dependency {name: \"bcrypt\", description: \"Library for hashing passwords\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Dependency {name: \"JWT\", description: \"Library for token-based authentication\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Dependency {name: \"React\", description: \"Library for building the frontend UI\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Dependency {name: \"JavaScript\", description: \"Programming language used for client-side logic\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Dependency {name: \"Python\", description: \"Programming language used for processing tasks\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Dependency {name: \"FastAPI\", description: \"Framework used in the processing module\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:Dependency {name: \"Pandas\", description: \"Library for data manipulation\"})\nCREATE (doc)-[:MENTIONS]->(e16)\nCREATE (e17:Dependency {name: \"SentenceTransformers\", description: \"Library for text embeddings\"})\nCREATE (doc)-[:MENTIONS]->(e17)\nCREATE (e18:Dependency {name: \"Rust\", description: \"Programming language used for the vector database\"})\nCREATE (doc)-[:MENTIONS]->(e18)\nCREATE (e19:Dependency {name: \"HNSW\", description: \"Algorithm for approximate nearest neighbor search\"})\nCREATE (doc)-[:MENTIONS]->(e19)\nCREATE (e20:Dependency {name: \"Axum\", description: \"HTTP framework for the vector database\"})\nCREATE (doc)-[:MENTIONS]->(e20)\nCREATE (e21:Dependency {name: \"Helmet.js\", description: \"Middleware for security headers\"})\nCREATE (doc)-[:MENTIONS]->(e21)\nCREATE (e22:Dependency {name: \"Pydantic\", description: \"Library for input validation\"})\nCREATE (doc)-[:MENTIONS]->(e22)\nCREATE (e23:API {name: \"POST /api/register\", description: \"Endpoint for user registration\"})\nCREATE (doc)-[:MENTIONS]->(e23)\nCREATE (e24:API {name: \"POST /api/login\", description: \"Endpoint for user login and JWT token retrieval\"})\nCREATE (doc)-[:MENTIONS]->(e24)\nCREATE (e25:API {name: \"GET /api/profile\", description: \"Endpoint to get user profile (authentication required)\"})\nCREATE (doc)-[:MENTIONS]->(e25)\nCREATE (e26:API {name: \"PUT /api/profile\", description: \"Endpoint to update user profile (authentication required)\"})\nCREATE (doc)-[:MENTIONS]->(e26)\nCREATE (e27:API {name: \"POST /api/change-password\", description: \"Endpoint to change user password (authentication required)\"})\nCREATE (doc)-[:MENTIONS]->(e27)\nCREATE (e28:API {name: \"GET /api/users\", description: \"Endpoint to list users with pagination\"})\nCREATE (doc)-[:MENTIONS]->(e28)\nCREATE (e29:API {name: \"DELETE /api/users/:id\", description: \"Endpoint to delete a user (admin only)\"})\nCREATE (doc)-[:MENTIONS]->(e29)\nCREATE (e30:API {name: \"GET /api/health\", description: \"Endpoint for service health check\"})\nCREATE (doc)-[:MENTIONS]->(e30)\nCREATE (e31:Database {name: \"PostgreSQL\", description: \"Primary database for storing user data\"})\nCREATE (doc)-[:MENTIONS]->(e31)\nCREATE (e32:Database {name: \"Vector Database\", description: \"Database for high-performance vector search\"})\nCREATE (doc)-[:MENTIONS]->(e32)\nCREATE (e33:Configuration {name: \"bcrypt rounds\", description: \"Password hashing configuration with 10 rounds\"})\nCREATE (doc)-[:MENTIONS]->(e33)\nCREATE (e34:Configuration {name: \"JWT expiration\", description: \"Token expiration set to 24 hours\"})\nCREATE (doc)-[:MENTIONS]->(e34)\nCREATE (e35:Configuration {name: \"Rate limiting\", description: \"Applied on all endpoints for security\"})\nCREATE (doc)-[:MENTIONS]->(e35)\nCREATE (e36:Script {name: \"npm install\", description: \"Script to install project dependencies\"})\nCREATE (doc)-[:MENTIONS]->(e36)\nCREATE (e37:Script {name: \"createdb users\", description: \"Script to create the PostgreSQL database\"})\nCREATE (doc)-[:MENTIONS]->(e37)\nCREATE (e38:Script {name: \"psql users < schema.sql\", description: \"Script to set up database schema\"})\nCREATE (doc)-[:MENTIONS]->(e38)\nCREATE (e39:Script {name: \"npm run dev\", description: \"Script to start the backend server\"})\nCREATE (doc)-[:MENTIONS]->(e39)\nCREATE (e40:Script {name: \"npm run dev:client\", description: \"Script to start the frontend development server\"})\nCREATE (doc)-[:MENTIONS]->(e40)\nCREATE (e41:Documentation {name: \"Quick Start\", description: \"Documentation for setting up and running the project\"})\nCREATE (doc)-[:MENTIONS]->(e41)\nCREATE (e42:Documentation {name: \"API Endpoints\", description: \"Documentation listing all available API endpoints\"})\nCREATE (doc)-[:MENTIONS]->(e42)\nCREATE (e43:Documentation {name: \"Architecture\", description: \"Documentation describing the system architecture\"})\nCREATE (doc)-[:MENTIONS]->(e43)\nCREATE (e44:Documentation {name: \"Security\", description: \"Documentation on security measures and configurations\"})\nCREATE (doc)-[:MENTIONS]->(e44)\nCREATE (e45:Documentation {name: \"License\", description: \"MIT license documentation\"})\nCREATE (doc)-[:MENTIONS]->(e45)",
+    "cypher": "CREATE (doc:Document {\n      id: \"Management System A full-stack user management system REST API React frontend\",\n      title: \"Management System A full-stack user management system REST API React frontend\",\n      domain: \"software\",\n      doc_type: \"software_architecture_document\"\n    })\nCREATE (e0:Module {name: \"Backend\", description: \"Handles server-side logic including authentication and user management\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Module {name: \"Frontend\", description: \"React-based user interface for interacting with the system\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Module {name: \"Processing\", description: \"Python-based module for data processing and text embeddings\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Module {name: \"Vector Database\", description: \"Rust-based module for high-performance vector search\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Class {name: \"AuthService\", description: \"Handles authentication logic\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Class {name: \"UserController\", description: \"Manages user-related operations\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Dependency {name: \"TypeScript\", description: \"Programming language used for backend\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Dependency {name: \"Node.js\", description: \"Runtime environment for backend\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Dependency {name: \"Express.js\", description: \"Web framework for backend\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Dependency {name: \"PostgreSQL\", description: \"Database for storage\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Dependency {name: \"bcrypt\", description: \"Library for password hashing\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Dependency {name: \"JWT\", description: \"Token-based authentication\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Dependency {name: \"React\", description: \"UI library for frontend\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Dependency {name: \"JavaScript\", description: \"Programming language for frontend\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Dependency {name: \"Python\", description: \"Programming language for processing\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Dependency {name: \"FastAPI\", description: \"Web framework for processing\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:Dependency {name: \"Pandas\", description: \"Library for data manipulation\"})\nCREATE (doc)-[:MENTIONS]->(e16)\nCREATE (e17:Dependency {name: \"SentenceTransformers\", description: \"Library for text embeddings\"})\nCREATE (doc)-[:MENTIONS]->(e17)\nCREATE (e18:Dependency {name: \"Rust\", description: \"Programming language for vector database\"})\nCREATE (doc)-[:MENTIONS]->(e18)\nCREATE (e19:Dependency {name: \"HNSW\", description: \"Algorithm for approximate nearest neighbor search\"})\nCREATE (doc)-[:MENTIONS]->(e19)\nCREATE (e20:Dependency {name: \"Axum\", description: \"HTTP framework for vector database\"})\nCREATE (doc)-[:MENTIONS]->(e20)\nCREATE (e21:API {name: \"POST /api/register\", description: \"Register new user\"})\nCREATE (doc)-[:MENTIONS]->(e21)\nCREATE (e22:API {name: \"POST /api/login\", description: \"Login and get JWT token\"})\nCREATE (doc)-[:MENTIONS]->(e22)\nCREATE (e23:API {name: \"GET /api/profile\", description: \"Get user profile (auth required)\"})\nCREATE (doc)-[:MENTIONS]->(e23)\nCREATE (e24:API {name: \"PUT /api/profile\", description: \"Update profile (auth required)\"})\nCREATE (doc)-[:MENTIONS]->(e24)\nCREATE (e25:API {name: \"POST /api/change-password\", description: \"Change password (auth required)\"})\nCREATE (doc)-[:MENTIONS]->(e25)\nCREATE (e26:API {name: \"GET /api/users\", description: \"List users (paginated)\"})\nCREATE (doc)-[:MENTIONS]->(e26)\nCREATE (e27:API {name: \"DELETE /api/users/:id\", description: \"Delete user (admin only)\"})\nCREATE (doc)-[:MENTIONS]->(e27)\nCREATE (e28:API {name: \"GET /api/health\", description: \"Service health check\"})\nCREATE (doc)-[:MENTIONS]->(e28)\nCREATE (e29:Database {name: \"PostgreSQL\", description: \"Primary database for user data storage\"})\nCREATE (doc)-[:MENTIONS]->(e29)\nCREATE (e30:Configuration {name: \"bcrypt rounds\", description: \"10 rounds for password hashing\"})\nCREATE (doc)-[:MENTIONS]->(e30)\nCREATE (e31:Configuration {name: \"JWT expiration\", description: \"Tokens expire in 24 hours\"})\nCREATE (doc)-[:MENTIONS]->(e31)\nCREATE (e32:Script {name: \"npm install\", description: \"Install dependencies\"})\nCREATE (doc)-[:MENTIONS]->(e32)\nCREATE (e33:Script {name: \"createdb users\", description: \"Setup database\"})\nCREATE (doc)-[:MENTIONS]->(e33)\nCREATE (e34:Script {name: \"psql users < schema.sql\", description: \"Initialize database schema\"})\nCREATE (doc)-[:MENTIONS]->(e34)\nCREATE (e35:Script {name: \"npm run dev\", description: \"Start server\"})\nCREATE (doc)-[:MENTIONS]->(e35)\nCREATE (e36:Script {name: \"npm run dev:client\", description: \"Start frontend\"})\nCREATE (doc)-[:MENTIONS]->(e36)\nCREATE (e37:Documentation {name: \"Quick Start\", description: \"Instructions for setting up and running the system\"})\nCREATE (doc)-[:MENTIONS]->(e37)\nCREATE (e38:Documentation {name: \"API Endpoints\", description: \"List of available API endpoints\"})\nCREATE (doc)-[:MENTIONS]->(e38)\nCREATE (e39:Documentation {name: \"Architecture\", description: \"Diagram and description of system architecture\"})\nCREATE (doc)-[:MENTIONS]->(e39)\nCREATE (e40:Documentation {name: \"Security\", description: \"Details on security measures\"})\nCREATE (doc)-[:MENTIONS]->(e40)\nCREATE (e41:Documentation {name: \"License\", description: \"MIT license information\"})\nCREATE (doc)-[:MENTIONS]->(e41)",
     "entities": [
       {
         "type": "Module",
         "properties": {
           "name": "Backend",
-          "description": "Handles server-side logic including authentication and database interactions"
+          "description": "Handles server-side logic including authentication and user management"
         }
       },
       {
         "type": "Module",
         "properties": {
           "name": "Frontend",
-          "description": "User interface built with React for interacting with the backend API"
+          "description": "React-based user interface for interacting with the system"
         }
       },
       {
         "type": "Module",
         "properties": {
           "name": "Processing",
-          "description": "Handles data processing tasks using Python and related libraries"
+          "description": "Python-based module for data processing and text embeddings"
         }
       },
       {
         "type": "Module",
         "properties": {
           "name": "Vector Database",
-          "description": "Manages high-performance vector search operations"
+          "description": "Rust-based module for high-performance vector search"
         }
       },
       {
         "type": "Class",
         "properties": {
           "name": "AuthService",
-          "description": "Service for handling authentication logic"
+          "description": "Handles authentication logic"
         }
       },
       {
         "type": "Class",
         "properties": {
           "name": "UserController",
-          "description": "Controller for managing user-related operations"
+          "description": "Manages user-related operations"
         }
       },
       {
         "type": "Dependency",
         "properties": {
           "name": "TypeScript",
-          "description": "Programming language used for backend development"
+          "description": "Programming language used for backend"
         }
       },
       {
         "type": "Dependency",
         "properties": {
           "name": "Node.js",
-          "description": "Runtime environment for the backend"
+          "description": "Runtime environment for backend"
         }
       },
       {
         "type": "Dependency",
         "properties": {
           "name": "Express.js",
-          "description": "Web framework for building the REST API"
+          "description": "Web framework for backend"
         }
       },
       {
         "type": "Dependency",
         "properties": {
           "name": "PostgreSQL",
-          "description": "Relational database for data storage"
+          "description": "Database for storage"
         }
       },
       {
         "type": "Dependency",
         "properties": {
           "name": "bcrypt",
-          "description": "Library for hashing passwords"
+          "description": "Library for password hashing"
         }
       },
       {
         "type": "Dependency",
         "properties": {
           "name": "JWT",
-          "description": "Library for token-based authentication"
+          "description": "Token-based authentication"
         }
       },
       {
         "type": "Dependency",
         "properties": {
           "name": "React",
-          "description": "Library for building the frontend UI"
+          "description": "UI library for frontend"
         }
       },
       {
         "type": "Dependency",
         "properties": {
           "name": "JavaScript",
-          "description": "Programming language used for client-side logic"
+          "description": "Programming language for frontend"
         }
       },
       {
         "type": "Dependency",
         "properties": {
           "name": "Python",
-          "description": "Programming language used for processing tasks"
+          "description": "Programming language for processing"
         }
       },
       {
         "type": "Dependency",
         "properties": {
           "name": "FastAPI",
-          "description": "Framework used in the processing module"
+          "description": "Web framework for processing"
         }
       },
       {
@@ -139,7 +139,7 @@
         "type": "Dependency",
         "properties": {
           "name": "Rust",
-          "description": "Programming language used for the vector database"
+          "description": "Programming language for vector database"
         }
       },
       {
@@ -153,198 +153,158 @@
         "type": "Dependency",
         "properties": {
           "name": "Axum",
-          "description": "HTTP framework for the vector database"
-        }
-      },
-      {
-        "type": "Dependency",
-        "properties": {
-          "name": "Helmet.js",
-          "description": "Middleware for security headers"
-        }
-      },
-      {
-        "type": "Dependency",
-        "properties": {
-          "name": "Pydantic",
-          "description": "Library for input validation"
+          "description": "HTTP framework for vector database"
         }
       },
       {
         "type": "API",
         "properties": {
           "name": "POST /api/register",
-          "description": "Endpoint for user registration"
+          "description": "Register new user"
         }
       },
       {
         "type": "API",
         "properties": {
           "name": "POST /api/login",
-          "description": "Endpoint for user login and JWT token retrieval"
+          "description": "Login and get JWT token"
         }
       },
       {
         "type": "API",
         "properties": {
           "name": "GET /api/profile",
-          "description": "Endpoint to get user profile (authentication required)"
+          "description": "Get user profile (auth required)"
         }
       },
       {
         "type": "API",
         "properties": {
           "name": "PUT /api/profile",
-          "description": "Endpoint to update user profile (authentication required)"
+          "description": "Update profile (auth required)"
         }
       },
       {
         "type": "API",
         "properties": {
           "name": "POST /api/change-password",
-          "description": "Endpoint to change user password (authentication required)"
+          "description": "Change password (auth required)"
         }
       },
       {
         "type": "API",
         "properties": {
           "name": "GET /api/users",
-          "description": "Endpoint to list users with pagination"
+          "description": "List users (paginated)"
         }
       },
       {
         "type": "API",
         "properties": {
           "name": "DELETE /api/users/:id",
-          "description": "Endpoint to delete a user (admin only)"
+          "description": "Delete user (admin only)"
         }
       },
       {
         "type": "API",
         "properties": {
           "name": "GET /api/health",
-          "description": "Endpoint for service health check"
+          "description": "Service health check"
         }
       },
       {
         "type": "Database",
         "properties": {
           "name": "PostgreSQL",
-          "description": "Primary database for storing user data"
-        }
-      },
-      {
-        "type": "Database",
-        "properties": {
-          "name": "Vector Database",
-          "description": "Database for high-performance vector search"
+          "description": "Primary database for user data storage"
         }
       },
       {
         "type": "Configuration",
         "properties": {
           "name": "bcrypt rounds",
-          "description": "Password hashing configuration with 10 rounds"
+          "description": "10 rounds for password hashing"
         }
       },
       {
         "type": "Configuration",
         "properties": {
           "name": "JWT expiration",
-          "description": "Token expiration set to 24 hours"
-        }
-      },
-      {
-        "type": "Configuration",
-        "properties": {
-          "name": "Rate limiting",
-          "description": "Applied on all endpoints for security"
+          "description": "Tokens expire in 24 hours"
         }
       },
       {
         "type": "Script",
         "properties": {
           "name": "npm install",
-          "description": "Script to install project dependencies"
+          "description": "Install dependencies"
         }
       },
       {
         "type": "Script",
         "properties": {
           "name": "createdb users",
-          "description": "Script to create the PostgreSQL database"
+          "description": "Setup database"
         }
       },
       {
         "type": "Script",
         "properties": {
           "name": "psql users < schema.sql",
-          "description": "Script to set up database schema"
+          "description": "Initialize database schema"
         }
       },
       {
         "type": "Script",
         "properties": {
           "name": "npm run dev",
-          "description": "Script to start the backend server"
+          "description": "Start server"
         }
       },
       {
         "type": "Script",
         "properties": {
           "name": "npm run dev:client",
-          "description": "Script to start the frontend development server"
+          "description": "Start frontend"
         }
       },
       {
         "type": "Documentation",
         "properties": {
           "name": "Quick Start",
-          "description": "Documentation for setting up and running the project"
+          "description": "Instructions for setting up and running the system"
         }
       },
       {
         "type": "Documentation",
         "properties": {
           "name": "API Endpoints",
-          "description": "Documentation listing all available API endpoints"
+          "description": "List of available API endpoints"
         }
       },
       {
         "type": "Documentation",
         "properties": {
           "name": "Architecture",
-          "description": "Documentation describing the system architecture"
+          "description": "Diagram and description of system architecture"
         }
       },
       {
         "type": "Documentation",
         "properties": {
           "name": "Security",
-          "description": "Documentation on security measures and configurations"
+          "description": "Details on security measures"
         }
       },
       {
         "type": "Documentation",
         "properties": {
           "name": "License",
-          "description": "MIT license documentation"
+          "description": "MIT license information"
         }
       }
     ],
     "relationships": [
-      {
-        "type": "CONTAINS",
-        "source": "Backend",
-        "target": "AuthService",
-        "properties": {}
-      },
-      {
-        "type": "CONTAINS",
-        "source": "Backend",
-        "target": "UserController",
-        "properties": {}
-      },
       {
         "type": "DEPENDS_ON",
         "source": "Backend",
@@ -436,6 +396,18 @@
         "properties": {}
       },
       {
+        "type": "CONTAINS",
+        "source": "Backend",
+        "target": "AuthService",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "Backend",
+        "target": "UserController",
+        "properties": {}
+      },
+      {
         "type": "EXPOSES",
         "source": "Backend",
         "target": "POST /api/register",
@@ -490,75 +462,93 @@
         "properties": {}
       },
       {
-        "type": "ACCESSES",
-        "source": "Processing",
-        "target": "Vector Database",
-        "properties": {}
-      },
-      {
-        "type": "BUILDS",
-        "source": "npm install",
-        "target": "Backend",
-        "properties": {}
-      },
-      {
-        "type": "BUILDS",
-        "source": "npm install",
-        "target": "Frontend",
-        "properties": {}
-      },
-      {
-        "type": "BUILDS",
-        "source": "createdb users",
-        "target": "PostgreSQL",
-        "properties": {}
-      },
-      {
-        "type": "BUILDS",
-        "source": "psql users < schema.sql",
-        "target": "PostgreSQL",
-        "properties": {}
-      },
-      {
-        "type": "BUILDS",
-        "source": "npm run dev",
-        "target": "Backend",
-        "properties": {}
-      },
-      {
-        "type": "BUILDS",
-        "source": "npm run dev:client",
-        "target": "Frontend",
+        "type": "DOCUMENTS",
+        "source": "Quick Start",
+        "target": "npm install",
         "properties": {}
       },
       {
         "type": "DOCUMENTS",
         "source": "Quick Start",
-        "target": "Management System A full-stack user management system REST API React frontend",
+        "target": "createdb users",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Quick Start",
+        "target": "psql users < schema.sql",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Quick Start",
+        "target": "npm run dev",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "Quick Start",
+        "target": "npm run dev:client",
         "properties": {}
       },
       {
         "type": "DOCUMENTS",
         "source": "API Endpoints",
-        "target": "Management System A full-stack user management system REST API React frontend",
+        "target": "POST /api/register",
         "properties": {}
       },
       {
         "type": "DOCUMENTS",
-        "source": "Architecture",
-        "target": "Management System A full-stack user management system REST API React frontend",
+        "source": "API Endpoints",
+        "target": "POST /api/login",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "API Endpoints",
+        "target": "GET /api/profile",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "API Endpoints",
+        "target": "PUT /api/profile",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "API Endpoints",
+        "target": "POST /api/change-password",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "API Endpoints",
+        "target": "GET /api/users",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "API Endpoints",
+        "target": "DELETE /api/users/:id",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "API Endpoints",
+        "target": "GET /api/health",
         "properties": {}
       },
       {
         "type": "DOCUMENTS",
         "source": "Security",
-        "target": "Management System A full-stack user management system REST API React frontend",
+        "target": "bcrypt rounds",
         "properties": {}
       },
       {
         "type": "DOCUMENTS",
-        "source": "License",
-        "target": "Management System A full-stack user management system REST API React frontend",
+        "source": "Security",
+        "target": "JWT expiration",
         "properties": {}
       }
     ]
@@ -566,7 +556,7 @@
   "fulltextMetadata": {
     "title": "Management System A full-stack user management system REST API React frontend",
     "domain": "software",
-    "docType": "software_architecture_documentation",
+    "docType": "software_architecture_document",
     "extractedFields": {
       "module_name": [
         "Backend",
@@ -575,18 +565,18 @@
         "Vector Database"
       ],
       "module_description": [
-        "Handles server-side logic including authentication and database interactions",
-        "User interface built with React for interacting with the backend API",
-        "Handles data processing tasks using Python and related libraries",
-        "Manages high-performance vector search operations"
+        "Handles server-side logic including authentication and user management",
+        "React-based user interface for interacting with the system",
+        "Python-based module for data processing and text embeddings",
+        "Rust-based module for high-performance vector search"
       ],
       "class_name": [
         "AuthService",
         "UserController"
       ],
       "class_description": [
-        "Service for handling authentication logic",
-        "Controller for managing user-related operations"
+        "Handles authentication logic",
+        "Manages user-related operations"
       ],
       "dependency_name": [
         "TypeScript",
@@ -603,28 +593,24 @@
         "SentenceTransformers",
         "Rust",
         "HNSW",
-        "Axum",
-        "Helmet.js",
-        "Pydantic"
+        "Axum"
       ],
       "dependency_description": [
-        "Programming language used for backend development",
-        "Runtime environment for the backend",
-        "Web framework for building the REST API",
-        "Relational database for data storage",
-        "Library for hashing passwords",
-        "Library for token-based authentication",
-        "Library for building the frontend UI",
-        "Programming language used for client-side logic",
-        "Programming language used for processing tasks",
-        "Framework used in the processing module",
+        "Programming language used for backend",
+        "Runtime environment for backend",
+        "Web framework for backend",
+        "Database for storage",
+        "Library for password hashing",
+        "Token-based authentication",
+        "UI library for frontend",
+        "Programming language for frontend",
+        "Programming language for processing",
+        "Web framework for processing",
         "Library for data manipulation",
         "Library for text embeddings",
-        "Programming language used for the vector database",
+        "Programming language for vector database",
         "Algorithm for approximate nearest neighbor search",
-        "HTTP framework for the vector database",
-        "Middleware for security headers",
-        "Library for input validation"
+        "HTTP framework for vector database"
       ],
       "api_name": [
         "POST /api/register",
@@ -637,32 +623,24 @@
         "GET /api/health"
       ],
       "api_description": [
-        "Endpoint for user registration",
-        "Endpoint for user login and JWT token retrieval",
-        "Endpoint to get user profile (authentication required)",
-        "Endpoint to update user profile (authentication required)",
-        "Endpoint to change user password (authentication required)",
-        "Endpoint to list users with pagination",
-        "Endpoint to delete a user (admin only)",
-        "Endpoint for service health check"
+        "Register new user",
+        "Login and get JWT token",
+        "Get user profile (auth required)",
+        "Update profile (auth required)",
+        "Change password (auth required)",
+        "List users (paginated)",
+        "Delete user (admin only)",
+        "Service health check"
       ],
-      "database_name": [
-        "PostgreSQL",
-        "Vector Database"
-      ],
-      "database_description": [
-        "Primary database for storing user data",
-        "Database for high-performance vector search"
-      ],
+      "database_name": "PostgreSQL",
+      "database_description": "Primary database for user data storage",
       "configuration_name": [
         "bcrypt rounds",
-        "JWT expiration",
-        "Rate limiting"
+        "JWT expiration"
       ],
       "configuration_description": [
-        "Password hashing configuration with 10 rounds",
-        "Token expiration set to 24 hours",
-        "Applied on all endpoints for security"
+        "10 rounds for password hashing",
+        "Tokens expire in 24 hours"
       ],
       "script_name": [
         "npm install",
@@ -672,11 +650,11 @@
         "npm run dev:client"
       ],
       "script_description": [
-        "Script to install project dependencies",
-        "Script to create the PostgreSQL database",
-        "Script to set up database schema",
-        "Script to start the backend server",
-        "Script to start the frontend development server"
+        "Install dependencies",
+        "Setup database",
+        "Initialize database schema",
+        "Start server",
+        "Start frontend"
       ],
       "documentation_name": [
         "Quick Start",
@@ -686,11 +664,11 @@
         "License"
       ],
       "documentation_description": [
-        "Documentation for setting up and running the project",
-        "Documentation listing all available API endpoints",
-        "Documentation describing the system architecture",
-        "Documentation on security measures and configurations",
-        "MIT license documentation"
+        "Instructions for setting up and running the system",
+        "List of available API endpoints",
+        "Diagram and description of system architecture",
+        "Details on security measures",
+        "MIT license information"
       ]
     },
     "keywords": [
@@ -715,19 +693,19 @@
       "required",
       "health"
     ],
-    "summary": "This document describes a full-stack user management system featuring user authentication with JWT tokens, password hashing, and a PostgreSQL database. The system includes a TypeScript/Express.js backend API, a React frontend, and additional data processing capabilities using Python with vector database integration. It provides comprehensive user management features including registration, login, profile management, and administrative functions through RESTful endpoints."
+    "summary": "This document describes a full-stack user management system featuring user authentication with JWT tokens, password hashing, and a PostgreSQL database. The system includes an Express.js backend with TypeScript, a React frontend, and additional data processing capabilities using Python and a Rust-based vector database. It provides complete user registration, login, profile management, and administrative functions through a REST API."
   },
   "cacheInfo": {
-    "cached": true,
+    "cached": false,
     "hash": "2d377c08d36e07b4f7833d90ba5f7fae5d53b50b54810356f6aad9c2fa1a0a08"
   },
   "performance": {
-    "totalTimeMs": 1,
+    "totalTimeMs": 97552,
     "tokens": {
-      "input": 2242,
-      "output": 3347,
-      "total": 5589
+      "input": 791,
+      "output": 3100,
+      "total": 3891
     },
-    "costUsd": 0.0012510400000000001
+    "costUsd": 0.00097874
   }
 }

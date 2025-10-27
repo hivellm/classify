@@ -2,12 +2,12 @@
   "file": "docs/ARCHITECTURE.md",
   "classification": {
     "template": "software_project",
-    "confidence": 0.95,
+    "confidence": 1,
     "domain": "software",
     "docType": "architecture_document"
   },
   "graphStructure": {
-    "cypher": "CREATE (doc:Document {\n      id: \"System Architecture\",\n      title: \"System Architecture\",\n      domain: \"software\",\n      doc_type: \"architecture_document\"\n    })\nCREATE (e0:Module {name: \"React App\", description: \"Frontend application built with React\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Function {name: \"useAuth\", description: \"Hook for authentication in React\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Module {name: \"LoginForm\", description: \"User interface component for login\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Module {name: \"Dashboard\", description: \"User interface component for dashboard\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Module {name: \"UserList\", description: \"User interface component for listing users\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Module {name: \"Express.js Server\", description: \"API server built with Express.js\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:API {name: \"POST /api/register\", description: \"Endpoint for user registration\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:API {name: \"POST /api/login\", description: \"Endpoint for user login\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:API {name: \"GET /api/profile\", description: \"Endpoint for retrieving user profile\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:API {name: \"GET /api/users\", description: \"Endpoint for retrieving user list\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Module {name: \"Authentication Middleware\", description: \"Middleware for JWT token verification\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Module {name: \"Rate Limiting Middleware\", description: \"Middleware for rate limiting requests\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Module {name: \"Error Handling Middleware\", description: \"Middleware for handling errors\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Module {name: \"UserController.ts\", description: \"Controller for user-related operations\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Module {name: \"AuthService.ts\", description: \"Service for authentication logic\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Function {name: \"register\", description: \"Function to register a new user\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:Function {name: \"login\", description: \"Function to log in a user\"})\nCREATE (doc)-[:MENTIONS]->(e16)\nCREATE (e17:Function {name: \"verifyToken\", description: \"Function to verify JWT tokens\"})\nCREATE (doc)-[:MENTIONS]->(e17)\nCREATE (e18:Function {name: \"changePassword\", description: \"Function to change user password\"})\nCREATE (doc)-[:MENTIONS]->(e18)\nCREATE (e19:Module {name: \"UserService.ts\", description: \"Service for user management logic\"})\nCREATE (doc)-[:MENTIONS]->(e19)\nCREATE (e20:Function {name: \"getProfile\", description: \"Function to get user profile\"})\nCREATE (doc)-[:MENTIONS]->(e20)\nCREATE (e21:Function {name: \"updateProfile\", description: \"Function to update user profile\"})\nCREATE (doc)-[:MENTIONS]->(e21)\nCREATE (e22:Function {name: \"deleteUser\", description: \"Function to delete a user\"})\nCREATE (doc)-[:MENTIONS]->(e22)\nCREATE (e23:Module {name: \"Database.ts\", description: \"Module for database connection pool\"})\nCREATE (doc)-[:MENTIONS]->(e23)\nCREATE (e24:Database {name: \"PostgreSQL\", description: \"Relational database for user data\"})\nCREATE (doc)-[:MENTIONS]->(e24)\nCREATE (e25:Module {name: \"users table\", description: \"Database table storing user information\"})\nCREATE (doc)-[:MENTIONS]->(e25)\nCREATE (e26:Module {name: \"sessions table\", description: \"Database table storing session information\"})\nCREATE (doc)-[:MENTIONS]->(e26)\nCREATE (e27:Module {name: \"Rust Vector DB\", description: \"Vector database for semantic search\"})\nCREATE (doc)-[:MENTIONS]->(e27)\nCREATE (e28:Module {name: \"Storage\", description: \"Storage module in Rust vector database\"})\nCREATE (doc)-[:MENTIONS]->(e28)\nCREATE (e29:Module {name: \"HNSW Index\", description: \"Index for efficient vector search\"})\nCREATE (doc)-[:MENTIONS]->(e29)\nCREATE (e30:Module {name: \"HTTP Handler\", description: \"Handler for HTTP requests in vector database\"})\nCREATE (doc)-[:MENTIONS]->(e30)\nCREATE (e31:API {name: \"POST /vectors\", description: \"Endpoint for inserting vectors\"})\nCREATE (doc)-[:MENTIONS]->(e31)\nCREATE (e32:API {name: \"POST /search\", description: \"Endpoint for similarity search\"})\nCREATE (doc)-[:MENTIONS]->(e32)\nCREATE (e33:API {name: \"DELETE /vectors/:id\", description: \"Endpoint for deleting vectors\"})\nCREATE (doc)-[:MENTIONS]->(e33)\nCREATE (e34:Module {name: \"Models\", description: \"Models module in Rust vector database\"})\nCREATE (doc)-[:MENTIONS]->(e34)\nCREATE (e35:Script {name: \"process_data.py\", description: \"Python script for data processing pipeline\"})\nCREATE (doc)-[:MENTIONS]->(e35)\nCREATE (e36:Function {name: \"Load Data\", description: \"Function to load data from CSV/JSON\"})\nCREATE (doc)-[:MENTIONS]->(e36)\nCREATE (e37:Function {name: \"Generate Embeddings\", description: \"Function to generate embeddings using SentenceTransformers\"})\nCREATE (doc)-[:MENTIONS]->(e37)\nCREATE (e38:Function {name: \"Upload to Vector DB\", description: \"Function to upload embeddings to vector database\"})\nCREATE (doc)-[:MENTIONS]->(e38)\nCREATE (e39:Configuration {name: \"HTTPS\", description: \"Transport security configuration\"})\nCREATE (doc)-[:MENTIONS]->(e39)\nCREATE (e40:Configuration {name: \"Helmet.js\", description: \"Security headers configuration\"})\nCREATE (doc)-[:MENTIONS]->(e40)\nCREATE (e41:Configuration {name: \"Rate Limiting\", description: \"Rate limiting configuration (100 req/15min per IP)\"})\nCREATE (doc)-[:MENTIONS]->(e41)\nCREATE (e42:Configuration {name: \"bcrypt\", description: \"Password hashing configuration with 10 salt rounds\"})\nCREATE (doc)-[:MENTIONS]->(e42)\nCREATE (e43:Configuration {name: \"JWT\", description: \"Token configuration with 24h expiry\"})\nCREATE (doc)-[:MENTIONS]->(e43)\nCREATE (e44:Module {name: \"Nginx\", description: \"Reverse proxy for deployment\"})\nCREATE (doc)-[:MENTIONS]->(e44)\nCREATE (e45:Module {name: \"React (SPA)\", description: \"Static files served in deployment\"})\nCREATE (doc)-[:MENTIONS]->(e45)\nCREATE (e46:Module {name: \"Express API\", description: \"Node.js server in deployment\"})\nCREATE (doc)-[:MENTIONS]->(e46)\nCREATE (e47:Module {name: \"Vector DB\", description: \"Rust service running on port 8080 in deployment\"})\nCREATE (doc)-[:MENTIONS]->(e47)\nCREATE (e48:Configuration {name: \"Connection Pooling\", description: \"Performance configuration with max 20 connections\"})\nCREATE (doc)-[:MENTIONS]->(e48)\nCREATE (e49:Configuration {name: \"JWT Caching\", description: \"Performance configuration to avoid repeated DB lookups\"})\nCREATE (doc)-[:MENTIONS]->(e49)\nCREATE (e50:Configuration {name: \"Batch Embedding Generation\", description: \"Performance configuration for efficient processing\"})\nCREATE (doc)-[:MENTIONS]->(e50)\nCREATE (e51:Configuration {name: \"Async/Await\", description: \"Performance configuration for non-blocking I/O\"})\nCREATE (doc)-[:MENTIONS]->(e51)\nCREATE (e52:Documentation {name: \"System Architecture Document\", description: \"Document describing the overall system architecture\"})\nCREATE (doc)-[:MENTIONS]->(e52)",
+    "cypher": "CREATE (doc:Document {\n      id: \"System Architecture\",\n      title: \"System Architecture\",\n      domain: \"software\",\n      doc_type: \"architecture_document\"\n    })\nCREATE (e0:Module {name: \"React App\", description: \"Frontend application built with React\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Module {name: \"Express.js Server\", description: \"API server built with Express.js\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Module {name: \"TypeScript Services\", description: \"Service layer containing business logic\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Module {name: \"Rust Vector DB\", description: \"Vector database service built in Rust\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Module {name: \"Python Pipeline\", description: \"Data processing pipeline in Python\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Function {name: \"register\", description: \"Handles user registration\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Function {name: \"login\", description: \"Handles user login\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Function {name: \"verifyToken\", description: \"Verifies JWT tokens\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Function {name: \"changePassword\", description: \"Changes user password\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Function {name: \"getProfile\", description: \"Retrieves user profile\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Function {name: \"updateProfile\", description: \"Updates user profile\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Function {name: \"deleteUser\", description: \"Deletes a user\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Class {name: \"UserController\", description: \"Controller for user-related operations\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Dependency {name: \"bcrypt\", description: \"Library for password hashing\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Dependency {name: \"JWT\", description: \"Library for JSON Web Tokens\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Dependency {name: \"SentenceTransformers\", description: \"Library for generating embeddings\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:Dependency {name: \"HNSW\", description: \"Index for efficient vector search\"})\nCREATE (doc)-[:MENTIONS]->(e16)\nCREATE (e17:Configuration {name: \"Rate Limiting\", description: \"100 requests per 15 minutes per IP\"})\nCREATE (doc)-[:MENTIONS]->(e17)\nCREATE (e18:Configuration {name: \"JWT Expiry\", description: \"24-hour token expiry\"})\nCREATE (doc)-[:MENTIONS]->(e18)\nCREATE (e19:Configuration {name: \"Connection Pooling\", description: \"Max 20 connections\"})\nCREATE (doc)-[:MENTIONS]->(e19)\nCREATE (e20:API {name: \"POST /api/register\", description: \"Endpoint for user registration\"})\nCREATE (doc)-[:MENTIONS]->(e20)\nCREATE (e21:API {name: \"POST /api/login\", description: \"Endpoint for user login\"})\nCREATE (doc)-[:MENTIONS]->(e21)\nCREATE (e22:API {name: \"GET /api/profile\", description: \"Endpoint for retrieving user profile\"})\nCREATE (doc)-[:MENTIONS]->(e22)\nCREATE (e23:API {name: \"GET /api/users\", description: \"Endpoint for retrieving user list\"})\nCREATE (doc)-[:MENTIONS]->(e23)\nCREATE (e24:API {name: \"POST /vectors\", description: \"Endpoint for inserting vectors\"})\nCREATE (doc)-[:MENTIONS]->(e24)\nCREATE (e25:API {name: \"POST /search\", description: \"Endpoint for vector similarity search\"})\nCREATE (doc)-[:MENTIONS]->(e25)\nCREATE (e26:API {name: \"DELETE /vectors/:id\", description: \"Endpoint for deleting vectors\"})\nCREATE (doc)-[:MENTIONS]->(e26)\nCREATE (e27:Database {name: \"PostgreSQL\", description: \"Relational database for user data\"})\nCREATE (doc)-[:MENTIONS]->(e27)\nCREATE (e28:Database {name: \"Rust Vector DB\", description: \"Vector database for semantic search\"})\nCREATE (doc)-[:MENTIONS]->(e28)\nCREATE (e29:Test {name: \"Authentication Tests\", description: \"Tests for authentication flows\"})\nCREATE (doc)-[:MENTIONS]->(e29)\nCREATE (e30:Script {name: \"process_data.py\", description: \"Python script for data processing\"})\nCREATE (doc)-[:MENTIONS]->(e30)\nCREATE (e31:Documentation {name: \"System Architecture Document\", description: \"Document describing the system architecture\"})\nCREATE (doc)-[:MENTIONS]->(e31)",
     "entities": [
       {
         "type": "Module",
@@ -17,38 +17,136 @@
         }
       },
       {
-        "type": "Function",
-        "properties": {
-          "name": "useAuth",
-          "description": "Hook for authentication in React"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "LoginForm",
-          "description": "User interface component for login"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "Dashboard",
-          "description": "User interface component for dashboard"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "UserList",
-          "description": "User interface component for listing users"
-        }
-      },
-      {
         "type": "Module",
         "properties": {
           "name": "Express.js Server",
           "description": "API server built with Express.js"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "TypeScript Services",
+          "description": "Service layer containing business logic"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "Rust Vector DB",
+          "description": "Vector database service built in Rust"
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "Python Pipeline",
+          "description": "Data processing pipeline in Python"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "register",
+          "description": "Handles user registration"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "login",
+          "description": "Handles user login"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "verifyToken",
+          "description": "Verifies JWT tokens"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "changePassword",
+          "description": "Changes user password"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "getProfile",
+          "description": "Retrieves user profile"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "updateProfile",
+          "description": "Updates user profile"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "deleteUser",
+          "description": "Deletes a user"
+        }
+      },
+      {
+        "type": "Class",
+        "properties": {
+          "name": "UserController",
+          "description": "Controller for user-related operations"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "bcrypt",
+          "description": "Library for password hashing"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "JWT",
+          "description": "Library for JSON Web Tokens"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "SentenceTransformers",
+          "description": "Library for generating embeddings"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "HNSW",
+          "description": "Index for efficient vector search"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "Rate Limiting",
+          "description": "100 requests per 15 minutes per IP"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "JWT Expiry",
+          "description": "24-hour token expiry"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "Connection Pooling",
+          "description": "Max 20 connections"
         }
       },
       {
@@ -80,153 +178,6 @@
         }
       },
       {
-        "type": "Module",
-        "properties": {
-          "name": "Authentication Middleware",
-          "description": "Middleware for JWT token verification"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "Rate Limiting Middleware",
-          "description": "Middleware for rate limiting requests"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "Error Handling Middleware",
-          "description": "Middleware for handling errors"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "UserController.ts",
-          "description": "Controller for user-related operations"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "AuthService.ts",
-          "description": "Service for authentication logic"
-        }
-      },
-      {
-        "type": "Function",
-        "properties": {
-          "name": "register",
-          "description": "Function to register a new user"
-        }
-      },
-      {
-        "type": "Function",
-        "properties": {
-          "name": "login",
-          "description": "Function to log in a user"
-        }
-      },
-      {
-        "type": "Function",
-        "properties": {
-          "name": "verifyToken",
-          "description": "Function to verify JWT tokens"
-        }
-      },
-      {
-        "type": "Function",
-        "properties": {
-          "name": "changePassword",
-          "description": "Function to change user password"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "UserService.ts",
-          "description": "Service for user management logic"
-        }
-      },
-      {
-        "type": "Function",
-        "properties": {
-          "name": "getProfile",
-          "description": "Function to get user profile"
-        }
-      },
-      {
-        "type": "Function",
-        "properties": {
-          "name": "updateProfile",
-          "description": "Function to update user profile"
-        }
-      },
-      {
-        "type": "Function",
-        "properties": {
-          "name": "deleteUser",
-          "description": "Function to delete a user"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "Database.ts",
-          "description": "Module for database connection pool"
-        }
-      },
-      {
-        "type": "Database",
-        "properties": {
-          "name": "PostgreSQL",
-          "description": "Relational database for user data"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "users table",
-          "description": "Database table storing user information"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "sessions table",
-          "description": "Database table storing session information"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "Rust Vector DB",
-          "description": "Vector database for semantic search"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "Storage",
-          "description": "Storage module in Rust vector database"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "HNSW Index",
-          "description": "Index for efficient vector search"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "HTTP Handler",
-          "description": "Handler for HTTP requests in vector database"
-        }
-      },
-      {
         "type": "API",
         "properties": {
           "name": "POST /vectors",
@@ -237,7 +188,7 @@
         "type": "API",
         "properties": {
           "name": "POST /search",
-          "description": "Endpoint for similarity search"
+          "description": "Endpoint for vector similarity search"
         }
       },
       {
@@ -248,136 +199,38 @@
         }
       },
       {
-        "type": "Module",
+        "type": "Database",
         "properties": {
-          "name": "Models",
-          "description": "Models module in Rust vector database"
+          "name": "PostgreSQL",
+          "description": "Relational database for user data"
+        }
+      },
+      {
+        "type": "Database",
+        "properties": {
+          "name": "Rust Vector DB",
+          "description": "Vector database for semantic search"
+        }
+      },
+      {
+        "type": "Test",
+        "properties": {
+          "name": "Authentication Tests",
+          "description": "Tests for authentication flows"
         }
       },
       {
         "type": "Script",
         "properties": {
           "name": "process_data.py",
-          "description": "Python script for data processing pipeline"
-        }
-      },
-      {
-        "type": "Function",
-        "properties": {
-          "name": "Load Data",
-          "description": "Function to load data from CSV/JSON"
-        }
-      },
-      {
-        "type": "Function",
-        "properties": {
-          "name": "Generate Embeddings",
-          "description": "Function to generate embeddings using SentenceTransformers"
-        }
-      },
-      {
-        "type": "Function",
-        "properties": {
-          "name": "Upload to Vector DB",
-          "description": "Function to upload embeddings to vector database"
-        }
-      },
-      {
-        "type": "Configuration",
-        "properties": {
-          "name": "HTTPS",
-          "description": "Transport security configuration"
-        }
-      },
-      {
-        "type": "Configuration",
-        "properties": {
-          "name": "Helmet.js",
-          "description": "Security headers configuration"
-        }
-      },
-      {
-        "type": "Configuration",
-        "properties": {
-          "name": "Rate Limiting",
-          "description": "Rate limiting configuration (100 req/15min per IP)"
-        }
-      },
-      {
-        "type": "Configuration",
-        "properties": {
-          "name": "bcrypt",
-          "description": "Password hashing configuration with 10 salt rounds"
-        }
-      },
-      {
-        "type": "Configuration",
-        "properties": {
-          "name": "JWT",
-          "description": "Token configuration with 24h expiry"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "Nginx",
-          "description": "Reverse proxy for deployment"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "React (SPA)",
-          "description": "Static files served in deployment"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "Express API",
-          "description": "Node.js server in deployment"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "Vector DB",
-          "description": "Rust service running on port 8080 in deployment"
-        }
-      },
-      {
-        "type": "Configuration",
-        "properties": {
-          "name": "Connection Pooling",
-          "description": "Performance configuration with max 20 connections"
-        }
-      },
-      {
-        "type": "Configuration",
-        "properties": {
-          "name": "JWT Caching",
-          "description": "Performance configuration to avoid repeated DB lookups"
-        }
-      },
-      {
-        "type": "Configuration",
-        "properties": {
-          "name": "Batch Embedding Generation",
-          "description": "Performance configuration for efficient processing"
-        }
-      },
-      {
-        "type": "Configuration",
-        "properties": {
-          "name": "Async/Await",
-          "description": "Performance configuration for non-blocking I/O"
+          "description": "Python script for data processing"
         }
       },
       {
         "type": "Documentation",
         "properties": {
           "name": "System Architecture Document",
-          "description": "Document describing the overall system architecture"
+          "description": "Document describing the system architecture"
         }
       }
     ],
@@ -385,151 +238,55 @@
       {
         "type": "CONTAINS",
         "source": "React App",
-        "target": "useAuth",
+        "target": "Authentication",
         "properties": {}
       },
       {
         "type": "CONTAINS",
         "source": "React App",
-        "target": "LoginForm",
+        "target": "User Interface Components",
         "properties": {}
       },
       {
         "type": "CONTAINS",
         "source": "React App",
-        "target": "Dashboard",
-        "properties": {}
-      },
-      {
-        "type": "CONTAINS",
-        "source": "React App",
-        "target": "UserList",
-        "properties": {}
-      },
-      {
-        "type": "CALLS",
-        "source": "React App",
-        "target": "fetch",
+        "target": "API Client",
         "properties": {}
       },
       {
         "type": "CONTAINS",
         "source": "Express.js Server",
-        "target": "POST /api/register",
+        "target": "Routes",
         "properties": {}
       },
       {
         "type": "CONTAINS",
         "source": "Express.js Server",
-        "target": "POST /api/login",
+        "target": "Middleware",
         "properties": {}
       },
       {
         "type": "CONTAINS",
         "source": "Express.js Server",
-        "target": "GET /api/profile",
+        "target": "Controllers",
         "properties": {}
       },
       {
         "type": "CONTAINS",
-        "source": "Express.js Server",
-        "target": "GET /api/users",
+        "source": "TypeScript Services",
+        "target": "AuthService.ts",
         "properties": {}
       },
       {
         "type": "CONTAINS",
-        "source": "Express.js Server",
-        "target": "Authentication Middleware",
+        "source": "TypeScript Services",
+        "target": "UserService.ts",
         "properties": {}
       },
       {
         "type": "CONTAINS",
-        "source": "Express.js Server",
-        "target": "Rate Limiting Middleware",
-        "properties": {}
-      },
-      {
-        "type": "CONTAINS",
-        "source": "Express.js Server",
-        "target": "Error Handling Middleware",
-        "properties": {}
-      },
-      {
-        "type": "CONTAINS",
-        "source": "Express.js Server",
-        "target": "UserController.ts",
-        "properties": {}
-      },
-      {
-        "type": "CONTAINS",
-        "source": "AuthService.ts",
-        "target": "register",
-        "properties": {}
-      },
-      {
-        "type": "CONTAINS",
-        "source": "AuthService.ts",
-        "target": "login",
-        "properties": {}
-      },
-      {
-        "type": "CONTAINS",
-        "source": "AuthService.ts",
-        "target": "verifyToken",
-        "properties": {}
-      },
-      {
-        "type": "CONTAINS",
-        "source": "AuthService.ts",
-        "target": "changePassword",
-        "properties": {}
-      },
-      {
-        "type": "CONTAINS",
-        "source": "UserService.ts",
-        "target": "getProfile",
-        "properties": {}
-      },
-      {
-        "type": "CONTAINS",
-        "source": "UserService.ts",
-        "target": "updateProfile",
-        "properties": {}
-      },
-      {
-        "type": "CONTAINS",
-        "source": "UserService.ts",
-        "target": "deleteUser",
-        "properties": {}
-      },
-      {
-        "type": "DEPENDS_ON",
-        "source": "AuthService.ts",
+        "source": "TypeScript Services",
         "target": "Database.ts",
-        "properties": {}
-      },
-      {
-        "type": "DEPENDS_ON",
-        "source": "UserService.ts",
-        "target": "Database.ts",
-        "properties": {}
-      },
-      {
-        "type": "ACCESSES",
-        "source": "Database.ts",
-        "target": "PostgreSQL",
-        "properties": {}
-      },
-      {
-        "type": "CONTAINS",
-        "source": "PostgreSQL",
-        "target": "users table",
-        "properties": {}
-      },
-      {
-        "type": "CONTAINS",
-        "source": "PostgreSQL",
-        "target": "sessions table",
         "properties": {}
       },
       {
@@ -541,31 +298,7 @@
       {
         "type": "CONTAINS",
         "source": "Rust Vector DB",
-        "target": "HNSW Index",
-        "properties": {}
-      },
-      {
-        "type": "CONTAINS",
-        "source": "Rust Vector DB",
         "target": "HTTP Handler",
-        "properties": {}
-      },
-      {
-        "type": "CONTAINS",
-        "source": "HTTP Handler",
-        "target": "POST /vectors",
-        "properties": {}
-      },
-      {
-        "type": "CONTAINS",
-        "source": "HTTP Handler",
-        "target": "POST /search",
-        "properties": {}
-      },
-      {
-        "type": "CONTAINS",
-        "source": "HTTP Handler",
-        "target": "DELETE /vectors/:id",
         "properties": {}
       },
       {
@@ -576,31 +309,145 @@
       },
       {
         "type": "CONTAINS",
-        "source": "process_data.py",
+        "source": "Python Pipeline",
         "target": "Load Data",
         "properties": {}
       },
       {
         "type": "CONTAINS",
-        "source": "process_data.py",
+        "source": "Python Pipeline",
         "target": "Generate Embeddings",
         "properties": {}
       },
       {
         "type": "CONTAINS",
-        "source": "process_data.py",
+        "source": "Python Pipeline",
         "target": "Upload to Vector DB",
         "properties": {}
       },
       {
-        "type": "CALLS",
-        "source": "Generate Embeddings",
+        "type": "DEPENDS_ON",
+        "source": "React App",
+        "target": "Express.js Server",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Express.js Server",
+        "target": "TypeScript Services",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "TypeScript Services",
+        "target": "PostgreSQL",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Python Pipeline",
+        "target": "Rust Vector DB",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "AuthService.ts",
+        "target": "bcrypt",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "AuthService.ts",
+        "target": "JWT",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Python Pipeline",
         "target": "SentenceTransformers",
         "properties": {}
       },
       {
+        "type": "DEPENDS_ON",
+        "source": "Rust Vector DB",
+        "target": "HNSW",
+        "properties": {}
+      },
+      {
         "type": "CALLS",
-        "source": "Upload to Vector DB",
+        "source": "register",
+        "target": "bcrypt",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "login",
+        "target": "bcrypt",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "verifyToken",
+        "target": "JWT",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "POST /api/register",
+        "target": "register",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "POST /api/login",
+        "target": "login",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "GET /api/profile",
+        "target": "getProfile",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "GET /api/users",
+        "target": "UserController",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "POST /vectors",
+        "target": "Storage",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "POST /search",
+        "target": "HNSW",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "DELETE /vectors/:id",
+        "target": "Storage",
+        "properties": {}
+      },
+      {
+        "type": "IMPLEMENTS",
+        "source": "UserController",
+        "target": "UserService.ts",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "TypeScript Services",
+        "target": "PostgreSQL",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "Python Pipeline",
         "target": "Rust Vector DB",
         "properties": {}
       },
@@ -630,68 +477,62 @@
       },
       {
         "type": "EXPOSES",
-        "source": "HTTP Handler",
+        "source": "Rust Vector DB",
         "target": "POST /vectors",
         "properties": {}
       },
       {
         "type": "EXPOSES",
-        "source": "HTTP Handler",
+        "source": "Rust Vector DB",
         "target": "POST /search",
         "properties": {}
       },
       {
         "type": "EXPOSES",
-        "source": "HTTP Handler",
+        "source": "Rust Vector DB",
         "target": "DELETE /vectors/:id",
         "properties": {}
       },
       {
-        "type": "DEPENDS_ON",
-        "source": "Authentication Middleware",
-        "target": "JWT",
-        "properties": {}
-      },
-      {
-        "type": "DEPENDS_ON",
-        "source": "AuthService.ts",
-        "target": "bcrypt",
-        "properties": {}
-      },
-      {
-        "type": "DEPENDS_ON",
-        "source": "System Architecture Document",
-        "target": "React App",
-        "properties": {}
-      },
-      {
-        "type": "DEPENDS_ON",
-        "source": "System Architecture Document",
-        "target": "Express.js Server",
-        "properties": {}
-      },
-      {
-        "type": "DEPENDS_ON",
-        "source": "System Architecture Document",
-        "target": "PostgreSQL",
-        "properties": {}
-      },
-      {
-        "type": "DEPENDS_ON",
-        "source": "System Architecture Document",
+        "type": "BUILDS",
+        "source": "process_data.py",
         "target": "Rust Vector DB",
-        "properties": {}
-      },
-      {
-        "type": "DEPENDS_ON",
-        "source": "System Architecture Document",
-        "target": "process_data.py",
         "properties": {}
       },
       {
         "type": "DOCUMENTS",
         "source": "System Architecture Document",
-        "target": "System Architecture Document",
+        "target": "React App",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "System Architecture Document",
+        "target": "Express.js Server",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "System Architecture Document",
+        "target": "TypeScript Services",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "System Architecture Document",
+        "target": "PostgreSQL",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "System Architecture Document",
+        "target": "Rust Vector DB",
+        "properties": {}
+      },
+      {
+        "type": "DOCUMENTS",
+        "source": "System Architecture Document",
+        "target": "Python Pipeline",
         "properties": {}
       }
     ]
@@ -703,79 +544,59 @@
     "extractedFields": {
       "module_name": [
         "React App",
-        "LoginForm",
-        "Dashboard",
-        "UserList",
         "Express.js Server",
-        "Authentication Middleware",
-        "Rate Limiting Middleware",
-        "Error Handling Middleware",
-        "UserController.ts",
-        "AuthService.ts",
-        "UserService.ts",
-        "Database.ts",
-        "users table",
-        "sessions table",
+        "TypeScript Services",
         "Rust Vector DB",
-        "Storage",
-        "HNSW Index",
-        "HTTP Handler",
-        "Models",
-        "Nginx",
-        "React (SPA)",
-        "Express API",
-        "Vector DB"
+        "Python Pipeline"
       ],
       "module_description": [
         "Frontend application built with React",
-        "User interface component for login",
-        "User interface component for dashboard",
-        "User interface component for listing users",
         "API server built with Express.js",
-        "Middleware for JWT token verification",
-        "Middleware for rate limiting requests",
-        "Middleware for handling errors",
-        "Controller for user-related operations",
-        "Service for authentication logic",
-        "Service for user management logic",
-        "Module for database connection pool",
-        "Database table storing user information",
-        "Database table storing session information",
-        "Vector database for semantic search",
-        "Storage module in Rust vector database",
-        "Index for efficient vector search",
-        "Handler for HTTP requests in vector database",
-        "Models module in Rust vector database",
-        "Reverse proxy for deployment",
-        "Static files served in deployment",
-        "Node.js server in deployment",
-        "Rust service running on port 8080 in deployment"
+        "Service layer containing business logic",
+        "Vector database service built in Rust",
+        "Data processing pipeline in Python"
       ],
       "function_name": [
-        "useAuth",
         "register",
         "login",
         "verifyToken",
         "changePassword",
         "getProfile",
         "updateProfile",
-        "deleteUser",
-        "Load Data",
-        "Generate Embeddings",
-        "Upload to Vector DB"
+        "deleteUser"
       ],
       "function_description": [
-        "Hook for authentication in React",
-        "Function to register a new user",
-        "Function to log in a user",
-        "Function to verify JWT tokens",
-        "Function to change user password",
-        "Function to get user profile",
-        "Function to update user profile",
-        "Function to delete a user",
-        "Function to load data from CSV/JSON",
-        "Function to generate embeddings using SentenceTransformers",
-        "Function to upload embeddings to vector database"
+        "Handles user registration",
+        "Handles user login",
+        "Verifies JWT tokens",
+        "Changes user password",
+        "Retrieves user profile",
+        "Updates user profile",
+        "Deletes a user"
+      ],
+      "class_name": "UserController",
+      "class_description": "Controller for user-related operations",
+      "dependency_name": [
+        "bcrypt",
+        "JWT",
+        "SentenceTransformers",
+        "HNSW"
+      ],
+      "dependency_description": [
+        "Library for password hashing",
+        "Library for JSON Web Tokens",
+        "Library for generating embeddings",
+        "Index for efficient vector search"
+      ],
+      "configuration_name": [
+        "Rate Limiting",
+        "JWT Expiry",
+        "Connection Pooling"
+      ],
+      "configuration_description": [
+        "100 requests per 15 minutes per IP",
+        "24-hour token expiry",
+        "Max 20 connections"
       ],
       "api_name": [
         "POST /api/register",
@@ -792,37 +613,23 @@
         "Endpoint for retrieving user profile",
         "Endpoint for retrieving user list",
         "Endpoint for inserting vectors",
-        "Endpoint for similarity search",
+        "Endpoint for vector similarity search",
         "Endpoint for deleting vectors"
       ],
-      "database_name": "PostgreSQL",
-      "database_description": "Relational database for user data",
+      "database_name": [
+        "PostgreSQL",
+        "Rust Vector DB"
+      ],
+      "database_description": [
+        "Relational database for user data",
+        "Vector database for semantic search"
+      ],
+      "test_name": "Authentication Tests",
+      "test_description": "Tests for authentication flows",
       "script_name": "process_data.py",
-      "script_description": "Python script for data processing pipeline",
-      "configuration_name": [
-        "HTTPS",
-        "Helmet.js",
-        "Rate Limiting",
-        "bcrypt",
-        "JWT",
-        "Connection Pooling",
-        "JWT Caching",
-        "Batch Embedding Generation",
-        "Async/Await"
-      ],
-      "configuration_description": [
-        "Transport security configuration",
-        "Security headers configuration",
-        "Rate limiting configuration (100 req/15min per IP)",
-        "Password hashing configuration with 10 salt rounds",
-        "Token configuration with 24h expiry",
-        "Performance configuration with max 20 connections",
-        "Performance configuration to avoid repeated DB lookups",
-        "Performance configuration for efficient processing",
-        "Performance configuration for non-blocking I/O"
-      ],
+      "script_description": "Python script for data processing",
       "documentation_name": "System Architecture Document",
-      "documentation_description": "Document describing the overall system architecture"
+      "documentation_description": "Document describing the system architecture"
     },
     "keywords": [
       "user",
@@ -846,19 +653,19 @@
       "storage",
       "hnsw"
     ],
-    "summary": "This document describes a multi-tier system architecture featuring a React frontend, Node.js/Python backend, PostgreSQL database, and Rust vector database. The system handles user authentication through JWT tokens and password hashing, with data flowing through dedicated service layers for user management and vector operations. It supports user registration, login, profile management, and includes a specialized vector search layer for similarity-based queries."
+    "summary": "This document outlines a multi-tier system architecture featuring a React frontend, Node.js/Python backend, PostgreSQL database, and Rust vector database. The system handles user authentication, profile management, and vector search operations through clearly defined API endpoints and services. Data flows through structured layers from client requests to backend processing, with Python handling data pipeline operations and Rust managing vector storage and similarity search."
   },
   "cacheInfo": {
-    "cached": true,
+    "cached": false,
     "hash": "fe09c549b5906a5a1f79c98e09558a0df7dfc382a2b87cedcbe7d8971048bd66"
   },
   "performance": {
-    "totalTimeMs": 1,
+    "totalTimeMs": 94742,
     "tokens": {
-      "input": 3170,
-      "output": 4014,
-      "total": 7184
+      "input": 1700,
+      "output": 3014,
+      "total": 4714
     },
-    "costUsd": 0.0015677200000000003
+    "costUsd": 0.00108192
   }
 }

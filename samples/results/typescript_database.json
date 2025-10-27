@@ -2,129 +2,113 @@
   "file": "typescript/database.ts",
   "classification": {
     "template": "software_project",
-    "confidence": 0.95,
+    "confidence": 1,
     "domain": "software",
-    "docType": "TypeScript/JavaScript Database Module"
+    "docType": "TypeScript/JavaScript Code Document"
   },
   "graphStructure": {
-    "cypher": "CREATE (doc:Document {\n      id: \"PostgreSQL Database Connection and Repository Implementation\",\n      title: \"PostgreSQL Database Connection and Repository Implementation\",\n      domain: \"software\",\n      doc_type: \"TypeScript/JavaScript Database Module\"\n    })\nCREATE (e0:Module {name: \"Database Module\", language: \"TypeScript/JavaScript\", purpose: \"Database connection management and repository pattern implementation\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Class {name: \"Connection\", access_modifier: \"public\", methods: \"constructor,query,transaction,close,healthCheck,create,findByEmail,findById,update,delete,create,findByToken,deleteExpired\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Class {name: \"UserRepository\", access_modifier: \"public\", methods: \"create,findByEmail,findById,update,delete\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Class {name: \"SessionRepository\", access_modifier: \"public\", methods: \"create,findByToken,deleteExpired\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Dependency {name: \"pg\", type: \"PostgreSQL client library\", version: \"unknown\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Dependency {name: \"util\", type: \"Node.js built-in module\", purpose: \"promisify function\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Database {name: \"PostgreSQL\", type: \"relational database\", tables: \"users,sessions\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Configuration {name: \"Pool Configuration\", max_connections: \"20\", idle_timeout: \"30000\", connection_timeout: \"2000\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Function {name: \"promisify\", source: \"util module\", purpose: \"Convert callback-based functions to promises\"})\nCREATE (doc)-[:MENTIONS]->(e8)",
+    "cypher": "CREATE (doc:Document {\n      id: \"PostgreSQL Database Connection and Repository Implementation\",\n      title: \"PostgreSQL Database Connection and Repository Implementation\",\n      domain: \"software\",\n      doc_type: \"TypeScript/JavaScript Code Document\"\n    })\nCREATE (e0:Module {name: \"util\", imports: \"promisify,Pool\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Module {name: \"pg\", imports: \"Pool\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Class {name: \"Connection\", description: \"PostgreSQL connection class with repository management\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Class {name: \"UserRepository\", description: \"User data repository with CRUD operations\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Class {name: \"SessionRepository\", description: \"Session data repository with token management\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Function {name: \"Execute SQL Query\", description: \"Executes SQL queries with parameters\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Function {name: \"Transaction\", description: \"Handles database transactions with rollback support\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Function {name: \"Close\", description: \"Closes the database connection pool\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Function {name: \"healthCheck\", description: \"Performs health check on database connection\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Database {name: \"PostgreSQL\", type: \"Relational Database\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Configuration {name: \"Pool Configuration\", properties: \"[object Object]\"})\nCREATE (doc)-[:MENTIONS]->(e10)",
     "entities": [
       {
         "type": "Module",
         "properties": {
-          "name": "Database Module",
-          "language": "TypeScript/JavaScript",
-          "purpose": "Database connection management and repository pattern implementation"
+          "name": "util",
+          "imports": [
+            "promisify",
+            [
+              "Pool"
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Module",
+        "properties": {
+          "name": "pg",
+          "imports": [
+            "Pool"
+          ]
         }
       },
       {
         "type": "Class",
         "properties": {
           "name": "Connection",
-          "access_modifier": "public",
-          "methods": [
-            "constructor",
-            "query",
-            "transaction",
-            "close",
-            "healthCheck",
-            [
-              "create",
-              "findByEmail",
-              "findById",
-              "update",
-              "delete"
-            ],
-            [
-              "create",
-              "findByToken",
-              "deleteExpired"
-            ]
-          ]
+          "description": "PostgreSQL connection class with repository management"
         }
       },
       {
         "type": "Class",
         "properties": {
           "name": "UserRepository",
-          "access_modifier": "public",
-          "methods": [
-            "create",
-            "findByEmail",
-            "findById",
-            "update",
-            "delete"
-          ]
+          "description": "User data repository with CRUD operations"
         }
       },
       {
         "type": "Class",
         "properties": {
           "name": "SessionRepository",
-          "access_modifier": "public",
-          "methods": [
-            "create",
-            "findByToken",
-            "deleteExpired"
-          ]
+          "description": "Session data repository with token management"
         }
       },
       {
-        "type": "Dependency",
+        "type": "Function",
         "properties": {
-          "name": "pg",
-          "type": "PostgreSQL client library",
-          "version": "unknown"
+          "name": "Execute SQL Query",
+          "description": "Executes SQL queries with parameters"
         }
       },
       {
-        "type": "Dependency",
+        "type": "Function",
         "properties": {
-          "name": "util",
-          "type": "Node.js built-in module",
-          "purpose": "promisify function"
+          "name": "Transaction",
+          "description": "Handles database transactions with rollback support"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "Close",
+          "description": "Closes the database connection pool"
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "healthCheck",
+          "description": "Performs health check on database connection"
         }
       },
       {
         "type": "Database",
         "properties": {
           "name": "PostgreSQL",
-          "type": "relational database",
-          "tables": [
-            "users",
-            "sessions"
-          ]
+          "type": "Relational Database"
         }
       },
       {
         "type": "Configuration",
         "properties": {
           "name": "Pool Configuration",
-          "max_connections": 20,
-          "idle_timeout": 30000,
-          "connection_timeout": 2000
-        }
-      },
-      {
-        "type": "Function",
-        "properties": {
-          "name": "promisify",
-          "source": "util module",
-          "purpose": "Convert callback-based functions to promises"
+          "properties": {
+            "max": 20,
+            "idleTimeoutMillis": 30000,
+            "connectionTimeoutMillis": 2000
+          }
         }
       }
     ],
     "relationships": [
       {
         "type": "IMPORTS",
-        "source": "Database Module",
-        "target": "pg",
+        "source": "Connection",
+        "target": "util",
         "properties": {}
       },
       {
         "type": "IMPORTS",
-        "source": "Database Module",
-        "target": "util",
+        "source": "Connection",
+        "target": "pg",
         "properties": {}
       },
       {
@@ -141,62 +125,56 @@
       },
       {
         "type": "DEPENDS_ON",
-        "source": "Connection",
-        "target": "pg",
-        "properties": {}
-      },
-      {
-        "type": "DEPENDS_ON",
         "source": "UserRepository",
-        "target": "pg",
+        "target": "PostgreSQL",
         "properties": {}
       },
       {
         "type": "DEPENDS_ON",
         "source": "SessionRepository",
-        "target": "pg",
+        "target": "PostgreSQL",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "Connection",
+        "target": "Pool Configuration",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "Execute SQL Query",
+        "target": "PostgreSQL",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "Transaction",
+        "target": "PostgreSQL",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "Close",
+        "target": "PostgreSQL",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "healthCheck",
+        "target": "Execute SQL Query",
         "properties": {}
       },
       {
         "type": "ACCESSES",
         "source": "UserRepository",
-        "target": "users table",
+        "target": "PostgreSQL",
         "properties": {}
       },
       {
         "type": "ACCESSES",
         "source": "SessionRepository",
-        "target": "sessions table",
-        "properties": {}
-      },
-      {
-        "type": "CALLS",
-        "source": "Connection",
-        "target": "Pool constructor",
-        "properties": {}
-      },
-      {
-        "type": "CALLS",
-        "source": "Connection",
-        "target": "UserRepository constructor",
-        "properties": {}
-      },
-      {
-        "type": "CALLS",
-        "source": "Connection",
-        "target": "SessionRepository constructor",
-        "properties": {}
-      },
-      {
-        "type": "IMPLEMENTS",
-        "source": "UserRepository",
-        "target": "CRUD operations",
-        "properties": {}
-      },
-      {
-        "type": "IMPLEMENTS",
-        "source": "SessionRepository",
-        "target": "Session management operations",
+        "target": "PostgreSQL",
         "properties": {}
       }
     ]
@@ -204,63 +182,48 @@
   "fulltextMetadata": {
     "title": "PostgreSQL Database Connection and Repository Implementation",
     "domain": "software",
-    "docType": "TypeScript/JavaScript Database Module",
+    "docType": "TypeScript/JavaScript Code Document",
     "extractedFields": {
-      "module_name": "Database Module",
-      "module_language": "TypeScript/JavaScript",
-      "module_purpose": "Database connection management and repository pattern implementation",
+      "module_name": [
+        "util",
+        "pg"
+      ],
+      "module_imports": [
+        "promisify",
+        [
+          "Pool"
+        ]
+      ],
       "class_name": [
         "Connection",
         "UserRepository",
         "SessionRepository"
       ],
-      "class_access_modifier": [
-        "public",
-        "public",
-        "public"
+      "class_description": [
+        "PostgreSQL connection class with repository management",
+        "User data repository with CRUD operations",
+        "Session data repository with token management"
       ],
-      "class_methods": [
-        "constructor",
-        "query",
-        "transaction",
-        "close",
-        "healthCheck",
-        [
-          "create",
-          "findByEmail",
-          "findById",
-          "update",
-          "delete"
-        ],
-        [
-          "create",
-          "findByToken",
-          "deleteExpired"
-        ]
+      "function_name": [
+        "Execute SQL Query",
+        "Transaction",
+        "Close",
+        "healthCheck"
       ],
-      "dependency_name": [
-        "pg",
-        "util"
+      "function_description": [
+        "Executes SQL queries with parameters",
+        "Handles database transactions with rollback support",
+        "Closes the database connection pool",
+        "Performs health check on database connection"
       ],
-      "dependency_type": [
-        "PostgreSQL client library",
-        "Node.js built-in module"
-      ],
-      "dependency_version": "unknown",
-      "dependency_purpose": "promisify function",
       "database_name": "PostgreSQL",
-      "database_type": "relational database",
-      "database_tables": [
-        "users",
-        "sessions"
-      ],
+      "database_type": "Relational Database",
       "configuration_name": "Pool Configuration",
-      "configuration_max_connections": 20,
-      "configuration_idle_timeout": 30000,
-      "configuration_connection_timeout": 2000,
-      "function_name": "promisify",
-      "function_source": "util module",
-      "function_purpose": "Convert callback-based functions to promises"
+      "configuration_properties": {
+        "max": 20,
+        "idleTimeoutMillis": 30000,
+        "connectionTimeoutMillis": 2000
+      }
     },
     "keywords": [
       "pool",
@@ -284,19 +247,19 @@
       "userrepository",
       "sessionrepository"
     ],
-    "summary": "This document presents a PostgreSQL database connection manager class that handles connection pooling, query execution, and transactions. It includes repository classes for users and sessions, and provides methods for database health checks and connection management. The implementation supports both direct queries and transactional operations with proper error handling and resource cleanup."
+    "summary": "This document defines a PostgreSQL database connection manager class that handles connection pooling, query execution, and transactions. It includes repository classes for users and sessions, and provides methods for health checks and connection management. The implementation supports both direct queries and transactional operations with proper error handling and resource cleanup."
   },
   "cacheInfo": {
-    "cached": true,
+    "cached": false,
     "hash": "98a73c3b4bd6baee27768fffc452d73e6eb65b1862b3d152f847589555d2af14"
   },
   "performance": {
-    "totalTimeMs": 7,
+    "totalTimeMs": 32481,
     "tokens": {
-      "input": 2489,
-      "output": 1051,
-      "total": 3540
+      "input": 872,
+      "output": 912,
+      "total": 1784
     },
-    "costUsd": 0.00064274
+    "costUsd": 0.00037744000000000005
   }
 }

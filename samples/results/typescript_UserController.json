@@ -2,32 +2,23 @@
   "file": "typescript/UserController.ts",
   "classification": {
     "template": "software_project",
-    "confidence": 0.95,
+    "confidence": 1,
     "domain": "software",
-    "docType": "TypeScript Class Definition"
+    "docType": "Class Documentation"
   },
   "graphStructure": {
-    "cypher": "CREATE (doc:Document {\n      id: \"UserController\",\n      title: \"UserController\",\n      domain: \"software\",\n      doc_type: \"TypeScript Class Definition\"\n    })\nCREATE (e0:Class {name: \"UserController\", access_modifier: \"public\", methods: \"register,login,getProfile,updateProfile,changePassword,register,login,updateProfile,getProfile\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Module {name: \"express\", imports: \"Request,Response,NextFunction,AuthService,UserService,ValidationError\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Module {name: \"./AuthService.js\", imports: \"AuthService\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Module {name: \"./UserService.js\", imports: \"UserService\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Module {name: \"./errors/ValidationError.js\", imports: \"ValidationError\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Class {name: \"AuthService\", methods: \"register,login\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Class {name: \"UserService\", methods: \"updateProfile,getProfile\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Class {name: \"ValidationError\", extends: \"Error\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Function {name: \"register\", http_method: \"POST\", endpoint: \"/api/users/register\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Function {name: \"login\", http_method: \"POST\", endpoint: \"/api/users/login\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Function {name: \"getProfile\", http_method: \"GET\", requires_auth: \"true\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Function {name: \"updateProfile\", http_method: \"PUT\", requires_auth: \"true\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Function {name: \"changePassword\", http_method: \"POST\", requires_auth: \"true\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:API {name: \"User API\", base_path: \"/api/users\", endpoints: \"/register,/login,/profile,/change-password\"})\nCREATE (doc)-[:MENTIONS]->(e13)",
+    "cypher": "CREATE (doc:Document {\n      id: \"UserController\",\n      title: \"UserController\",\n      domain: \"software\",\n      doc_type: \"Class Documentation\"\n    })\nCREATE (e0:Class {name: \"UserController\", methods: \"register,login,getProfile,updateProfile,changePassword\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Module {name: \"express\", imports: \"Request,Response,NextFunction,AuthService,UserService,ValidationError\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Module {name: \"./AuthService.js\", imports: \"AuthService\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Module {name: \"./UserService.js\", imports: \"UserService\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Module {name: \"./errors/ValidationError.js\", imports: \"ValidationError\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Function {name: \"register\", method: \"POST\", endpoint: \"/api/users/register\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Function {name: \"login\", method: \"POST\", endpoint: \"Authenticate JWT token\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Function {name: \"getProfile\", method: \"GET\", endpoint: \"Get (requires authentication)\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Function {name: \"updateProfile\", method: \"PUT\", endpoint: \"Update\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Function {name: \"changePassword\", method: \"POST\", endpoint: \"Change\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:API {name: \"User HTTP requests\"})\nCREATE (doc)-[:MENTIONS]->(e10)",
     "entities": [
       {
         "type": "Class",
         "properties": {
           "name": "UserController",
-          "access_modifier": "public",
           "methods": [
             "register",
             "login",
             "getProfile",
             "updateProfile",
-            "changePassword",
-            [
-              "register",
-              "login"
-            ],
-            [
-              "updateProfile",
-              "getProfile"
-            ]
+            "changePassword"
           ]
         }
       },
@@ -79,37 +70,10 @@
         }
       },
       {
-        "type": "Class",
-        "properties": {
-          "name": "AuthService",
-          "methods": [
-            "register",
-            "login"
-          ]
-        }
-      },
-      {
-        "type": "Class",
-        "properties": {
-          "name": "UserService",
-          "methods": [
-            "updateProfile",
-            "getProfile"
-          ]
-        }
-      },
-      {
-        "type": "Class",
-        "properties": {
-          "name": "ValidationError",
-          "extends": "Error"
-        }
-      },
-      {
         "type": "Function",
         "properties": {
           "name": "register",
-          "http_method": "POST",
+          "method": "POST",
           "endpoint": "/api/users/register"
         }
       },
@@ -117,45 +81,38 @@
         "type": "Function",
         "properties": {
           "name": "login",
-          "http_method": "POST",
-          "endpoint": "/api/users/login"
+          "method": "POST",
+          "endpoint": "Authenticate JWT token"
         }
       },
       {
         "type": "Function",
         "properties": {
           "name": "getProfile",
-          "http_method": "GET",
-          "requires_auth": true
+          "method": "GET",
+          "endpoint": "Get (requires authentication)"
         }
       },
       {
         "type": "Function",
         "properties": {
           "name": "updateProfile",
-          "http_method": "PUT",
-          "requires_auth": true
+          "method": "PUT",
+          "endpoint": "Update"
         }
       },
       {
         "type": "Function",
         "properties": {
           "name": "changePassword",
-          "http_method": "POST",
-          "requires_auth": true
+          "method": "POST",
+          "endpoint": "Change"
         }
       },
       {
         "type": "API",
         "properties": {
-          "name": "User API",
-          "base_path": "/api/users",
-          "endpoints": [
-            "/register",
-            "/login",
-            "/profile",
-            "/change-password"
-          ]
+          "name": "User HTTP requests"
         }
       }
     ],
@@ -259,25 +216,7 @@
       {
         "type": "EXPOSES",
         "source": "UserController",
-        "target": "User API",
-        "properties": {}
-      },
-      {
-        "type": "ACCESSES",
-        "source": "getProfile",
-        "target": "req.user",
-        "properties": {}
-      },
-      {
-        "type": "ACCESSES",
-        "source": "updateProfile",
-        "target": "req.user",
-        "properties": {}
-      },
-      {
-        "type": "ACCESSES",
-        "source": "changePassword",
-        "target": "req.user",
+        "target": "API",
         "properties": {}
       }
     ]
@@ -285,29 +224,15 @@
   "fulltextMetadata": {
     "title": "UserController",
     "domain": "software",
-    "docType": "TypeScript Class Definition",
+    "docType": "Class Documentation",
     "extractedFields": {
-      "class_name": [
-        "UserController",
-        "AuthService",
-        "UserService",
-        "ValidationError"
-      ],
-      "class_access_modifier": "public",
+      "class_name": "UserController",
       "class_methods": [
         "register",
         "login",
         "getProfile",
         "updateProfile",
-        "changePassword",
-        [
-          "register",
-          "login"
-        ],
-        [
-          "updateProfile",
-          "getProfile"
-        ]
+        "changePassword"
       ],
       "module_name": [
         "express",
@@ -329,7 +254,6 @@
           "ValidationError"
         ]
       ],
-      "class_extends": "Error",
       "function_name": [
         "register",
         "login",
@@ -337,7 +261,7 @@
         "updateProfile",
         "changePassword"
       ],
-      "function_http_method": [
+      "function_method": [
         "POST",
         "POST",
         "GET",
@@ -346,21 +270,12 @@
       ],
       "function_endpoint": [
         "/api/users/register",
-        "/api/users/login"
+        "Authenticate JWT token",
+        "Get (requires authentication)",
+        "Update",
+        "Change"
       ],
-      "function_requires_auth": [
-        true,
-        true,
-        true
-      ],
-      "api_name": "User API",
-      "api_base_path": "/api/users",
-      "api_endpoints": [
-        "/register",
-        "/login",
-        "/profile",
-        "/change-password"
-      ]
+      "api_name": "User HTTP requests"
     },
     "keywords": [
       "user",
@@ -384,19 +299,19 @@
       "register",
       "import"
     ],
-    "summary": "This document defines a UserController class that handles user authentication and management in an Express.js application. It provides methods for user registration (requiring email, password, and name with validation) and user login (returning a JWT token). The controller integrates with AuthService and UserService to perform core authentication and user profile operations."
+    "summary": "This document contains a TypeScript UserController class that handles user authentication endpoints. It provides register and login methods that validate input requirements (email, password, name) and interact with AuthService and UserService dependencies. The controller returns appropriate HTTP responses with success data or forwards errors for handling."
   },
   "cacheInfo": {
-    "cached": true,
+    "cached": false,
     "hash": "21080d426b044ff56f9d62f3423e64dd57a510e6b47331676ca5d517fdaccae9"
   },
   "performance": {
-    "totalTimeMs": 1,
+    "totalTimeMs": 35963,
     "tokens": {
-      "input": 2373,
-      "output": 1368,
-      "total": 3741
+      "input": 768,
+      "output": 1059,
+      "total": 1827
     },
-    "costUsd": 0.0007152600000000001
+    "costUsd": 0.00040404000000000004
   }
 }

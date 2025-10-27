@@ -250,7 +250,7 @@ export class CacheManager {
       let fileCount = 0;
 
       const subdirs = await readdir(this.cacheDir).catch(() => []);
-      
+
       for (const subdir of subdirs) {
         const subdirPath = join(this.cacheDir, subdir);
         try {

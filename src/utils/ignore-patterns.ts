@@ -8,16 +8,16 @@ export const DEFAULT_IGNORE_PATTERNS = [
   '**/bower_components/**',
   '**/.next/**',
   '**/.nuxt/**',
-  
+
   // Build outputs (general)
   '**/dist/**',
   '**/build/**',
   '**/out/**',
   '**/.output/**',
-  
+
   // Rust
   '**/target/**',
-  
+
   // Java / Kotlin / Scala
   '**/target/**',
   '**/.gradle/**',
@@ -26,13 +26,13 @@ export const DEFAULT_IGNORE_PATTERNS = [
   '**/.mvn/**',
   '**/bin/**',
   '**/*.class',
-  
+
   // C# / .NET
   '**/bin/**',
   '**/obj/**',
   '**/.vs/**',
   '**/packages/**',
-  
+
   // C / C++
   '**/cmake-build-*/**',
   '**/*.o',
@@ -42,17 +42,17 @@ export const DEFAULT_IGNORE_PATTERNS = [
   '**/*.so',
   '**/*.dylib',
   '**/*.dll',
-  
+
   // Go
   '**/vendor/**',
-  
+
   // Elixir / Erlang
   '**/_build/**',
   '**/deps/**',
   '**/.elixir_ls/**',
   '**/.fetch/**',
   '**/erl_crash.dump',
-  
+
   // Python
   '**/__pycache__/**',
   '**/.pytest_cache/**',
@@ -63,45 +63,45 @@ export const DEFAULT_IGNORE_PATTERNS = [
   '**/*.pyc',
   '**/*.pyo',
   '**/*.egg-info/**',
-  
+
   // Ruby
   '**/vendor/bundle/**',
   '**/.bundle/**',
-  
+
   // PHP
   '**/vendor/**',
-  
+
   // Caches (general)
   '**/cache/**',
   '**/.cache/**',
   '**/coverage/**',
-  
+
   // Temporary files
   '**/tmp/**',
   '**/temp/**',
   '**/logs/**',
   '**/log/**',
-  
+
   // Version control
   '**/.git/**',
   '**/.svn/**',
   '**/.hg/**',
-  
+
   // IDE directories
   '**/.idea/**',
   '**/.vscode/**',
   '**/.vs/**',
-  
+
   // Data directories
   '**/data/**',
-  
+
   // Project-specific large directories
-  '**/client-sdks/**',  // Generated SDKs
-  '**/gui/**',          // GUI with node_modules
-  '**/dashboard/**',    // Dashboard apps
-  '**/qdrant/**',       // Qdrant data/cache
-  '**/sample/**',       // Sample data
-  '**/samples/**',      // Sample files
+  '**/client-sdks/**', // Generated SDKs
+  '**/gui/**', // GUI with node_modules
+  '**/dashboard/**', // Dashboard apps
+  '**/qdrant/**', // Qdrant data/cache
+  '**/sample/**', // Sample data
+  '**/samples/**', // Sample files
   '**/benchmark/reports/**', // Benchmark outputs
 ] as const;
 
@@ -116,14 +116,10 @@ export function mergeIgnorePatterns(customPatterns: string[] = []): string[] {
  * Check if a file path matches any ignore pattern
  */
 export function shouldIgnore(filePath: string, patterns: string[]): boolean {
-  return patterns.some(pattern => {
+  return patterns.some((pattern) => {
     const regex = new RegExp(
-      pattern
-        .replace(/\*\*/g, '.*')
-        .replace(/\*/g, '[^/]*')
-        .replace(/\?/g, '.')
+      pattern.replace(/\*\*/g, '.*').replace(/\*/g, '[^/]*').replace(/\?/g, '.')
     );
     return regex.test(filePath);
   });
 }
-

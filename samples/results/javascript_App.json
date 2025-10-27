@@ -2,12 +2,12 @@
   "file": "javascript/App.jsx",
   "classification": {
     "template": "software_project",
-    "confidence": 0.95,
+    "confidence": 1,
     "domain": "software",
-    "docType": "React Component Code"
+    "docType": "source_code"
   },
   "graphStructure": {
-    "cypher": "CREATE (doc:Document {\n      id: \"User Management System React Application\",\n      title: \"User Management System React Application\",\n      domain: \"software\",\n      doc_type: \"React Component Code\"\n    })\nCREATE (e0:Module {name: \"react\", imports: \"useState,useEffect,useAuth,UserList,LoginForm,Dashboard\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Module {name: \"./hooks/useAuth\", imports: \"useAuth\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Module {name: \"./components/UserList\", imports: \"UserList\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Module {name: \"./components/LoginForm\", imports: \"LoginForm\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Module {name: \"./components/Dashboard\", imports: \"Dashboard\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Function {name: \"App\", component_type: \"React Functional Component\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Function {name: \"ProfileView\", component_type: \"React Functional Component\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Function {name: \"handleLogin\", scope: \"App component\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Function {name: \"handleLogout\", scope: \"App component\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Function {name: \"handleSave\", scope: \"ProfileView component\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:API {name: \"/api/users/profile\", method: \"PUT\", requires_auth: \"true\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Configuration {name: \"localStorage\", key: \"authToken\"})\nCREATE (doc)-[:MENTIONS]->(e11)",
+    "cypher": "CREATE (doc:Document {\n      id: \"React Application Code\",\n      title: \"React Application Code\",\n      domain: \"software\",\n      doc_type: \"source_code\"\n    })\nCREATE (e0:Module {name: \"react\", imports: \"useState,useEffect,useAuth,UserList,LoginForm,Dashboard\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Module {name: \"./hooks/useAuth\", imports: \"useAuth\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Module {name: \"./components/UserList\", imports: \"UserList\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Module {name: \"./components/LoginForm\", imports: \"LoginForm\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Module {name: \"./components/Dashboard\", imports: \"Dashboard\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Function {name: \"App\", is_component: \"true\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Function {name: \"handleLogin\", is_event_handler: \"true\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Function {name: \"handleLogout\", is_event_handler: \"true\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Function {name: \"ProfileView\", is_component: \"true\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Function {name: \"handleSave\", is_event_handler: \"true\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:API {name: \"/api/users/profile\", method: \"PUT\", requires_auth: \"true\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Configuration {name: \"localStorage\", key: \"authToken\"})\nCREATE (doc)-[:MENTIONS]->(e11)",
     "entities": [
       {
         "type": "Module",
@@ -71,35 +71,35 @@
         "type": "Function",
         "properties": {
           "name": "App",
-          "component_type": "React Functional Component"
-        }
-      },
-      {
-        "type": "Function",
-        "properties": {
-          "name": "ProfileView",
-          "component_type": "React Functional Component"
+          "is_component": true
         }
       },
       {
         "type": "Function",
         "properties": {
           "name": "handleLogin",
-          "scope": "App component"
+          "is_event_handler": true
         }
       },
       {
         "type": "Function",
         "properties": {
           "name": "handleLogout",
-          "scope": "App component"
+          "is_event_handler": true
+        }
+      },
+      {
+        "type": "Function",
+        "properties": {
+          "name": "ProfileView",
+          "is_component": true
         }
       },
       {
         "type": "Function",
         "properties": {
           "name": "handleSave",
-          "scope": "ProfileView component"
+          "is_event_handler": true
         }
       },
       {
@@ -169,6 +169,30 @@
       },
       {
         "type": "CALLS",
+        "source": "App",
+        "target": "handleLogin",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
+        "source": "App",
+        "target": "handleLogout",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "App",
+        "target": "handleLogin",
+        "properties": {}
+      },
+      {
+        "type": "CONTAINS",
+        "source": "App",
+        "target": "handleLogout",
+        "properties": {}
+      },
+      {
+        "type": "CALLS",
         "source": "handleLogin",
         "target": "login",
         "properties": {}
@@ -186,59 +210,59 @@
         "properties": {}
       },
       {
-        "type": "CALLS",
-        "source": "handleSave",
-        "target": "fetch",
-        "properties": {}
-      },
-      {
-        "type": "CONTAINS",
-        "source": "App",
-        "target": "handleLogin",
-        "properties": {}
-      },
-      {
-        "type": "CONTAINS",
-        "source": "App",
-        "target": "handleLogout",
-        "properties": {}
-      },
-      {
         "type": "CONTAINS",
         "source": "ProfileView",
         "target": "handleSave",
         "properties": {}
       },
       {
+        "type": "CALLS",
+        "source": "handleSave",
+        "target": "fetch",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "handleSave",
+        "target": "localStorage",
+        "properties": {}
+      },
+      {
         "type": "ACCESSES",
         "source": "App",
         "target": "localStorage",
-        "properties": {}
-      },
-      {
-        "type": "ACCESSES",
-        "source": "handleSave",
-        "target": "localStorage",
-        "properties": {}
-      },
-      {
-        "type": "ACCESSES",
-        "source": "handleSave",
-        "target": "/api/users/profile",
         "properties": {}
       },
       {
         "type": "DEPENDS_ON",
         "source": "App",
-        "target": "useAuth",
+        "target": "ProfileView",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "App",
+        "target": "Dashboard",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "App",
+        "target": "UserList",
+        "properties": {}
+      },
+      {
+        "type": "DEPENDS_ON",
+        "source": "App",
+        "target": "LoginForm",
         "properties": {}
       }
     ]
   },
   "fulltextMetadata": {
-    "title": "User Management System React Application",
+    "title": "React Application Code",
     "domain": "software",
-    "docType": "React Component Code",
+    "docType": "source_code",
     "extractedFields": {
       "module_name": [
         "react",
@@ -265,19 +289,19 @@
       ],
       "function_name": [
         "App",
-        "ProfileView",
         "handleLogin",
         "handleLogout",
+        "ProfileView",
         "handleSave"
       ],
-      "function_component_type": [
-        "React Functional Component",
-        "React Functional Component"
+      "function_is_component": [
+        true,
+        true
       ],
-      "function_scope": [
-        "App component",
-        "App component",
-        "ProfileView component"
+      "function_is_event_handler": [
+        true,
+        true,
+        true
       ],
       "api_name": "/api/users/profile",
       "api_method": "PUT",
@@ -307,19 +331,19 @@
       "users",
       "usestate"
     ],
-    "summary": "This React application manages user authentication and navigation between different views. It displays a login form for unauthenticated users and a dashboard interface with navigation options for authenticated users. The app handles login/logout functionality and automatically checks for existing authentication tokens on initial load."
+    "summary": "This React application manages user authentication and interface routing. It displays a login form for unauthenticated users and a dashboard with navigation options for authenticated users. The app handles login/logout functionality and automatically checks for existing authentication tokens on startup."
   },
   "cacheInfo": {
-    "cached": true,
+    "cached": false,
     "hash": "83ca70c66be4755861663d3e937978f135ed43df19c68d391b88460cdc64f7d3"
   },
   "performance": {
-    "totalTimeMs": 1,
+    "totalTimeMs": 41273,
     "tokens": {
-      "input": 2354,
-      "output": 1172,
-      "total": 3526
+      "input": 769,
+      "output": 1236,
+      "total": 2005
     },
-    "costUsd": 0.0006577200000000001
+    "costUsd": 0.00045374000000000006
   }
 }

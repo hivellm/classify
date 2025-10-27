@@ -2,12 +2,12 @@
   "file": "docs/API.md",
   "classification": {
     "template": "software_project",
-    "confidence": 0.95,
+    "confidence": 1,
     "domain": "software",
     "docType": "Documentation"
   },
   "graphStructure": {
-    "cypher": "CREATE (doc:Document {\n      id: \"API Documentation\",\n      title: \"API Documentation\",\n      domain: \"software\",\n      doc_type: \"Documentation\"\n    })\nCREATE (e0:API {name: \"User Management System API\", base_url: \"http://localhost:3000/api\", authentication: \"JWT\", rate_limiting: \"100 requests per 15 minutes per IP\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Module {name: \"Authentication Module\", description: \"Handles user registration, login, and JWT token generation\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Module {name: \"User Profile Module\", description: \"Manages user profile retrieval and updates\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Module {name: \"Password Management Module\", description: \"Handles password change operations\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Module {name: \"User List Module\", description: \"Provides paginated listing of users\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Module {name: \"User Deletion Module\", description: \"Handles user deletion with admin authentication\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Module {name: \"Health Check Module\", description: \"Performs service health checks\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Function {name: \"POST /register\", description: \"Registers a new user\", method: \"POST\", endpoint: \"/register\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Function {name: \"POST /login\", description: \"Authenticates user and returns JWT token\", method: \"POST\", endpoint: \"/login\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Function {name: \"GET /profile\", description: \"Retrieves current user profile\", method: \"GET\", endpoint: \"/profile\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Function {name: \"PUT /profile\", description: \"Updates user profile\", method: \"PUT\", endpoint: \"/profile\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Function {name: \"POST /change-password\", description: \"Changes user password\", method: \"POST\", endpoint: \"/change-password\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Function {name: \"GET /users\", description: \"Lists all users with pagination\", method: \"GET\", endpoint: \"/users\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Function {name: \"DELETE /users/:id\", description: \"Deletes a user by ID\", method: \"DELETE\", endpoint: \"/users/:id\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Function {name: \"GET /health\", description: \"Performs health check\", method: \"GET\", endpoint: \"/health\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Dependency {name: \"bcrypt\", description: \"Used for password hashing with 10 salt rounds\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:Dependency {name: \"JWT\", description: \"Used for authentication tokens with 24-hour expiration\"})\nCREATE (doc)-[:MENTIONS]->(e16)\nCREATE (e17:Dependency {name: \"Helmet.js\", description: \"Applies security headers\"})\nCREATE (doc)-[:MENTIONS]->(e17)\nCREATE (e18:Configuration {name: \"CORS Configuration\", description: \"Enabled for specified origins\"})\nCREATE (doc)-[:MENTIONS]->(e18)\nCREATE (e19:Configuration {name: \"HTTPS Configuration\", description: \"Recommended for production\"})\nCREATE (doc)-[:MENTIONS]->(e19)\nCREATE (e20:Database {name: \"User Database\", description: \"Stores user data including email, password, name, bio, avatar, and created_at\"})\nCREATE (doc)-[:MENTIONS]->(e20)\nCREATE (e21:Documentation {name: \"API Documentation\", description: \"REST API specification for User Management System\"})\nCREATE (doc)-[:MENTIONS]->(e21)",
+    "cypher": "CREATE (doc:Document {\n      id: \"API Documentation\",\n      title: \"API Documentation\",\n      domain: \"software\",\n      doc_type: \"Documentation\"\n    })\nCREATE (e0:API {name: \"User Management System API\", base_url: \"http://localhost:3000/api\", authentication: \"JWT\", rate_limiting: \"100 requests per 15 minutes per IP\"})\nCREATE (doc)-[:MENTIONS]->(e0)\nCREATE (e1:Module {name: \"Authentication Module\", description: \"Handles user registration, login, and JWT token management\"})\nCREATE (doc)-[:MENTIONS]->(e1)\nCREATE (e2:Module {name: \"User Profile Module\", description: \"Manages user profile data and operations\"})\nCREATE (doc)-[:MENTIONS]->(e2)\nCREATE (e3:Module {name: \"User Management Module\", description: \"Handles user listing and deletion operations\"})\nCREATE (doc)-[:MENTIONS]->(e3)\nCREATE (e4:Module {name: \"Health Check Module\", description: \"Provides service health status\"})\nCREATE (doc)-[:MENTIONS]->(e4)\nCREATE (e5:Function {name: \"register\", method: \"POST\", endpoint: \"/register\", description: \"Register a new user\"})\nCREATE (doc)-[:MENTIONS]->(e5)\nCREATE (e6:Function {name: \"login\", method: \"POST\", endpoint: \"/login\", description: \"Authenticate user and receive JWT token\"})\nCREATE (doc)-[:MENTIONS]->(e6)\nCREATE (e7:Function {name: \"getProfile\", method: \"GET\", endpoint: \"/profile\", description: \"Get current user profile\"})\nCREATE (doc)-[:MENTIONS]->(e7)\nCREATE (e8:Function {name: \"updateProfile\", method: \"PUT\", endpoint: \"/profile\", description: \"Update user profile\"})\nCREATE (doc)-[:MENTIONS]->(e8)\nCREATE (e9:Function {name: \"changePassword\", method: \"POST\", endpoint: \"/change-password\", description: \"Change user password\"})\nCREATE (doc)-[:MENTIONS]->(e9)\nCREATE (e10:Function {name: \"listUsers\", method: \"GET\", endpoint: \"/users\", description: \"List all users (paginated)\"})\nCREATE (doc)-[:MENTIONS]->(e10)\nCREATE (e11:Function {name: \"deleteUser\", method: \"DELETE\", endpoint: \"/users/:id\", description: \"Delete a user\"})\nCREATE (doc)-[:MENTIONS]->(e11)\nCREATE (e12:Function {name: \"healthCheck\", method: \"GET\", endpoint: \"/health\", description: \"Service health check\"})\nCREATE (doc)-[:MENTIONS]->(e12)\nCREATE (e13:Database {name: \"User Database\", description: \"Stores user information including email, password hash, profile data\"})\nCREATE (doc)-[:MENTIONS]->(e13)\nCREATE (e14:Dependency {name: \"bcrypt\", description: \"Password hashing library with 10 salt rounds\"})\nCREATE (doc)-[:MENTIONS]->(e14)\nCREATE (e15:Dependency {name: \"JWT\", description: \"JSON Web Token implementation for authentication\"})\nCREATE (doc)-[:MENTIONS]->(e15)\nCREATE (e16:Dependency {name: \"Helmet.js\", description: \"Security headers middleware\"})\nCREATE (doc)-[:MENTIONS]->(e16)\nCREATE (e17:Configuration {name: \"Security Configuration\", description: \"JWT tokens expire after 24 hours, HTTPS recommended, CORS enabled\"})\nCREATE (doc)-[:MENTIONS]->(e17)\nCREATE (e18:Documentation {name: \"API Documentation\", description: \"REST API specification for User Management System\"})\nCREATE (doc)-[:MENTIONS]->(e18)",
     "entities": [
       {
         "type": "API",
@@ -22,156 +22,135 @@
         "type": "Module",
         "properties": {
           "name": "Authentication Module",
-          "description": "Handles user registration, login, and JWT token generation"
+          "description": "Handles user registration, login, and JWT token management"
         }
       },
       {
         "type": "Module",
         "properties": {
           "name": "User Profile Module",
-          "description": "Manages user profile retrieval and updates"
+          "description": "Manages user profile data and operations"
         }
       },
       {
         "type": "Module",
         "properties": {
-          "name": "Password Management Module",
-          "description": "Handles password change operations"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "User List Module",
-          "description": "Provides paginated listing of users"
-        }
-      },
-      {
-        "type": "Module",
-        "properties": {
-          "name": "User Deletion Module",
-          "description": "Handles user deletion with admin authentication"
+          "name": "User Management Module",
+          "description": "Handles user listing and deletion operations"
         }
       },
       {
         "type": "Module",
         "properties": {
           "name": "Health Check Module",
-          "description": "Performs service health checks"
+          "description": "Provides service health status"
         }
       },
       {
         "type": "Function",
         "properties": {
-          "name": "POST /register",
-          "description": "Registers a new user",
+          "name": "register",
           "method": "POST",
-          "endpoint": "/register"
+          "endpoint": "/register",
+          "description": "Register a new user"
         }
       },
       {
         "type": "Function",
         "properties": {
-          "name": "POST /login",
-          "description": "Authenticates user and returns JWT token",
+          "name": "login",
           "method": "POST",
-          "endpoint": "/login"
+          "endpoint": "/login",
+          "description": "Authenticate user and receive JWT token"
         }
       },
       {
         "type": "Function",
         "properties": {
-          "name": "GET /profile",
-          "description": "Retrieves current user profile",
+          "name": "getProfile",
           "method": "GET",
-          "endpoint": "/profile"
+          "endpoint": "/profile",
+          "description": "Get current user profile"
         }
       },
       {
         "type": "Function",
         "properties": {
-          "name": "PUT /profile",
-          "description": "Updates user profile",
+          "name": "updateProfile",
           "method": "PUT",
-          "endpoint": "/profile"
+          "endpoint": "/profile",
+          "description": "Update user profile"
         }
       },
       {
         "type": "Function",
         "properties": {
-          "name": "POST /change-password",
-          "description": "Changes user password",
+          "name": "changePassword",
           "method": "POST",
-          "endpoint": "/change-password"
+          "endpoint": "/change-password",
+          "description": "Change user password"
         }
       },
       {
         "type": "Function",
         "properties": {
-          "name": "GET /users",
-          "description": "Lists all users with pagination",
+          "name": "listUsers",
           "method": "GET",
-          "endpoint": "/users"
+          "endpoint": "/users",
+          "description": "List all users (paginated)"
         }
       },
       {
         "type": "Function",
         "properties": {
-          "name": "DELETE /users/:id",
-          "description": "Deletes a user by ID",
+          "name": "deleteUser",
           "method": "DELETE",
-          "endpoint": "/users/:id"
+          "endpoint": "/users/:id",
+          "description": "Delete a user"
         }
       },
       {
         "type": "Function",
         "properties": {
-          "name": "GET /health",
-          "description": "Performs health check",
+          "name": "healthCheck",
           "method": "GET",
-          "endpoint": "/health"
-        }
-      },
-      {
-        "type": "Dependency",
-        "properties": {
-          "name": "bcrypt",
-          "description": "Used for password hashing with 10 salt rounds"
-        }
-      },
-      {
-        "type": "Dependency",
-        "properties": {
-          "name": "JWT",
-          "description": "Used for authentication tokens with 24-hour expiration"
-        }
-      },
-      {
-        "type": "Dependency",
-        "properties": {
-          "name": "Helmet.js",
-          "description": "Applies security headers"
-        }
-      },
-      {
-        "type": "Configuration",
-        "properties": {
-          "name": "CORS Configuration",
-          "description": "Enabled for specified origins"
-        }
-      },
-      {
-        "type": "Configuration",
-        "properties": {
-          "name": "HTTPS Configuration",
-          "description": "Recommended for production"
+          "endpoint": "/health",
+          "description": "Service health check"
         }
       },
       {
         "type": "Database",
         "properties": {
           "name": "User Database",
-          "description": "Stores user data including email, password, name, bio, avatar, and created_at"
+          "description": "Stores user information including email, password hash, profile data"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "bcrypt",
+          "description": "Password hashing library with 10 salt rounds"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "JWT",
+          "description": "JSON Web Token implementation for authentication"
+        }
+      },
+      {
+        "type": "Dependency",
+        "properties": {
+          "name": "Helmet.js",
+          "description": "Security headers middleware"
+        }
+      },
+      {
+        "type": "Configuration",
+        "properties": {
+          "name": "Security Configuration",
+          "description": "JWT tokens expire after 24 hours, HTTPS recommended, CORS enabled"
         }
       },
       {
@@ -186,150 +165,126 @@
       {
         "type": "EXPOSES",
         "source": "User Management System API",
-        "target": "POST /register",
+        "target": "Authentication Module",
         "properties": {}
       },
       {
         "type": "EXPOSES",
         "source": "User Management System API",
-        "target": "POST /login",
+        "target": "User Profile Module",
         "properties": {}
       },
       {
         "type": "EXPOSES",
         "source": "User Management System API",
-        "target": "GET /profile",
+        "target": "User Management Module",
         "properties": {}
       },
       {
         "type": "EXPOSES",
         "source": "User Management System API",
-        "target": "PUT /profile",
-        "properties": {}
-      },
-      {
-        "type": "EXPOSES",
-        "source": "User Management System API",
-        "target": "POST /change-password",
-        "properties": {}
-      },
-      {
-        "type": "EXPOSES",
-        "source": "User Management System API",
-        "target": "GET /users",
-        "properties": {}
-      },
-      {
-        "type": "EXPOSES",
-        "source": "User Management System API",
-        "target": "DELETE /users/:id",
-        "properties": {}
-      },
-      {
-        "type": "EXPOSES",
-        "source": "User Management System API",
-        "target": "GET /health",
+        "target": "Health Check Module",
         "properties": {}
       },
       {
         "type": "CONTAINS",
         "source": "Authentication Module",
-        "target": "POST /register",
+        "target": "register",
         "properties": {}
       },
       {
         "type": "CONTAINS",
         "source": "Authentication Module",
-        "target": "POST /login",
+        "target": "login",
         "properties": {}
       },
       {
         "type": "CONTAINS",
         "source": "User Profile Module",
-        "target": "GET /profile",
+        "target": "getProfile",
         "properties": {}
       },
       {
         "type": "CONTAINS",
         "source": "User Profile Module",
-        "target": "PUT /profile",
+        "target": "updateProfile",
         "properties": {}
       },
       {
         "type": "CONTAINS",
-        "source": "Password Management Module",
-        "target": "POST /change-password",
+        "source": "User Profile Module",
+        "target": "changePassword",
         "properties": {}
       },
       {
         "type": "CONTAINS",
-        "source": "User List Module",
-        "target": "GET /users",
+        "source": "User Management Module",
+        "target": "listUsers",
         "properties": {}
       },
       {
         "type": "CONTAINS",
-        "source": "User Deletion Module",
-        "target": "DELETE /users/:id",
+        "source": "User Management Module",
+        "target": "deleteUser",
         "properties": {}
       },
       {
         "type": "CONTAINS",
         "source": "Health Check Module",
-        "target": "GET /health",
+        "target": "healthCheck",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "register",
+        "target": "User Database",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "login",
+        "target": "User Database",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "getProfile",
+        "target": "User Database",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "updateProfile",
+        "target": "User Database",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "changePassword",
+        "target": "User Database",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "listUsers",
+        "target": "User Database",
+        "properties": {}
+      },
+      {
+        "type": "ACCESSES",
+        "source": "deleteUser",
+        "target": "User Database",
         "properties": {}
       },
       {
         "type": "DEPENDS_ON",
-        "source": "POST /register",
+        "source": "Authentication Module",
         "target": "bcrypt",
         "properties": {}
       },
       {
         "type": "DEPENDS_ON",
-        "source": "POST /login",
-        "target": "bcrypt",
-        "properties": {}
-      },
-      {
-        "type": "DEPENDS_ON",
-        "source": "POST /login",
-        "target": "JWT",
-        "properties": {}
-      },
-      {
-        "type": "DEPENDS_ON",
-        "source": "GET /profile",
-        "target": "JWT",
-        "properties": {}
-      },
-      {
-        "type": "DEPENDS_ON",
-        "source": "PUT /profile",
-        "target": "JWT",
-        "properties": {}
-      },
-      {
-        "type": "DEPENDS_ON",
-        "source": "POST /change-password",
-        "target": "bcrypt",
-        "properties": {}
-      },
-      {
-        "type": "DEPENDS_ON",
-        "source": "POST /change-password",
-        "target": "JWT",
-        "properties": {}
-      },
-      {
-        "type": "DEPENDS_ON",
-        "source": "GET /users",
-        "target": "JWT",
-        "properties": {}
-      },
-      {
-        "type": "DEPENDS_ON",
-        "source": "DELETE /users/:id",
+        "source": "Authentication Module",
         "target": "JWT",
         "properties": {}
       },
@@ -340,63 +295,9 @@
         "properties": {}
       },
       {
-        "type": "DEPENDS_ON",
+        "type": "IMPLEMENTS",
         "source": "User Management System API",
-        "target": "CORS Configuration",
-        "properties": {}
-      },
-      {
-        "type": "DEPENDS_ON",
-        "source": "User Management System API",
-        "target": "HTTPS Configuration",
-        "properties": {}
-      },
-      {
-        "type": "ACCESSES",
-        "source": "POST /register",
-        "target": "User Database",
-        "properties": {}
-      },
-      {
-        "type": "ACCESSES",
-        "source": "POST /login",
-        "target": "User Database",
-        "properties": {}
-      },
-      {
-        "type": "ACCESSES",
-        "source": "GET /profile",
-        "target": "User Database",
-        "properties": {}
-      },
-      {
-        "type": "ACCESSES",
-        "source": "PUT /profile",
-        "target": "User Database",
-        "properties": {}
-      },
-      {
-        "type": "ACCESSES",
-        "source": "POST /change-password",
-        "target": "User Database",
-        "properties": {}
-      },
-      {
-        "type": "ACCESSES",
-        "source": "GET /users",
-        "target": "User Database",
-        "properties": {}
-      },
-      {
-        "type": "ACCESSES",
-        "source": "DELETE /users/:id",
-        "target": "User Database",
-        "properties": {}
-      },
-      {
-        "type": "ACCESSES",
-        "source": "GET /health",
-        "target": "User Database",
+        "target": "Security Configuration",
         "properties": {}
       },
       {
@@ -419,38 +320,24 @@
       "module_name": [
         "Authentication Module",
         "User Profile Module",
-        "Password Management Module",
-        "User List Module",
-        "User Deletion Module",
+        "User Management Module",
         "Health Check Module"
       ],
       "module_description": [
-        "Handles user registration, login, and JWT token generation",
-        "Manages user profile retrieval and updates",
-        "Handles password change operations",
-        "Provides paginated listing of users",
-        "Handles user deletion with admin authentication",
-        "Performs service health checks"
+        "Handles user registration, login, and JWT token management",
+        "Manages user profile data and operations",
+        "Handles user listing and deletion operations",
+        "Provides service health status"
       ],
       "function_name": [
-        "POST /register",
-        "POST /login",
-        "GET /profile",
-        "PUT /profile",
-        "POST /change-password",
-        "GET /users",
-        "DELETE /users/:id",
-        "GET /health"
-      ],
-      "function_description": [
-        "Registers a new user",
-        "Authenticates user and returns JWT token",
-        "Retrieves current user profile",
-        "Updates user profile",
-        "Changes user password",
-        "Lists all users with pagination",
-        "Deletes a user by ID",
-        "Performs health check"
+        "register",
+        "login",
+        "getProfile",
+        "updateProfile",
+        "changePassword",
+        "listUsers",
+        "deleteUser",
+        "healthCheck"
       ],
       "function_method": [
         "POST",
@@ -472,26 +359,30 @@
         "/users/:id",
         "/health"
       ],
+      "function_description": [
+        "Register a new user",
+        "Authenticate user and receive JWT token",
+        "Get current user profile",
+        "Update user profile",
+        "Change user password",
+        "List all users (paginated)",
+        "Delete a user",
+        "Service health check"
+      ],
+      "database_name": "User Database",
+      "database_description": "Stores user information including email, password hash, profile data",
       "dependency_name": [
         "bcrypt",
         "JWT",
         "Helmet.js"
       ],
       "dependency_description": [
-        "Used for password hashing with 10 salt rounds",
-        "Used for authentication tokens with 24-hour expiration",
-        "Applies security headers"
+        "Password hashing library with 10 salt rounds",
+        "JSON Web Token implementation for authentication",
+        "Security headers middleware"
       ],
-      "configuration_name": [
-        "CORS Configuration",
-        "HTTPS Configuration"
-      ],
-      "configuration_description": [
-        "Enabled for specified origins",
-        "Recommended for production"
-      ],
-      "database_name": "User Database",
-      "database_description": "Stores user data including email, password, name, bio, avatar, and created_at",
+      "configuration_name": "Security Configuration",
+      "configuration_description": "JWT tokens expire after 24 hours, HTTPS recommended, CORS enabled",
       "documentation_name": "API Documentation",
       "documentation_description": "REST API specification for User Management System"
     },
@@ -517,19 +408,19 @@
       "requires",
       "headers"
     ],
-    "summary": "This document outlines a REST API for user management with JWT authentication. Key endpoints include user registration, login with token generation, and authenticated profile retrieval and updates. The API handles common error scenarios like validation issues, authentication failures, and server errors."
+    "summary": "This document outlines a REST API for a User Management System with a base URL at localhost:3000/api, requiring JWT authentication for most endpoints. It details key endpoints including user registration (POST /register), login to obtain a JWT token (POST /login), and authenticated profile retrieval and updates (GET /PUT /profile). Each endpoint specifies request/response formats and potential error codes."
   },
   "cacheInfo": {
-    "cached": true,
+    "cached": false,
     "hash": "bc17ccda3ba6d474e1241be98b770851838febf7118a5da921f9cb318e7a7e00"
   },
   "performance": {
-    "totalTimeMs": 1,
+    "totalTimeMs": 57292,
     "tokens": {
-      "input": 3116,
-      "output": 2479,
-      "total": 5595
+      "input": 1881,
+      "output": 1757,
+      "total": 3638
     },
-    "costUsd": 0.0011303600000000002
+    "costUsd": 0.0007553000000000001
   }
 }

@@ -20,7 +20,7 @@ export class ElasticsearchClient {
 
   constructor(config: ElasticsearchConfig) {
     this.config = config;
-    
+
     // Setup auth headers
     this.headers = {
       'Content-Type': 'application/json',
@@ -29,7 +29,9 @@ export class ElasticsearchClient {
     if (config.apiKey) {
       this.headers['Authorization'] = `ApiKey ${config.apiKey}`;
     } else if (config.auth) {
-      const credentials = Buffer.from(`${config.auth.username}:${config.auth.password}`).toString('base64');
+      const credentials = Buffer.from(`${config.auth.username}:${config.auth.password}`).toString(
+        'base64'
+      );
       this.headers['Authorization'] = `Basic ${credentials}`;
     }
   }
@@ -45,15 +47,19 @@ export class ElasticsearchClient {
       });
 
       if (!pingResponse.ok) {
-        throw new Error(`Elasticsearch connection failed: ${pingResponse.status} ${pingResponse.statusText}`);
+        throw new Error(
+          `Elasticsearch connection failed: ${pingResponse.status} ${pingResponse.statusText}`
+        );
       }
 
       console.log('✅ Connected to Elasticsearch');
-      
+
       // Ensure index exists
       await this.ensureIndex();
     } catch (error) {
-      throw new Error(`Failed to connect to Elasticsearch: ${error instanceof Error ? error.message : error}`);
+      throw new Error(
+        `Failed to connect to Elasticsearch: ${error instanceof Error ? error.message : error}`
+      );
     }
   }
 
@@ -139,26 +145,27 @@ export class ElasticsearchClient {
    */
   async insertBatch(results: Array<{ result: ClassifyResult; file: string }>): Promise<void> {
     // Build NDJSON for bulk API
-    const bulkBody = results
-      .map(({ result, file }) => {
-        const action = JSON.stringify({ index: { _index: this.config.index } });
-        const document = JSON.stringify({
-          title: result.fulltextMetadata.title,
-          domain: result.fulltextMetadata.domain,
-          docType: result.fulltextMetadata.docType,
-          keywords: result.fulltextMetadata.keywords,
-          summary: result.fulltextMetadata.summary,
-          extractedFields: result.fulltextMetadata.extractedFields,
-          sourceFile: file,
-          classifiedAt: new Date().toISOString(),
-          classification: {
-            template: result.classification.template,
-            confidence: result.classification.confidence,
-          },
-        });
-        return `${action}\n${document}`;
-      })
-      .join('\n') + '\n';
+    const bulkBody =
+      results
+        .map(({ result, file }) => {
+          const action = JSON.stringify({ index: { _index: this.config.index } });
+          const document = JSON.stringify({
+            title: result.fulltextMetadata.title,
+            domain: result.fulltextMetadata.domain,
+            docType: result.fulltextMetadata.docType,
+            keywords: result.fulltextMetadata.keywords,
+            summary: result.fulltextMetadata.summary,
+            extractedFields: result.fulltextMetadata.extractedFields,
+            sourceFile: file,
+            classifiedAt: new Date().toISOString(),
+            classification: {
+              template: result.classification.template,
+              confidence: result.classification.confidence,
+            },
+          });
+          return `${action}\n${document}`;
+        })
+        .join('\n') + '\n';
 
     const response = await fetch(`${this.config.url}/_bulk?refresh=true`, {
       method: 'POST',
@@ -189,4 +196,3 @@ export class ElasticsearchClient {
     // No persistent connection to close
   }
 }
-
