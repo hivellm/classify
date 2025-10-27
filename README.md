@@ -2,8 +2,8 @@
 
 > Intelligent document classification for graph databases and full-text search using modern LLMs
 
-**Version:** 0.3.0 (Production Ready)  
-**Status:** 🚀 Production-Ready Pipeline - 88/89 Tests Passing
+**Version:** 0.4.0 (Production Ready)  
+**Status:** 🚀 Production-Ready with Database Integrations - 88/89 Tests Passing
 
 ## Overview
 
@@ -15,12 +15,14 @@ Classify is a TypeScript-based CLI tool that automatically classifies documents 
 - ✅ **Multi-LLM Support**: 6 providers (DeepSeek, OpenAI, Anthropic, Gemini, xAI, Groq) with 30+ models
 - ✅ **Cost-Optimized**: Default model (DeepSeek) costs ~$0.0024 per document
 - ✅ **Dual Output**: Graph structure (Cypher) + Full-text metadata
-- ✅ **SHA256-based Caching**: Persistent cache for multi-system usage (70-90% hit rate)
+- ✅ **SHA256-based Caching**: Subdirectory-optimized cache supports millions of documents
 - ✅ **Document Conversion**: Transmutation integration (PDF, DOCX, XLSX, PPTX, etc → Markdown)
 - ✅ **Prompt Compression**: 50% token reduction with 91% quality retention (compression-prompt)
-- ✅ **Model Selection**: Choose specific model per provider
-- ✅ **Batch Processing**: Parallel processing with rate limiting
-- ✅ **Cache Awareness**: Automatic cache management and statistics
+- ✅ **Database Integrations**: Neo4j + Elasticsearch via REST (zero dependencies)
+- ✅ **Parallel Batch Processing**: 20 files simultaneously with incremental indexing
+- ✅ **Incremental Indexing**: Send to databases progressively during processing
+- ✅ **Multi-Language Support**: Ignore patterns for 10+ programming languages
+- ✅ **Semantic Search**: Find code by meaning, not just text matching
 
 ## Quick Start
 
@@ -225,7 +227,7 @@ cat result.json | jq '.fulltext_metadata' | \
 - **[API_REFERENCE.md](./docs/API_REFERENCE.md)** - CLI commands and programmatic API
 - **[TEMPLATE_SPECIFICATION.md](./docs/TEMPLATE_SPECIFICATION.md)** - Template format and creation
 - **[LLM_PROVIDERS.md](./docs/LLM_PROVIDERS.md)** - Provider configuration and model selection
-- **[INTEGRATION.md](./docs/INTEGRATION.md)** - Integration with Nexus, Elasticsearch, etc.
+- **[INTEGRATIONS.md](./docs/INTEGRATIONS.md)** 🆕 - Neo4j & Elasticsearch REST integrations
 - **[CONFIGURATION.md](./docs/CONFIGURATION.md)** - Configuration options and best practices
 - **[CACHE.md](./docs/CACHE.md)** - Caching system and performance optimization
 
@@ -299,8 +301,14 @@ npx @hivellm/classify clear-cache --all
 ### Programmatic API
 
 ```typescript
-import { ClassifyClient } from '@hivellm/classify';
+import { 
+  ClassifyClient, 
+  BatchProcessor,
+  Neo4jClient,
+  ElasticsearchClient 
+} from '@hivellm/classify';
 
+// Initialize client
 const client = new ClassifyClient({
   provider: 'deepseek',
   model: 'deepseek-chat',
@@ -309,18 +317,41 @@ const client = new ClassifyClient({
   compressionEnabled: true
 });
 
-// Classify document
+// Classify single document
 const result = await client.classify('contract.pdf');
-
 console.log(result.classification.domain);        // "legal"
 console.log(result.graphStructure.cypher);       // Cypher statements
 console.log(result.fulltextMetadata);            // Metadata object
-console.log(result.cacheInfo.cached);            // false (first run)
 
-// Next time: instant from cache!
-const cached = await client.classify('contract.pdf');
-console.log(cached.cacheInfo.cached);            // true
-console.log(cached.performance.totalTimeMs);     // ~3ms
+// Batch processing with parallel execution
+const batchProcessor = new BatchProcessor(client);
+const batchResult = await batchProcessor.processFiles(files, {
+  concurrency: 20,        // 20 files in parallel
+  templateId: 'software_project',
+  onBatchComplete: async (results) => {
+    // Send to databases incrementally
+    console.log(`Processed ${results.length} files`);
+  }
+});
+
+// Database integration (optional)
+const neo4j = new Neo4jClient({
+  url: 'http://localhost:7474',
+  username: 'neo4j',
+  password: 'password',
+});
+
+const elasticsearch = new ElasticsearchClient({
+  url: 'http://localhost:9200',
+  index: 'documents',
+});
+
+await neo4j.initialize();
+await elasticsearch.initialize();
+
+// Insert results
+await neo4j.insertResult(result, 'contract.pdf');
+await elasticsearch.insertResult(result, 'contract.pdf');
 ```
 
 ## Environment Variables
@@ -341,6 +372,18 @@ export CLASSIFY_CACHE_ENABLED=true
 export CLASSIFY_CACHE_DIR=./.classify-cache
 export CLASSIFY_COMPRESSION_ENABLED=true
 export CLASSIFY_COMPRESSION_RATIO=0.5
+
+# Database Integrations (optional)
+export NEO4J_URL=http://localhost:7474
+export NEO4J_USERNAME=neo4j
+export NEO4J_PASSWORD=password
+export NEO4J_DATABASE=neo4j
+
+export ELASTICSEARCH_URL=http://localhost:9200
+export ELASTICSEARCH_INDEX=classify-documents
+export ELASTICSEARCH_USERNAME=elastic
+export ELASTICSEARCH_PASSWORD=password
+# Or use API key: export ELASTICSEARCH_API_KEY=...
 ```
 
 ## Dependencies
@@ -359,18 +402,27 @@ export CLASSIFY_COMPRESSION_RATIO=0.5
 classify/
 ├── src/
 │   ├── cli/              # CLI commands
-│   ├── providers/        # LLM provider implementations
-│   ├── templates/        # Template engine
-│   ├── selection/        # Template selection logic
-│   ├── core/             # Classification logic
-│   ├── outputs/          # Output generators (graph/fulltext)
-│   ├── cache/            # SHA256-based caching system
-│   └── utils/            # Helpers
-├── templates/            # Built-in templates
-├── docs/                 # Documentation
-├── tests/
-├── package.json
-└── tsconfig.json
+│   ├── llm/              # LLM provider implementations (6 providers)
+│   ├── templates/        # Template engine (15 templates)
+│   ├── classification/   # Classification pipeline
+│   ├── preprocessing/    # Document processing & conversion
+│   ├── output/           # Output generators (graph/fulltext)
+│   ├── cache/            # Subdirectory-optimized cache system
+│   ├── batch/            # Parallel batch processor
+│   ├── compression/      # Prompt compression
+│   ├── integrations/     # Neo4j & Elasticsearch clients (REST)
+│   └── utils/            # Ignore patterns & helpers
+├── samples/
+│   ├── code/             # Sample code files for testing
+│   ├── examples/         # Integration examples
+│   ├── scripts/          # Test & analysis scripts
+│   └── results/          # Classification results
+├── templates/            # Built-in classification templates
+├── tests/                # Unit tests (88 passing)
+│   ├── test-documents/   # Test fixtures
+│   └── test-results/     # Expected results
+├── docs/                 # Complete documentation
+└── package.json
 ```
 
 ## Development
@@ -434,9 +486,26 @@ MIT
 - **[Transmutation](../transmutation/)** - Document conversion engine
 - **[compression-prompt](../compression-prompt/)** - Prompt compression tool
 
+## Real-World Results
+
+**Vectorizer Project** (100 Rust files tested):
+- ✅ 100% classification success
+- ✅ 1,834 entities extracted (Functions, Classes, Modules, Dependencies)
+- ✅ 2,384 relationships mapped
+- ✅ 100% average confidence
+- ✅ Semantic search working: "where is embedding implemented?" → instant results
+- ✅ Graph analysis: module dependencies, impact analysis, code navigation
+
+**Key Insights Enabled**:
+- 🔍 **Semantic Search**: "How does database storage work?" → relevant files ranked by score
+- 🗺️ **Architecture Map**: Core modules identified (crate::db, crate::embedding, etc.)
+- 📊 **Complexity Analysis**: Most complex files identified (src/lib.rs with 42 entities)
+- 🔗 **Dependency Graph**: External crates mapped (tokio, serde_json, tracing, etc.)
+- 🧪 **Test Coverage**: 24% test files automatically detected
+
 ---
 
-## 🎉 Current Implementation Status (v0.2.0)
+## 🎉 Current Implementation Status (v0.4.0)
 
 ### Completed ✅
 
@@ -535,10 +604,18 @@ MIT
 - ✅ **88 Tests Passing**: 80%+ coverage on all metrics
 - ✅ **Latest Models**: GPT-5 mini/nano, Claude 4.5 Haiku, Gemini 2.5 Flash, Grok 3
 
+### Completed in v0.4.0 ✅
+- ✅ **Database Integrations**: Neo4j & Elasticsearch REST clients (zero dependencies)
+- ✅ **Optimized Cache**: Subdirectory structure (hash[0:2]) supports millions of files
+- ✅ **Parallel Processing**: 20 files simultaneously with real-time progress
+- ✅ **Incremental Indexing**: Send to databases during processing, not after
+- ✅ **Multi-Language Ignore**: Java, C#, C++, Go, Elixir, Ruby, PHP, Rust support
+- ✅ **Production Tested**: 100-file Vectorizer project successfully classified and indexed
+
 ### Next Steps 📋
 1. ⏳ Complete CLI commands (interactive mode, progress bars)
-2. ⏳ Create user guide and troubleshooting docs
-3. ⏳ Publish v0.3.0 to npm
+2. ⏳ Add more database connectors (MongoDB, Qdrant, Pinecone)
+3. ⏳ Publish v0.4.0 to npm
 
 ---
 

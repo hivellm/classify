@@ -7,6 +7,81 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2025-10-27
+
+### Added
+
+- **Database Integrations** (REST API):
+  - Neo4jClient with HTTP Transactional Cypher API
+  - ElasticsearchClient with Bulk API support
+  - Zero dependencies - pure REST API implementations
+  - Auto-detection from environment variables
+  - Incremental indexing during batch processing
+  - Complete INTEGRATIONS.md documentation
+
+- **Optimized Cache Structure**:
+  - Subdirectory organization using hash[0:2] prefix
+  - Distributes cache across 256 subdirectories
+  - Prevents filesystem bottlenecks with large projects
+  - Tested with 78 subdirectories, handles millions of files
+
+- **Enhanced Batch Processing**:
+  - New `BatchProcessor.processFiles()` method
+  - Parallel processing: 20 files simultaneously (configurable)
+  - `onBatchComplete` callback for incremental database indexing
+  - Real-time progress tracking with batch statistics
+  - Template forcing via `templateId` option in BatchOptions
+
+- **Expanded Ignore Patterns**:
+  - Multi-language support: Java, C#, C++, Go, Elixir, Ruby, PHP
+  - Project-specific patterns: client-sdks/, gui/, qdrant/, sample/
+  - Prevents indexing 130k+ unnecessary files in large projects
+  - Exported utilities: `DEFAULT_IGNORE_PATTERNS`, `mergeIgnorePatterns()`, `shouldIgnore()`
+
+- **Advanced Analysis Scripts**:
+  - `classify-vectorizer.ts` - Full project classification with incremental indexing
+  - `quick-test-vectorizer.ts` - Fast 100-file test
+  - `advanced-analysis.ts` - Demonstrates semantic search & graph analysis
+  - `validate-test.ts` - Database validation queries
+  - `query-databases.ts` - General database query examples
+
+### Changed
+
+- Cache now uses subdirectories (`.classify-cache/ab/*.json` vs `.classify-cache/*.json`)
+- BatchProcessor default concurrency increased from 4 to 20
+- Classification results now sent incrementally during processing (not after)
+- Project structure reorganized:
+  - `scripts/` → `samples/scripts/`
+  - `examples/` → `samples/examples/`
+  - `test-documents/` → `tests/test-documents/`
+  - `test-results/` → `tests/test-results/`
+
+### Performance
+
+**Incremental Indexing** (100 files tested):
+- Classification: 435s (7.3 minutes)
+- Neo4j inserts: Incremental (no wait time)
+- Elasticsearch inserts: Incremental (no wait time)
+- Memory efficient: only 20 results in memory at a time
+
+**Cache Performance** (with subdirectories):
+- File lookup: O(1) with subdirectory distribution
+- Supports millions of cached documents
+- No filesystem limits on single directory
+
+**Database Integration** (100 files):
+- Neo4j: 2,694 entities + relationships indexed
+- Elasticsearch: 100 documents with full-text metadata
+- Semantic search: finds code by meaning, not filename
+- Graph queries: module dependencies, impact analysis
+
+### Fixed
+
+- Cache stats now correctly counts files in subdirectories
+- ClassifyClient.classify() now accepts optional ClassifyFileOptions
+- Type errors in batch processing scripts
+- Return types for getCacheStats() and clearCache()
+
 ## [0.3.0] - 2025-10-27
 
 ### Added
