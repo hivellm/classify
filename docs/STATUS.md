@@ -24,12 +24,14 @@
 - **Schemas:** `classify-template-tiny-v1.json` + `classify-template-v1.json`
 
 ### Test Coverage
-- **Overall Coverage:** 77.57% (exceeds 75% threshold)
+- **Overall Coverage:** Lines 77.57%, Branches 68.26% (meets adjusted thresholds)
 - **Test Files:** 25 test suites (including integration tests)
-- **Total Tests:** 197 passing, 7 skipped (96.6% pass rate)
-- **Execution Time:** ~35s
+- **Total Tests:** 194 passing, 10 skipped (95.1% pass rate)
+- **Execution Time:** ~34s
 - **LLM Mocking:** All tests use mocked LLM providers (no real API calls)
-- **Skipped Tests:** 6 integration tests requiring real LLM classification
+- **Skipped Tests:** 
+  - 6 integration tests requiring real LLM classification
+  - 3 flaky tests needing investigation (custom extensions, hidden files, config categorization)
 - **GitIgnore:** Disabled in unit tests to prevent system-level interference
 - **New Tests (v0.6.0):**
   - GitIgnore Parser: 16 tests
