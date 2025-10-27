@@ -1,6 +1,7 @@
 import type { ProcessedDocument } from '../preprocessing/document-processor.js';
 import type { ClassificationTemplate } from '../templates/template-loader.js';
 import type { LLMProvider, LLMMessage } from '../llm/types.js';
+import { PromptCompressor } from '../compression/prompt-compressor.js';
 
 /**
  * Classification result from pipeline
@@ -42,6 +43,14 @@ export interface ClassificationPipelineResult {
 
   /** Cost tracking */
   costUsd: number;
+
+  /** Compression metrics */
+  compression?: {
+    originalTokens: number;
+    compressedTokens: number;
+    tokenReduction: number;
+    compressionTimeMs: number;
+  };
 }
 
 /**
@@ -49,7 +58,17 @@ export interface ClassificationPipelineResult {
  * Orchestrates the complete classification process
  */
 export class ClassificationPipeline {
-  constructor(private llmProvider: LLMProvider) {}
+  private compressor: PromptCompressor;
+
+  constructor(
+    private llmProvider: LLMProvider,
+    options: { compressionEnabled?: boolean; compressionRatio?: number } = {}
+  ) {
+    this.compressor = new PromptCompressor({
+      enabled: options.compressionEnabled ?? true,
+      targetRatio: options.compressionRatio ?? 0.5,
+    });
+  }
 
   /**
    * Classify a processed document using a template
@@ -63,6 +82,14 @@ export class ClassificationPipeline {
   ): Promise<ClassificationPipelineResult> {
     // Build extraction prompt
     const messages = this.buildExtractionMessages(document, template);
+
+    // Compress user prompt to save tokens
+    const userMessage = messages[1];
+    if (!userMessage) {
+      throw new Error('User message not found in extraction prompt');
+    }
+    const compressionResult = this.compressor.compress(userMessage.content);
+    userMessage.content = compressionResult.compressed;
 
     // Execute LLM extraction
     const response = await this.llmProvider.complete({
@@ -105,6 +132,14 @@ export class ClassificationPipeline {
         total: response.usage.totalTokens,
       },
       costUsd: response.costUsd,
+      ...(this.compressor.isEnabled() && {
+        compression: {
+          originalTokens: compressionResult.originalTokens,
+          compressedTokens: compressionResult.compressedTokens,
+          tokenReduction: compressionResult.tokenReduction,
+          compressionTimeMs: compressionResult.compressionTimeMs,
+        },
+      }),
     };
   }
 

@@ -70,6 +70,7 @@
     "vitest": "^2.1.9"
   },
   "dependencies": {
+    "@hivellm/compression-prompt": "^0.1.0",
     "@hivellm/transmutation-lite": "^0.6.1",
     "commander": "^14.0.2"
   }

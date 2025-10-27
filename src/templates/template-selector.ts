@@ -1,5 +1,6 @@
 import type { LLMProvider } from '../llm/types.js';
 import type { TemplateLoader, TemplateIndex } from './template-loader.js';
+import { PromptCompressor } from '../compression/prompt-compressor.js';
 
 /**
  * Template selection result
@@ -22,6 +23,14 @@ export interface TemplateSelection {
 
   /** Cost in USD */
   costUsd: number;
+
+  /** Compression metrics (if enabled) */
+  compression?: {
+    originalTokens: number;
+    compressedTokens: number;
+    tokenReduction: number;
+    compressionTimeMs: number;
+  };
 }
 
 /**
@@ -29,10 +38,18 @@ export interface TemplateSelection {
  * Uses LLM to select the best template for a document
  */
 export class TemplateSelector {
+  private compressor: PromptCompressor;
+
   constructor(
     private llmProvider: LLMProvider,
-    private templateLoader: TemplateLoader
-  ) {}
+    private templateLoader: TemplateLoader,
+    options: { compressionEnabled?: boolean; compressionRatio?: number } = {}
+  ) {
+    this.compressor = new PromptCompressor({
+      enabled: options.compressionEnabled ?? true,
+      targetRatio: options.compressionRatio ?? 0.5,
+    });
+  }
 
   /**
    * Select best template for a document
@@ -43,6 +60,9 @@ export class TemplateSelector {
     const index = this.templateLoader.getIndex();
     const prompt = this.buildSelectionPrompt(index, documentContent);
 
+    // Compress user prompt (document content) to save tokens
+    const compressionResult = this.compressor.compress(prompt.user);
+
     const response = await this.llmProvider.complete({
       model: this.llmProvider.defaultModel,
       messages: [
@@ -52,7 +72,7 @@ export class TemplateSelector {
         },
         {
           role: 'user',
-          content: prompt.user,
+          content: compressionResult.compressed,
         },
       ],
       temperature: 0.3, // Low temperature for consistent selection
@@ -82,6 +102,14 @@ export class TemplateSelector {
         output: response.usage.outputTokens,
       },
       costUsd: response.costUsd,
+      ...(this.compressor.isEnabled() && {
+        compression: {
+          originalTokens: compressionResult.originalTokens,
+          compressedTokens: compressionResult.compressedTokens,
+          tokenReduction: compressionResult.tokenReduction,
+          compressionTimeMs: compressionResult.compressionTimeMs,
+        },
+      }),
     };
   }
 

@@ -39,3 +39,9 @@ export {
   ClassificationPipeline,
   type ClassificationPipelineResult,
 } from './classification/index.js';
+
+// Compression
+export {
+  PromptCompressor,
+  type CompressionResult,
+} from './compression/index.js';

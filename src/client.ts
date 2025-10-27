@@ -49,9 +49,16 @@ export class ClassifyClient {
     });
     this.templateSelector = new TemplateSelector(
       this.llmProvider,
-      this.templateLoader
+      this.templateLoader,
+      {
+        compressionEnabled: this.options.compressionEnabled,
+        compressionRatio: this.options.compressionRatio,
+      }
     );
-    this.classificationPipeline = new ClassificationPipeline(this.llmProvider);
+    this.classificationPipeline = new ClassificationPipeline(this.llmProvider, {
+      compressionEnabled: this.options.compressionEnabled,
+      compressionRatio: this.options.compressionRatio,
+    });
   }
 
   /**
