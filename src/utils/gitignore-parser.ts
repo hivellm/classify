@@ -1,5 +1,5 @@
-import { readFile, access } from 'fs/promises';
-import { join, dirname, isAbsolute, relative } from 'path';
+import { readFile } from 'fs/promises';
+import { join, dirname } from 'path';
 
 /**
  * Parsed gitignore pattern with metadata
@@ -34,7 +34,7 @@ export class GitIgnoreParser {
     try {
       const content = await readFile(gitignorePath, 'utf-8');
       this.parseContent(content, gitignorePath);
-    } catch (error) {
+    } catch {
       // File doesn't exist or can't be read - ignore silently
       console.warn(`Could not read .gitignore: ${gitignorePath}`);
     }

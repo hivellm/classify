@@ -100,11 +100,11 @@ export class RecursiveScanner {
   constructor(options: ScanOptions = {}) {
     this.ignorePatterns = [
       ...DEFAULT_IGNORE_PATTERNS,
-      ...(options.ignorePatterns || []),
+      ...(options.ignorePatterns ?? []),
     ];
     
     this.extensions = new Set(
-      options.extensions || DEFAULT_EXTENSIONS
+      options.extensions ?? DEFAULT_EXTENSIONS
     );
     
     this.includeTests = options.includeTests ?? false;
@@ -125,7 +125,7 @@ export class RecursiveScanner {
     // Check if directory exists
     try {
       await stat(directory);
-    } catch (error) {
+    } catch {
       throw new Error(`Directory does not exist: ${directory}`);
     }
     
@@ -205,9 +205,9 @@ export class RecursiveScanner {
           results.push(file);
         }
       }
-    } catch (error) {
+    } catch {
       // Log error but continue scanning
-      console.warn(`Warning: Could not scan ${directory}: ${error}`);
+      console.warn(`Warning: Could not scan ${directory}`);
     }
   }
   
@@ -335,8 +335,8 @@ export class RecursiveScanner {
     
     for (const file of files) {
       totalSize += file.size;
-      byCategory[file.category] = (byCategory[file.category] || 0) + 1;
-      byExtension[file.extension] = (byExtension[file.extension] || 0) + 1;
+      byCategory[file.category] = (byCategory[file.category] ?? 0) + 1;
+      byExtension[file.extension] = (byExtension[file.extension] ?? 0) + 1;
     }
     
     return {

@@ -83,7 +83,7 @@ export class OpenAIProvider extends BaseLLMProvider {
       };
 
       const choice = data.choices[0];
-      if (!choice || !choice.message) {
+      if (!choice?.message) {
         throw new Error('Invalid API response: missing choice or message');
       }
 

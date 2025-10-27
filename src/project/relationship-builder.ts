@@ -1,5 +1,5 @@
 import { readFile } from 'fs/promises';
-import { dirname, join, relative, resolve, extname, basename } from 'path';
+import { dirname, relative, resolve, extname } from 'path';
 
 /**
  * File relationship (import/dependency)
@@ -101,25 +101,33 @@ export class RelationshipBuilder {
     let match;
     while ((match = es6ImportRegex.exec(content)) !== null) {
       const importPath = match[1];
-      imports.push(this.createRelationship(filePath, importPath, 'import', projectRoot));
+      if (importPath) {
+        imports.push(this.createRelationship(filePath, importPath, 'import', projectRoot));
+      }
     }
 
     // Dynamic imports
     while ((match = dynamicImportRegex.exec(content)) !== null) {
       const importPath = match[1];
-      imports.push(this.createRelationship(filePath, importPath, 'import', projectRoot));
+      if (importPath) {
+        imports.push(this.createRelationship(filePath, importPath, 'import', projectRoot));
+      }
     }
 
     // Require calls
     while ((match = requireRegex.exec(content)) !== null) {
       const importPath = match[1];
-      imports.push(this.createRelationship(filePath, importPath, 'require', projectRoot));
+      if (importPath) {
+        imports.push(this.createRelationship(filePath, importPath, 'require', projectRoot));
+      }
     }
 
     // Export from
     while ((match = exportFromRegex.exec(content)) !== null) {
       const importPath = match[1];
-      imports.push(this.createRelationship(filePath, importPath, 'import', projectRoot));
+      if (importPath) {
+        imports.push(this.createRelationship(filePath, importPath, 'import', projectRoot));
+      }
     }
 
     return imports;
@@ -144,12 +152,16 @@ export class RelationshipBuilder {
     let match;
     while ((match = importRegex.exec(content)) !== null) {
       const module = match[1];
-      imports.push(this.createRelationship(filePath, module, 'import', projectRoot, '.py'));
+      if (module) {
+        imports.push(this.createRelationship(filePath, module, 'import', projectRoot, '.py'));
+      }
     }
 
     while ((match = fromImportRegex.exec(content)) !== null) {
       const module = match[1];
-      imports.push(this.createRelationship(filePath, module, 'import', projectRoot, '.py'));
+      if (module) {
+        imports.push(this.createRelationship(filePath, module, 'import', projectRoot, '.py'));
+      }
     }
 
     return imports;
@@ -173,13 +185,17 @@ export class RelationshipBuilder {
 
     let match;
     while ((match = useRegex.exec(content)) !== null) {
-      const module = match[1].trim();
-      imports.push(this.createRelationship(filePath, module, 'use', projectRoot, '.rs'));
+      const module = match[1]?.trim();
+      if (module) {
+        imports.push(this.createRelationship(filePath, module, 'use', projectRoot, '.rs'));
+      }
     }
 
     while ((match = modRegex.exec(content)) !== null) {
       const module = match[1];
-      imports.push(this.createRelationship(filePath, module, 'mod', projectRoot, '.rs'));
+      if (module) {
+        imports.push(this.createRelationship(filePath, module, 'mod', projectRoot, '.rs'));
+      }
     }
 
     return imports;
@@ -201,7 +217,9 @@ export class RelationshipBuilder {
     let match;
     while ((match = importRegex.exec(content)) !== null) {
       const importPath = match[1];
-      imports.push(this.createRelationship(filePath, importPath, 'import', projectRoot, '.java'));
+      if (importPath) {
+        imports.push(this.createRelationship(filePath, importPath, 'import', projectRoot, '.java'));
+      }
     }
 
     return imports;
@@ -226,18 +244,22 @@ export class RelationshipBuilder {
     let match;
     while ((match = singleImportRegex.exec(content)) !== null) {
       const importPath = match[1];
-      imports.push(this.createRelationship(filePath, importPath, 'import', projectRoot, '.go'));
+      if (importPath) {
+        imports.push(this.createRelationship(filePath, importPath, 'import', projectRoot, '.go'));
+      }
     }
 
     while ((match = blockImportRegex.exec(content)) !== null) {
       const block = match[1];
-      const lines = block.split('\n');
-      
-      for (const line of lines) {
-        const lineMatch = line.match(/"([^"]+)"/);
-        if (lineMatch) {
-          const importPath = lineMatch[1];
-          imports.push(this.createRelationship(filePath, importPath, 'import', projectRoot, '.go'));
+      if (block) {
+        const lines = block.split('\n');
+        
+        for (const line of lines) {
+          const lineMatch = line.match(/"([^"]+)"/);
+          if (lineMatch?.[1]) {
+            const importPath = lineMatch[1];
+            imports.push(this.createRelationship(filePath, importPath, 'import', projectRoot, '.go'));
+          }
         }
       }
     }
@@ -364,7 +386,7 @@ export class RelationshipBuilder {
       recursionStack.add(node);
       path.push(node);
 
-      const neighbors = graph.get(node) || [];
+      const neighbors = graph.get(node) ?? [];
       
       for (const neighbor of neighbors) {
         dfs(neighbor, [...path]);

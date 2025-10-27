@@ -36,7 +36,7 @@ export class ProjectDetector {
     const configFiles: string[] = [];
     const entryPoints: string[] = [];
     const dirParts = directory.split(/[/\\]/);
-    let name: string = dirParts[dirParts.length - 1] || 'unknown';
+    let name: string = dirParts[dirParts.length - 1] ?? 'unknown';
     let primaryLanguage: string = 'unknown';
 
     // Detect Node.js
@@ -53,7 +53,7 @@ export class ProjectDetector {
 
       // Find entry points
       const pkgContent = await this.readJson(join(directory, 'package.json'));
-      name = pkgContent.name || name;
+      name = pkgContent.name ?? name;
       
       if (pkgContent.main) entryPoints.push(pkgContent.main);
       if (pkgContent.module) entryPoints.push(pkgContent.module);
