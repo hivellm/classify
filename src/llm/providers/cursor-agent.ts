@@ -174,19 +174,21 @@ export class CursorAgentProvider implements LLMProvider {
 
     // Extract JSON from response if present
     const jsonMatch = accumulatedText.match(/```json\n([\s\S]*?)\n```/);
-    const content = jsonMatch ? jsonMatch[1] : accumulatedText;
+    const content = jsonMatch ? jsonMatch[1] : accumulatedText || '';
 
     // Estimate tokens (rough estimate: 1 token ≈ 4 characters)
     const inputTokens = Math.ceil(output.length / 4);
-    const outputTokens = Math.ceil(content.length / 4);
+    const outputTokens = Math.ceil((content || '').length / 4);
 
     return {
-      content: content.trim(),
+      content: content?.trim() || '',
       finishReason: 'stop',
       usage: {
         inputTokens,
         outputTokens,
+        totalTokens: inputTokens + outputTokens,
       },
+      costUsd: 0, // cursor-agent is free
       model,
     };
   }

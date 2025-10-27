@@ -3,7 +3,7 @@
  */
 export interface ClassifyOptions {
   /** LLM provider (default: 'deepseek') */
-  provider?: 'deepseek' | 'openai' | 'anthropic' | 'gemini' | 'xai' | 'groq';
+  provider?: 'deepseek' | 'openai' | 'anthropic' | 'gemini' | 'xai' | 'groq' | 'cursor-agent';
 
   /** LLM model name */
   model?: string;
