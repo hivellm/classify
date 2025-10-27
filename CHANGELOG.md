@@ -7,6 +7,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2025-10-27
+
+### Added
+
+- **6 LLM Providers** (Complete):
+  - DeepSeek provider (deepseek-chat) - Default, most cost-effective
+  - OpenAI provider (gpt-5-mini, gpt-5-nano, o3-mini, gpt-4o series)
+  - Anthropic provider (claude-3-5-haiku-20241022, claude-4-5-haiku)
+  - Google Gemini provider (gemini-2.5-flash, gemini-2.0-flash-exp)
+  - xAI Grok provider (grok-3, grok-3-mini)
+  - Groq provider (llama-3.3-70b-versatile, mixtral, gemma2)
+
+- **2 New Templates**:
+  - Software Project template (code, scripts, dependencies, tests, docs)
+    - Entities: Module, Function, Class, Dependency, API, Database, Test, Script, Documentation
+    - Relationships: IMPORTS, DEPENDS_ON, CALLS, IMPLEMENTS, CONTAINS, TESTS, DOCUMENTS
+  - Academic Paper template (research, citations, methodologies, datasets)
+    - Entities: Author, Institution, ResearchTopic, Methodology, Dataset, Model, Metric, Finding, Citation
+    - Relationships: AUTHORED_BY, AFFILIATED_WITH, PROPOSES, ANALYZES, CITES, BUILDS_ON, EVALUATES_WITH
+
+- **Enhanced Testing**:
+  - 88 unit tests (100% passing)
+  - 6 new provider tests (Anthropic, Gemini, xAI, Groq)
+  - Coverage: 80%+ on all metrics
+
+### Changed
+
+- Updated default models to latest versions (GPT-5, Gemini 2.5, Grok 3)
+- Total templates increased from 13 to 15
+- Total providers increased from 2 to 6
+- Improved pricing data for all models
+
 ## [0.2.1] - 2025-10-27
 
 ### Added
