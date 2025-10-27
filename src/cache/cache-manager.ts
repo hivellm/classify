@@ -102,7 +102,7 @@ export class CacheManager {
       result.cacheInfo.cached = true;
 
       return result;
-    } catch (error) {
+    } catch {
       // Cache miss
       this.stats.misses++;
       return null;
@@ -191,8 +191,8 @@ export class CacheManager {
       }
 
       return cleared;
-    } catch (error) {
-      console.warn(`Failed to clear old cache entries: ${error}`);
+    } catch {
+      console.warn('Failed to clear old cache entries');
       return cleared;
     }
   }

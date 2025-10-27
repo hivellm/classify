@@ -92,7 +92,7 @@ export class ClassificationPipeline {
     // Extract document content for compression (between ``` markers)
     let compressionResult = null;
     const contentMatch = userMessage.content.match(/```markdown\n([\s\S]*?)\n```/);
-    if (contentMatch && contentMatch[1]) {
+    if (contentMatch?.[1]) {
       const originalContent = contentMatch[1];
       compressionResult = this.compressor.compress(originalContent);
       

@@ -237,19 +237,21 @@ ${content.slice(0, 2000)}${content.length > 2000 ? '...' : ''}`,
 
         case 'date':
         case 'deadline':
-        case 'event':
+        case 'event': {
           const date = entity.properties.date ?? entity.properties.value;
           if (date) result.dates.push(String(date));
           break;
+        }
 
         case 'amount':
         case 'price':
         case 'cost':
         case 'budget':
-        case 'revenue':
+        case 'revenue': {
           const value = entity.properties.value ?? entity.properties.amount;
           if (value) result.amounts.push(String(value));
           break;
+        }
       }
     });
 
