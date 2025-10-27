@@ -4,7 +4,7 @@ import { join } from 'path';
 
 describe('TemplateLoader', () => {
   const loader = new TemplateLoader();
-  const templateDir = join(process.cwd(), 'templates');
+  const templateDir = join(process.cwd(), 'templates', 'tiny');
 
   beforeAll(async () => {
     await loader.loadTemplates(templateDir);

@@ -128,7 +128,7 @@ IMPORTANT: Respond with valid JSON in the exact format specified above. Your res
     const templatesInfo = index.templates
       .map(
         (t) =>
-          `- **${t.name}**: ${t.display_name} - ${t.description}\n  Domains: ${t.domain_expertise.join(', ')}\n  Indicators: ${t.key_indicators.join(', ')}`
+          `- **${t.name}**: ${t.display_name} - ${t.description}\n  Domains: ${t.domain_expertise?.join(', ') || 'general'}\n  Indicators: ${t.key_indicators?.join(', ') || 'general'}`
       )
       .join('\n\n');
 
