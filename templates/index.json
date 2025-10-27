@@ -3,8 +3,8 @@
   "version": "1.0",
   "metadata": {
     "description": "Template Index for Document Classification - Use this to select the most appropriate template for a given document",
-    "total_templates": 13,
-    "last_updated": "2025-01-26"
+    "total_templates": 15,
+    "last_updated": "2025-01-27"
   },
   
   "templates": [
@@ -366,6 +366,74 @@
       ],
       "domain_expertise": ["product", "product_management", "development"],
       "use_when": "Document describes product features, requirements, or product planning"
+    },
+    
+    {
+      "name": "software_project",
+      "priority": 89,
+      "display_name": "Software Project Documents",
+      "description": "For source code, scripts, documentation, and software project artifacts with code correlation and dependencies",
+      "best_for": [
+        "Source code files",
+        "Scripts and automation",
+        "Code documentation",
+        "API specifications",
+        "Configuration files",
+        "README and changelogs",
+        "Test suites",
+        "Build and deployment scripts"
+      ],
+      "key_indicators": [
+        "import", "export", "function", "class", "module", "package",
+        "dependency", "npm", "pip", "cargo", "script", "build",
+        "test", "api", "endpoint", "database", "schema",
+        "typescript", "python", "rust", "javascript", "async",
+        "await", "const", "let", "def", "fn", "struct"
+      ],
+      "example_documents": [
+        "AuthService.ts - User Authentication Module",
+        "README.md - Project Documentation",
+        "package.json - Dependencies Configuration",
+        "test_auth.py - Authentication Tests",
+        "deploy.sh - Deployment Script",
+        "API.md - REST API Specification"
+      ],
+      "domain_expertise": ["software", "programming", "development", "engineering"],
+      "use_when": "Document is source code, script, or technical software project artifact"
+    },
+    
+    {
+      "name": "academic_paper",
+      "priority": 93,
+      "display_name": "Academic Papers",
+      "description": "For research papers, theses, dissertations, and scientific articles with citations and methodologies",
+      "best_for": [
+        "Research papers",
+        "Theses and dissertations",
+        "Conference papers",
+        "Journal articles",
+        "Technical reports",
+        "Preprints",
+        "Review papers",
+        "Case studies"
+      ],
+      "key_indicators": [
+        "abstract", "introduction", "methodology", "results", "discussion",
+        "conclusion", "references", "citation", "author", "affiliation",
+        "dataset", "experiment", "hypothesis", "model", "metric",
+        "accuracy", "precision", "recall", "baseline", "improvement",
+        "doi", "arxiv", "conference", "journal", "peer review",
+        "statistical", "analysis", "findings", "contribution"
+      ],
+      "example_documents": [
+        "Deep Learning for Image Classification",
+        "A Novel Approach to Natural Language Processing",
+        "PhD Thesis - Quantum Computing Applications",
+        "Case Study - Climate Change Impact",
+        "Review Paper - Machine Learning in Healthcare"
+      ],
+      "domain_expertise": ["research", "academic", "science", "education"],
+      "use_when": "Document is a research paper, academic article, or scientific publication"
     },
     
     {
