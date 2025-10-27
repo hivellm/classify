@@ -41,7 +41,7 @@ describe('Project Mapping Integration', () => {
       apiKey: 'test-key',
       cacheEnabled: false,
     });
-    
+
     // Replace the LLM provider with mock
     (client as any).llmProvider = mockProvider;
 
