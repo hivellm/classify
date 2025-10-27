@@ -59,6 +59,7 @@
     "node": ">=18.0.0"
   },
   "devDependencies": {
+    "@fission-ai/openspec": "^0.13.0",
     "@types/node": "^22.18.12",
     "@typescript-eslint/eslint-plugin": "^8.20.0",
     "@typescript-eslint/parser": "^8.20.0",
