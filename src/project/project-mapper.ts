@@ -59,6 +59,8 @@ export class ProjectMapper {
       templateId?: string;
       useGitIgnore?: boolean;
       buildRelationships?: boolean;
+      maxFiles?: number;
+      ignorePatterns?: string[];
       onProgress?: (current: number, total: number, file: string) => void;
     } = {}
   ): Promise<ProjectMapResult> {
@@ -85,14 +87,19 @@ export class ProjectMapper {
     // Find all source files
     console.log('📂 Scanning files...');
     const pattern = '**/*.{ts,js,jsx,tsx,rs,py,java,go,md,json,yml,yaml,toml,sh}';
+    
+    // Custom ignore patterns
+    const customIgnore = options.ignorePatterns || [];
+    const defaultIgnore = ['**/node_modules/**', '**/target/**', '**/dist/**', '**/build/**'];
+    
     const allFiles = await glob(pattern, {
       cwd: directory,
       absolute: true,
-      ignore: ['**/node_modules/**', '**/target/**', '**/dist/**', '**/build/**'],
+      ignore: [...defaultIgnore, ...customIgnore],
     });
 
     // Filter files
-    const filteredFiles = allFiles.filter((file) => {
+    let filteredFiles = allFiles.filter((file) => {
       // Check gitignore first
       if (gitignoreParser?.shouldIgnore(file, directory)) {
         return false;
@@ -108,6 +115,12 @@ export class ProjectMapper {
 
       return !shouldSkip;
     });
+
+    // Limit files if maxFiles specified
+    if (options.maxFiles && filteredFiles.length > options.maxFiles) {
+      console.log(`   ⚠️  Limiting to ${options.maxFiles} files (found ${filteredFiles.length})`);
+      filteredFiles = filteredFiles.slice(0, options.maxFiles);
+    }
 
     console.log(`   Found ${allFiles.length} files, ${filteredFiles.length} after filtering\n`);
 
