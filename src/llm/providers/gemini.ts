@@ -49,7 +49,7 @@ export class GeminiProvider extends BaseLLMProvider {
             : undefined,
           generationConfig: {
             temperature: request.temperature ?? 0.7,
-            maxOutputTokens: request.maxTokens || 8192,
+            maxOutputTokens: request.maxTokens ?? 8192,
             responseMimeType: request.jsonMode ? 'application/json' : 'text/plain',
           },
         }),
@@ -86,7 +86,7 @@ export class GeminiProvider extends BaseLLMProvider {
     const outputTokens = data.usageMetadata?.candidatesTokenCount || 0;
 
     return {
-      content: candidate.content?.parts?.[0]?.text || '',
+      content: candidate.content?.parts?.[0]?.text ?? '',
       finishReason: candidate.finishReason === 'STOP' ? 'stop' : 'length',
       usage: {
         inputTokens,
@@ -107,6 +107,6 @@ export class GeminiProvider extends BaseLLMProvider {
       'gemini-1.5-flash-8b': { input: 0.0375, output: 0.15 },
     };
 
-    return pricing[model] || { input: 0.05, output: 0.2 };
+    return pricing[model] ?? { input: 0.05, output: 0.2 };
   }
 }

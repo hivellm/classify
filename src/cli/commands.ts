@@ -6,6 +6,7 @@ import { ClassifyClient } from '../client.js';
 import { ProjectMapper } from '../project/project-mapper.js';
 import { ElasticsearchClient } from '../integrations/elasticsearch-client.js';
 import { Neo4jClient } from '../integrations/neo4j-client.js';
+import type { ClassifyResult } from '../types.js';
 import { writeFile } from 'fs/promises';
 import * as path from 'path';
 
@@ -101,7 +102,7 @@ export async function mapProjectCommand(directory: string, options: MapProjectOp
       
       // Bulk insert into databases
       const validResults = batchResults
-        .filter(item => item.result)
+        .filter((item): item is { filePath: string; result: ClassifyResult } => item.result !== null)
         .map(item => ({ result: item.result, file: item.filePath }));
 
       if (validResults.length === 0) {
@@ -138,7 +139,7 @@ export async function mapProjectCommand(directory: string, options: MapProjectOp
   console.log(`❌ Errors: ${result.statistics.failedFiles}`);
   console.log(`\n📊 Entities:`);
   console.log(`   - Total: ${result.statistics.totalEntities || 0}`);
-  console.log(`   - Types: ${result.statistics.entityTypes?.length || 0} different types`);
+  console.log(`   - Types: ${result.statistics.entityTypes?.length ?? 0} different types`);
   console.log(`\n🔗 Relationships:`);
   console.log(`   - Total: ${result.statistics.totalRelationships || 0}`);
   console.log(`   - Imports: ${result.statistics.totalImports || 0}`);

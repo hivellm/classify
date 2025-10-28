@@ -28,12 +28,16 @@ export interface ProjectMapResult {
   /** Project statistics */
   statistics: {
     totalFiles: number;
+    successfulFiles: number;
+    failedFiles: number;
     totalEntities: number;
     totalRelationships: number;
     totalImports: number;
+    entityTypes?: string[];
     byLanguage: Record<string, number>;
     byDocType: Record<string, number>;
     totalCost: number;
+    averageCost: number;
     processingTime: number;
   };
 
@@ -61,6 +65,7 @@ export class ProjectMapper {
       maxFiles?: number;
       ignorePatterns?: string[];
       onProgress?: (current: number, total: number, file: string) => void;
+      onBatchComplete?: (batchResults: Array<{ filePath: string; result: ClassifyResult | null }>) => Promise<void>;
     } = {}
   ): Promise<ProjectMapResult> {
     const startTime = Date.now();
@@ -82,7 +87,7 @@ export class ProjectMapper {
       try {
         await gitignoreParser.loadCascading(directory);
         console.log(`   Loaded ${gitignoreParser.getPatterns().length} patterns\n`);
-      } catch (error) {
+      } catch {
         console.warn(`   ⚠️  Failed to load .gitignore, continuing without it\n`);
         gitignoreParser = undefined;
       }
@@ -93,7 +98,7 @@ export class ProjectMapper {
     const pattern = 'src/**/*.{ts,js,jsx,tsx,rs,py,java,go}'; // Only source code in src/
     
     // Custom ignore patterns
-    const customIgnore = options.ignorePatterns || [];
+    const customIgnore = options.ignorePatterns ?? [];
     const defaultIgnore = [
       '**/node_modules/**',
       '**/target/**', 
@@ -166,6 +171,11 @@ export class ProjectMapper {
           const lastFile = batch[batch.length - 1];
           options.onProgress(results.length, filteredFiles.length, lastFile?.filePath ?? '');
         }
+
+        // Call user batch complete callback if provided
+        if (options.onBatchComplete) {
+          await options.onBatchComplete(batch);
+        }
       },
     });
 
@@ -201,7 +211,7 @@ export class ProjectMapper {
     }
 
     // Calculate statistics
-    const statistics = this.calculateStatistics(results, relationships);
+    const statistics = this.calculateStatistics(results, relationships, batchResult.successCount, batchResult.failureCount);
 
     // Generate unified Cypher
     const projectCypher = this.generateProjectCypher(project, results, relationships);
@@ -226,26 +236,38 @@ export class ProjectMapper {
    */
   private calculateStatistics(
     results: Array<{ path: string; result: ClassifyResult }>,
-    relationships: FileRelationship[]
+    relationships: FileRelationship[],
+    successCount: number,
+    failureCount: number
   ): {
     totalFiles: number;
+    successfulFiles: number;
+    failedFiles: number;
     totalEntities: number;
     totalRelationships: number;
     totalImports: number;
+    entityTypes?: string[];
     byLanguage: Record<string, number>;
     byDocType: Record<string, number>;
     totalCost: number;
+    averageCost: number;
   } {
     let totalEntities = 0;
     let totalRelationships = 0;
     let totalCost = 0;
     const byLanguage: Record<string, number> = {};
     const byDocType: Record<string, number> = {};
+    const entityTypesSet = new Set<string>();
 
     for (const { result } of results) {
       totalEntities += result.graphStructure.entities.length;
       totalRelationships += result.graphStructure.relationships.length;
       totalCost += result.performance.costUsd ?? 0;
+
+      // Collect entity types
+      for (const entity of result.graphStructure.entities) {
+        entityTypesSet.add(entity.type);
+      }
 
       const domain = result.classification.domain;
       byLanguage[domain] = (byLanguage[domain] ?? 0) + 1;
@@ -254,14 +276,21 @@ export class ProjectMapper {
       byDocType[docType] = (byDocType[docType] ?? 0) + 1;
     }
 
+    const totalFiles = successCount + failureCount;
+    const averageCost = totalFiles > 0 ? totalCost / totalFiles : 0;
+
     return {
-      totalFiles: results.length,
+      totalFiles,
+      successfulFiles: successCount,
+      failedFiles: failureCount,
       totalEntities,
       totalRelationships,
       totalImports: relationships.length,
+      entityTypes: Array.from(entityTypesSet),
       byLanguage,
       byDocType,
       totalCost,
+      averageCost,
     };
   }
 

@@ -1,7 +1,7 @@
 {
-  "version": "0.11.1",
-  "installedAt": "2025-10-27T05:09:11.422Z",
-  "updatedAt": "2025-10-27T05:10:02.228Z",
+  "version": "0.12.1",
+  "installedAt": "2025-10-27T05:10:02.223Z",
+  "updatedAt": "2025-10-28T02:28:02.584Z",
   "projectId": "classify",
   "features": {
     "openspec": true,

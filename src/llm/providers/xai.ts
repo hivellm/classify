@@ -94,6 +94,6 @@ export class XAIProvider extends BaseLLMProvider {
       'grok-beta': { input: 5.0, output: 15.0 },
     };
 
-    return pricing[model] || { input: 3.0, output: 12.0 };
+    return pricing[model] ?? { input: 3.0, output: 12.0 };
   }
 }

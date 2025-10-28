@@ -94,6 +94,6 @@ export class GroqProvider extends BaseLLMProvider {
       'gemma2-9b-it': { input: 0.2, output: 0.2 },
     };
 
-    return pricing[model] || { input: 0.59, output: 0.79 };
+    return pricing[model] ?? { input: 0.59, output: 0.79 };
   }
 }

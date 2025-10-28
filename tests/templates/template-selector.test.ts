@@ -2,14 +2,21 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { TemplateSelector } from '../../src/templates/template-selector.js';
 import { TemplateLoader } from '../../src/templates/template-loader.js';
 import type { LLMProvider } from '../../src/llm/types.js';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 describe('TemplateSelector', () => {
   let templateLoader: TemplateLoader;
   let mockProvider: LLMProvider;
 
   beforeEach(async () => {
+    // Load templates from the correct path (templates/ in project root)
+    const templatesDir = join(__dirname, '..', '..', 'templates', 'tiny');
     templateLoader = new TemplateLoader();
-    await templateLoader.loadTemplates();
+    await templateLoader.loadTemplates(templatesDir);
 
     mockProvider = {
       name: 'mock-provider',

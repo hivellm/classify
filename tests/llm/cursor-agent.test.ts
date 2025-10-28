@@ -35,21 +35,22 @@ describe('CursorAgentProvider', () => {
 
   it('should parse stream output correctly', async () => {
     const mockOutput = `{"type":"system","subtype":"init","apiKeySource":"config","cwd":"/test","session_id":"test-123","model":"claude-sonnet-4","permissionMode":"accept"}
-{"type":"assistant","message":{"role":"assistant","content":[{"type":"再把","text":"Result: success"}]},"session_id":"test-123","timestamp_ms":1000}
+{"type":"assistant","message":{"role":"assistant","content":[{"type":"text","text":"Result: success"}]},"session_id":"test-123","timestamp_ms":1000}
 {"type":"result","subtype":"success","duration_ms":1500,"duration_api_ms":1200,"is_error":false,"result":"success","session_id":"test-123","request_id":"req-123"}`;
 
     // Mock successful spawn
     const mockChild = {
       on: vi.fn((event, callback) => {
         if (event === 'close') {
-          setTimeout(() => callback(0), 10);
+          setTimeout(() => callback(0), 100); // Give more time for data to process
         }
         return mockChild;
       }),
       stdout: {
         on: vi.fn((event, callback) => {
           if (event === 'data') {
-            setTimeout(() => callback(Buffer.from(mockOutput)), 10);
+            // Emit data before close
+            setTimeout(() => callback(Buffer.from(mockOutput)), 5);
           }
           return mockChild.stdout;
         }),
@@ -86,6 +87,13 @@ describe('CursorAgentProvider', () => {
           }
           return mockChild;
         }),
+        stdout: {
+          on: vi.fn(() => mockChild.stdout),
+        },
+        stderr: {
+          on: vi.fn(() => mockChild.stderr),
+        },
+        kill: vi.fn(),
       };
       return mockChild;
     });

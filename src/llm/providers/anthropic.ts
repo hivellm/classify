@@ -47,7 +47,7 @@ export class AnthropicProvider extends BaseLLMProvider {
         model,
         messages: messages.filter((m) => m.role !== 'user' || !systemMessage),
         system: systemMessage?.content,
-        max_tokens: request.maxTokens || 4096,
+        max_tokens: request.maxTokens ?? 4096,
         temperature: request.temperature ?? 0.7,
       }),
       signal: AbortSignal.timeout(this.config.timeout),
@@ -75,7 +75,7 @@ export class AnthropicProvider extends BaseLLMProvider {
     const outputTokens = data.usage?.output_tokens || 0;
 
     return {
-      content: data.content[0]?.text || '',
+      content: data.content[0]?.text ?? '',
       finishReason: data.stop_reason === 'end_turn' ? 'stop' : 'length',
       usage: {
         inputTokens,
@@ -97,6 +97,6 @@ export class AnthropicProvider extends BaseLLMProvider {
       'claude-3-haiku-20240307': { input: 0.25, output: 1.25 },
     };
 
-    return pricing[model] || { input: 0.8, output: 4.0 };
+    return pricing[model] ?? { input: 0.8, output: 4.0 };
   }
 }

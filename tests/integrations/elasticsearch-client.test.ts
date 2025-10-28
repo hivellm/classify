@@ -149,7 +149,7 @@ describe('ElasticsearchClient', () => {
       expect(fetch).toHaveBeenCalledWith(
         expect.stringContaining('test-index/_doc'),
         expect.objectContaining({
-          method: 'POST',
+          method: 'PUT',
         })
       );
     });
