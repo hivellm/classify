@@ -210,12 +210,18 @@ export class CursorAgentProvider implements LLMProvider {
         '--output-format',
         'stream-json',
         '--stream-partial-output',
-        '--',
         prompt,
       ];
 
-      console.log('🔧 [DEBUG] Spawning cursor-agent with args:', args.slice(0, -1), `[prompt: ${prompt.substring(0, 50)}...]`);
-      const child = spawn('cursor-agent', args);
+      const child = spawn('cursor-agent', args, {
+        env: {
+          ...process.env,
+          // Disable Node.js buffering for immediate output
+          NODE_NO_READLINE: '1',
+        },
+        stdio: ['ignore', 'pipe', 'pipe'],
+        shell: false,
+      });
 
       let stdout = '';
       let stderr = '';
@@ -232,7 +238,6 @@ export class CursorAgentProvider implements LLMProvider {
 
       child.stdout.on('data', (data) => {
         const chunk = data.toString();
-        console.log(`🔧 [DEBUG] Received ${chunk.length} chars`);
         stdout += chunk;
         buffer += chunk;
 
@@ -244,14 +249,9 @@ export class CursorAgentProvider implements LLMProvider {
           if (line.trim()) {
             const event = parseStreamLine(line);
             
-            if (event) {
-              console.log(`🔧 [DEBUG] Event type: ${event.type}`);
-            }
-            
             // Check if we got a result event (completion)
             if (event?.type === 'result') {
               hasResultEvent = true;
-              console.log('🔧 [DEBUG] Received result event, killing cursor-agent...');
               
               // Give 500ms for any remaining output, then kill
               setTimeout(() => {
@@ -278,22 +278,18 @@ export class CursorAgentProvider implements LLMProvider {
       child.on('close', (code) => {
         clearTimeout(timeoutId);
 
-        console.log(`🔧 [DEBUG] cursor-agent exited with code ${code}, stdout length: ${stdout.length}, stderr: ${stderr.substring(0, 200)}`);
-
         if (!hasResultEvent && code !== 0) {
           reject(
             new Error(`cursor-agent exited with code ${code}\nStderr: ${stderr}\nStdout: ${stdout}`)
           );
         } else {
-          if (stdout.length === 0) {
-            console.warn('⚠️  cursor-agent returned empty output!');
-          }
           resolve(stdout);
         }
       });
 
       child.on('error', (error) => {
         clearTimeout(timeoutId);
+        
         if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
           reject(
             new Error(
