@@ -91,31 +91,24 @@ export class Neo4jClient {
    */
   async insertResult(result: ClassifyResult, sourceFile: string): Promise<void> {
     const fileHash = result.cacheInfo.hash;
+    let cypher = result.graphStructure.cypher;
     
-    // Replace CREATE with MERGE and add file_hash as unique ID
-    // This prevents duplicates when re-indexing the same file
-    let enhancedCypher = result.graphStructure.cypher.replace(
-      'CREATE (doc:Document {',
-      `MERGE (doc:Document { file_hash: "${fileHash}" })\n      ON CREATE SET doc += {\n      source_file: "${sourceFile}",\n      classified_at: datetime(),\n      `
+    // Replace CREATE with MERGE and add file_hash as unique identifier
+    cypher = cypher.replace(
+      'CREATE (doc:Document {\n',
+      `MERGE (doc:Document { file_hash: "${fileHash}" })
+      ON CREATE SET doc +={\n      file_hash: "${fileHash}",\n      source_file: "${sourceFile}",\n      classified_at: datetime(),\n`
     );
     
-    // Also add ON MATCH to update metadata on re-index
-    enhancedCypher = enhancedCypher.replace(
-      'CREATE (doc:Document { file_hash:',
-      'MERGE (doc:Document { file_hash:'
+    // Replace "    })" with "    }" (remove closing paren) and add ON MATCH
+    cypher = cypher.replace(
+      '\n    })\nCREATE',
+      `\n    }
+      ON MATCH SET doc.updated_at = datetime()
+CREATE`
     );
-    
-    // Add update clause for when document already exists
-    if (!enhancedCypher.includes('ON MATCH SET')) {
-      const insertPos = enhancedCypher.indexOf('}\n      ON CREATE SET');
-      if (insertPos > -1) {
-        enhancedCypher = enhancedCypher.slice(0, insertPos + 1) +
-          `\n      ON MATCH SET doc.source_file = "${sourceFile}", doc.updated_at = datetime()` +
-          enhancedCypher.slice(insertPos + 1);
-      }
-    }
 
-    await this.executeCypher(enhancedCypher);
+    await this.executeCypher(cypher);
   }
 
   /**
@@ -127,30 +120,24 @@ export class Neo4jClient {
     // Build all Cypher statements for the batch
     const statements = results.map(({ result, file }) => {
       const fileHash = result.cacheInfo.hash;
+      let cypher = result.graphStructure.cypher;
       
-      // Replace CREATE with MERGE and add file_hash as unique ID
-      let enhancedCypher = result.graphStructure.cypher.replace(
-        'CREATE (doc:Document {',
-        `MERGE (doc:Document { file_hash: "${fileHash}" })\n      ON CREATE SET doc += {\n      source_file: "${file}",\n      classified_at: datetime(),\n      `
+      // Replace CREATE with MERGE and add file_hash as unique identifier
+      cypher = cypher.replace(
+        'CREATE (doc:Document {\n',
+        `MERGE (doc:Document { file_hash: "${fileHash}" })
+      ON CREATE SET doc += {\n      file_hash: "${fileHash}",\n      source_file: "${file}",\n      classified_at: datetime(),\n`
       );
       
-      // Also replace any other CREATE (doc:Document patterns
-      enhancedCypher = enhancedCypher.replace(
-        'CREATE (doc:Document { file_hash:',
-        'MERGE (doc:Document { file_hash:'
+      // Replace "    })" with "    }" (remove closing paren) and add ON MATCH
+      cypher = cypher.replace(
+        '\n    })\nCREATE',
+        `\n    }
+      ON MATCH SET doc.updated_at = datetime()
+CREATE`
       );
-      
-      // Add update clause for when document already exists
-      if (!enhancedCypher.includes('ON MATCH SET')) {
-        const insertPos = enhancedCypher.indexOf('}\n      ON CREATE SET');
-        if (insertPos > -1) {
-          enhancedCypher = enhancedCypher.slice(0, insertPos + 1) +
-            `\n      ON MATCH SET doc.source_file = "${file}", doc.updated_at = datetime()` +
-            enhancedCypher.slice(insertPos + 1);
-        }
-      }
 
-      return { statement: enhancedCypher };
+      return { statement: cypher };
     });
 
     // Execute all statements in a single transaction
