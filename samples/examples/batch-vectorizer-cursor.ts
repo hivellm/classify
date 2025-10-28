@@ -72,8 +72,8 @@ async function main() {
   // Process files with callback for incremental indexing
   const startTime = Date.now();
 
-  const results = await batchProcessor.processFiles(filesToProcess, {
-    concurrency: 1, // Process one at a time for cursor-agent (may be slow)
+  const batchResult = await batchProcessor.processFiles(filesToProcess, {
+    concurrency: 3, // Process 3 at a time
     templateId: 'software_project',
     compressionEnabled: true,
     onProgress: (current, total, file) => {
@@ -81,37 +81,23 @@ async function main() {
     },
     onBatchComplete: async (batchResults) => {
       // Index each result immediately
-      for (const result of batchResults) {
-        if (result.error) {
-          console.error(`  ❌ Error: ${result.error}`);
-          errors++;
-          continue;
-        }
-
-        if (!result.result) {
-          console.error(`  ❌ No result returned`);
-          errors++;
-          continue;
-        }
-
-        const fileName = path.basename(result.file);
+      for (const item of batchResults) {
+        const fileName = path.basename(item.filePath);
 
         // Index in Elasticsearch
         try {
-          await elasticsearch.insertResult(result.result, result.file);
+          await elasticsearch.insertResult(item.result, item.filePath);
           indexedElastic++;
-          console.log(`  ✅ Indexed in Elasticsearch`);
         } catch (error) {
-          console.warn(`  ⚠️  Elasticsearch indexing failed:`, error instanceof Error ? error.message : error);
+          console.warn(`  ⚠️  Elasticsearch ${fileName}:`, error instanceof Error ? error.message : error);
         }
 
         // Index in Neo4j
         try {
-          await neo4j.insertResult(result.result, result.file);
+          await neo4j.insertResult(item.result, item.filePath);
           indexedNeo4j++;
-          console.log(`  ✅ Indexed in Neo4j`);
         } catch (error) {
-          console.warn(`  ⚠️  Neo4j indexing failed:`, error instanceof Error ? error.message : error);
+          console.warn(`  ⚠️  Neo4j ${fileName}:`, error instanceof Error ? error.message : error);
         }
 
         processedCount++;
@@ -125,13 +111,13 @@ async function main() {
   console.log('\n' + '='.repeat(60));
   console.log('📊 BATCH PROCESSING COMPLETE');
   console.log('='.repeat(60));
-  console.log(`⏱️  Duration: ${(duration / 1000).toFixed(1)}s`);
-  console.log(`📄 Files processed: ${processedCount}`);
-  console.log(`❌ Errors: ${errors}`);
-  console.log(`💾 Cache hits: ${results.filter((r) => r.result?.performance.cacheHit).length}`);
+  console.log(`⏱️  Duration: ${(duration / 1000).toFixed(1)}s (${(duration / 60000).toFixed(1)} min)`);
+  console.log(`📄 Files processed: ${batchResult.successCount}/${batchResult.totalFiles}`);
+  console.log(`❌ Errors: ${batchResult.failureCount}`);
+  console.log(`💾 Cache: ${batchResult.performance.cacheHits} hits / ${batchResult.performance.cacheMisses} misses`);
   console.log(`\n💰 Costs:`);
-  console.log(`   - Total: $${results.reduce((sum, r) => sum + (r.result?.performance.costUsd || 0), 0).toFixed(4)}`);
-  console.log(`   - Average per file: $${(results.reduce((sum, r) => sum + (r.result?.performance.costUsd || 0), 0) / processedCount).toFixed(6)}`);
+  console.log(`   - Total: $${batchResult.performance.totalCost.toFixed(4)}`);
+  console.log(`   - Average per file: $${batchResult.performance.averageCost.toFixed(6)}`);
   console.log(`\n🔍 Indexing:`);
   console.log(`   - Elasticsearch: ${indexedElastic} documents`);
   console.log(`   - Neo4j: ${indexedNeo4j} documents`);
