@@ -25,8 +25,11 @@ interface MapProjectOptions {
 }
 
 export async function mapProjectCommand(directory: string, options: MapProjectOptions): Promise<void> {
+  // Resolve to absolute path
+  const absoluteDir = path.resolve(directory);
+  
   console.log('\n🗺️  PROJECT MAPPER\n');
-  console.log(`📂 Directory: ${directory}`);
+  console.log(`📂 Directory: ${absoluteDir}`);
   console.log(`🤖 Provider: ${options.provider}`);
   console.log(`⚙️  Concurrency: ${options.concurrency}`);
   console.log(`📝 Template: ${options.template}`);
@@ -78,10 +81,10 @@ export async function mapProjectCommand(directory: string, options: MapProjectOp
   let indexedNeo4j = 0;
 
   // Map project with progress callback
-  const result = await mapper.mapProject(directory, {
+  const result = await mapper.mapProject(absoluteDir, {
     concurrency: parseInt(options.concurrency),
     includeTests: options.includeTests,
-    useGitIgnore: true,
+    useGitIgnore: false, // Disable gitignore - too aggressive, we use glob ignore instead
     buildRelationships: true,
     templateId: options.template,
     onProgress: (current, total, file) => {
@@ -90,12 +93,21 @@ export async function mapProjectCommand(directory: string, options: MapProjectOp
       process.stdout.write(`\r📦 [${current}/${total}] ${percent}% - ${fileName}${' '.repeat(50)}`);
     },
     onBatchComplete: async (batchResults) => {
+      // Log errors for debugging
+      const errors = batchResults.filter(item => !item.result);
+      if (errors.length > 0 && errors.length < batchResults.length) {
+        console.log(`\n   ❌ ${errors.length}/${batchResults.length} failed`);
+      }
+      
       // Bulk insert into databases
       const validResults = batchResults
         .filter(item => item.result)
         .map(item => ({ result: item.result, file: item.filePath }));
 
-      if (validResults.length === 0) return;
+      if (validResults.length === 0) {
+        // All failed in this batch - don't log, it's already shown
+        return;
+      }
 
       // Elasticsearch bulk insert
       try {
@@ -125,15 +137,15 @@ export async function mapProjectCommand(directory: string, options: MapProjectOp
   console.log(`✅ Success: ${result.statistics.successfulFiles}`);
   console.log(`❌ Errors: ${result.statistics.failedFiles}`);
   console.log(`\n📊 Entities:`);
-  console.log(`   - Total: ${result.statistics.totalEntities}`);
-  console.log(`   - Types: ${result.statistics.entityTypes.length} different types`);
+  console.log(`   - Total: ${result.statistics.totalEntities || 0}`);
+  console.log(`   - Types: ${result.statistics.entityTypes?.length || 0} different types`);
   console.log(`\n🔗 Relationships:`);
-  console.log(`   - Total: ${result.statistics.totalRelationships}`);
-  console.log(`   - Imports: ${result.statistics.totalImports}`);
-  console.log(`   - Circular deps: ${result.circularDependencies.length}`);
+  console.log(`   - Total: ${result.statistics.totalRelationships || 0}`);
+  console.log(`   - Imports: ${result.statistics.totalImports || 0}`);
+  console.log(`   - Circular deps: ${result.circularDependencies?.length || 0}`);
   console.log(`\n💰 Costs:`);
-  console.log(`   - Total: $${result.statistics.totalCost.toFixed(4)}`);
-  console.log(`   - Average per file: $${result.statistics.averageCost.toFixed(6)}`);
+  console.log(`   - Total: $${(result.statistics.totalCost || 0).toFixed(4)}`);
+  console.log(`   - Average per file: $${(result.statistics.averageCost || 0).toFixed(6)}`);
   console.log(`\n🔍 Indexing:`);
   console.log(`   - Elasticsearch: ${indexedElastic} documents`);
   console.log(`   - Neo4j: ${indexedNeo4j} documents`);

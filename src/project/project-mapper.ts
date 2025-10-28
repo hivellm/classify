@@ -4,7 +4,6 @@ import { RelationshipBuilder, type FileRelationship } from './relationship-build
 import { BatchProcessor } from '../batch/batch-processor.js';
 import type { ClassifyClient } from '../client.js';
 import type { ClassifyResult } from '../types.js';
-import { shouldIgnore, DEFAULT_IGNORE_PATTERNS } from '../utils/ignore-patterns.js';
 import { GitIgnoreParser } from '../utils/gitignore-parser.js';
 
 /**
@@ -80,49 +79,68 @@ export class ProjectMapper {
     if (options.useGitIgnore !== false) {
       console.log('📋 Loading .gitignore...');
       gitignoreParser = new GitIgnoreParser();
-      await gitignoreParser.loadCascading(directory);
-      console.log(`   Loaded ${gitignoreParser.getPatterns().length} patterns\n`);
+      try {
+        await gitignoreParser.loadCascading(directory);
+        console.log(`   Loaded ${gitignoreParser.getPatterns().length} patterns\n`);
+      } catch (error) {
+        console.warn(`   ⚠️  Failed to load .gitignore, continuing without it\n`);
+        gitignoreParser = undefined;
+      }
     }
 
-    // Find all source files
+    // Find all source files - limit to src/ directory only for code projects
     console.log('📂 Scanning files...');
-    const pattern = '**/*.{ts,js,jsx,tsx,rs,py,java,go,md,json,yml,yaml,toml,sh}';
+    const pattern = 'src/**/*.{ts,js,jsx,tsx,rs,py,java,go}'; // Only source code in src/
     
     // Custom ignore patterns
     const customIgnore = options.ignorePatterns || [];
-    const defaultIgnore = ['**/node_modules/**', '**/target/**', '**/dist/**', '**/build/**'];
+    const defaultIgnore = [
+      '**/node_modules/**',
+      '**/target/**', 
+      '**/dist/**', 
+      '**/build/**',
+      '**/coverage/**',
+      '**/.git/**',
+    ];
     
     const allFiles = await glob(pattern, {
       cwd: directory,
       absolute: true,
+      dot: false, // Don't include dotfiles
       ignore: [...defaultIgnore, ...customIgnore],
     });
+    
+    console.log(`   📁 Glob found: ${allFiles.length} files`);
 
     // Filter files
     let filteredFiles = allFiles.filter((file) => {
-      // Check gitignore first
-      if (gitignoreParser?.shouldIgnore(file, directory)) {
-        return false;
-      }
-
-      // Check default ignore patterns
-      const shouldSkip = shouldIgnore(file, [...DEFAULT_IGNORE_PATTERNS]);
-
       // Optionally exclude tests
       if (!options.includeTests && file.match(/test|spec|__tests__|__mocks__/i)) {
         return false;
       }
 
-      return !shouldSkip;
+      // Check gitignore last (if available)
+      // Note: gitignore is often too aggressive for code analysis
+      // We already filtered by glob ignore patterns
+      if (gitignoreParser && options.useGitIgnore === true) {
+        if (gitignoreParser.shouldIgnore(file, directory)) {
+          return false;
+        }
+      }
+
+      // Don't use DEFAULT_IGNORE_PATTERNS here - already filtered by glob
+      return true;
     });
 
+    console.log(`   📋 After ignore patterns: ${filteredFiles.length} files`);
+    
     // Limit files if maxFiles specified
     if (options.maxFiles && filteredFiles.length > options.maxFiles) {
-      console.log(`   ⚠️  Limiting to ${options.maxFiles} files (found ${filteredFiles.length})`);
+      console.log(`   ⚠️  Limiting to ${options.maxFiles} files`);
       filteredFiles = filteredFiles.slice(0, options.maxFiles);
     }
 
-    console.log(`   Found ${allFiles.length} files, ${filteredFiles.length} after filtering\n`);
+    console.log(`   ✅ Final count: ${filteredFiles.length} files to process\n`);
 
     // Classify files in parallel
     console.log('📊 Classifying files...');

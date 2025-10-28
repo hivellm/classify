@@ -259,6 +259,11 @@ export class BatchProcessor {
           failureCount++;
           const errorMsg = error instanceof Error ? error.message : 'Unknown error';
 
+          // Log first error for debugging
+          if (failureCount === 1) {
+            console.error(`\n❌ First error (${file}):\n  ${errorMsg}\n`);
+          }
+
           if (!continueOnError) {
             throw error;
           }

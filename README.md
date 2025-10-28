@@ -2,8 +2,8 @@
 
 > Intelligent document classification for graph databases and full-text search using modern LLMs
 
-**Version:** 0.6.1 (Project Mapping + Test Fixes)  
-**Status:** ⭐ Ultra Cost-Optimized + Project Analysis - TINY Templates Default (70-80% Savings) - Production Ready ✅
+**Version:** 0.7.0 (Cursor-Agent + CLI + Bulk Indexing)  
+**Status:** ⭐ Ultra Cost-Optimized + Local LLM + Bulk Indexing - Production Ready ✅
 
 ## Overview
 
@@ -34,19 +34,25 @@ Classify is a TypeScript-based CLI tool that automatically classifies documents 
 
 ```bash
 npm install -g @hivellm/classify
+
+# Also install cursor-agent for local/free LLM execution
+npm install -g cursor-agent
+cursor-agent login
 ```
 
 ### Basic Usage
 
 ```bash
+# Map entire project (NEW! v0.7.0)
+npx @hivellm/classify map-project ./my-project \
+  --provider cursor-agent \
+  --concurrency 5
+
 # Classify single document (auto-selects template)
 npx @hivellm/classify document contract.pdf
 
 # Batch process directory
 npx @hivellm/classify batch ./documents
-
-# View cache statistics
-npx @hivellm/classify cache-stats
 
 # List available templates
 npx @hivellm/classify list-templates
@@ -142,7 +148,14 @@ npm install -g cursor-agent
 # Login to cursor-agent
 cursor-agent login
 
-# Use cursor-agent for classification (no API key needed)
+# CLI: Map entire project with cursor-agent
+npx @hivellm/classify map-project ./my-project \
+  --provider cursor-agent \
+  --concurrency 5 \
+  --elasticsearch-index my-project \
+  --neo4j-password password
+
+# Programmatic: Use cursor-agent for classification
 const client = new ClassifyClient({
   provider: 'cursor-agent',
   // No apiKey needed!
@@ -152,10 +165,11 @@ const result = await client.classify('document.pdf');
 ```
 
 **Benefits of Cursor-Agent**:
-- 🔒 **Privacy**: All processing happens locally
-- 💰 **Zero Cost**: No API fees
-- 🚀 **No Rate Limits**: Process as many documents as you want
-- ⚡ **Fast**: Direct CLI execution
+- 🔒 **Privacy**: All processing happens locally (no data sent to APIs)
+- 💰 **Zero Cost**: No API fees whatsoever
+- 🚀 **No Rate Limits**: Process unlimited documents
+- ⚡ **Fast**: Direct CLI execution with streaming
+- 🔄 **Bulk Indexing**: Automatic Elasticsearch + Neo4j indexing with SHA256 deduplication
 
 ## Integration Examples
 
@@ -252,25 +266,43 @@ cat result.json | jq '.fulltext_metadata' | \
   curl -X POST http://localhost:9200/documents/_doc -d @-
 ```
 
-## Project Mapping 🆕 v0.6.0
+## Project Mapping 🆕 v0.7.0
 
-Map entire codebases with file relationship analysis and gitignore support:
+Map entire codebases with automatic database indexing:
+
+### CLI Usage (Recommended)
+
+```bash
+# Map project with cursor-agent (local/free)
+npx @hivellm/classify map-project ./vectorizer \
+  --provider cursor-agent \
+  --concurrency 5 \
+  --template software_project \
+  --elasticsearch-index vectorizer-core \
+  --neo4j-password password
+
+# Result: 216 files → Elasticsearch + Neo4j + project-map.cypher
+# Duration: ~5 seconds (with cache)
+# Cost: $0.00 (cursor-agent is free!)
+```
+
+### Programmatic API
 
 ```typescript
 import { ProjectMapper, ClassifyClient } from '@hivellm/classify';
 
 const client = new ClassifyClient({
-  provider: 'deepseek',
-  model: 'deepseek-chat',
+  provider: 'cursor-agent',  // or 'deepseek', 'openai', etc.
 });
 
 const mapper = new ProjectMapper(client);
 
 const result = await mapper.mapProject('./my-project', {
-  concurrency: 20,              // Process 20 files in parallel
+  concurrency: 5,               // Process 5 files in parallel
   includeTests: false,          // Skip test files
-  useGitIgnore: true,           // Respect .gitignore patterns
+  useGitIgnore: false,          // Disabled by default (glob patterns sufficient)
   buildRelationships: true,     // Analyze import/dependency graph
+  templateId: 'software_project',
   onProgress: (current, total, file) => {
     console.log(`[${current}/${total}] ${file}`);
   },
@@ -291,13 +323,15 @@ fs.writeFileSync('project-map.cypher', result.projectCypher);
 
 ### Features
 
-- **GitIgnore Support**: Automatically respects `.gitignore` patterns (cascading)
+- **CLI Command**: `map-project` with automatic database indexing ⭐ **NEW in v0.7.0**
+- **Bulk Indexing**: Elasticsearch `_bulk` API + Neo4j transactions (6x fewer requests)
+- **Deduplication**: SHA256 hash prevents duplicates (upsert behavior)
 - **Relationship Analysis**: Parses imports for TypeScript, JavaScript, Python, Rust, Java, Go
 - **Circular Dependencies**: Detects and reports circular import chains
 - **Multi-Language**: Smart filtering for 10+ programming languages
-- **Parallel Processing**: Up to 20 concurrent file classifications
-- **Incremental Progress**: Real-time progress callbacks
-- **Neo4j Export**: Generates unified Cypher with file relationships
+- **Parallel Processing**: Configurable concurrency (default: 5 with cursor-agent)
+- **Real-time Progress**: Live file-by-file progress display
+- **Neo4j + Elasticsearch**: Dual indexing with automatic schema creation
 
 ## Documentation
 

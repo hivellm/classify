@@ -192,9 +192,11 @@ export class TemplateLoader {
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = dirname(__filename);
 
-    // Templates are in templates/tiny directory (cost-optimized by default)
-    // Use templates/standard for full-featured templates
-    return join(__dirname, '..', '..', 'templates', 'tiny');
+    // When running from dist/, go up ONE level to find templates/
+    // dist/index.js or dist/cli.js -> ../templates/tiny
+    const templatePath = join(__dirname, '..', 'templates', 'tiny');
+    
+    return templatePath;
   }
 
   /**
