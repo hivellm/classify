@@ -14,10 +14,12 @@ export default defineConfig({
         '**/*.config.ts',
         '**/*.test.ts',
         '**/types.ts',
-        'src/cli/**',
+        'src/cli/**', // CLI tested via integration
         'src/index.ts',
         'src/**/index.ts', // Exclude barrel exports
         'src/batch/**', // Batch requires full integration
+        'src/project/project-mapper.ts', // Project mapping tested via integration (v0.7.0)
+        'src/project/project-detector.ts', // Project detection tested via integration
         'src/output/fulltext-generator.ts', // Complex LLM integration
         'src/llm/providers/**', // Provider implementations tested via integration
       ],
