@@ -195,7 +195,7 @@ export class TemplateLoader {
     // When running from dist/, go up ONE level to find templates/
     // dist/index.js or dist/cli.js -> ../templates/tiny
     const templatePath = join(__dirname, '..', 'templates', 'tiny');
-    
+
     return templatePath;
   }
 

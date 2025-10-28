@@ -92,14 +92,14 @@ export class Neo4jClient {
   async insertResult(result: ClassifyResult, sourceFile: string): Promise<void> {
     const fileHash = result.cacheInfo.hash;
     let cypher = result.graphStructure.cypher;
-    
+
     // Replace CREATE with MERGE and add file_hash as unique identifier
     cypher = cypher.replace(
       'CREATE (doc:Document {\n',
       `MERGE (doc:Document { file_hash: "${fileHash}" })
       ON CREATE SET doc +={\n      file_hash: "${fileHash}",\n      source_file: "${sourceFile}",\n      classified_at: datetime(),\n`
     );
-    
+
     // Replace "    })" with "    }" (remove closing paren) and add ON MATCH
     cypher = cypher.replace(
       '\n    })\nCREATE',
@@ -121,14 +121,14 @@ CREATE`
     const statements = results.map(({ result, file }) => {
       const fileHash = result.cacheInfo.hash;
       let cypher = result.graphStructure.cypher;
-      
+
       // Replace CREATE with MERGE and add file_hash as unique identifier
       cypher = cypher.replace(
         'CREATE (doc:Document {\n',
         `MERGE (doc:Document { file_hash: "${fileHash}" })
       ON CREATE SET doc += {\n      file_hash: "${fileHash}",\n      source_file: "${file}",\n      classified_at: datetime(),\n`
       );
-      
+
       // Replace "    })" with "    }" (remove closing paren) and add ON MATCH
       cypher = cypher.replace(
         '\n    })\nCREATE',
@@ -160,7 +160,10 @@ CREATE`
 
     // Check for errors
     if (data.errors && data.errors.length > 0) {
-      console.warn(`⚠️  Neo4j batch insert had ${data.errors.length} errors:`, data.errors.slice(0, 3));
+      console.warn(
+        `⚠️  Neo4j batch insert had ${data.errors.length} errors:`,
+        data.errors.slice(0, 3)
+      );
     }
   }
 

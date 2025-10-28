@@ -115,7 +115,7 @@ export class ElasticsearchClient {
    */
   async insertResult(result: ClassifyResult, sourceFile: string): Promise<void> {
     const fileHash = result.cacheInfo.hash;
-    
+
     const document = {
       fileHash, // Use hash as unique identifier
       title: result.fulltextMetadata.title,
@@ -156,15 +156,15 @@ export class ElasticsearchClient {
       results
         .map(({ result, file }) => {
           const fileHash = result.cacheInfo.hash;
-          
+
           // Use index action with _id to enable upsert behavior
-          const action = JSON.stringify({ 
-            index: { 
+          const action = JSON.stringify({
+            index: {
               _index: this.config.index,
-              _id: fileHash // Use hash as unique ID to prevent duplicates
-            } 
+              _id: fileHash, // Use hash as unique ID to prevent duplicates
+            },
           });
-          
+
           const document = JSON.stringify({
             fileHash, // Store hash in document for queries
             title: result.fulltextMetadata.title,

@@ -50,10 +50,10 @@ export class ClassifyClient {
     // Initialize components
     this.documentProcessor = new DocumentProcessor();
     this.templateLoader = new TemplateLoader();
-    
+
     // cursor-agent doesn't need API key, others do
     const apiKey = this.options.provider === 'cursor-agent' ? 'not-needed' : this.options.apiKey;
-    
+
     this.llmProvider = ProviderFactory.create(this.options.provider, {
       apiKey,
       model: this.options.model,

@@ -248,16 +248,16 @@ export class CursorAgentProvider implements LLMProvider {
         for (const line of lines) {
           if (line.trim()) {
             const event = parseStreamLine(line);
-            
+
             // Check if we got a result event (completion)
             if (event?.type === 'result') {
               hasResultEvent = true;
-              
+
               // Give 500ms for any remaining output, then kill
               setTimeout(() => {
                 clearTimeout(timeoutId);
                 child.kill('SIGTERM');
-                
+
                 // Force kill after 1s if still alive
                 setTimeout(() => {
                   if (!child.killed) {
@@ -289,7 +289,7 @@ export class CursorAgentProvider implements LLMProvider {
 
       child.on('error', (error) => {
         clearTimeout(timeoutId);
-        
+
         if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
           reject(
             new Error(
@@ -349,4 +349,3 @@ export class CursorAgentProvider implements LLMProvider {
     };
   }
 }
-

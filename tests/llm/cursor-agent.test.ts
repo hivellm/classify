@@ -18,7 +18,7 @@ describe('CursorAgentProvider', () => {
     expect(provider.name).toBe('cursor-agent');
     expect(provider.defaultModel).toBe('cursor-agent');
     expect(provider.supportedModels).toContain('cursor-agent');
-   });
+  });
 
   it('should return zero cost pricing', () => {
     const provider = new CursorAgentProvider();
@@ -99,7 +99,7 @@ describe('CursorAgentProvider', () => {
     });
 
     const provider = new CursorAgentProvider();
-    
+
     await expect(
       provider.complete({
         messages: [{ role: 'user', content: 'test' }],

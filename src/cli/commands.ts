@@ -25,10 +25,13 @@ interface MapProjectOptions {
   neo4jPassword: string;
 }
 
-export async function mapProjectCommand(directory: string, options: MapProjectOptions): Promise<void> {
+export async function mapProjectCommand(
+  directory: string,
+  options: MapProjectOptions
+): Promise<void> {
   // Resolve to absolute path
   const absoluteDir = path.resolve(directory);
-  
+
   console.log('\n🗺️  PROJECT MAPPER\n');
   console.log(`📂 Directory: ${absoluteDir}`);
   console.log(`🤖 Provider: ${options.provider}`);
@@ -57,12 +60,15 @@ export async function mapProjectCommand(directory: string, options: MapProjectOp
   });
 
   console.log('📡 Connecting to databases...');
-  
+
   try {
     await elasticsearch.initialize();
     console.log('✅ Elasticsearch connected');
   } catch (error) {
-    console.warn('⚠️  Elasticsearch not available:', error instanceof Error ? error.message : error);
+    console.warn(
+      '⚠️  Elasticsearch not available:',
+      error instanceof Error ? error.message : error
+    );
   }
 
   try {
@@ -95,15 +101,17 @@ export async function mapProjectCommand(directory: string, options: MapProjectOp
     },
     onBatchComplete: async (batchResults) => {
       // Log errors for debugging
-      const errors = batchResults.filter(item => !item.result);
+      const errors = batchResults.filter((item) => !item.result);
       if (errors.length > 0 && errors.length < batchResults.length) {
         console.log(`\n   ❌ ${errors.length}/${batchResults.length} failed`);
       }
-      
+
       // Bulk insert into databases
       const validResults = batchResults
-        .filter((item): item is { filePath: string; result: ClassifyResult } => item.result !== null)
-        .map(item => ({ result: item.result, file: item.filePath }));
+        .filter(
+          (item): item is { filePath: string; result: ClassifyResult } => item.result !== null
+        )
+        .map((item) => ({ result: item.result, file: item.filePath }));
 
       if (validResults.length === 0) {
         // All failed in this batch - don't log, it's already shown
@@ -115,7 +123,10 @@ export async function mapProjectCommand(directory: string, options: MapProjectOp
         await elasticsearch.insertBatch(validResults);
         indexedElastic += validResults.length;
       } catch (error) {
-        console.warn(`\n⚠️  Elasticsearch bulk insert failed:`, error instanceof Error ? error.message : error);
+        console.warn(
+          `\n⚠️  Elasticsearch bulk insert failed:`,
+          error instanceof Error ? error.message : error
+        );
       }
 
       // Neo4j bulk insert
@@ -123,7 +134,10 @@ export async function mapProjectCommand(directory: string, options: MapProjectOp
         await neo4j.insertBatch(validResults);
         indexedNeo4j += validResults.length;
       } catch (error) {
-        console.warn(`\n⚠️  Neo4j bulk insert failed:`, error instanceof Error ? error.message : error);
+        console.warn(
+          `\n⚠️  Neo4j bulk insert failed:`,
+          error instanceof Error ? error.message : error
+        );
       }
     },
   });
@@ -133,7 +147,9 @@ export async function mapProjectCommand(directory: string, options: MapProjectOp
   console.log('\n\n' + '='.repeat(60));
   console.log('📊 PROJECT MAPPING COMPLETE');
   console.log('='.repeat(60));
-  console.log(`⏱️  Duration: ${(duration / 1000).toFixed(1)}s (${(duration / 60000).toFixed(1)} min)`);
+  console.log(
+    `⏱️  Duration: ${(duration / 1000).toFixed(1)}s (${(duration / 60000).toFixed(1)} min)`
+  );
   console.log(`📄 Files analyzed: ${result.statistics.totalFiles}`);
   console.log(`✅ Success: ${result.statistics.successfulFiles}`);
   console.log(`❌ Errors: ${result.statistics.failedFiles}`);
@@ -162,4 +178,3 @@ export async function mapProjectCommand(directory: string, options: MapProjectOp
 
   console.log('\n✅ All done!\n');
 }
-

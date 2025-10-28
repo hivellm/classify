@@ -65,7 +65,9 @@ export class ProjectMapper {
       maxFiles?: number;
       ignorePatterns?: string[];
       onProgress?: (current: number, total: number, file: string) => void;
-      onBatchComplete?: (batchResults: Array<{ filePath: string; result: ClassifyResult | null }>) => Promise<void>;
+      onBatchComplete?: (
+        batchResults: Array<{ filePath: string; result: ClassifyResult | null }>
+      ) => Promise<void>;
     } = {}
   ): Promise<ProjectMapResult> {
     const startTime = Date.now();
@@ -96,25 +98,25 @@ export class ProjectMapper {
     // Find all source files - limit to src/ directory only for code projects
     console.log('📂 Scanning files...');
     const pattern = 'src/**/*.{ts,js,jsx,tsx,rs,py,java,go}'; // Only source code in src/
-    
+
     // Custom ignore patterns
     const customIgnore = options.ignorePatterns ?? [];
     const defaultIgnore = [
       '**/node_modules/**',
-      '**/target/**', 
-      '**/dist/**', 
+      '**/target/**',
+      '**/dist/**',
       '**/build/**',
       '**/coverage/**',
       '**/.git/**',
     ];
-    
+
     const allFiles = await glob(pattern, {
       cwd: directory,
       absolute: true,
       dot: false, // Don't include dotfiles
       ignore: [...defaultIgnore, ...customIgnore],
     });
-    
+
     console.log(`   📁 Glob found: ${allFiles.length} files`);
 
     // Filter files
@@ -138,7 +140,7 @@ export class ProjectMapper {
     });
 
     console.log(`   📋 After ignore patterns: ${filteredFiles.length} files`);
-    
+
     // Limit files if maxFiles specified
     if (options.maxFiles && filteredFiles.length > options.maxFiles) {
       console.log(`   ⚠️  Limiting to ${options.maxFiles} files`);
@@ -211,7 +213,12 @@ export class ProjectMapper {
     }
 
     // Calculate statistics
-    const statistics = this.calculateStatistics(results, relationships, batchResult.successCount, batchResult.failureCount);
+    const statistics = this.calculateStatistics(
+      results,
+      relationships,
+      batchResult.successCount,
+      batchResult.failureCount
+    );
 
     // Generate unified Cypher
     const projectCypher = this.generateProjectCypher(project, results, relationships);
