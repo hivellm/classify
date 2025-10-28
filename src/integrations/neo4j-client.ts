@@ -156,7 +156,7 @@ CREATE`
       throw new Error(`Batch insert failed: ${response.status} ${error}`);
     }
 
-    const data = await response.json();
+    const data = (await response.json()) as any;
 
     // Check for errors
     if (data.errors && data.errors.length > 0) {

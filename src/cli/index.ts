@@ -48,15 +48,20 @@ program
   .command('map-project <directory>')
   .description('Map entire project structure to graph database')
   .option('-o, --output <file>', 'Output file for unified Cypher', 'project-map.cypher')
-  .option('-m, --model <model>', 'LLM model to use', 'deepseek-chat')
-  .option('--concurrency <n>', 'Number of parallel processes', '20')
+  .option('-p, --provider <provider>', 'LLM provider to use', 'cursor-agent')
+  .option('-m, --model <model>', 'LLM model to use')
+  .option('--concurrency <n>', 'Number of parallel processes', '5')
   .option('--include-tests', 'Include test files in mapping')
-  .option('--template <id>', 'Force specific template (default: auto-select)')
+  .option('--template <id>', 'Force specific template', 'software_project')
   .option('--no-cache', 'Disable caching')
-  .action((directory, options) => {
-    console.log(`Mapping project: ${directory}`);
-    console.log('Options:', options);
-    console.log('⚠️  Not implemented yet - use ProjectMapper API directly');
+  .option('--elasticsearch-url <url>', 'Elasticsearch URL', 'http://localhost:9200')
+  .option('--elasticsearch-index <index>', 'Elasticsearch index name', 'project-map')
+  .option('--neo4j-url <url>', 'Neo4j URL', 'http://localhost:7474')
+  .option('--neo4j-user <user>', 'Neo4j username', 'neo4j')
+  .option('--neo4j-password <password>', 'Neo4j password', 'password')
+  .action(async (directory, options) => {
+    const { mapProjectCommand } = await import('./commands.js');
+    await mapProjectCommand(directory, options);
   });
 
 // List templates command

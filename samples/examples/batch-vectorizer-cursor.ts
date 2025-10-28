@@ -53,19 +53,25 @@ async function main() {
     console.warn('⚠️  Neo4j not available:', error instanceof Error ? error.message : error);
   }
 
-  // Find Rust files in vectorizer project
+  // Find Rust files in vectorizer project (src/ only - core implementation)
   const vectorizerPath = path.join(process.cwd(), '..', 'vectorizer');
-  console.log(`\n📂 Scanning: ${vectorizerPath}`);
+  console.log(`\n📂 Scanning: ${vectorizerPath}/src (core only)`);
 
-  const files = await glob('**/*.rs', {
+  const files = await glob('src/**/*.rs', {
     cwd: vectorizerPath,
-    ignore: ['target/**', 'tests/**', 'benches/**'],
+    ignore: ['target/**', 'tests/**', 'benches/**', 'benchmark/**', 'examples/**'],
     absolute: true,
   });
 
-  // Limit to 100 files
-  const filesToProcess = files.slice(0, 100);
-  console.log(`📊 Found ${files.length} Rust files, processing first ${filesToProcess.length}\n`);
+  // Sort files for deterministic order (important for deduplication)
+  files.sort();
+
+  console.log(`📊 Found ${files.length} Rust core files (no tests/benchmarks)`);
+  console.log(`📋 First 5 files:`);
+  files.slice(0, 5).forEach(f => console.log(`   - ${path.basename(f)}`));
+  
+  const filesToProcess = files; // Process all core files
+  console.log(`\n🎯 Processing all ${filesToProcess.length} core files\n`);
 
   // Create batch processor
   const batchProcessor = new BatchProcessor(client);
