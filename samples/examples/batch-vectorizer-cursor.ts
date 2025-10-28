@@ -1,6 +1,12 @@
 /**
  * Batch process 100 Vectorizer files with cursor-agent
  * Index results in both Elasticsearch and Neo4j
+ * 
+ * Uses SHA256 file hash as unique ID to prevent duplicates:
+ * - Elasticsearch: PUT with hash as document ID (upsert)
+ * - Neo4j: MERGE with file_hash property (upsert)
+ * 
+ * Re-running this script will UPDATE existing documents instead of duplicating.
  */
 
 import { ClassifyClient } from '../../src/client.js';
@@ -80,28 +86,30 @@ async function main() {
       console.log(`\n[${current}/${total}] Processing: ${path.basename(file)}`);
     },
     onBatchComplete: async (batchResults) => {
-      // Index each result immediately
-      for (const item of batchResults) {
-        const fileName = path.basename(item.filePath);
+      // Use bulk insert for better performance
+      const validResults = batchResults
+        .filter(item => item.result)
+        .map(item => ({ result: item.result, file: item.filePath }));
 
-        // Index in Elasticsearch
-        try {
-          await elasticsearch.insertResult(item.result, item.filePath);
-          indexedElastic++;
-        } catch (error) {
-          console.warn(`  ⚠️  Elasticsearch ${fileName}:`, error instanceof Error ? error.message : error);
-        }
+      if (validResults.length === 0) return;
 
-        // Index in Neo4j
-        try {
-          await neo4j.insertResult(item.result, item.filePath);
-          indexedNeo4j++;
-        } catch (error) {
-          console.warn(`  ⚠️  Neo4j ${fileName}:`, error instanceof Error ? error.message : error);
-        }
-
-        processedCount++;
+      // Bulk insert in Elasticsearch
+      try {
+        await elasticsearch.insertBatch(validResults);
+        indexedElastic += validResults.length;
+      } catch (error) {
+        console.warn(`  ⚠️  Elasticsearch bulk insert failed:`, error instanceof Error ? error.message : error);
       }
+
+      // Bulk insert in Neo4j
+      try {
+        await neo4j.insertBatch(validResults);
+        indexedNeo4j += validResults.length;
+      } catch (error) {
+        console.warn(`  ⚠️  Neo4j bulk insert failed:`, error instanceof Error ? error.message : error);
+      }
+
+      processedCount += validResults.length;
     },
   });
 

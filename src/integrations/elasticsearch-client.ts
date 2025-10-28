@@ -81,6 +81,7 @@ export class ElasticsearchClient {
         body: JSON.stringify({
           mappings: {
             properties: {
+              fileHash: { type: 'keyword' }, // SHA256 hash - unique ID
               title: { type: 'text' },
               domain: { type: 'keyword' },
               docType: { type: 'keyword' },
@@ -113,7 +114,10 @@ export class ElasticsearchClient {
    * Insert classification result into Elasticsearch
    */
   async insertResult(result: ClassifyResult, sourceFile: string): Promise<void> {
+    const fileHash = result.cacheInfo.hash;
+    
     const document = {
+      fileHash, // Use hash as unique identifier
       title: result.fulltextMetadata.title,
       domain: result.fulltextMetadata.domain,
       docType: result.fulltextMetadata.docType,
@@ -128,8 +132,9 @@ export class ElasticsearchClient {
       },
     };
 
-    const response = await fetch(`${this.config.url}/${this.config.index}/_doc`, {
-      method: 'POST',
+    // Use PUT with hash as ID to prevent duplicates (upsert behavior)
+    const response = await fetch(`${this.config.url}/${this.config.index}/_doc/${fileHash}`, {
+      method: 'PUT',
       headers: this.headers,
       body: JSON.stringify(document),
     });
@@ -141,15 +146,27 @@ export class ElasticsearchClient {
   }
 
   /**
-   * Insert multiple results in batch using bulk API
+   * Insert multiple results in batch using bulk API with file hash as ID
    */
   async insertBatch(results: Array<{ result: ClassifyResult; file: string }>): Promise<void> {
+    if (results.length === 0) return;
+
     // Build NDJSON for bulk API
     const bulkBody =
       results
         .map(({ result, file }) => {
-          const action = JSON.stringify({ index: { _index: this.config.index } });
+          const fileHash = result.cacheInfo.hash;
+          
+          // Use index action with _id to enable upsert behavior
+          const action = JSON.stringify({ 
+            index: { 
+              _index: this.config.index,
+              _id: fileHash // Use hash as unique ID to prevent duplicates
+            } 
+          });
+          
           const document = JSON.stringify({
+            fileHash, // Store hash in document for queries
             title: result.fulltextMetadata.title,
             domain: result.fulltextMetadata.domain,
             docType: result.fulltextMetadata.docType,
