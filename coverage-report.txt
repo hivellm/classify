@@ -1,0 +1,891 @@
+
+> @hivellm/classify@0.7.0 test:coverage
+> vitest --coverage --run
+
+
+ RUN  v4.0.4 F:/Node/hivellm/classify
+      Coverage enabled with v8
+
+stderr | tests/gitignore-parser.test.ts > GitIgnoreParser > loadFromFile > should handle non-existent file gracefully
+Could not read .gitignore: C:\Users\Bolado\AppData\Local\Temp\gitignore-test-1761619432647\non-existent.gitignore
+
+stderr | tests/gitignore-parser.test.ts > GitIgnoreParser > loadCascading > should load .gitignore files from parent directories
+Could not read .gitignore: C:\Users\Bolado\AppData\Local\Temp\.gitignore
+
+stderr | tests/gitignore-parser.test.ts > GitIgnoreParser > loadCascading > should load .gitignore files from parent directories
+Could not read .gitignore: C:\Users\Bolado\AppData\Local\.gitignore
+
+stderr | tests/gitignore-parser.test.ts > GitIgnoreParser > loadCascading > should load .gitignore files from parent directories
+Could not read .gitignore: C:\Users\Bolado\AppData\.gitignore
+
+stderr | tests/gitignore-parser.test.ts > GitIgnoreParser > loadCascading > should load .gitignore files from parent directories
+Could not read .gitignore: C:\Users\Bolado\.gitignore
+
+stderr | tests/gitignore-parser.test.ts > GitIgnoreParser > loadCascading > should load .gitignore files from parent directories
+Could not read .gitignore: C:\Users\.gitignore
+
+stderr | tests/gitignore-parser.test.ts > GitIgnoreParser > loadCascading > should load .gitignore files from parent directories
+Could not read .gitignore: C:\.gitignore
+
+ Ô£ô tests/types.test.ts (5 tests) 3ms
+ Ô£ô tests/cache/cache-manager.test.ts (14 tests) 34ms
+stdout | tests/relationship-builder.test.ts > RelationshipBuilder > detectCircularDependencies > should detect circular dependencies
+Note: Circular dependency detection requires full path resolution
+
+stdout | tests/integrations/neo4j-client.test.ts > Neo4jClient > initialize > should successfully connect to Neo4j
+Ô£à Connected to Neo4j
+
+stdout | tests/integrations/elasticsearch-client.test.ts > ElasticsearchClient > initialize > should successfully connect to Elasticsearch
+Ô£à Connected to Elasticsearch
+
+stdout | tests/integrations/neo4j-client.test.ts > Neo4jClient > initialize > should use custom database name
+Ô£à Connected to Neo4j
+
+stdout | tests/integrations/elasticsearch-client.test.ts > ElasticsearchClient > initialize > should create index if it does not exist
+Ô£à Connected to Elasticsearch
+
+stdout | tests/integrations/elasticsearch-client.test.ts > ElasticsearchClient > initialize > should create index if it does not exist
+Ô£à Created index: test-index
+
+stdout | tests/integrations/elasticsearch-client.test.ts > ElasticsearchClient > initialize > should use authentication when provided
+Ô£à Connected to Elasticsearch
+
+stdout | tests/integrations/elasticsearch-client.test.ts > ElasticsearchClient > initialize > should use API key when provided
+Ô£à Connected to Elasticsearch
+
+ Ô£ô tests/templates/template-loader.test.ts (9 tests) 13ms
+ Ô£ô tests/llm/deepseek.test.ts (4 tests) 5ms
+ Ô£ô tests/gitignore-parser.test.ts (16 tests) 24ms
+ Ô£ô tests/relationship-builder.test.ts (17 tests) 42ms
+ Ô£ô tests/integrations/neo4j-client.test.ts (6 tests) 11ms
+ Ô£ô tests/utils/ignore-patterns.test.ts (21 tests) 13ms
+ Ô£ô tests/llm/xai.test.ts (2 tests) 4ms
+ Ô£ô tests/integrations/elasticsearch-client.test.ts (9 tests) 14ms
+ Ô£ô tests/llm/anthropic.test.ts (2 tests) 4ms
+ Ô£ô tests/llm/groq.test.ts (2 tests) 4ms
+ Ô£ô tests/llm/gemini.test.ts (2 tests) 4ms
+ Ô£ô tests/llm/openai.test.ts (5 tests) 6ms
+ Ô£ô tests/recursive-scanner.test.ts (17 tests | 14 skipped) 28ms
+stderr | tests/compression/prompt-compressor.test.ts > PromptCompressor > compress > should compress text
+Compression failed, using original text: Input too short (83 tokens/bytes), minimum is 200
+
+stderr | tests/compression/prompt-compressor.test.ts > PromptCompressor > compress > should handle short text
+Compression failed, using original text: Input too short (5 tokens/bytes), minimum is 200
+
+stderr | tests/classification/pipeline.test.ts > ClassificationPipeline > classify > should classify document and extract entities
+Compression failed, using original text: Input too short (34 tokens/bytes), minimum is 200
+
+stderr | tests/classification/pipeline.test.ts > ClassificationPipeline > classify > should handle missing entities
+Compression failed, using original text: Input too short (34 tokens/bytes), minimum is 200
+
+stderr | tests/classification/pipeline.test.ts > ClassificationPipeline > classify > should handle missing relationships
+Compression failed, using original text: Input too short (34 tokens/bytes), minimum is 200
+
+stderr | tests/classification/pipeline.test.ts > ClassificationPipeline > classify > should throw on invalid JSON
+Compression failed, using original text: Input too short (34 tokens/bytes), minimum is 200
+
+stderr | tests/templates/template-selector.test.ts > TemplateSelector > select > should select template based on document content
+Compression failed, using original text: Input too short (47 tokens/bytes), minimum is 200
+
+ Ô£ô tests/compression/prompt-compressor.test.ts (8 tests) 8ms
+ Ô£ô tests/llm/provider-factory.test.ts (7 tests) 4ms
+stderr | tests/templates/template-selector.test.ts > TemplateSelector > select > should throw error when LLM returns invalid JSON
+Compression failed, using original text: Input too short (20 tokens/bytes), minimum is 200
+
+stderr | tests/templates/template-selector.test.ts > TemplateSelector > select > should throw error for non-existent template
+Compression failed, using original text: Input too short (20 tokens/bytes), minimum is 200
+
+ Ô£ô tests/llm/cursor-agent.test.ts (5 tests) 121ms
+ Ô£ô tests/templates/template-selector.test.ts (6 tests) 44ms
+ Ô£ô tests/classification/pipeline.test.ts (7 tests) 72ms
+ Ô£ô tests/preprocessing/document-processor.test.ts (8 tests) 16ms
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+­ƒöì Detecting project structure...
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+Ô£à Project: @hivellm/classify (typescript)
+   Types: nodejs
+   Entry points: ./dist/index.js, src/index.ts
+
+­ƒôï Loading .gitignore...
+
+stderr | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+Could not read .gitignore: F:\Node\.gitignore
+
+stderr | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+Could not read .gitignore: F:\.gitignore
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Loaded 40 patterns
+
+­ƒôé Scanning files...
+
+ Ô£ô tests/batch/batch-processor.test.ts (2 tests | 1 skipped) 6ms
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   ­ƒôü Glob found: 41 files
+   ­ƒôï After ignore patterns: 41 files
+   Ô£à Final count: 41 files to process
+
+­ƒôè Classifying files...
+­ƒôü Processing 41 files
+ÔÜÖ´©Å  Concurrency: 1 files per batch
+
+­ƒôª Batch 1/41 | Progress: 1/41 (2.4%)
+
+stderr | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+
+ÔØî First error (F:\Node\hivellm\classify\src\types.ts):
+  ENOENT: no such file or directory, open 'F:\Node\hivellm\classify\src\templates\tiny\index.json'
+
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 2/41 | Progress: 2/41 (4.9%)
+
+ Ô£ô tests/client.test.ts (15 tests) 7ms
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 3/41 | Progress: 3/41 (7.3%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 4/41 | Progress: 4/41 (9.8%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 5/41 | Progress: 5/41 (12.2%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 6/41 | Progress: 6/41 (14.6%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 7/41 | Progress: 7/41 (17.1%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 8/41 | Progress: 8/41 (19.5%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 9/41 | Progress: 9/41 (22.0%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 10/41 | Progress: 10/41 (24.4%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 11/41 | Progress: 11/41 (26.8%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 12/41 | Progress: 12/41 (29.3%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 13/41 | Progress: 13/41 (31.7%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 14/41 | Progress: 14/41 (34.1%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 15/41 | Progress: 15/41 (36.6%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 16/41 | Progress: 16/41 (39.0%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 17/41 | Progress: 17/41 (41.5%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 18/41 | Progress: 18/41 (43.9%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 19/41 | Progress: 19/41 (46.3%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 20/41 | Progress: 20/41 (48.8%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 21/41 | Progress: 21/41 (51.2%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 22/41 | Progress: 22/41 (53.7%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 23/41 | Progress: 23/41 (56.1%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 24/41 | Progress: 24/41 (58.5%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 25/41 | Progress: 25/41 (61.0%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 26/41 | Progress: 26/41 (63.4%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 27/41 | Progress: 27/41 (65.9%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 28/41 | Progress: 28/41 (68.3%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 29/41 | Progress: 29/41 (70.7%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 30/41 | Progress: 30/41 (73.2%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 31/41 | Progress: 31/41 (75.6%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 32/41 | Progress: 32/41 (78.0%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 33/41 | Progress: 33/41 (80.5%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 34/41 | Progress: 34/41 (82.9%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 35/41 | Progress: 35/41 (85.4%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 36/41 | Progress: 36/41 (87.8%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 37/41 | Progress: 37/41 (90.2%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 38/41 | Progress: 38/41 (92.7%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 39/41 | Progress: 39/41 (95.1%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 40/41 | Progress: 40/41 (97.6%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 41/41 | Progress: 41/41 (100.0%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should respect .gitignore patterns
+
+Ô£à Classified 0 files (41 failed)
+
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+­ƒöì Detecting project structure...
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+Ô£à Project: @hivellm/classify (typescript)
+   Types: nodejs
+   Entry points: ./dist/index.js, src/index.ts
+
+­ƒôï Loading .gitignore...
+
+stderr | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+Could not read .gitignore: F:\Node\.gitignore
+
+stderr | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+Could not read .gitignore: F:\.gitignore
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Loaded 40 patterns
+
+­ƒôé Scanning files...
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   ­ƒôü Glob found: 41 files
+   ­ƒôï After ignore patterns: 41 files
+   Ô£à Final count: 41 files to process
+
+­ƒôè Classifying files...
+­ƒôü Processing 41 files
+ÔÜÖ´©Å  Concurrency: 1 files per batch
+
+­ƒôª Batch 1/41 | Progress: 1/41 (2.4%)
+
+stderr | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+
+ÔØî First error (F:\Node\hivellm\classify\src\types.ts):
+  ENOENT: no such file or directory, open 'F:\Node\hivellm\classify\src\templates\tiny\index.json'
+
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 2/41 | Progress: 2/41 (4.9%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 3/41 | Progress: 3/41 (7.3%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 4/41 | Progress: 4/41 (9.8%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 5/41 | Progress: 5/41 (12.2%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 6/41 | Progress: 6/41 (14.6%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 7/41 | Progress: 7/41 (17.1%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 8/41 | Progress: 8/41 (19.5%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 9/41 | Progress: 9/41 (22.0%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 10/41 | Progress: 10/41 (24.4%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 11/41 | Progress: 11/41 (26.8%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 12/41 | Progress: 12/41 (29.3%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 13/41 | Progress: 13/41 (31.7%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 14/41 | Progress: 14/41 (34.1%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 15/41 | Progress: 15/41 (36.6%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 16/41 | Progress: 16/41 (39.0%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 17/41 | Progress: 17/41 (41.5%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 18/41 | Progress: 18/41 (43.9%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 19/41 | Progress: 19/41 (46.3%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 20/41 | Progress: 20/41 (48.8%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 21/41 | Progress: 21/41 (51.2%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 22/41 | Progress: 22/41 (53.7%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 23/41 | Progress: 23/41 (56.1%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 24/41 | Progress: 24/41 (58.5%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 25/41 | Progress: 25/41 (61.0%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 26/41 | Progress: 26/41 (63.4%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 27/41 | Progress: 27/41 (65.9%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 28/41 | Progress: 28/41 (68.3%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 29/41 | Progress: 29/41 (70.7%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 30/41 | Progress: 30/41 (73.2%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 31/41 | Progress: 31/41 (75.6%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 32/41 | Progress: 32/41 (78.0%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 33/41 | Progress: 33/41 (80.5%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 34/41 | Progress: 34/41 (82.9%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 35/41 | Progress: 35/41 (85.4%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 36/41 | Progress: 36/41 (87.8%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 37/41 | Progress: 37/41 (90.2%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 38/41 | Progress: 38/41 (92.7%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 39/41 | Progress: 39/41 (95.1%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 40/41 | Progress: 40/41 (97.6%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 41/41 | Progress: 41/41 (100.0%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+
+Ô£à Classified 0 files (41 failed)
+
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+­ƒöì Detecting project structure...
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+Ô£à Project: @hivellm/classify (typescript)
+   Types: nodejs
+   Entry points: ./dist/index.js, src/index.ts
+
+­ƒôé Scanning files...
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   ­ƒôü Glob found: 41 files
+   ­ƒôï After ignore patterns: 41 files
+   Ô£à Final count: 41 files to process
+
+­ƒôè Classifying files...
+­ƒôü Processing 41 files
+ÔÜÖ´©Å  Concurrency: 1 files per batch
+
+­ƒôª Batch 1/41 | Progress: 1/41 (2.4%)
+
+stderr | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+
+ÔØî First error (F:\Node\hivellm\classify\src\types.ts):
+  ENOENT: no such file or directory, open 'F:\Node\hivellm\classify\src\templates\tiny\index.json'
+
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 2/41 | Progress: 2/41 (4.9%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 3/41 | Progress: 3/41 (7.3%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 4/41 | Progress: 4/41 (9.8%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 5/41 | Progress: 5/41 (12.2%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 6/41 | Progress: 6/41 (14.6%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 7/41 | Progress: 7/41 (17.1%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 8/41 | Progress: 8/41 (19.5%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 9/41 | Progress: 9/41 (22.0%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 10/41 | Progress: 10/41 (24.4%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 11/41 | Progress: 11/41 (26.8%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 12/41 | Progress: 12/41 (29.3%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 13/41 | Progress: 13/41 (31.7%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 14/41 | Progress: 14/41 (34.1%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 15/41 | Progress: 15/41 (36.6%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 16/41 | Progress: 16/41 (39.0%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 17/41 | Progress: 17/41 (41.5%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 18/41 | Progress: 18/41 (43.9%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 19/41 | Progress: 19/41 (46.3%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 20/41 | Progress: 20/41 (48.8%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 21/41 | Progress: 21/41 (51.2%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 22/41 | Progress: 22/41 (53.7%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 23/41 | Progress: 23/41 (56.1%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 24/41 | Progress: 24/41 (58.5%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 25/41 | Progress: 25/41 (61.0%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 26/41 | Progress: 26/41 (63.4%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 27/41 | Progress: 27/41 (65.9%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 28/41 | Progress: 28/41 (68.3%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 29/41 | Progress: 29/41 (70.7%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 30/41 | Progress: 30/41 (73.2%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 31/41 | Progress: 31/41 (75.6%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 32/41 | Progress: 32/41 (78.0%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 33/41 | Progress: 33/41 (80.5%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 34/41 | Progress: 34/41 (82.9%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 35/41 | Progress: 35/41 (85.4%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 36/41 | Progress: 36/41 (87.8%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 37/41 | Progress: 37/41 (90.2%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 38/41 | Progress: 38/41 (92.7%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 39/41 | Progress: 39/41 (95.1%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 40/41 | Progress: 40/41 (97.6%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+­ƒôª Batch 41/41 | Progress: 41/41 (100.0%)
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+   Ô£à 0/1 classified | ­ƒôª 0 from cache
+
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+
+Ô£à Classified 0 files (41 failed)
+
+
+stdout | tests/integration/project-mapping.integration.test.ts > Project Mapping Integration > GitIgnore Integration > should include all files when gitignore is disabled
+
+­ƒôü GitIgnore Comparison:
+   With .gitignore: 41 files
+   Without .gitignore: 41 files
+
+ Ô£ô tests/integration/project-mapping.integration.test.ts (9 tests | 6 skipped) 68ms
+ Ô£ô tests/llm/base-provider.test.ts (6 tests) 1005ms
+     Ô£ô should retry on failure  1000ms
+ Ô£ô tests/cli.test.ts (7 tests) 2583ms
+       Ô£ô should display help message  456ms
+       Ô£ô should display version  365ms
+       Ô£ô should list all available templates  362ms
+       Ô£ô should show template priorities  340ms
+       Ô£ô should show not implemented message  344ms
+       Ô£ô should show not implemented message  353ms
+       Ô£ô should show cache statistics header  361ms
+
+ Test Files  26 passed (26)
+      Tests  190 passed | 21 skipped (211)
+   Start at  23:43:52
+   Duration  2.99s (transform 2.56s, setup 0ms, collect 5.49s, tests 4.14s, environment 5ms, prepare 1.23s)
+
+ % Coverage report from v8
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |    74.6 |    63.74 |    87.6 |   75.87 |                   
+ src               |   42.85 |    75.75 |   57.14 |   42.85 |                   
+  client.ts        |   42.85 |    75.75 |   57.14 |   42.85 | 91-176,200-224    
+ src/cache         |   80.83 |    70.27 |   93.33 |   80.73 |                   
+  cache-manager.ts |   80.83 |    70.27 |   93.33 |   80.73 | ...27-228,286-287 
+ ...classification |      90 |    79.16 |      80 |      90 |                   
+  pipeline.ts      |      90 |    79.16 |      80 |      90 | 89,176            
+ src/compression   |     100 |    88.88 |     100 |     100 |                   
+  ...compressor.ts |     100 |    88.88 |     100 |     100 | 90                
+ src/integrations  |   57.31 |     52.5 |   66.66 |   59.49 |                   
+  ...rch-client.ts |   56.81 |       60 |    62.5 |   59.52 | 105-106,152-205   
+  neo4j-client.ts  |   57.89 |       45 |   71.42 |   59.45 | 118-163           
+ src/llm           |   94.87 |    90.32 |     100 |   94.59 |                   
+  base-provider.ts |   95.83 |    90.47 |     100 |   95.45 | 62                
+  ...er-factory.ts |   93.33 |       90 |     100 |   93.33 | 64                
+ src/preprocessing |     100 |      100 |     100 |     100 |                   
+  ...-processor.ts |     100 |      100 |     100 |     100 |                   
+ src/project       |   70.42 |    46.25 |      84 |   72.92 |                   
+  ...t-detector.ts |   55.07 |    28.84 |     100 |   63.15 | ...04,109,114,147 
+  ...ect-mapper.ts |   51.75 |    38.77 |   71.42 |   52.21 | ...35-345,350-367 
+  ...ip-builder.ts |   92.41 |    67.79 |   86.66 |   93.05 | ...36,376-381,385 
+ src/templates     |    87.5 |    80.48 |     100 |   87.27 |                   
+  ...ate-loader.ts |   81.57 |    70.83 |     100 |   81.08 | ...15,219,223,229 
+  ...e-selector.ts |     100 |    94.11 |     100 |     100 | 131               
+ src/utils         |   80.36 |    67.54 |   95.45 |   81.64 |                   
+  ...ore-parser.ts |   94.52 |    76.19 |     100 |    97.1 | 141,143           
+  ...e-patterns.ts |     100 |      100 |     100 |     100 |                   
+  ...ve-scanner.ts |   67.05 |    61.97 |   88.88 |   67.85 | ...48,306,321-352 
+-------------------|---------|----------|---------|---------|-------------------
+ERROR: Coverage for statements (74.6%) does not meet global threshold (75%)
+ERROR: Coverage for branches (63.74%) does not meet global threshold (65%)
