@@ -1,8 +1,9 @@
 {
-  "version": "0.12.1",
-  "installedAt": "2025-10-27T05:10:02.223Z",
-  "updatedAt": "2025-10-28T02:28:02.584Z",
+  "version": "0.15.0",
+  "installedAt": "2025-10-28T02:28:02.579Z",
+  "updatedAt": "2025-11-01T05:22:17.549Z",
   "projectId": "classify",
+  "mode": "full",
   "features": {
     "openspec": true,
     "watcher": false,
@@ -11,7 +12,7 @@
     "telemetry": false,
     "notifications": false,
     "dryRun": false,
-    "gitHooks": false,
+    "gitHooks": true,
     "repl": false,
     "templates": true,
     "context": true,

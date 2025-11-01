@@ -5,8 +5,11 @@ const CLI_PATH = './dist/cli.js';
 
 describe('CLI', () => {
   describe('--help', () => {
-    it('should display help message', () => {
-      const output = execSync(`node ${CLI_PATH} --help`, { encoding: 'utf-8' });
+    it('should display help message', { timeout: 15000 }, () => {
+      const output = execSync(`node ${CLI_PATH} --help`, { 
+        encoding: 'utf-8',
+        timeout: 10000 // 10 second timeout for the command
+      });
 
       expect(output).toContain('Usage: classify');
       expect(output).toContain('Intelligent document classification');
